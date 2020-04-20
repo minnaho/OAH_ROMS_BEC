@@ -15,7 +15,7 @@ var1 = 'NH4'
 var2 = 'salt'
 
 # sigma level (-1 = surface)
-s_l = -1
+s_l = 34
 
 # hourly outputs
 h_path = '/data/project3/kesf/ROMS/L2_SCB_AP/hourly/AVG_Y2000M07/'
@@ -26,7 +26,7 @@ d_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/AVG_Y2000M07/'
 d_files = list(sorted(glob.glob(d_path+'l2_scb_avg.*')))
 
 # points to extract time series
-places = ['HTP','OCSD','SB river','SM river','LA River','SG River','SD River']
+places = ['HTP','OCSD','SBriver','SMriver','LARiver','SGRiver','SDRiver']
 o_hp_pt = np.array([557,650])
 o_oc_pt = np.array([551,447])
 
@@ -47,7 +47,7 @@ h_ts_v2 = np.empty((len(eta_pts),len(h_files)))
 d_ts_v1 = np.empty((len(eta_pts),len(d_files)))
 d_ts_v2 = np.empty((len(eta_pts),len(d_files)))
 
-
+'''
 for h_i in range(len(h_files)):
     h_time[h_i] = Dataset(h_files[h_i],'r').variables['ocean_time'][0]
     print('file # '+str(h_i)+' of '+str(len(h_files)))
@@ -66,7 +66,7 @@ for d_i in range(len(d_files)):
         d_nc_v2 = Dataset(d_files[d_i],'r').variables[var2][0,s_l,eta_pts[p_i],xi_pts[p_i]]
         d_ts_v1[p_i,d_i] = d_nc_v1
         d_ts_v2[p_i,d_i] = d_nc_v2
-
+'''
 # datetime calculation
 dateinit = datetime.datetime(1994,1,1,0,0,0)
 h_dt = []
@@ -91,4 +91,4 @@ for p_i in range(len(places)):
     ax2.legend(loc='best')
     ax2.tick_params(labelrotation=45)
 #    ax2.xticks(rotation=45)
-    fig.savefig(places[p_i]+'_ts.png',bbox_inches='tight')
+    fig.savefig(places[p_i]+'_ts_34.png',bbox_inches='tight')

@@ -149,11 +149,13 @@ miniconda2/
 *.xls
 *.dat
 *.mat
+*.gz
 
 # image, pdf, text, etc
 *.pdf
 *.jpg
 *.png
+*.mp4
 *.txt
 *.in
 

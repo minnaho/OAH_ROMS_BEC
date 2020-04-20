@@ -17,6 +17,11 @@ potw_minor_path = '/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc'
 atmos_path = '/data/project1/minnaho/atmos_deposition_data/L2_SCB_atmos_deposition.nc'
 setting = 'bight'
 
+s_day = 86400
+n_mass = 14
+mmol_to_mol = 1./1000
+g_to_kg = 1./1000
+
 ################
 # load atmos data
 ################
@@ -128,8 +133,12 @@ if setting == 'cal':
     oxn_monthly = np.empty((12,oxn.shape[1],oxn.shape[2]))
     for m_i in range(12):
         oxn_monthly[m_i] = np.nanmean(oxn[m_i::12,:,:])
-        
-        
+
+# find mean deposition in kg/day across entire bight 
+# sum across entire bight
+oxn_yearly = np.nansum(np.nanmean(np.array(oxn),axis=0))*s_day*n_mass*mmol_to_mol*g_to_kg
+redn_yearly = np.nansum(np.nanmean(np.array(redn),axis=0))*s_day*n_mass*mmol_to_mol*g_to_kg
+atmos_n_yearly = oxn_yearly+redn_yearly
 
 ###############
 # river major data (10 yrs)
@@ -226,6 +235,11 @@ major_flo_sum = np.nansum(np.nansum(major_flo[:,:,:],axis=1),axis=1)
 r_flo = major_flo_sum+minor_flo_short
 r_fluxn = major_fluxn+minor_fluxn
 r_fluxp = major_fluxp+minor_fluxp # mmol/s
+
+# find average flow and N flux over 1997-2000
+r_en_dt = 1461 # 2001-1-1
+r_yearly_flo = np.nanmean(r_flo[:r_en_dt])
+r_yearly_fluxn = np.nanmean(r_fluxn[:r_en_dt])*s_day*n_mass*mmol_to_mol*g_to_kg
 
 # find indices for each season
 r_1 = []
@@ -353,6 +367,13 @@ for m_i in range(minor_potw_flo.shape[1]):
     a.append(minor_potw_flo[:iend_minor,m_i,m_i]*minor_potw_po4[:iend_minor,m_i,m_i])
 minor_potw_fluxallp = np.nansum(np.array(a),axis=0)
 
+p_st_dt = 313
+p_en_dt = 361 # 2001-1-1
+ma_yearly_flo = np.nanmean(major_potw_allf[p_st_dt:p_en_dt])
+ma_yearly_fluxn = np.nanmean(major_potw_fluxalln[p_st_dt:p_en_dt])*s_day*n_mass*mmol_to_mol*g_to_kg
+
+mi_yearly_flo = np.nanmean(minor_potw_allf[:12])
+mi_yearly_fluxn = np.nanmean(minor_potw_fluxalln[:12])*s_day*n_mass*mmol_to_mol*g_to_kg
 
 # find indices for each season
 r_potw_1 = []
@@ -424,11 +445,11 @@ figh = 8
 seasons = ['Winter','Spring','Summer','Fall']
 width = 0.15
 axis_font = 18
-savename = './figs/inputs_compare_nolog.pdf'
+#savename = './figs/inputs_compare_nolog.pdf'
 #savename = './figs/inputs_compare.png'
-#savename = './figs/inputs_compare.pdf'
+savename = './figs/inputs_compare.pdf'
 
-plt.ion()
+#plt.ion()
 fig,ax = plt.subplots(1,1,figsize=[figw,figh])
 x_ind = np.arange(len(seasons))
 ax.bar(x_ind,atmo_n_season,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
@@ -436,13 +457,13 @@ ax.bar(x_ind+width,all_potw_season_n,color='orange',width=width,label='All POTWs
 ax.bar(x_ind+(2*width),r_season_n,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
 ax.set_xticks([width,1+width,2+width,3+width])
 ax.set_xticklabels(['Winter','Spring','Summer','Fall'])
-#ax.set_yscale('log')
+ax.set_yscale('log')
 ax.set_ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
 ax.tick_params(axis='both',which='major',labelsize=axis_font)
 #ax.tick_params(axis='both',which='minor',labelsize=axis_font)
 ax.legend(loc='lower left',fontsize=20,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=3,handlelength=2.5,handleheight=1.5)
 
-plt.savefig(savename,bbox_inches='tight')
+#plt.savefig(savename,bbox_inches='tight')
 
 
 
