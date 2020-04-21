@@ -98,7 +98,7 @@ om = reshape(om,NY,NX);
 end
 
 %%%%% Calculate omega aragonite option2 (Juranek et al 2014, applied on USW coast)
-[OM,Err] = juranek_aragsat(temp,o2) ;
+[OM,Err] = juranek_aragsat(temp',o2') ;
 
 if option1==1
 om(om==0)=NaN;
