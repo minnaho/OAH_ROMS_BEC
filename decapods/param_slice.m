@@ -4,7 +4,7 @@ load_grid_ussw1
 %% choose the option
 option1=0; % put 1 if you need to calculate omega using the CO2SYS program
 %% choose the depth DD
-DD1 = 30; % set bottom depth
+DD1 = 150; % set bottom depth
 DD2 = DD1; % set top depth same as bottom depth to get slice
 
 %% create the netdcf empty files
@@ -21,7 +21,7 @@ create_netcdf3D_L1(fout2,ncvar,shortname,longname,unit);
 
 
 %% find the modle outputs directories
-rep = '/data/project3/kesf/ROMS/USSW1/DAILY/' ;
+rep = '/data/project5/kesf/ROMS/USSW1/daily/' ;
 %% list the model outputs
 repavg = dir([rep,'/ussw1_avg.Y*.nc']) ;
 %repavg = dir([rep,'/ussw1_avg.Y2001*.nc']) ;
