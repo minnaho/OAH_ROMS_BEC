@@ -1,13 +1,17 @@
+
 load_grid_ussw1
 
-file = '/data/project3/kesf/tools_matlab/applications/pteropods/om_juranek_L1.nc' ;
-data = ncread(file,'var');
-
-fout =   '/data/project3/kesf/tools_matlab/applications/pteropods/pteropods_behavior_L1.nc';
-
-DATA = squeeze(data(i,j,:)) ;
-ThresholdMagnitude = 1.5 ;
-ThresholdDuration = 7 ;
-InputData = DATA' ;
+file = '/data/project3/kesf/tools_matlab/applications/pteropods/om_juranek_L1_200m_2001.nc' ;
+disp('data reading in progress ... ... ... ')
+InputData = ncread(file,'var');
+date = datenum(2001,1,1):datenum(2001,12,31);
+months = str2num(datestr(date,'mm')) ;
+%% june august
+list = find(months>3 & months<6);
+InputData = squeeze(InputData(:,:,list)) ;
+ThresholdMagnitude =  1.5 ;
+ThresholdDuration =  5 ;
 outPerDay = 1 ;
 
+disp('data ready ')
+fout =   ['/data/project3/kesf/tools_matlab/applications/pteropods/pteropods_shelldiss_mild_juvenile_2001.nc'];
