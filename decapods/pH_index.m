@@ -19,17 +19,17 @@ addpath(genpath('/data/project3/kesf/tools_matlab/matlab_paths/'))
 param_threshold
 
 %% loop over each point of the grid
-for i=1:NY
-for j=1:NX
-if mask(i,j)==0 ;
-Duration(i,j) = NaN;
-Frequency(i,j) = NaN;
-Intensity(i,j) = NaN;
-Severity(i,j) = NaN;
-Recovery(i,j) = NaN;
+for i=1:NX
+for j=1:NY
+if mask(j,i)==0 ;
+Duration(j,i) = NaN;
+Frequency(j,i) = NaN;
+Intensity(j,i) = NaN;
+Severity(j,i) = NaN;
+Recovery(j,i) = NaN;
 
 else
-	[Duration(i,j), Frequency(i,j), Intensity(i,j), Severity(i,j), Recovery(i,j)] = ...
+	[Duration(j,i), Frequency(j,i), Intensity(j,i), Severity(j,i), Recovery(j,i)] = ...
         Fx_PteropodThresholds_v02(ThresholdMagnitude, ThresholdDuration, squeeze(InputData(i,j,:))', outPerDay) ;
 end
 end
