@@ -35,6 +35,7 @@ dz = diff(z_w);
 	z = (zbot+ztop)./2 ;
 
 %% read the variables
+if option1~=1
    dataout  = ncread(file, 'rho') ;
    dataout = permute(dataout, [3 2 1]);
    dens = (squeeze(dataout(:,:,:)) + 1027.4) ;
@@ -49,8 +50,14 @@ dz = diff(z_w);
    o2 = squeeze(dataout(:,:,:)) ;
    o2 = (o2./(dens.*0.001)) ;
    o2(z>DD1 & z<DD2)=NaN; o2 = squeeze(nanmean(o2,1)) ;
+end
 
 if option1==1
+   dataout  = ncread(file, 'temp') ;
+   dataout = permute(dataout, [3 2 1]);
+   temp = squeeze(dataout(:,:,:)) ;
+   temp(z>DD1 & z<DD2)=NaN; temp = squeeze(nanmean(temp,1)) ;
+
    dataout  = ncread(file, 'DIC') ;
    dataout = permute(dataout, [3 2 1]);
    dic = squeeze(dataout(:,:,:)) ;
@@ -78,7 +85,7 @@ if option1==1
    alk = (alk./(dens.*0.001)) ; %./ 1.0114 ;
    alk(z>DD1 & z<DD2)=NaN; alk = squeeze(nanmean(alk,1)) ;
 
-%%%%% Calculate omega aragonite option1
+%%%%% Calculate pH option1
 %% parameters
 PAR1TYPE =  1 ; % alk
 PAR2TYPE = 3 ; % dic 2 , pH 3
@@ -99,12 +106,12 @@ om = reshape(om,NX,NY);
 end
 
 %%%%% Calculate omega aragonite option2 (Juranek et al 2014, applied on USW coast)
-[OM,Err] = juranek_aragsat(temp',o2') ;
 
 if option1==1
 om(om==0)=NaN;
 end
 if option1~=1
+[OM,Err] = juranek_aragsat(temp',o2') ;
 OM(OM==0)=NaN;
 end
 
