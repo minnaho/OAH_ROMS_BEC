@@ -18,22 +18,30 @@ addpath(genpath('/data/project3/kesf/tools_matlab/matlab_paths/'))
 %% load the grid
 param_threshold
 
+per_InputData = permute(InputData,[2 1 3]);
 %% loop over each point of the grid
-for i=1:NX
-for j=1:NY
-if mask(j,i)==0 ;
-Duration(j,i) = NaN;
-Frequency(j,i) = NaN;
-Intensity(j,i) = NaN;
-Severity(j,i) = NaN;
-Recovery(j,i) = NaN;
+for i=1:NY
+for j=1:NX
+if mask(i,j)==0 ;
+Duration(i,j) = NaN;
+Frequency(i,j) = NaN;
+Intensity(i,j) = NaN;
+Severity(i,j) = NaN;
+Recovery(i,j) = NaN;
 
 else
-	[Duration(j,i), Frequency(j,i), Intensity(j,i), Severity(j,i), Recovery(j,i)] = ...
-        Fx_PteropodThresholds_v02(ThresholdMagnitude, ThresholdDuration, squeeze(InputData(i,j,:))', outPerDay) ;
+	[Duration(i,j), Frequency(i,j), Intensity(i,j), Severity(i,j), Recovery(i,j)] = ...
+        Fx_PteropodThresholds_v02(ThresholdMagnitude, ThresholdDuration, squeeze(per_InputData(i,j,:))', outPerDay) ;
 end
 end
 end
+
+Duration(mask==0)=NaN;
+Intensity(mask==0)=NaN;
+Severity(mask==0)=NaN;
+Frequency(mask==0)=NaN;
+Recovery(mask==0)=NaN;
+
 
 disp('write the nc file...')
 % create the ncfile

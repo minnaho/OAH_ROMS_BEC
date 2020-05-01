@@ -5,6 +5,7 @@ matplotlib.rcParams['ps.fonttype'] = 42
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset,num2date,date2num
 import datetime as datetime
+import scipy.io
 
 fig_path = './figs/'
 # data paths
@@ -21,6 +22,7 @@ s_day = 86400
 n_mass = 14
 mmol_to_mol = 1./1000
 g_to_kg = 1./1000
+m2_to_hectare = 10000
 
 ################
 # load atmos data
@@ -136,8 +138,11 @@ if setting == 'cal':
 
 # find mean deposition in kg/day across entire bight 
 # sum across entire bight
-oxn_yearly = np.nansum(np.nanmean(np.array(oxn),axis=0))*s_day*n_mass*mmol_to_mol*g_to_kg
-redn_yearly = np.nansum(np.nanmean(np.array(redn),axis=0))*s_day*n_mass*mmol_to_mol*g_to_kg
+# convert to hectare because that is the true value,
+# model takes care of the value when in m2
+mat = scipy.io.loadmat('../maskt.mat') # apply mask that is 0-15km coastal band
+oxn_yearly = np.nansum(np.nanmean(np.array(oxn),axis=0)*mask_nc*mat['maskt'])*s_day*n_mass*mmol_to_mol*g_to_kg*m2_to_hectare
+redn_yearly = np.nansum(np.nanmean(np.array(redn),axis=0)*mask_nc*mat['maskt'])*s_day*n_mass*mmol_to_mol*g_to_kg*m2_to_hectare
 atmos_n_yearly = oxn_yearly+redn_yearly
 
 ###############

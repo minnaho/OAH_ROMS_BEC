@@ -34,23 +34,29 @@ dz = diff(z_w);
         ztop = [zbot(2:end,:,:);zeros(1,NY,NX)];
 	z = (zbot+ztop)./2 ;
 
-%% read the variables
-if option1~=1
-   dataout  = ncread(file, 'rho') ;
-   dataout = permute(dataout, [3 2 1]);
-   dens = (squeeze(dataout(:,:,:)) + 1027.4) ;
-
-   dataout  = ncread(file, 'temp') ;
-   dataout = permute(dataout, [3 2 1]);
-   temp = squeeze(dataout(:,:,:)) ;
-   temp(z>DD1 & z<DD2)=NaN; temp = squeeze(nanmean(temp,1)) ;
-
-   dataout  = ncread(file, 'O2') ;
-   dataout = permute(dataout, [3 2 1]);
-   o2 = squeeze(dataout(:,:,:)) ;
-   o2 = (o2./(dens.*0.001)) ;
-   o2(z>DD1 & z<DD2)=NaN; o2 = squeeze(nanmean(o2,1)) ;
+if bgc==1
+   rho_bgc  = ncread(file, 'rho') ;
+   dens_bgc = permute(rho_bgc, [3 2 1]);
+   dens_bgc = dens_bgc + 1027.4 ;
 end
+
+%% read the variables
+%if option1~=1
+%   dataout  = ncread(file, 'rho') ;
+%   dataout = permute(dataout, [3 2 1]);
+%   dens = (squeeze(dataout(:,:,:)) + 1027.4) ;
+%
+%   dataout  = ncread(file, 'temp') ;
+%   dataout = permute(dataout, [3 2 1]);
+%   temp = squeeze(dataout(:,:,:)) ;
+%   temp(z>DD1 & z<DD2)=NaN; temp = squeeze(nanmean(temp,1)) ;
+%
+%   dataout  = ncread(file, 'O2') ;
+%   dataout = permute(dataout, [3 2 1]);
+%   o2 = squeeze(dataout(:,:,:)) ;
+%   o2 = (o2./(dens.*0.001)) ;
+%   o2(z>DD1 & z<DD2)=NaN; o2 = squeeze(nanmean(o2,1)) ;
+%end
 
 if option1==1
    dataout  = ncread(file, 'rho') ;
@@ -58,36 +64,59 @@ if option1==1
    dens = (squeeze(dataout(:,:,:)) + 1027.4) ;
 
    dataout  = ncread(file, 'temp') ;
-   dataout = permute(dataout, [3 2 1]);
-   temp = squeeze(dataout(:,:,:)) ;
-   temp(z>DD1 & z<DD2)=NaN; temp = squeeze(nanmean(temp,1)) ;
+   var = permute(dataout, [3 2 1]);
+if bgc==1
+   var = (var./(dens_bgc.*0.001)) ;
+end
+     Var  = vinterp ( var, -(abs(z)) ,  -abs(DDfix) ) ;
+     Var(Var==0)=NaN;
+     temp = Var ;
+
 
    dataout  = ncread(file, 'DIC') ;
-   dataout = permute(dataout, [3 2 1]);
-   dic = squeeze(dataout(:,:,:)) ;
-   dic = (dic./(dens.*0.001)) ;
-   dic(z>DD1 & z<DD2)=NaN; dic = squeeze(nanmean(dic,1)) ;
+   var = permute(dataout, [3 2 1]);
+if bgc==1
+   var = (var./(dens_bgc.*0.001)) ;
+end
+     Var  = vinterp ( var, -(abs(z)) ,  -abs(DDfix) ) ;
+     Var(Var==0)=NaN;
+     dic = Var;
 
    dataout  = ncread(file, 'salt') ;
-   dataout = permute(dataout, [3 2 1]);
-   salt = squeeze(dataout(:,:,:)) ;
-   salt(z>DD1 & z<DD2)=NaN; salt = squeeze(nanmean(salt,1)) ;
+   var = permute(dataout, [3 2 1]);
+if bgc==1
+   var = (var./(dens_bgc.*0.001)) ;
+end
+     Var  = vinterp ( var, -(abs(z)) ,  -abs(DDfix) ) ;
+     Var(Var==0)=NaN;
+     salt = Var;
 
    dataout  = ncread(file, 'PO4') ;
-   dataout = permute(dataout, [3 2 1]);
-   po4 = squeeze(dataout(:,:,:)) ;
-   po4(z>DD1 & z<DD2)=NaN; po4 = squeeze(nanmean(po4,1)) ;
+   var = permute(dataout, [3 2 1]);
+if bgc==1
+   var = (var./(dens_bgc.*0.001)) ;
+end
+     Var  = vinterp ( var, -(abs(z)) ,  -abs(DDfix) ) ;
+     Var(Var==0)=NaN;
+     po4 = Var;
 
    dataout  = ncread(file, 'SiO3') ;
-   dataout = permute(dataout, [3 2 1]);
-   sio3 = squeeze(dataout(:,:,:)) ;
-   sio3(z>DD1 & z<DD2)=NaN; sio3 = squeeze(nanmean(sio3,1)) ;
+   var = permute(dataout, [3 2 1]);
+if bgc==1
+   var = (var./(dens_bgc.*0.001)) ;
+end
+     Var  = vinterp ( var, -(abs(z)) ,  -abs(DDfix) ) ;
+     Var(Var==0)=NaN;
+     sio3 = Var;
 
    dataout  = ncread(file, 'Alk') ;
-   dataout = permute(dataout, [3 2 1]);
-   alk = squeeze(dataout(:,:,:)) ;
-   alk = (alk./(dens.*0.001)) ; %./ 1.0114 ;
-   alk(z>DD1 & z<DD2)=NaN; alk = squeeze(nanmean(alk,1)) ;
+   var = permute(dataout, [3 2 1]);
+if bgc==1
+   var = (var./(dens_bgc.*0.001)) ;
+end
+     Var  = vinterp ( var, -(abs(z)) ,  -abs(DDfix) ) ;
+     Var(Var==0)=NaN;
+     alk = Var;
 
 %%%%% Calculate pH option1
 %% parameters

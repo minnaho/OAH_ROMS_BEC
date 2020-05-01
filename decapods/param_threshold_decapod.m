@@ -5,7 +5,7 @@ file = '/data/project1/minnaho/decapods/extract_nc/pH_co2sys_L1_50m_slice.nc' ;
 disp('data reading in progress ... ... ... ')
 InputData = ncread(file,'var');
 InputData = squeeze(InputData(:,:,:)) ;
-ThresholdMagnitude =  7.75 ;
+ThresholdMagnitude =  7.52 ;
 ThresholdDuration =  30 ;
 outPerDay = 1 ;
 

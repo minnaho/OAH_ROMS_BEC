@@ -5,6 +5,7 @@ matplotlib.rcParams['ps.fonttype'] = 42
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset,num2date,date2num
 import datetime as datetime
+import scipy.io
 
 fig_path = './figs/'
 # data paths
@@ -50,72 +51,74 @@ if setting == 'cal':
 
 # load per season (add up each 3 months in season) then sum over entire region 
 if setting == 'bight':
+    mat = scipy.io.loadmat('../maskt.mat') 
+    m2_to_hectare = 10000
     oxn_season  = np.empty((4))
     redn_season = np.empty((4))
     alk_season  = np.empty((4))
     fe_season   = np.empty((4))
 
-    oxn_win0 = np.array(oxn[11]+oxn[0]+oxn[1])*mask_nc
+    oxn_win0 = np.array(oxn[11]+oxn[0]+oxn[1])*mask_nc*mat['maskt']*m2_to_hectare
     oxn_win0[oxn_win0==0] = np.nan
     oxn_winter = np.nansum(oxn_win0)
 
-    oxn_spr0 = np.array(oxn[2]+oxn[3]+oxn[4])*mask_nc
+    oxn_spr0 = np.array(oxn[2]+oxn[3]+oxn[4])*mask_nc*mat['maskt']*m2_to_hectare
     oxn_spr0[oxn_spr0==0] = np.nan
     oxn_spring = np.nansum(oxn_spr0)
 
-    oxn_sum0 = np.array(oxn[5]+oxn[6]+oxn[7])*mask_nc
+    oxn_sum0 = np.array(oxn[5]+oxn[6]+oxn[7])*mask_nc*mat['maskt']*m2_to_hectare
     oxn_sum0[oxn_sum0==0] = np.nan
     oxn_summer = np.nansum(oxn_sum0)
 
-    oxn_aut0 = np.array(oxn[8]+oxn[9]+oxn[10])*mask_nc
+    oxn_aut0 = np.array(oxn[8]+oxn[9]+oxn[10])*mask_nc*mat['maskt']*m2_to_hectare
     oxn_aut0[oxn_aut0==0] = np.nan
     oxn_autumn = np.nansum(oxn_aut0)
 
-    fe_win0 = np.array(fe[11]+fe[0]+fe[1])*mask_nc
+    fe_win0 = np.array(fe[11]+fe[0]+fe[1])*mask_nc*mat['maskt']*m2_to_hectare
     fe_win0[fe_win0==0] = np.nan
     fe_winter = np.nansum(fe_win0)
 
-    fe_spr0 = np.array(fe[2]+fe[3]+fe[4])*mask_nc
+    fe_spr0 = np.array(fe[2]+fe[3]+fe[4])*mask_nc*mat['maskt']*m2_to_hectare
     fe_spr0[fe_spr0==0] = np.nan
     fe_spring = np.nansum(fe_spr0)
 
-    fe_sum0 = np.array(fe[5]+fe[6]+fe[7])*mask_nc
+    fe_sum0 = np.array(fe[5]+fe[6]+fe[7])*mask_nc*mat['maskt']*m2_to_hectare
     fe_sum0[fe_sum0==0] = np.nan
     fe_summer = np.nansum(fe_sum0)
 
-    fe_aut0 = np.array(fe[8]+fe[9]+fe[10])*mask_nc
+    fe_aut0 = np.array(fe[8]+fe[9]+fe[10])*mask_nc*mat['maskt']*m2_to_hectare
     fe_aut0[fe_aut0==0] = np.nan
     fe_autumn = np.nansum(fe_aut0)
 
-    alk_win0 = np.array(alk[11]+alk[0]+alk[1])*mask_nc
+    alk_win0 = np.array(alk[11]+alk[0]+alk[1])*mask_nc*mat['maskt']*m2_to_hectare
     alk_win0[alk_win0==0] = np.nan
     alk_winter = np.nansum(alk_win0)
 
-    alk_spr0 = np.array(alk[2]+alk[3]+alk[4])*mask_nc
+    alk_spr0 = np.array(alk[2]+alk[3]+alk[4])*mask_nc*mat['maskt']*m2_to_hectare
     alk_spr0[alk_spr0==0] = np.nan
     alk_spring = np.nansum(alk_spr0)
 
-    alk_sum0 = np.array(alk[5]+alk[6]+alk[7])*mask_nc
+    alk_sum0 = np.array(alk[5]+alk[6]+alk[7])*mask_nc*mat['maskt']*m2_to_hectare
     alk_sum0[alk_sum0==0] = np.nan
     alk_summer = np.nansum(alk_sum0)
 
-    alk_aut0 = np.array(alk[8]+alk[9]+alk[10])*mask_nc
+    alk_aut0 = np.array(alk[8]+alk[9]+alk[10])*mask_nc*mat['maskt']*m2_to_hectare
     alk_aut0[alk_aut0==0] = np.nan
     alk_autumn = np.nansum(alk_aut0)
 
-    redn_win0 = np.array(redn[11]+redn[0]+redn[1])*mask_nc
+    redn_win0 = np.array(redn[11]+redn[0]+redn[1])*mask_nc*mat['maskt']*m2_to_hectare
     redn_win0[redn_win0==0] = np.nan
     redn_winter = np.nansum(redn_win0)
 
-    redn_spr0 = np.array(redn[2]+redn[3]+redn[4])*mask_nc
+    redn_spr0 = np.array(redn[2]+redn[3]+redn[4])*mask_nc*mat['maskt']*m2_to_hectare
     redn_spr0[redn_spr0==0] = np.nan
     redn_spring = np.nansum(redn_spr0)
 
-    redn_sum0 = np.array(redn[5]+redn[6]+redn[7])*mask_nc
+    redn_sum0 = np.array(redn[5]+redn[6]+redn[7])*mask_nc*mat['maskt']*m2_to_hectare
     redn_sum0[redn_sum0==0] = np.nan
     redn_summer = np.nansum(redn_sum0)
 
-    redn_aut0 = np.array(redn[8]+redn[9]+redn[10])*mask_nc
+    redn_aut0 = np.array(redn[8]+redn[9]+redn[10])*mask_nc*mat['maskt']*m2_to_hectare
     redn_aut0[redn_aut0==0] = np.nan
     redn_autumn = np.nansum(redn_aut0)
 
@@ -424,9 +427,9 @@ figh = 8
 seasons = ['Winter','Spring','Summer','Fall']
 width = 0.15
 axis_font = 18
-savename = './figs/inputs_compare_nolog.pdf'
+#savename = './figs/inputs_compare_nolog.pdf'
 #savename = './figs/inputs_compare.png'
-#savename = './figs/inputs_compare.pdf'
+savename = './figs/inputs_compare.pdf'
 
 plt.ion()
 fig,ax = plt.subplots(1,1,figsize=[figw,figh])
@@ -436,7 +439,7 @@ ax.bar(x_ind+width,all_potw_season_n,color='orange',width=width,label='All POTWs
 ax.bar(x_ind+(2*width),r_season_n,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
 ax.set_xticks([width,1+width,2+width,3+width])
 ax.set_xticklabels(['Winter','Spring','Summer','Fall'])
-#ax.set_yscale('log')
+ax.set_yscale('log')
 ax.set_ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
 ax.tick_params(axis='both',which='major',labelsize=axis_font)
 #ax.tick_params(axis='both',which='minor',labelsize=axis_font)
