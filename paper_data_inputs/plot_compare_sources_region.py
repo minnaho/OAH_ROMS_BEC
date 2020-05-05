@@ -5,6 +5,7 @@ matplotlib.rcParams['ps.fonttype'] = 42
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset,num2date,date2num
 import datetime as datetime
+import scipy.io
 
 fig_path = './figs/'
 # data paths
@@ -31,16 +32,18 @@ if setting == 'bight':
     grid_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/roms_grd.nc'
     dataset_name = '/data/project1/minnaho/atmos_deposition_data/L2_SCB_atmos_deposition.nc'
     atmos_data = Dataset(dataset_name,'r')
+    mask_mat = scipy.io.loadmat('../maskt.mat')['maskt'] # mask that is first 0-15km offshore
+    m2_to_hectare = 10000
 
     grid_nc = Dataset(grid_path,'r')
     lat_nc = np.array(grid_nc.variables['lat_rho'])
     lon_nc = np.array(grid_nc.variables['lon_rho'])
     mask_nc = np.array(grid_nc.variables['mask_rho'])
 
-    oxn = atmos_data.variables['NH4']
-    redn = atmos_data.variables['NO3']
-    alk = atmos_data.variables['alk']
-    fe = atmos_data.variables['fe']
+    oxn  = np.array(atmos_data.variables['NH4'])*mask_mat*m2_to_hectare
+    redn = np.array(atmos_data.variables['NO3'])*mask_mat*m2_to_hectare
+    alk  = np.array(atmos_data.variables['alk'])*mask_mat*m2_to_hectare
+    fe   = np.array(atmos_data.variables['fe'])*mask_mat*m2_to_hectare
 
 if setting == 'cal':
     dataset_name = '/data/project1/minnaho/atmos_deposition_data/atmos_deposition_CMAQ_2002_2012.nc'
@@ -49,10 +52,10 @@ if setting == 'cal':
     lat_nc = np.array(atmos_data.variables['latitude'])
     lon_nc = np.array(atmos_data.variables['longitude'])
 
-    oxn = atmos_data.variables['oxidized_nitrogen']
+    oxn  = atmos_data.variables['oxidized_nitrogen']
     redn = atmos_data.variables['reduced_nitrogen']
-    alk = atmos_data.variables['alkalinity']
-    fe = atmos_data.variables['iron']
+    alk  = atmos_data.variables['alkalinity']
+    fe   = atmos_data.variables['iron']
 
 
 # load per season (add up each 3 months in season) then sum over entire region 
@@ -760,9 +763,8 @@ seasons = ['Winter','Spring','Summer','Fall']
 regions = ['Santa Barbara','Santa Monica','San Pedro','Orange County','San Diego']
 width = 0.1
 axis_font = 18
-#savename = './figs/inputs_compare_nolog.pdf'
-savename = './figs/inputs_compare_region.pdf'
-#savename = './figs/inputs_compare.png'
+#savename = './figs/inputs_compare_region.pdf'
+savename = './figs/inputs_compare_region_nolog.pdf'
 
 plt.ion()
 fig,ax = plt.subplots(1,1,figsize=[figw,figh])
@@ -772,7 +774,8 @@ ax.bar(x_ind+width,p_yr,color='orange',width=width,label='All POTWs')
 ax.bar(x_ind+(2*width),r_yr,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
 ax.set_xticks([width,1+width,2+width,3+width,4+width])
 ax.set_xticklabels(['Santa Barbara','Santa Monica','San Pedro','Orange County','San Diego'])
-ax.set_yscale('log')
+#ax.set_yscale('log')
+#ax.set_ybound(lower=10E-1,upper=25E5)
 ax.set_ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
 ax.tick_params(axis='both',which='major',labelsize=axis_font)
 #ax.tick_params(axis='both',which='minor',labelsize=axis_font)

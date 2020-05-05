@@ -5,7 +5,7 @@ bgc=1
 %% choose the option
 option1=1; % put 1 if you need to calculate omega using the CO2SYS program
 %% choose depth slice
-DDfix = 100; 
+DDfix = 30; 
 
 %% create the netdcf empty files
 if option1==1

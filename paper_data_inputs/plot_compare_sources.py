@@ -51,7 +51,7 @@ if setting == 'cal':
 
 # load per season (add up each 3 months in season) then sum over entire region 
 if setting == 'bight':
-    mat = scipy.io.loadmat('../maskt.mat') 
+    mat = scipy.io.loadmat('../maskt.mat') # mask that is first 0-15km offshore
     m2_to_hectare = 10000
     oxn_season  = np.empty((4))
     redn_season = np.empty((4))
@@ -427,9 +427,9 @@ figh = 8
 seasons = ['Winter','Spring','Summer','Fall']
 width = 0.15
 axis_font = 18
-#savename = './figs/inputs_compare_nolog.pdf'
+savename = './figs/inputs_compare_nolog.pdf'
 #savename = './figs/inputs_compare.png'
-savename = './figs/inputs_compare.pdf'
+#savename = './figs/inputs_compare.pdf'
 
 plt.ion()
 fig,ax = plt.subplots(1,1,figsize=[figw,figh])
@@ -439,7 +439,9 @@ ax.bar(x_ind+width,all_potw_season_n,color='orange',width=width,label='All POTWs
 ax.bar(x_ind+(2*width),r_season_n,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
 ax.set_xticks([width,1+width,2+width,3+width])
 ax.set_xticklabels(['Winter','Spring','Summer','Fall'])
-ax.set_yscale('log')
+#ax.set_yscale('log')
+#ax.set_ybound(lower=10E-1,upper=10E5)
+ax.set_ybound(lower=0)
 ax.set_ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
 ax.tick_params(axis='both',which='major',labelsize=axis_font)
 #ax.tick_params(axis='both',which='minor',labelsize=axis_font)

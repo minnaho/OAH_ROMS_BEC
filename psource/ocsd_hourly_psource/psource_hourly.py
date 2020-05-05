@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 
 # read in psource data
 filein = 'roms_psource.nc'
-fileout = 'roms_psource_hourly.nc'
+fileout = 'roms_psource_hourly_1999_2000.nc'
 
 filein_nc = xr.open_dataset(filein)
 

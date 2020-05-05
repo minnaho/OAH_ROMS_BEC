@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np
 from netCDF4 import Dataset,num2date,date2num
 import xarray as xr
+import subprocess as subprocess
 
 # get csv files from folder
 #csv_files_long = sorted(glob.glob('/mnt/d/Minna/Documents/BGC_model_work/validation/C*.csv'))
@@ -404,48 +405,42 @@ ds = df.astype('float32')
 xrs = xr.Dataset(ds)
 #xrs.reset_index('dim_0',inplace=True)
 
-xrs.to_netcdf('central_bight_master_database_1998_2019_1D_sd.nc')
+savename = 'central_bight_master_database_1998_2019_1D_sd.nc'
+xrs.to_netcdf(savename)
+
+# add attributes
+subprocess.call('ncatted -h -a units,\'date\',c,c,\'days since 1996-01-16\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'depth\',c,c,\'m\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'latitude\',c,c,\'degrees north\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'longitude\',c,c,\'degrees east\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'temperature\',c,c,\'degrees Celsius\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'CDOM\',c,c,\'ug/L\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'Chl-a\',c,c,\'ug/L\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'E_coli\',c,c,\'MPN/100mL\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'Enterococci\',c,c,\'MPN/100mL\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'ammonia-N\',c,c,\'mg/L\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'beam_C\',c,c,\'1/m\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'conductivity\',c,c,\'S/m\' '+savename,shell=True)
+subprocess.call('ncatted -h -a units,\'delta_T\',c,c,\'degrees Celsius/m\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'delta_T\',c,c,\'change in temperature\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'descent_rate\',c,c,\'m/s\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'dissolved_oxygen\',c,c,\'mg/L\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'fecal_coliforms\',c,c,\'MPN/100mL\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'irradiance\',c,c,\'uE/cm2/s\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'irradiance_norm\',c,c,\'%\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'light_transmission\',c,c,\'%\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'oxygen_saturation_mg_L\',c,c,\'mg/L\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'oxygen_saturation_percent\',c,c,\'%\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'pH\',c,c,\'pH units\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'salinity\',c,c,\'psu\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'specific_density\',c,c,\'kg/m3\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'stability\',c,c,\'kg/m3/m\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'surface_irradiance\',c,c,\'uE/cm2/s\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'total_coliforms\',c,c,\'MPN/100mL\' '+savename,shell=True)
+subprocess.call('ncatted -h -a long_name,\'transmissivity\',c,c,\'%\' '+savename,shell=True)
 
 '''
 xrs = xr.Dataset.from_dataframe(df)
 xrs.to_netcdf('central_bight_master_database_1998_2017.nc')
 '''
 
-'''
-#####################
-# make netCDF file
-####################
-f = Dataset('central_bight_database.nc','w')
-
-# dimensions
-time = f.createDimension('time',None)
-station = f.createDimension('station',None)
-depth = f.createDimension('depth',None)
-
-# variables
-times = f.createVariable('time',np.float64,('time',))
-depths = f.createVariable('depth',np.float32,('depth',))
-
-lats = f.createVariable('latitude',np.float32,('lat',))
-lons = f.createVariable('longitude',np.float32,('lon',))
-
-temp     = f.createVariable('temperature',np.float32,('time','station','depth'))
-cond     = f.createVariable('conductivity',np.float32,('time','station','depth'))
-pH       = f.createVariable('pH',np.float32,('time','station','depth'))
-oxygen   = f.createVariable('oxygen',np.float32,('time','station','depth'))
-trans    = f.createVariable('transmissivity',np.float32,('time','station','depth'))
-salinity = f.createVariable('salinity',np.float32,('time','station','depth'))
-dens     = f.createVariable('specific_density',np.float32,('time','station','depth'))
-time_s   = f.createVariable('time_seconds',np.float32,('time','station','depth'))
-desc     = f.createVariable('descent_rate',np.float32,('time','station','depth'))
-SBE_DO   = f.createVariable('SBE_DO',np.float32,('time','station','depth'))
-SBE_beam = f.createVariable('SBE_Beam',np.float32,('time','station','depth'))
-chl-a    = f.createVariable('chl-a',np.float32,('time','station','depth'))
-CDOM     = f.createVariable('CDOM',np.float32,('time','station','depth'))
-ammonia  = f.createVariable('ammonia-N',np.float32,('time','station','depth'))
-total_colif = f.createVariable('total_colif',np.float32,('time','station','depth'))
-fecal_colif = f.createVariable('fecal_colif',np.float32,('time','station','depth'))
-e_coli      = f.createVariable('E.coli',np.float32,('time','station','depth'))
-enterococci = f.createVariable('enterococci',np.float32,('time','station','depth'))
-
-'''
