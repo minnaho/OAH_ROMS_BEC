@@ -1,5 +1,4 @@
-function [Frequency] = threshold_freq_yearlyavg( ...
-    ThresholdMagnitude, ThresholdDuration, InputData, outPerDay)
+function Frequency_yearly = threshold_freq_yearly(ThresholdMagnitude, ThresholdDuration, InputData, outPerDay)
 
 % Matlab function to calculate metrics for model output of pteropod thresholds
 % for input of a two-dimensional array of aragonite saturation state omega
@@ -44,7 +43,7 @@ function [Frequency] = threshold_freq_yearlyavg( ...
 % - Recovery is the average recovery period (days) between adverse events
 
 clear Frequency_yearly ndays;
-Frequency = zeros(1,numel(InputData(:,1)));
+Frequency_yearly = zeros(1,numel(InputData(:,1)));
 ndays=numel(InputData(1,:))/outPerDay;   % total number of days being evaluated
 
 for inode=1:numel(InputData(:,1))          % loop through nodes
