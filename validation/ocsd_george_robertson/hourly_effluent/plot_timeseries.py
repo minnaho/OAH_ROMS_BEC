@@ -16,8 +16,8 @@ monthly_date = num2date(time_arr,time_nc.units)
 
 df_raw = pd.read_excel('OCSD_hourly_effluent_minna_edits.xlsx',sheet_name=0,header=None,skiprows=1,usecols='A,C:D')
 
-#flow_gal_day = np.array(df_raw[3]*1000000.)
-flow_gal_day = np.array(df_raw[3])
+flow_gal_day = np.array(df_raw[3]*1000000.)
+#flow_gal_day = np.array(df_raw[3])
 date_str = np.array(df_raw[0].astype(str))
 
 date_no_hr_l = []
@@ -34,8 +34,8 @@ for d_i in range(len(date_no_hr)):
 date_hr = np.array(date_hr_l)
 
 monthly_data = (monthly_data_m3_s*(264.172052*86400))/1000000.
-#flow_m3_s = flow_gal_day/(264.172052*86400)
-flow_m3_s = flow_gal_day
+flow_m3_s = flow_gal_day/(264.172052*86400)
+#flow_m3_s = flow_gal_day
 
 # monthly average of hourly data (732 is approx how many hours in a month)
 flow_monthly = np.empty((flow_m3_s[::732].shape[0]))
@@ -65,8 +65,8 @@ ax.grid()
 #ax.xaxis.set_major_formatter(h_fmt)
 plt.xticks(rotation=50)
 plt.xlabel('Time (hourly)',fontsize=axis_font)
-#plt.ylabel('Flow (m$^3$/s)',fontsize=axis_font)
-plt.ylabel('Flow (MGD)',fontsize=axis_font)
+plt.ylabel('Flow (m$^3$/s)',fontsize=axis_font)
+#plt.ylabel('Flow (MGD)',fontsize=axis_font)
 plt.title('Hourly and Monthly Flow OCSD',fontsize=title_font)
 plt.legend(loc='best',fontsize=legend_size)
 plt.tick_params(axis='both',which='major',labelsize=axis_font)

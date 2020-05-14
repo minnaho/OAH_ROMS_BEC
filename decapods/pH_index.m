@@ -21,6 +21,7 @@ param_threshold
 per_InputData = permute(InputData,[2 1 3]);
 %% loop over each point of the grid
 for i=1:NY
+disp(['i = ',num2str(i),' of ',num2str(NY)])
 for j=1:NX
 if mask(i,j)==0 ;
 Duration(i,j) = NaN;
@@ -84,7 +85,7 @@ netcdf.putVar(ncid,S,Severity);
 
 
  % insert global attribute
-  NC_GLOBAL = netcdf.getConstant('NC_GLOBAL');
+NC_GLOBAL = netcdf.getConstant('NC_GLOBAL');
 netcdf.putAtt(ncid,NC_GLOBAL,'title','Decapods thresholds analysis')
 netcdf.putAtt(ncid,NC_GLOBAL,'long_title','Decapods thresholds analysis on ROMS L1 California state wide model')
 netcdf.putAtt(ncid,NC_GLOBAL,'institution','UCLA/UW/SCCWRP')

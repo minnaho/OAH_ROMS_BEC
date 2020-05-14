@@ -96,11 +96,12 @@ num_days = 3955
 lat_mean = np.mean(lat_grid)
 lon_mean = np.mean(lon_grid)
 
-lat_min = np.min(lat_grid)
+#lat_min = np.min(lat_grid)
+lat_min = 30
 lat_max = np.max(lat_grid)
-lon_min = np.min(lon_grid)
 lon_max = np.max(lon_grid)
-
+lon_min = -126
+#lon_min = np.min(lon_grid)
 
 # draw latitude
 parallels = np.arange(0,90,2)
@@ -120,12 +121,12 @@ axis_tick_size = 14
 subplot_title_font = 16
 axis_font = 15
 
-fig_w = 16
+fig_w = 14
 fig_h = 9
 cb_w = 0.01
 
 
-baths = [100,500,750,1000]
+baths = [200]
 
 # loop over each experiment
 for exp_i in range(len(exp_files)):
@@ -141,8 +142,8 @@ for exp_i in range(len(exp_files)):
         # make land white by setting values to nan
         variable_data[variable_data==0] = np.nan
         axes.flat[var].set_title(exp_variables[var],fontsize=subplot_title_font) 
-        #h_plt = map_ax.contour(x,y,h_grid,baths,colors='k',linewidths=1)
-        #plt.clabel(h_plt,fontsize=9,fmt='%1i')
+        h_plt = map_ax.contour(x,y,h_grid,baths,colors='k',linewidths=1)
+        plt.clabel(h_plt,fontsize=9,fmt='%1i')
         map_ax.drawstates()
         map_ax.drawcountries()
         map_ax.drawcoastlines()
@@ -199,6 +200,8 @@ for exp_i in range(len(exp_files)):
     if '_300m_' in exp_files[exp_i]:
         ph_data = np.array(Dataset(extract_data_300,'r').variables['var'][0,:,:])
     p = map_ax.pcolor(x,y,ph_data,cmap=cmap_plot)
+    h_plt = map_ax.contour(x,y,h_grid,baths,colors='k',linewidths=1)
+    plt.clabel(h_plt,fontsize=9,fmt='%1i')
     map_ax.drawstates()
     map_ax.drawcountries()
     map_ax.drawcoastlines()

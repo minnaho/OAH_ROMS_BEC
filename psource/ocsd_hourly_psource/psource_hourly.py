@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 
 # read in psource data
 filein = 'roms_psource.nc'
-fileout = 'roms_psource_hourly_1999_2000.nc'
+fileout = 'roms_psource_hourly.nc'
 
 filein_nc = xr.open_dataset(filein)
 
@@ -20,6 +20,14 @@ ocsd_st_dt = datetime(1999,1,31,0,0)
 ocsd_en_dt = num2date(ocsd_hourly_nc.variables['time'].shape[0],ocsd_time)
 
 ocsd_flow = np.array(ocsd_hourly_nc.variables['flow'])
+
+# interpolate nan values
+ok = ~np.isnan(ocsd_flow)
+xp = ok.ravel().nonzero()[0]
+fp = ocsd_flow[~np.isnan(ocsd_flow)]
+x  = np.isnan(ocsd_flow).ravel().nonzero()[0]
+ocsd_flow[np.isnan(ocsd_flow)] = np.interp(x, xp, fp)
+
 
 # psrc time
 time_unit_orig = 'days since 1994-1-1 00:00'
