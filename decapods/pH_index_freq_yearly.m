@@ -17,7 +17,33 @@ addpath(genpath('/data/project1/minnaho/decapods/'))
 
 %% user can change here:
 %% load the grid
-param_threshold_decapod_yearlyfreq
+%param_threshold_decapod_yearlyfreq
+
+load_grid_ussw1
+
+% loop through years to calculate and save each year as separate file
+all_years = 2007:2007;
+for y_i=1:size(all_years,2)
+disp(['year: ',num2str(all_years(y_i))])
+file = '/data/project1/minnaho/decapods/extract_nc/pH_co2sys_L1_150m_slice.nc' ;
+% pick year to subsample output
+year_select = all_years(y_i);
+
+disp('data reading in progress ... ... ... ')
+InputData = ncread(file,'var');
+% total time that output file accounts for (daily timestep)
+date = datenum(1997,2,1):datenum(2007,11,30);
+year = str2num(datestr(date,'yyyy'));
+list = find(year==year_select);
+InputData = squeeze(InputData(:,:,list)) ;
+
+ThresholdMagnitude =  7.76 ;
+ThresholdDuration =  9 ;
+outPerDay = 1 ;
+
+disp('data ready ')
+fout =   ['/data/project1/minnaho/decapods/decapods_nc/yearly_freq/decapods_adult_search_150m_9d_',num2str(year_select),'.nc'];
+
 
 per_InputData = permute(InputData,[2 1 3]);
 %% loop over each point of the grid
@@ -58,5 +84,6 @@ netcdf.putAtt(ncid,NC_GLOBAL,'long_title','Decapods thresholds analysis on ROMS 
 netcdf.putAtt(ncid,NC_GLOBAL,'institution','UCLA/UW/SCCWRP')
 netcdf.putAtt(ncid,NC_GLOBAL,'source','roms')
 netcdf.putAtt(ncid,NC_GLOBAL,'description',['ThresholdMagnitude = ',num2str(ThresholdMagnitude),', ThresholdDuration = ',num2str(ThresholdDuration)])
+netcdf.close(ncid)
 
-
+end
