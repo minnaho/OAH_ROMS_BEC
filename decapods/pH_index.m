@@ -91,5 +91,5 @@ netcdf.putAtt(ncid,NC_GLOBAL,'long_title','Decapods thresholds analysis on ROMS 
 netcdf.putAtt(ncid,NC_GLOBAL,'institution','UCLA/UW/SCCWRP')
 netcdf.putAtt(ncid,NC_GLOBAL,'source','roms')
 netcdf.putAtt(ncid,NC_GLOBAL,'description',['ThresholdMagnitude = ',num2str(ThresholdMagnitude),', ThresholdDuration = ',num2str(ThresholdDuration)])
-
+netcdf.close(ncid)
 
