@@ -31,14 +31,17 @@ major_flo = np.array(major_nc.variables['flow']) # m3/s
 major_nh4 = np.array(major_nc.variables['NH4']) # mmol/m3
 major_no3 = np.array(major_nc.variables['NO3']) # mmol/m3
 major_no2 = np.array(major_nc.variables['NO2']) # mmol/m3
+major_on = np.array(major_nc.variables['ON']) # mmol/m3
 major_po4 = np.array(major_nc.variables['PO4']) # mmol/m3
+major_op = np.array(major_nc.variables['OP']) # mmol/m3
 major_fe  = np.array(major_nc.variables['Fe'])  # mmol/m3
 major_pH  = np.array(major_nc.variables['pH']) 
 major_alk = np.array(major_nc.variables['alkalinity']) 
 major_temp = np.array(major_nc.variables['temperature']) 
 major_salt = np.array(major_nc.variables['salinity']) 
 
-major_tn = major_nh4+major_no3+major_no2
+major_tn = major_nh4+major_no3+major_no2+major_on
+major_tp = major_po4+major_op
 
 # plotting major
 figw = 10
@@ -110,11 +113,119 @@ axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1
 loc = mtick.MultipleLocator(base=50000) 
 axes.flat[3].yaxis.set_major_locator(loc)
 fig.savefig(savename_major_flux,bbox_inches='tight')
-#axes.flat[0].yaxis.set_major_formatter(y_fmt)
-#axes.flat[1].yaxis.set_major_formatter(y_fmt)
-#axes.flat[2].yaxis.set_major_formatter(y_fmt)
-#axes.flat[3].yaxis.set_major_formatter(y_fmt)
-#axes.flat[4].yaxis.set_major_formatter(y_fmt)
+
+# major fluxes + all majors added up
+savename_major_flux = fig_path+'major_potw_ts_sum_flux.pdf'
+y_fmt = mtick.FormatStrFormatter('%1.E')
+
+major_flo[major_flo>1E36]=np.nan
+a = []
+for m_i in range(major_flo.shape[1]):
+    a.append(major_flo[:,m_i,m_i]*major_tn[:,m_i,m_i])
+
+major_potw_fluxalln = np.nansum(np.array(a),axis=0)
+
+b = []
+for m_i in range(major_flo.shape[1]):
+    b.append(major_flo[:,m_i,m_i]*major_tp[:,m_i,m_i])
+
+major_fluxalln = np.nansum(np.array(a),axis=0)
+major_fluxallp = np.nansum(np.array(b),axis=0)
+
+fig,axes = plt.subplots(3,1,sharex=True,figsize=[figw,figh])
+axes.flat[0].plot(major_time_dt[:iend_major-1],np.nansum(np.nansum(major_flo[:iend_major-1],axis=1),axis=1),linewidth=lw)
+axes.flat[1].plot(major_time_dt[:iend_major-1],major_fluxalln[:iend_major-1],color='orange',linewidth=lw)
+axes.flat[2].plot(major_time_dt[:iend_major-1],major_fluxallp[:iend_major-1],color='gray',linewidth=lw)
+axes.flat[0].set_ybound(lower=0)
+axes.flat[1].set_ybound(lower=0)
+axes.flat[2].set_ybound(lower=0)
+axes.flat[0].set_ylabel('Volume Flux\n m$^3$ s$^{-1}$',fontsize=axis_font)
+axes.flat[1].set_ylabel('Total N Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[2].set_ylabel('Total P Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[1].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+#axes.flat[0].legend(loc='best',fontsize=axis_tick_font,bbox_to_anchor=[1.,1],handlelength=3)
+#axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
+loc = mtick.MultipleLocator(base=50000) 
+#axes.flat[3].yaxis.set_major_locator(loc)
+fig.savefig(savename_major_flux,bbox_inches='tight')
+
+savename_major_flux = fig_path+'major_potw_ts_sum_flux_nobound.pdf'
+y_fmt = mtick.FormatStrFormatter('%1.E')
+
+major_flo[major_flo>1E36]=np.nan
+a = []
+for m_i in range(major_flo.shape[1]):
+    a.append(major_flo[:,m_i,m_i]*major_tn[:,m_i,m_i])
+
+major_potw_fluxalln = np.nansum(np.array(a),axis=0)
+
+b = []
+for m_i in range(major_flo.shape[1]):
+    b.append(major_flo[:,m_i,m_i]*major_tp[:,m_i,m_i])
+
+major_fluxalln = np.nansum(np.array(a),axis=0)
+major_fluxallp = np.nansum(np.array(b),axis=0)
+
+fig,axes = plt.subplots(3,1,sharex=True,figsize=[figw+1,figh])
+axes.flat[0].plot(major_time_dt[:iend_major-1],np.nansum(np.nansum(major_flo[:iend_major-1],axis=1),axis=1),linewidth=lw)
+axes.flat[1].plot(major_time_dt[:iend_major-1],major_fluxalln[:iend_major-1],color='orange',linewidth=lw)
+axes.flat[2].plot(major_time_dt[:iend_major-1],major_fluxallp[:iend_major-1],color='gray',linewidth=lw)
+#axes.flat[0].set_ybound(lower=0)
+#axes.flat[1].set_ybound(lower=0)
+#axes.flat[2].set_ybound(lower=0)
+axes.flat[0].set_ylabel('Volume Flux\n m$^3$ s$^{-1}$',fontsize=axis_font)
+axes.flat[1].set_ylabel('Total N Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[2].set_ylabel('Total P Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[1].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+#axes.flat[0].legend(loc='best',fontsize=axis_tick_font,bbox_to_anchor=[1.,1],handlelength=3)
+#axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
+loc = mtick.MultipleLocator(base=50000) 
+#axes.flat[3].yaxis.set_major_locator(loc)
+fig.savefig(savename_major_flux,bbox_inches='tight')
+
+
+#start in 1980s
+st_in = 200
+savename_major_flux = fig_path+'major_potw_ts_sum_flux_shorter.pdf'
+y_fmt = mtick.FormatStrFormatter('%1.E')
+
+major_flo[major_flo>1E36]=np.nan
+a = []
+for m_i in range(major_flo.shape[1]):
+    a.append(major_flo[:,m_i,m_i]*major_tn[:,m_i,m_i])
+
+major_potw_fluxalln = np.nansum(np.array(a),axis=0)
+
+b = []
+for m_i in range(major_flo.shape[1]):
+    b.append(major_flo[:,m_i,m_i]*major_tp[:,m_i,m_i])
+
+major_fluxalln = np.nansum(np.array(a),axis=0)
+major_fluxallp = np.nansum(np.array(b),axis=0)
+
+fig,axes = plt.subplots(3,1,sharex=True,figsize=[figw,figh])
+axes.flat[0].plot(major_time_dt[st_in:iend_major-1],np.nansum(np.nansum(major_flo[st_in:iend_major-1],axis=1),axis=1),linewidth=lw)
+axes.flat[1].plot(major_time_dt[st_in:iend_major-1],major_fluxalln[st_in:iend_major-1],color='orange',linewidth=lw)
+axes.flat[2].plot(major_time_dt[st_in:iend_major-1],major_fluxallp[st_in:iend_major-1],color='gray',linewidth=lw)
+#axes.flat[0].set_ybound(lower=0)
+#axes.flat[1].set_ybound(lower=0)
+#axes.flat[2].set_ybound(lower=0)
+axes.flat[0].set_ylabel('Volume Flux\n m$^3$ s$^{-1}$',fontsize=axis_font)
+axes.flat[1].set_ylabel('Total N Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[2].set_ylabel('Total P Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[1].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+#axes.flat[0].legend(loc='best',fontsize=axis_tick_font,bbox_to_anchor=[1.,1],handlelength=3)
+#axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
+loc = mtick.MultipleLocator(base=50000) 
+#axes.flat[3].yaxis.set_major_locator(loc)
+fig.savefig(savename_major_flux,bbox_inches='tight')
+'''
 
 ###############
 # minor data
@@ -324,3 +435,4 @@ axes.flat[3].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 axes.flat[4].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
 fig.savefig(savename_major_clim,bbox_inches='tight')
+'''
