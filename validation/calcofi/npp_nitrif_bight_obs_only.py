@@ -130,7 +130,7 @@ c_conv = 12
 sec_day = 86400
 npp_conv_m = c_conv
 npp_conv_o = (1./sec_day)
-nit_conv = (1./sec_day)*(1./1000) # nmol/L/day
+nit_conv = (1./sec_day)*(1./1000) # convert nmol/L/day to mmol/m3/s
 
 h_plot = 9
 w_plot = 6

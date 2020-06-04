@@ -53,7 +53,7 @@ h_grid = h_nc[y0:yE,x0:xE]
 #############################
 # load pteropods experiments
 #############################
-path_data = '/data/project1/minnaho/decapods/decapods_nc/'
+path_data = '/data/project1/minnaho/decapods/echinoderms_nc/'
 extract_data_0   = '../extract_nc/pH_co2sys_L1_0m_slice_avg.nc'
 extract_data_30  = '../extract_nc/pH_co2sys_L1_30m_slice_avg.nc'
 extract_data_50  = '../extract_nc/pH_co2sys_L1_50m_slice_avg.nc'
@@ -62,9 +62,7 @@ extract_data_150 = '../extract_nc/pH_co2sys_L1_150m_slice_avg.nc'
 extract_data_300 = '../extract_nc/pH_co2sys_L1_300m_slice_avg.nc'
 extract_data_70 = '../extract_nc/pH_co2sys_L1_70m_int_avg.nc'
 
-#exp_files = ['decapods_juvenile_mort_50m_1997_2007.nc',
-#             'decapods_adult_searching_50m_1997_2007.nc']
-exp_files = list(sorted(glob.glob(path_data+'*')))
+exp_files = list(sorted(glob.glob(path_data+'*.nc')))
 
 
 # full length of L1 simulation 1997-2007
@@ -73,14 +71,11 @@ dt_en = datetime.datetime(2007,11,30)
 # make array of all dates
 date_range = np.array([dt_st+datetime.timedelta(days=n) for n in range(int ((dt_en+datetime.timedelta(days=1)-dt_st).days))])
 
-num_days_mar_jul = 0
-num_days_apr_aug = 0
+num_days_apr_jul = 0
 # find number of days with selected months
 for d_i in range(len(date_range)):
-    if date_range[d_i].month >= 3 and date_range[d_i].month <= 7:
-        num_days_mar_jul += 1
-    if date_range[d_i].month >= 4 and date_range[d_i].month <= 8:
-        num_days_apr_aug += 1
+    if date_range[d_i].month >= 4 and date_range[d_i].month <= 7:
+        num_days_apr_jul += 1
 
 num_days_full = len(date_range)
 
@@ -112,7 +107,7 @@ meridians = np.arange(180,360,4)
 # plot using grid
 #####################
 
-save_figs_path = '/data/project1/minnaho/decapods/plot/decapod_figs/'
+save_figs_path = '/data/project1/minnaho/decapods/plot/echinoderm_figs/'
 
 title_font = 20
 cb_font = 16
@@ -130,10 +125,8 @@ baths = [200]
 # loop over each experiment
 for exp_i in range(len(exp_files)):
     print('plotting '+str(exp_files[exp_i]))
-    if 'upwell' in exp_files[exp_i] and 'mort' in exp_files[exp_i]:
-        num_days_select = num_days_mar_jul
-    if 'upwell' in exp_files[exp_i] and 'diss' in exp_files[exp_i]:
-        num_days_select = num_days_apr_aug
+    if 'upwell' in exp_files[exp_i]:
+        num_days_select = num_days_apr_jul
     else:
         num_days_select = num_days_full
     nc_data = Dataset(exp_files[exp_i],'r')

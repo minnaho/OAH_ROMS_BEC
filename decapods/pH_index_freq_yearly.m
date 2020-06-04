@@ -25,7 +25,7 @@ load_grid_ussw1
 all_years = 1997:2007;
 for y_i=1:size(all_years,2)
 disp(['year: ',num2str(all_years(y_i))])
-file = '/data/project1/minnaho/decapods/extract_nc/pH_co2sys_L1_70m_int.nc' ;
+file = '/data/project1/minnaho/decapods/extract_nc/pH_co2sys_L1_30m_slice.nc' ;
 % pick year to subsample output
 year_select = all_years(y_i);
 
@@ -37,12 +37,13 @@ year = str2num(datestr(date,'yyyy'));
 list = find(year==year_select);
 InputData = squeeze(InputData(:,:,list)) ;
 
-ThresholdMagnitude =  7.57 ;
-ThresholdDuration =  30 ;
+ThresholdMagnitude =  7.7 ;
+ThresholdDuration =  7 ;
 outPerDay = 1 ;
 
 disp('data ready ')
-fout =   ['/data/project1/minnaho/decapods/decapods_nc/yearly_freq/decapods_larval_diss_70m_',num2str(year_select),'.nc'];
+%fout =   ['/data/project1/minnaho/decapods/decapods_nc/yearly_freq/decapods_larval_diss_70m_',num2str(year_select),'.nc'];
+fout =   ['/data/project1/minnaho/decapods/echinoderms_nc/yearly_freq/echinoderm_larval_behavior_30m_',num2str(year_select),'.nc'];
 
 
 per_InputData = permute(InputData,[2 1 3]);

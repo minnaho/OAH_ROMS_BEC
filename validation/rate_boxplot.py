@@ -21,6 +21,7 @@ import pandas as pd
 rate_name = '/data/project1/minnaho/validation/ValidationRateData_mh.xlsx'
 nitr_rate_df = pd.read_excel(rate_name,sheet_name='Nitrification and nut uptake')
 growth_df = pd.read_excel(rate_name,sheet_name='growth and grazing')
+npp_df = pd.read_excel(rate_name,sheet_name='Primary Production')
 
 phyto_grw = np.array(growth_df['phytoplankton growth'][9:][~np.isnan(growth_df['phytoplankton growth'][9:])])
 

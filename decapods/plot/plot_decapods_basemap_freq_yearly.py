@@ -54,6 +54,7 @@ h_grid = h_nc[y0:yE,x0:xE]
 # load pteropods experiments
 #############################
 path_data = '/data/project1/minnaho/decapods/decapods_nc/'
+freq_path = '/data/project1/minnaho/decapods/decapods_nc/freq_avg/'
 extract_data_0   = '../extract_nc/pH_co2sys_L1_0m_slice_avg.nc'
 extract_data_30  = '../extract_nc/pH_co2sys_L1_30m_slice_avg.nc'
 extract_data_50  = '../extract_nc/pH_co2sys_L1_50m_slice_avg.nc'
@@ -62,10 +63,18 @@ extract_data_150 = '../extract_nc/pH_co2sys_L1_150m_slice_avg.nc'
 extract_data_300 = '../extract_nc/pH_co2sys_L1_300m_slice_avg.nc'
 extract_data_70 = '../extract_nc/pH_co2sys_L1_70m_int_avg.nc'
 
-#exp_files = ['decapods_juvenile_mort_50m_1997_2007.nc',
-#             'decapods_adult_searching_50m_1997_2007.nc']
-exp_files = list(sorted(glob.glob(path_data+'*')))
+# path with data files
+exp_files = list(sorted(glob.glob(path_data+'*.nc')))
+freq_files = list(sorted(glob.glob(freq_path+'*.nc')))
 
+# no path 
+exp_files_short = list(sorted(glob.glob1(path_data,'*.nc')))
+freq_files_short = list(sorted(glob.glob1(freq_path,'*.nc')))
+
+# names to match with the original decapod experiments
+freq_files_nofreq = []
+for f_i in range(len(freq_files_short)):
+    freq_files_nofreq.append(freq_files_short[f_i][:freq_files_short[f_i].index('freq')])
 
 # full length of L1 simulation 1997-2007
 dt_st = datetime.datetime(1997,2,1)
@@ -170,8 +179,14 @@ for exp_i in range(len(exp_files)):
             cmap_plot = cmocean.cm.matter
             cb_label = 'Number of Days'
         if exp_variables[var] == 'Frequency':
+            exp_str_i = exp_files_short[exp_i].index('1997')
+            if exp_files_short[exp_i][:exp_str_i] in freq_files_nofreq:
+                freq_avg = freq_files[freq_files_nofreq.index(exp_files_short[exp_i][:exp_str_i])]
+                variable_data_tr = np.transpose(np.array(Dataset(freq_avg,'r').variables['Frequency']))
+                variable_data = variable_data_tr[y0:yE,x0:xE]*mask_grid
+                variable_data[variable_data==0] = np.nan
             cmap_plot = cmocean.cm.turbid
-            cb_label = 'Number of Events'
+            cb_label = 'Yearly Avg Number of Events'
         if exp_variables[var] == 'Intensity':
             cmap_plot = cmocean.cm.thermal_r
             cb_label = 'Mean value below threshold'
@@ -222,6 +237,5 @@ for exp_i in range(len(exp_files)):
     #fig.tight_layout()
     #fig.suptitle(exp_titles[exp_i]+' pH '+nc_data.description+' days',fontsize=title_font)
     #fig.subplots_adjust(top=.90)
-    fig.savefig(save_figs_path+exp_files[exp_i][len(path_data):exp_files[exp_i].index('.n')]+'.png',bbox_inches='tight')
+    fig.savefig(save_figs_path+exp_files[exp_i][len(path_data):exp_files[exp_i].index('.n')]+'_freqavg.png',bbox_inches='tight')
     plt.close('all')
-
