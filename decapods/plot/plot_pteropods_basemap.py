@@ -19,6 +19,9 @@ import cmocean as cmocean
 import datetime as datetime
 import glob as glob
 
+path_data = '../pteropods_nc/avg_yearly/'
+#path_data = '../pteropods_nc/'
+save_figs_path = '/data/project1/minnaho/decapods/plot/pteropod_figs/'
 
 ###########
 # load grid
@@ -53,30 +56,29 @@ h_grid = h_nc[y0:yE,x0:xE]
 #############################
 # load pteropods experiments
 #############################
-path_data = '/data/project1/minnaho/decapods/echinoderms_nc/'
-extract_data_0   = '../extract_nc/pH_co2sys_L1_0m_slice_avg.nc'
-extract_data_30  = '../extract_nc/pH_co2sys_L1_30m_slice_avg.nc'
-extract_data_50  = '../extract_nc/pH_co2sys_L1_50m_slice_avg.nc'
-extract_data_100 = '../extract_nc/pH_co2sys_L1_100m_slice_avg.nc'
-extract_data_150 = '../extract_nc/pH_co2sys_L1_150m_slice_avg.nc'
-extract_data_300 = '../extract_nc/pH_co2sys_L1_300m_slice_avg.nc'
-extract_data_70 = '../extract_nc/pH_co2sys_L1_70m_int_avg.nc'
-extract_data_b5 = '../extract_nc/pH_co2sys_L1_bottom_5m_int.nc'
+extract_data_b5 = '../extract_nc/omega_ara_co2sys_L1_200m_int_avg.nc'
 
 exp_files = list(sorted(glob.glob(path_data+'*.nc')))
 
 
 # full length of L1 simulation 1997-2007
-dt_st = datetime.datetime(1997,2,1)
-dt_en = datetime.datetime(2007,11,30)
+if 'avg' in  path_data:
+    dt_st = datetime.datetime(1998,1,1)
+    dt_en = datetime.datetime(1998,12,31)
+else:
+    dt_st = datetime.datetime(1997,2,1)
+    dt_en = datetime.datetime(2007,11,30)
 # make array of all dates
 date_range = np.array([dt_st+datetime.timedelta(days=n) for n in range(int ((dt_en+datetime.timedelta(days=1)-dt_st).days))])
 
-num_days_apr_jul = 0
+num_days_mar_may = 0
+num_days_jun_sep = 0
 # find number of days with selected months
 for d_i in range(len(date_range)):
-    if date_range[d_i].month >= 4 and date_range[d_i].month <= 7:
-        num_days_apr_jul += 1
+    if date_range[d_i].month >= 3 and date_range[d_i].month <= 5:
+        num_days_mar_may += 1
+    if date_range[d_i].month >= 6 and date_range[d_i].month <= 9:
+        num_days_jun_sep += 1
 
 num_days_full = len(date_range)
 
@@ -108,7 +110,6 @@ meridians = np.arange(180,360,4)
 # plot using grid
 #####################
 
-save_figs_path = '/data/project1/minnaho/decapods/plot/echinoderm_figs/'
 
 title_font = 20
 cb_font = 16
@@ -126,8 +127,10 @@ baths = [200]
 # loop over each experiment
 for exp_i in range(len(exp_files)):
     print('plotting '+str(exp_files[exp_i]))
-    if 'upwell' in exp_files[exp_i]:
-        num_days_select = num_days_apr_jul
+    if 'jun_sep' in exp_files[exp_i]:
+        num_days_select = num_days_jun_sep
+    if 'mar_may' in exp_files[exp_i]:
+        num_days_select = num_days_mar_may
     else:
         num_days_select = num_days_full
     nc_data = Dataset(exp_files[exp_i],'r')
@@ -136,8 +139,9 @@ for exp_i in range(len(exp_files)):
     for var in range(len(exp_variables)):
         map_ax = Basemap(projection='stere',resolution='h',lat_0=lat_mean,lon_0=lon_mean,llcrnrlat=lat_min,urcrnrlat=lat_max,llcrnrlon=lon_min,urcrnrlon=lon_max,ax=axes.flat[var])
         x,y = map_ax(lon_grid,lat_grid)
-        variable_data_tr = np.transpose(nc_data.variables[exp_variables[var]][:,:])
-        variable_data = variable_data_tr[y0:yE,x0:xE]*mask_grid
+        #variable_data_tr = np.transpose(nc_data.variables[exp_variables[var]][:,:])
+        #variable_data = variable_data_tr[y0:yE,x0:xE]*mask_grid
+        variable_data = np.array(nc_data.variables[exp_variables[var]][:,:])[y0:yE,x0:xE]*mask_grid
         # make land white by setting values to nan
         variable_data[variable_data==0] = np.nan
         axes.flat[var].set_title(exp_variables[var],fontsize=subplot_title_font) 
@@ -184,22 +188,9 @@ for exp_i in range(len(exp_files)):
     # plot pH averaged as 6th map
     map_ax = Basemap(projection='stere',resolution='h',lat_0=lat_mean,lon_0=lon_mean,llcrnrlat=lat_min,urcrnrlat=lat_max,llcrnrlon=lon_min,urcrnrlon=lon_max,ax=axes.flat[-1])
     cmap_plot = cmocean.cm.dense
-    axes.flat[-1].set_title('Average pH 1997-2007',fontsize=subplot_title_font) 
+    axes.flat[-1].set_title('Average $\Omega$ 1997-2007',fontsize=subplot_title_font) 
     cb_label = 'pH'
-    if '_0m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_0,'r').variables['var'][0,:,:])
-    if '_30m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_30,'r').variables['var'][0,:,:])
-    if '_50m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_50,'r').variables['var'][0,:,:])
-    if '_100m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_100,'r').variables['var'][0,:,:])
-    if '_150m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_150,'r').variables['var'][0,:,:])
-    if '_300m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_300,'r').variables['var'][0,:,:])
-    if '_5m_' in exp_files[exp_i]:
-        ph_data = np.array(Dataset(extract_data_b5,'r').variables['var'][0,:,:])
+    ph_data = np.array(Dataset(extract_data_b5,'r').variables['var'][0,:,:])
     p = map_ax.pcolor(x,y,ph_data,cmap=cmap_plot)
     h_plt = map_ax.contour(x,y,h_grid,baths,colors='k',linewidths=1)
     plt.clabel(h_plt,fontsize=9,fmt='%1i')

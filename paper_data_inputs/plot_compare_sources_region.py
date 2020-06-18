@@ -577,7 +577,7 @@ r_oc_yr = np.nansum(r_n_mon_oc)
 potw_ma_nc = Dataset(potw_major_path,'r')
 potw_mi_nc = Dataset(potw_minor_path,'r')
 
-major_potw_time = num2date(np.array(major_nc.variables['time']),major_nc.variables['time'].units)
+major_potw_time = num2date(np.array(potw_ma_nc.variables['time']),potw_ma_nc.variables['time'].units)
 
 # convert real_datetime to datetime
 major_potw_time_l = []

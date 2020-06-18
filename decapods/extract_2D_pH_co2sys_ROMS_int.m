@@ -69,7 +69,7 @@ if bgc==1
    var = (var./(dens_bgc.*0.001)) ;
 end
      cnt = 1;
-     for i=step:step:DDfix
+     for i=DD0:step:DD1
      Var(:,:,cnt)  = vinterp ( var, -(abs(z)) ,  -abs(i) ) ;
      end
      Var(Var==0)=NaN;
@@ -82,7 +82,7 @@ if bgc==1
    var = (var./(dens_bgc.*0.001)) ;
 end
      cnt = 1;
-     for i=step:step:DDfix
+     for i=DD0:step:DD1
      Var(:,:,cnt)  = vinterp ( var, -(abs(z)) ,  -abs(i) ) ;
      end
      Var(Var==0)=NaN;
@@ -94,7 +94,7 @@ if bgc==1
    var = (var./(dens_bgc.*0.001)) ;
 end
      cnt = 1;
-     for i=step:step:DDfix
+     for i=DD0:step:DD1
      Var(:,:,cnt)  = vinterp ( var, -(abs(z)) ,  -abs(i) ) ;
      end
      Var(Var==0)=NaN;
@@ -106,7 +106,7 @@ if bgc==1
    var = (var./(dens_bgc.*0.001)) ;
 end
      cnt = 1;
-     for i=step:step:DDfix
+     for i=DD0:step:DD1
      Var(:,:,cnt)  = vinterp ( var, -(abs(z)) ,  -abs(i) ) ;
      end
      Var(Var==0)=NaN;
@@ -118,7 +118,7 @@ if bgc==1
    var = (var./(dens_bgc.*0.001)) ;
 end
      cnt = 1;
-     for i=step:step:DDfix
+     for i=DD0:step:DD1
      Var(:,:,cnt)  = vinterp ( var, -(abs(z)) ,  -abs(i) ) ;
      end
      Var(Var==0)=NaN;
@@ -130,7 +130,7 @@ if bgc==1
    var = (var./(dens_bgc.*0.001)) ;
 end
      cnt = 1;
-     for i=step:step:DDfix
+     for i=DD0:step:DD1
      Var(:,:,cnt)  = vinterp ( var, -(abs(z)) ,  -abs(i) ) ;
      end
      Var(Var==0)=NaN;

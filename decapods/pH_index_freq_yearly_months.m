@@ -35,15 +35,15 @@ InputData = ncread(file,'var');
 date = datenum(1997,2,1):datenum(2007,11,30);
 mmyear = str2num(datestr(date,'mm yyyy'));
 % select year and months
-list = find(mmyear(:,2)==year_select & mmyear(:,1)>3 & mmyear(:,1)<8);
+list = find(mmyear(:,2)==year_select & mmyear(:,1)>5 & mmyear(:,1)<12);
 InputData = squeeze(InputData(:,:,list)) ;
 
-ThresholdMagnitude =  7.675 ;
-ThresholdDuration =  30 ;
+ThresholdMagnitude =  7.7 ;
+ThresholdDuration =  7 ;
 outPerDay = 1 ;
 
 disp('data ready ')
-fout =   ['/data/project1/minnaho/decapods/echinoderms_nc/yearly_freq/echinoderm_larval_phys_30m_upwell_',num2str(year_select),'.nc'];
+fout =   ['/data/project1/minnaho/decapods/echinoderms_nc/yearly_freq/echinoderm_larval_behavior_30m_jun_nov_',num2str(year_select),'.nc'];
 
 
 per_InputData = permute(InputData,[2 1 3]);
