@@ -52,7 +52,9 @@ print('min bight npp  g C/m2/y: ',np.nanmin(bight_npp)*npp_conv)
 # nitrification: units nmol/L day
 #####################
 # convert nmol/L/day to mmol/m3/s
-nit_conv = (1./86400)*(1./1000)
+#nit_conv = (1./86400)*(1./1000)
+# convert nmol/L/day to mmol/m3/day
+nit_conv = 1./1000
 
 r_lat = np.array(nit_df['Lat'])
 r_lon = np.array(nit_df['Lon'])
