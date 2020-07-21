@@ -10,17 +10,19 @@
 #############################
 from netCDF4 import Dataset, num2date
 import numpy as np
+import matplotlib
+matplotlib.rcParams['pdf.fonttype'] = 42
+matplotlib.rcParams['ps.fonttype'] = 42
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdate
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 #import colormaps_ncview as cmaps
 import cmocean as cmocean
 import datetime as datetime
 import glob as glob
 
-#species = 'decapod'
-species = 'echinoderm'
+species = 'decapod'
+#species = 'echinoderm'
 #path_data = '../pteropods_nc/avg_yearly/'
 path_data = '../'+species+'s_nc/'
 save_figs_path = '/data/project1/minnaho/decapods/plot/'+species+'_figs/'
@@ -62,7 +64,8 @@ h_echino[h_echino>0] = 1
 #############################
 # load experiments
 #############################
-exp_files = list(sorted(glob.glob(path_data+'*.nc')))
+#exp_files = list(sorted(glob.glob(path_data+'*.nc')))
+exp_files = [path_data+'decapods_adult_mort_300m_180d_1997_2007.nc',path_data+'decapods_juvenile_mort_100m_upwell_1997_2007.nc']
 
 
 # full length of L1 simulation 1997-2007
@@ -103,9 +106,9 @@ num_days_full = len(date_range)
 
 exp_variables = ['Duration',
                  #'Recovery',
-                 'Frequency',
-                 'Intensity']
-                 #'Severity']
+                 #'Frequency',
+                 'Intensity',
+                 'Severity']
 
 
 # basemap
@@ -138,7 +141,7 @@ axis_font = 15
 h_space = 0.1
 w_space = 0.3
 
-fig_w = 15
+fig_w = 17
 fig_h = 10
 cb_w = 0.01
 
@@ -216,6 +219,7 @@ for exp_i in range(len(exp_files)):
             cmap_plot = cmocean.cm.haline_r
             variable_data = (variable_data/variable_data_orig)*duration
             cb_label = '% time omega below threshold'
+        #p = map_ax.pcolor(x,y,variable_data,cmap=cmap_plot,rasterized=True)
         p = map_ax.pcolor(x,y,variable_data,cmap=cmap_plot)
         p0 = axes.flat[var].get_position().get_points().flatten()
         cb_ax = fig.add_axes([p0[2]+0.01,p0[1],cb_w,p0[3]-p0[1]])
@@ -224,6 +228,6 @@ for exp_i in range(len(exp_files)):
         cb_im.ax.tick_params(axis='both',which='major',direction='in',labelsize=axis_tick_size)
         cb_im.ax.tick_params(axis='both',which='minor',direction='in',labelsize=axis_tick_size)
 
-    fig.savefig(save_figs_path+exp_files[exp_i][len(path_data):exp_files[exp_i].index('.n')]+'_3panel'+str_en+'.png',bbox_inches='tight')
+    fig.savefig(save_figs_path+exp_files[exp_i][len(path_data):exp_files[exp_i].index('.n')]+'_3panel'+str_en+'.jpg',bbox_inches='tight')
     plt.close('all')
 

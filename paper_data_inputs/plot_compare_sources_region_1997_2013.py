@@ -18,6 +18,7 @@ potw_minor_path = '/data/project1/minnaho/potw_outfall_data/minor_potw_data_new.
 
 atmos_path = '/data/project1/minnaho/atmos_deposition_data/L2_SCB_atmos_deposition.nc'
 setting = 'bight'
+log_set = True
 
 ############
 # load grid
@@ -46,10 +47,10 @@ maskarr[6,j_locs[5]:,:] = 1
 maskarr[maskarr==0] = np.nan
 
 # uncomment to see masks plotted
-colors = ['spring','viridis_r','gray','rainbow','gnuplot_r','seismic','Greens_r']
-plt.ion()
-for i in range(len(maskarr)):
-    plt.imshow(maskarr[i]*mask_nc,cmap=colors[i],origin='lower')
+#colors = ['spring','viridis_r','gray','rainbow','gnuplot_r','seismic','Greens_r']
+#plt.ion()
+#for i in range(len(maskarr)):
+#    plt.imshow(maskarr[i]*mask_nc,cmap=colors[i],origin='lower')
 
 '''
 #maskscb = total domain
@@ -80,12 +81,13 @@ maskarr[6,:,:] = np.transpose(region_mask['masksd'])
 ################
 dataset_name = '/data/project1/minnaho/atmos_deposition_data/L2_SCB_atmos_deposition.nc'
 atmos_data = Dataset(dataset_name,'r')
-m2_to_hectare = 10000
+#m2_to_hectare = 10000
+m2_resolution_grid = 330*330
 
-oxn  = np.array(atmos_data.variables['NH4'])*mask_mat*m2_to_hectare
-redn = np.array(atmos_data.variables['NO3'])*mask_mat*m2_to_hectare
-alk  = np.array(atmos_data.variables['alk'])*mask_mat*m2_to_hectare
-fe   = np.array(atmos_data.variables['fe'])*mask_mat*m2_to_hectare
+oxn  = np.array(atmos_data.variables['NH4'])*mask_mat*m2_resolution_grid*mask_nc
+redn = np.array(atmos_data.variables['NO3'])*mask_mat*m2_resolution_grid*mask_nc
+alk  = np.array(atmos_data.variables['alk'])*mask_mat*m2_resolution_grid*mask_nc
+fe   = np.array(atmos_data.variables['fe'])*mask_mat*m2_resolution_grid*mask_nc
 
 oxn_yr  = np.nansum(oxn,axis=0)
 redn_yr = np.nansum(redn,axis=0)
@@ -341,6 +343,7 @@ p_major_flo = [[] for i in range(maskarr.shape[0])]
 p_major_tn = [[] for i in range(maskarr.shape[0])] # TN flux
 for r_i in range(len(p_major_ind)):
     p_major_flo[r_i].append(np.transpose(major_flo[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]).tolist())
+    # flux mmol/s
     p_major_tn[r_i].append(np.transpose(major_flo[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]*major_tn[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]).tolist())
 
 # turn to array so can sum all potw in region up
@@ -455,20 +458,38 @@ p_tnn_smm = p_major_tnn_occ+p_minor_tnn_smm
 p_tnn_ven = p_major_tnn_occ+p_minor_tnn_ven
 p_tnn_sbb = p_major_tnn_occ+p_minor_tnn_sbb
 
+# convert to kg/month, then sum
+s_to_d = 86400
+d_to_mo = 30
+mmol_to_mol = 1./1000
+g_to_kg = 1./1000
+g_N = 14
+
+p_yr_nobight = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_sbb)))
+r_yr_nobight = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_sbb)))
+
+# bightwide sum
+p_bight = np.nansum(p_yr_nobight)
+r_bight = np.nansum(r_yr_nobight)
+a_bight = np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*atmos_plt)
+atmos_plt = atmos_plt*((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))
+
 #############
 # plot
 #############
-a_yr = atmos_plt
-p_yr = np.array((np.nanmean(p_tnn_ssd),np.nanmean(p_tnn_nsd),np.nanmean(p_tnn_occ),np.nanmean(p_tnn_spp),np.nanmean(p_tnn_smm),np.nanmean(p_tnn_ven),np.nanmean(p_tnn_sbb)))
-r_yr = np.array((np.nanmean(r_tnn_ssd),np.nanmean(r_tnn_nsd),np.nanmean(r_tnn_occ),np.nanmean(r_tnn_spp),np.nanmean(r_tnn_smm),np.nanmean(r_tnn_ven),np.nanmean(r_tnn_sbb)))
+a_yr = np.append(atmos_plt,a_bight)
+p_yr = np.append(p_yr_nobight,p_bight)
+r_yr = np.append(r_yr_nobight,r_bight)
 
-figw = 14
+figw = 12
 figh = 8
-regions = ['S SD','N SD','OC','San Pedro','Santa Monica','Ventura','Santa Barbara']
-width = 0.1
+regions = ['S SD','N SD','OC','SP','SM','Ventura','SB','Bightwide']
+width = 0.2
 axis_font = 18
-#savename = './figs/inputs_compare_region.pdf'
-savename = './figs/inputs_compare_region_1997_2013_nolog.pdf'
+if log_set == True:
+    savename = './figs/inputs_compare_region_1997_2013.pdf'
+else:
+    savename = './figs/inputs_compare_region_1997_2013_nolog.pdf'
 
 plt.ion()
 fig,ax = plt.subplots(1,1,figsize=[figw,figh])
@@ -476,10 +497,11 @@ x_ind = np.arange(len(regions))
 ax.bar(x_ind,a_yr,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
 ax.bar(x_ind+width,p_yr,color='orange',width=width,label='All POTWs')
 ax.bar(x_ind+(2*width),r_yr,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
-ax.set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width])
+ax.set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
 ax.set_xticklabels(regions)
-#ax.set_yscale('log')
-#ax.set_ybound(lower=10E-1,upper=25E5)
+if log_set == True:
+    ax.set_yscale('log')
+    ax.set_ybound(lower=10E-1,upper=25E5)
 ax.set_ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
 ax.tick_params(axis='both',which='major',labelsize=axis_font)
 #ax.tick_params(axis='both',which='minor',labelsize=axis_font)
@@ -487,3 +509,76 @@ ax.legend(loc='lower left',fontsize=20,bbox_to_anchor=(0,1.02,1.,.102),mode='exp
 
 plt.savefig(savename,bbox_inches='tight')
 
+
+# broken y axis plot with kg/day units
+savename = './figs/inputs_compare_region_1997_2013_brokeny.pdf'
+
+a_yr_kg = a_yr
+p_yr_kg = p_yr
+r_yr_kg = r_yr
+
+offset1 = 50000
+offset0 = 1000000
+
+# y0: upper lim of bottom axis, y1: lower lim of top axis
+y0 = 1.4E6
+#y1 = 9500000
+y1 = 3E6
+#y2 = np.max(p_yr_kg)+offset0
+y2 = 1E8
+
+fig,axes = plt.subplots(2,1,sharex=True,figsize=[figw,figh])
+axes[0].bar(x_ind,a_yr_kg,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
+axes[1].bar(x_ind,a_yr_kg,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
+axes[0].bar(x_ind+width,p_yr_kg,color='orange',width=width,label='All POTWs')
+axes[1].bar(x_ind+width,p_yr_kg,color='orange',width=width,label='All POTWs')
+axes[0].bar(x_ind+(2*width),r_yr_kg,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
+axes[1].bar(x_ind+(2*width),r_yr_kg,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
+axes[0].set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
+axes[0].set_xticklabels(regions)
+
+axes[0].set_ylim(y1, y2)
+axes[1].set_ylim(0, y0)
+axes[1].legend().set_visible(False)
+
+d = .01  # how big to make the diagonal lines in axes coordinates
+# arguments to pass to plot, just so we don't keep repeating them
+kwargs = dict(transform=axes[0].transAxes, color='k', clip_on=False)
+axes[0].plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
+axes[0].plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
+
+kwargs.update(transform=axes[1].transAxes)  # switch to the bottom axes
+axes[1].plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
+axes[1].plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagona
+
+axes[0].legend(loc='lower left',fontsize=20,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=3,handlelength=2.5,handleheight=1.5)
+axes[0].tick_params(axis='both',which='major',labelsize=axis_font)
+axes[1].tick_params(axis='both',which='major',labelsize=axis_font)
+#fig.add_subplot(111, frameon=False)
+## hide tick and tick label of the big axis
+#plt.tick_params(labelcolor='none', top=False, bottom=False, left=False, right=False)
+#plt.xlabel('Region')
+#plt.ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
+axes[0].set_ylabel('Total N Flux kg y$^{-1}$',fontsize=axis_font)
+axes[1].set_xlabel('Region',fontsize=axis_font)
+# set top plot to log scale
+if log_set == True:
+    axes[0].set_yscale('log')
+    axes[0].set_ybound(lower=y1,upper=y2)
+# put numbers above bars
+#axes[0].text(x_ind[-1],a_yr_kg[-1]+10000,str(np.floor(a_yr_kg[-1]).astype(int)),fontsize=12,rotation=90,horizontalalignment='center')
+for i in range(len(a_yr_kg)-1):
+    axes[1].text(x_ind[i],a_yr_kg[i]+offset1,format(np.floor(a_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+    axes[1].text(x_ind[i]+(2*width),r_yr_kg[i]+offset1,format(np.floor(r_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+    if i != 1:
+        axes[0].text(x_ind[i]+(width),p_yr_kg[i]+offset0,format(np.floor(p_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+# manually set bars that are too close to border
+#axes[0].text(x_ind[-1],a_yr_kg[-1]+(offset0*.5),format(np.floor(a_yr_kg[-1]).astype(int)),fontsize=12,rotation=90,horizontalalignment='center')
+axes[0].text(x_ind[-1],a_yr_kg[-1]+(offset0*.5),format(np.floor(a_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes[0].text(x_ind[-1]+(2*width),r_yr_kg[-1]+(offset0),format(np.floor(r_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes[0].text(x_ind[-1]+(width),p_yr_kg[-1]-(offset0*50),format(np.floor(p_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes[1].text(x_ind[1]+(width),p_yr_kg[1]-(offset1*9),format(np.floor(p_yr_kg[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+fig.subplots_adjust(hspace=0.1)
+plt.savefig(savename,bbox_inches='tight')

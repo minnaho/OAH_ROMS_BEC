@@ -22,7 +22,8 @@ s_day = 86400
 n_mass = 14
 mmol_to_mol = 1./1000
 g_to_kg = 1./1000
-m2_to_hectare = 10000
+m2_resolution_area = 330*330 # multiply by area of grid cell
+#m2_resolution_area = 10000 # this is incorrectly resolving the spatial scale
 
 ################
 # load atmos data
@@ -141,9 +142,9 @@ if setting == 'cal':
 # convert to hectare because that is the true value,
 # model takes care of the value when in m2
 mat = scipy.io.loadmat('../maskt.mat') # apply mask that is 0-15km coastal band
-oxn_yearly = np.nansum(np.nanmean(np.array(oxn),axis=0)*mask_nc*mat['maskt'])*s_day*n_mass*mmol_to_mol*g_to_kg*m2_to_hectare
-redn_yearly = np.nansum(np.nanmean(np.array(redn),axis=0)*mask_nc*mat['maskt'])*s_day*n_mass*mmol_to_mol*g_to_kg*m2_to_hectare
-atmos_n_yearly = oxn_yearly+redn_yearly
+oxn_daily = np.nansum(np.nanmean(np.array(oxn),axis=0)*mask_nc*mat['maskt'])*s_day*n_mass*mmol_to_mol*g_to_kg*m2_resolution_area
+redn_daily = np.nansum(np.nanmean(np.array(redn),axis=0)*mask_nc*mat['maskt'])*s_day*n_mass*mmol_to_mol*g_to_kg*m2_resolution_area
+atmos_n_daily = oxn_daily+redn_daily
 
 ###############
 # river major data (10 yrs)
@@ -172,8 +173,6 @@ major_flo[major_flo>1E20] = np.nan
 major_tn[major_tn>1E20] = np.nan
 major_po4[major_po4>1E20] = np.nan
 major_allf = np.nansum(np.nansum(major_flo,axis=1),axis=1)
-major_alln = np.nansum(np.nansum(major_tn,axis=1),axis=1)
-major_allp = np.nansum(np.nansum(major_po4,axis=1),axis=1)
 
 ##############
 # river 24 yrs
@@ -199,8 +198,6 @@ minor_flo[minor_flo>1E20] = np.nan
 minor_tn[minor_tn>1E20] = np.nan
 minor_po4[minor_po4>1E20] = np.nan
 minor_allf = np.nansum(np.nansum(minor_flo,axis=1),axis=1)
-minor_alln = np.nansum(np.nansum(minor_tn,axis=1),axis=1)
-minor_allp = np.nansum(np.nansum(minor_po4,axis=1),axis=1)
 
 # plotting
 figw = 12
@@ -220,6 +217,7 @@ b = []
 for m_i in range(minor_flo.shape[1]):
     a.append(minor_flo[num_st.days:-num_en.days,m_i,m_i]*minor_tn[num_st.days:-num_en.days,m_i,m_i])
     b.append(minor_flo[num_st.days:-num_en.days,m_i,m_i]*minor_po4[num_st.days:-num_en.days,m_i,m_i])
+
 # a,b shape (24,3650)
 # sum up all rivers
 minor_fluxn = np.nansum(np.array(a),axis=0)
@@ -243,8 +241,8 @@ r_fluxp = major_fluxp+minor_fluxp # mmol/s
 
 # find average flow and N flux over 1997-2000
 r_en_dt = 1461 # 2001-1-1
-r_yearly_flo = np.nanmean(r_flo[:r_en_dt])
-r_yearly_fluxn = np.nanmean(r_fluxn[:r_en_dt])*s_day*n_mass*mmol_to_mol*g_to_kg
+r_daily_flo = np.nanmean(r_flo[:r_en_dt])
+r_daily_fluxn = np.nanmean(r_fluxn[:r_en_dt])*s_day*n_mass*mmol_to_mol*g_to_kg
 
 # find indices for each season
 r_1 = []
@@ -365,20 +363,22 @@ iend_minor = 12
 a = []
 for m_i in range(minor_potw_flo.shape[1]):
     a.append(minor_potw_flo[:iend_minor,m_i,m_i]*minor_potw_tn[:iend_minor,m_i,m_i])
+
 minor_potw_fluxalln = np.nansum(np.array(a),axis=0)
 
 a = []
 for m_i in range(minor_potw_flo.shape[1]):
     a.append(minor_potw_flo[:iend_minor,m_i,m_i]*minor_potw_po4[:iend_minor,m_i,m_i])
+
 minor_potw_fluxallp = np.nansum(np.array(a),axis=0)
 
 p_st_dt = 313
 p_en_dt = 361 # 2001-1-1
-ma_yearly_flo = np.nanmean(major_potw_allf[p_st_dt:p_en_dt])
-ma_yearly_fluxn = np.nanmean(major_potw_fluxalln[p_st_dt:p_en_dt])*s_day*n_mass*mmol_to_mol*g_to_kg
+ma_daily_flo = np.nanmean(major_potw_allf[p_st_dt:p_en_dt])
+ma_daily_fluxn = np.nanmean(major_potw_fluxalln[p_st_dt:p_en_dt])*s_day*n_mass*mmol_to_mol*g_to_kg
 
-mi_yearly_flo = np.nanmean(minor_potw_allf[:12])
-mi_yearly_fluxn = np.nanmean(minor_potw_fluxalln[:12])*s_day*n_mass*mmol_to_mol*g_to_kg
+mi_daily_flo = np.nanmean(minor_potw_allf[:12])
+mi_daily_fluxn = np.nanmean(minor_potw_fluxalln[:12])*s_day*n_mass*mmol_to_mol*g_to_kg
 
 # find indices for each season
 r_potw_1 = []
@@ -471,4 +471,8 @@ ax.legend(loc='lower left',fontsize=20,bbox_to_anchor=(0,1.02,1.,.102),mode='exp
 #plt.savefig(savename,bbox_inches='tight')
 
 
-
+print('atmos daily N flux kg/day: '+str(atmos_n_daily))
+print('potw daily flow m3/s: '+str(ma_daily_flo))
+print('potw daily N flux kg/day: '+str(ma_daily_fluxn))
+print('river daily flow m3/s: '+str(r_daily_flo))
+print('river daily N flux kg/day: '+str(r_daily_fluxn))

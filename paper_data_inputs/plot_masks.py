@@ -19,4 +19,3 @@ plt.imshow(np.transpose(region_mask['masksb']),origin='lower',cmap=colors[6])
 
 # south sd, north sd, oc, sp, sm, v, sb
 j_locs = np.array((164,264,500,610,740,948))
-
