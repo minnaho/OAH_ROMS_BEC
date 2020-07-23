@@ -3,6 +3,7 @@ import numpy as np
 from netCDF4 import Dataset
 from mpl_toolkits.basemap import Basemap
 import cmocean as cmocean
+import scipy.io as sio
 
 plt.ion()
 
@@ -12,7 +13,10 @@ mask_ssd = np.array(region_mask.variables['mask_ssd'])
 mask_nsd = np.array(region_mask.variables['mask_nsd'])*2
 mask_oc = np.array(region_mask.variables['mask_oc'])*3
 mask_sp = np.array(region_mask.variables['mask_sp'])*4
-mask_sm = np.array(region_mask.variables['mask_sm'])*5
+# my SM mask
+#mask_sm = np.array(region_mask.variables['mask_sm'])*5
+# faycal's SM mask from PNAS paper
+#mask_sm = np.array()*5
 mask_v = np.array(region_mask.variables['mask_v'])*6
 mask_sb = np.array(region_mask.variables['mask_sb'])*7
 
@@ -68,3 +72,5 @@ ax.text(225000,125000,'SP',fontsize=axis_tick_size)
 ax.text(263000,96000,'OC',fontsize=axis_tick_size)
 ax.text(302000,55000,'NSD',fontsize=axis_tick_size)
 ax.text(307000,15000,'SSD',fontsize=axis_tick_size)
+
+plt.savefig('figs/region_masks.png',bbox_inches='tight')

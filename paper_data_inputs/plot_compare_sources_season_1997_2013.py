@@ -52,73 +52,74 @@ if setting == 'cal':
 # load per season (add up each 3 months in season) then sum over entire region 
 if setting == 'bight':
     mat = scipy.io.loadmat('../maskt.mat') # mask that is first 0-15km offshore
-    m2_to_hectare = 10000
+    #m2_to_hectare = 10000
+    m2_resolution_grid = 330*330
     oxn_season  = np.empty((4))
     redn_season = np.empty((4))
     alk_season  = np.empty((4))
     fe_season   = np.empty((4))
 
-    oxn_win0 = np.array(oxn[11]+oxn[0]+oxn[1])*mask_nc*mat['maskt']*m2_to_hectare
+    oxn_win0 = np.array(oxn[11]+oxn[0]+oxn[1])*mask_nc*mat['maskt']*m2_resolution_grid
     oxn_win0[oxn_win0==0] = np.nan
     oxn_winter = np.nansum(oxn_win0)
 
-    oxn_spr0 = np.array(oxn[2]+oxn[3]+oxn[4])*mask_nc*mat['maskt']*m2_to_hectare
+    oxn_spr0 = np.array(oxn[2]+oxn[3]+oxn[4])*mask_nc*mat['maskt']*m2_resolution_grid
     oxn_spr0[oxn_spr0==0] = np.nan
     oxn_spring = np.nansum(oxn_spr0)
 
-    oxn_sum0 = np.array(oxn[5]+oxn[6]+oxn[7])*mask_nc*mat['maskt']*m2_to_hectare
+    oxn_sum0 = np.array(oxn[5]+oxn[6]+oxn[7])*mask_nc*mat['maskt']*m2_resolution_grid
     oxn_sum0[oxn_sum0==0] = np.nan
     oxn_summer = np.nansum(oxn_sum0)
 
-    oxn_aut0 = np.array(oxn[8]+oxn[9]+oxn[10])*mask_nc*mat['maskt']*m2_to_hectare
+    oxn_aut0 = np.array(oxn[8]+oxn[9]+oxn[10])*mask_nc*mat['maskt']*m2_resolution_grid
     oxn_aut0[oxn_aut0==0] = np.nan
     oxn_autumn = np.nansum(oxn_aut0)
 
-    fe_win0 = np.array(fe[11]+fe[0]+fe[1])*mask_nc*mat['maskt']*m2_to_hectare
+    fe_win0 = np.array(fe[11]+fe[0]+fe[1])*mask_nc*mat['maskt']*m2_resolution_grid
     fe_win0[fe_win0==0] = np.nan
     fe_winter = np.nansum(fe_win0)
 
-    fe_spr0 = np.array(fe[2]+fe[3]+fe[4])*mask_nc*mat['maskt']*m2_to_hectare
+    fe_spr0 = np.array(fe[2]+fe[3]+fe[4])*mask_nc*mat['maskt']*m2_resolution_grid
     fe_spr0[fe_spr0==0] = np.nan
     fe_spring = np.nansum(fe_spr0)
 
-    fe_sum0 = np.array(fe[5]+fe[6]+fe[7])*mask_nc*mat['maskt']*m2_to_hectare
+    fe_sum0 = np.array(fe[5]+fe[6]+fe[7])*mask_nc*mat['maskt']*m2_resolution_grid
     fe_sum0[fe_sum0==0] = np.nan
     fe_summer = np.nansum(fe_sum0)
 
-    fe_aut0 = np.array(fe[8]+fe[9]+fe[10])*mask_nc*mat['maskt']*m2_to_hectare
+    fe_aut0 = np.array(fe[8]+fe[9]+fe[10])*mask_nc*mat['maskt']*m2_resolution_grid
     fe_aut0[fe_aut0==0] = np.nan
     fe_autumn = np.nansum(fe_aut0)
 
-    alk_win0 = np.array(alk[11]+alk[0]+alk[1])*mask_nc*mat['maskt']*m2_to_hectare
+    alk_win0 = np.array(alk[11]+alk[0]+alk[1])*mask_nc*mat['maskt']*m2_resolution_grid
     alk_win0[alk_win0==0] = np.nan
     alk_winter = np.nansum(alk_win0)
 
-    alk_spr0 = np.array(alk[2]+alk[3]+alk[4])*mask_nc*mat['maskt']*m2_to_hectare
+    alk_spr0 = np.array(alk[2]+alk[3]+alk[4])*mask_nc*mat['maskt']*m2_resolution_grid
     alk_spr0[alk_spr0==0] = np.nan
     alk_spring = np.nansum(alk_spr0)
 
-    alk_sum0 = np.array(alk[5]+alk[6]+alk[7])*mask_nc*mat['maskt']*m2_to_hectare
+    alk_sum0 = np.array(alk[5]+alk[6]+alk[7])*mask_nc*mat['maskt']*m2_resolution_grid
     alk_sum0[alk_sum0==0] = np.nan
     alk_summer = np.nansum(alk_sum0)
 
-    alk_aut0 = np.array(alk[8]+alk[9]+alk[10])*mask_nc*mat['maskt']*m2_to_hectare
+    alk_aut0 = np.array(alk[8]+alk[9]+alk[10])*mask_nc*mat['maskt']*m2_resolution_grid
     alk_aut0[alk_aut0==0] = np.nan
     alk_autumn = np.nansum(alk_aut0)
 
-    redn_win0 = np.array(redn[11]+redn[0]+redn[1])*mask_nc*mat['maskt']*m2_to_hectare
+    redn_win0 = np.array(redn[11]+redn[0]+redn[1])*mask_nc*mat['maskt']*m2_resolution_grid
     redn_win0[redn_win0==0] = np.nan
     redn_winter = np.nansum(redn_win0)
 
-    redn_spr0 = np.array(redn[2]+redn[3]+redn[4])*mask_nc*mat['maskt']*m2_to_hectare
+    redn_spr0 = np.array(redn[2]+redn[3]+redn[4])*mask_nc*mat['maskt']*m2_resolution_grid
     redn_spr0[redn_spr0==0] = np.nan
     redn_spring = np.nansum(redn_spr0)
 
-    redn_sum0 = np.array(redn[5]+redn[6]+redn[7])*mask_nc*mat['maskt']*m2_to_hectare
+    redn_sum0 = np.array(redn[5]+redn[6]+redn[7])*mask_nc*mat['maskt']*m2_resolution_grid
     redn_sum0[redn_sum0==0] = np.nan
     redn_summer = np.nansum(redn_sum0)
 
-    redn_aut0 = np.array(redn[8]+redn[9]+redn[10])*mask_nc*mat['maskt']*m2_to_hectare
+    redn_aut0 = np.array(redn[8]+redn[9]+redn[10])*mask_nc*mat['maskt']*m2_resolution_grid
     redn_aut0[redn_aut0==0] = np.nan
     redn_autumn = np.nansum(redn_aut0)
 
@@ -161,8 +162,6 @@ major_flo[major_flo>1E20] = np.nan
 major_tn[major_tn>1E20] = np.nan
 major_po4[major_po4>1E20] = np.nan
 major_allf = np.nansum(np.nansum(major_flo,axis=1),axis=1)
-major_alln = np.nansum(np.nansum(major_tn,axis=1),axis=1)
-major_allp = np.nansum(np.nansum(major_po4,axis=1),axis=1)
 
 ##############
 # river 24 yrs
@@ -188,15 +187,11 @@ minor_flo[minor_flo>1E20] = np.nan
 minor_tn[minor_tn>1E20] = np.nan
 minor_po4[minor_po4>1E20] = np.nan
 minor_allf = np.nansum(np.nansum(minor_flo,axis=1),axis=1)
-minor_alln = np.nansum(np.nansum(minor_tn,axis=1),axis=1)
-minor_allp = np.nansum(np.nansum(minor_po4,axis=1),axis=1)
 
 # plotting
 figw = 12
 figh = 8
 axis_tick_font = 10
-#major_names = ['HTP','JWPCP','OCSD','PLWTP']
-#major_linesty = ['-','--','-.',':']
 lw = 2
 
 # combine rivers 10 yrs and 24 yrs
@@ -209,6 +204,7 @@ b = []
 for m_i in range(minor_flo.shape[1]):
     a.append(minor_flo[num_st.days:-num_en.days,m_i,m_i]*minor_tn[num_st.days:-num_en.days,m_i,m_i])
     b.append(minor_flo[num_st.days:-num_en.days,m_i,m_i]*minor_po4[num_st.days:-num_en.days,m_i,m_i])
+
 # a,b shape (24,3650)
 # sum up all rivers
 minor_fluxn = np.nansum(np.array(a),axis=0)
