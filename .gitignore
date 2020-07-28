@@ -162,3 +162,13 @@ miniconda2/
 # fortran
 *.o
 *.f
+
+# shapefiles/arcgis/cartopy
+*.shp
+*.dbf
+*.cpg
+*.prj
+*.sbn
+*.sbx
+*.shp.xml
+*.shx

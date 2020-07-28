@@ -21,12 +21,12 @@ lats_river = rivers[0]
 lons_river = rivers[1]
 
 # mpa masks
-mpa1 = np.transpose(np.array(h5py.File('../mpa1.mat','r')['mpa1']))
-mpa2 = np.transpose(np.array(h5py.File('../mpa2.mat','r')['mpa2']))
-mpa3 = np.transpose(np.array(h5py.File('../mpa3.mat','r')['mpa3']))
-mpa4 = np.transpose(np.array(h5py.File('../mpa4.mat','r')['mpa4']))
-mpa5 = np.transpose(np.array(h5py.File('../mpa5.mat','r')['mpa5']))
-mpa6 = np.transpose(np.array(h5py.File('../mpa6.mat','r')['mpa6']))
+mpa1 = np.transpose(np.array(h5py.File('mpa1.mat','r')['mpa1']))
+mpa2 = np.transpose(np.array(h5py.File('mpa2.mat','r')['mpa2']))
+mpa3 = np.transpose(np.array(h5py.File('mpa3.mat','r')['mpa3']))
+mpa4 = np.transpose(np.array(h5py.File('mpa4.mat','r')['mpa4']))
+mpa5 = np.transpose(np.array(h5py.File('mpa5.mat','r')['mpa5']))
+mpa6 = np.transpose(np.array(h5py.File('mpa6.mat','r')['mpa6']))
 
 all_mpas = np.array((mpa1,mpa2,mpa3,mpa4,mpa5,mpa6))*.9
 all_mpas[all_mpas==0] = np.nan
@@ -41,11 +41,11 @@ mask_sp = np.array(region_mask.variables['mask_sp'])*4
 # my SM mask
 #mask_sm = np.array(region_mask.variables['mask_sm'])*5
 # faycal's SM mask from PNAS paper
-mask_sm = np.transpose(np.array(h5py.File('../masksm.mat','r')['masksm']))
+mask_sm = np.transpose(np.array(h5py.File('masksm.mat','r')['masksm']))
 mask_v = np.array(region_mask.variables['mask_v'])*6
 mask_sb = np.array(region_mask.variables['mask_sb'])*7
 
-mask_la = np.transpose(np.array(h5py.File('../maskgla.mat','r')['maskgla']))
+mask_la = np.transpose(np.array(h5py.File('maskgla.mat','r')['maskgla']))
 np.nan_to_num(mask_la,copy=False,nan=0)
 
 all_regions = np.array((mask_ssd,mask_nsd,mask_oc,mask_sp,mask_sm,mask_v,mask_sb))
