@@ -6,12 +6,14 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 from netCDF4 import Dataset,num2date,date2num
 import datetime as datetime
+import pandas as pd
 
 # data paths
 major_path = '/data/project1/minnaho/potw_outfall_data/major_potw_data.nc'
 minor_path = '/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc'
 fig_path = './figs/'
 
+ocsd_data = '/data/project1/minnaho/potw_outfall_data/OO10-OCSD _REvised 06052020.xlsx'
 
 
 ###############
@@ -19,15 +21,10 @@ fig_path = './figs/'
 ###############
 major_nc = Dataset(major_path,'r')
 
-major_time = num2date(np.array(major_nc.variables['time']),major_nc.variables['time'].units)
+major_time_dt = num2date(np.array(major_nc.variables['time']),major_nc.variables['time'].units,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
 
-# convert real_datetime to datetime
-major_time_l = []
-for d_i in range(len(major_time)):
-    major_time_l.append(major_time[d_i]+datetime.timedelta(0,1))
-
-major_time_dt = np.array(major_time_l)
-
+ind_1997 = 313
+ind_2010 = 481
 
 major_flo = np.array(major_nc.variables['flow']) # m3/s
 major_nh4 = np.array(major_nc.variables['NH4']) # mmol/m3
@@ -50,6 +47,25 @@ major_tn[major_tn>1E20] = np.nan
 major_tp[major_tp>1E20] = np.nan
 major_toc[major_toc>1E20] = np.nan
 major_po4[major_po4>1E20] = np.nan
+
+# replace NO3/NO2 OCSD data with Martha's new calculations of NO3 + NO2
+ocsd_df = pd.read_excel(ocsd_data,header=None,sheet_name='Sheet1')
+# new NO3+NO2
+# is it actually mg/L, not kg/m3? makes more sense as mg/L
+kg_to_g = 1000
+g_to_mol = 1./14
+mol_to_mmol = 1000
+mgL_to_mmolm3 = 1000./14
+
+# 0 index is column name [potw_1997+1:potw_2013+1]
+ocsd_nox_l = list(ocsd_df[3][1:])
+for i in range(len(major_nh4[:,2,2])-len(ocsd_df[3][1:])):
+    ocsd_nox_l.append(np.nan)
+
+ocsd_nox = np.array(ocsd_nox_l).astype(float)*mgL_to_mmolm3
+
+# replace ocsd major tn data with new calculations
+major_tn[:,2,2] = major_nh4[:,2,2]+major_on[:,2,2]+ocsd_nox
 
 # plotting major
 figw = 10
@@ -156,6 +172,30 @@ axes.flat[4].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
 loc = mtick.MultipleLocator(base=50000) 
 axes.flat[3].yaxis.set_major_locator(loc)
+fig.savefig(savename_major_flux,bbox_inches='tight')
+
+# fluxes only, TN and TP
+savename_major_flux = fig_path+'major_potw_ts_tptn_newocsd.pdf'
+
+fig,axes = plt.subplots(3,1,sharex=True,figsize=[figw,figh+7])
+for p_i in range(len(major_names)):
+    axes.flat[0].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[1].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i]*major_tn[ind_1997:ind_2010,p_i,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[2].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i]*major_tp[ind_1997:ind_2010,p_i,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+
+axes.flat[0].set_ybound(lower=0)
+axes.flat[1].set_ybound(lower=0)
+axes.flat[2].set_ybound(lower=0)
+axes.flat[0].set_ylabel('Volume Flux\n m$^3$ s$^{-1}$',fontsize=axis_font)
+axes.flat[1].set_ylabel('Total N Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[2].set_ylabel('Total P Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[1].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_tick_font)
+#axes.flat[0].legend(loc='best',fontsize=axis_tick_font,bbox_to_anchor=[1.,1],handlelength=3)
+axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
+#loc = mtick.MultipleLocator(base=50000) 
+#axes.flat[3].yaxis.set_major_locator(loc)
 fig.savefig(savename_major_flux,bbox_inches='tight')
 
 # fluxes only, including TOC
@@ -310,8 +350,8 @@ axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 loc = mtick.MultipleLocator(base=50000) 
 #axes.flat[3].yaxis.set_major_locator(loc)
 fig.savefig(savename_major_flux,bbox_inches='tight')
-'''
 
+'''
 ###############
 # minor data
 ###############
@@ -455,8 +495,8 @@ for p_i in range(len(major_names)):
     major_clim_flo_l = []
     major_clim_tn_l = []
     for m_i in range(1,months+1): # skip first value start at Jan
-        major_clim_flo_l.append(np.nanmean(major_flo[m_i::months,p_i,p_i]))
-        major_clim_tn_l.append(np.nanmean(major_tn[m_i::months,p_i,p_i]))
+        major_clim_flo_l.append(np.nanmean(major_flo[ind_1997:ind_2010][m_i::months,p_i,p_i]))
+        major_clim_tn_l.append(np.nanmean(major_tn[ind_1997:ind_2010][m_i::months,p_i,p_i]))
     major_clim_flo = np.array(major_clim_flo_l)
     major_clim_tn = np.array(major_clim_tn_l)
     axes.flat[0].plot(mon_name,major_clim_flo,linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)

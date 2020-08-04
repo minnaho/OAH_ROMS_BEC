@@ -152,16 +152,19 @@ major_po4 = np.array(major_nc.variables['phosphate']) # mmol/m3
 major_alk = np.array(major_nc.variables['alkalinity']) 
 major_temp = np.array(major_nc.variables['temperature']) 
 major_tn = np.array(major_nc.variables['total_nitrogen']) 
+major_tp = np.array(major_nc.variables['total_phosphorus']) 
 
 major_flo[major_flo>1E20] = np.nan
 major_tn[major_tn>1E20] = np.nan
-major_po4[major_po4>1E20] = np.nan
+major_tp[major_tp>1E20] = np.nan
 
 r_major_flo = [[] for i in range(maskarr.shape[0])]
 r_major_tn = [[] for i in range(maskarr.shape[0])] # TN flux
+r_major_tp = [[] for i in range(maskarr.shape[0])] # TN flux
 for r_i in range(len(r_major_ind)):
     r_major_flo[r_i].append(np.transpose(major_flo[:,r_major_ind[r_i],r_major_ind[r_i]]).tolist())
     r_major_tn[r_i].append(np.transpose(major_flo[:,r_major_ind[r_i],r_major_ind[r_i]]*major_tn[:,r_major_ind[r_i],r_major_ind[r_i]]).tolist())
+    r_major_tp[r_i].append(np.transpose(major_flo[:,r_major_ind[r_i],r_major_ind[r_i]]*major_tp[:,r_major_ind[r_i],r_major_ind[r_i]]).tolist())
 
 # turn to array so can sum all rivers in region up
 # then reshape to (10,12) because this data set is 10 years
@@ -184,6 +187,13 @@ r_major_tnn_smm = np.nanmean(np.nansum(np.array(r_major_tn[4][0]),axis=0).reshap
 r_major_tnn_ven = np.nanmean(np.nansum(np.array(r_major_tn[5][0]),axis=0).reshape(ry0,12),axis=0)
 r_major_tnn_sbb = np.nanmean(np.nansum(np.array(r_major_tn[6][0]),axis=0).reshape(ry0,12),axis=0)
 
+r_major_tpp_ssd = np.nanmean(np.nansum(np.array(r_major_tp[0][0]),axis=0).reshape(ry0,12),axis=0)
+r_major_tpp_nsd = np.nanmean(np.nansum(np.array(r_major_tp[1][0]),axis=0).reshape(ry0,12),axis=0)
+r_major_tpp_occ = np.nanmean(np.nansum(np.array(r_major_tp[2][0]),axis=0).reshape(ry0,12),axis=0)
+r_major_tpp_spp = np.nanmean(np.nansum(np.array(r_major_tp[3][0]),axis=0).reshape(ry0,12),axis=0)
+r_major_tpp_smm = np.nanmean(np.nansum(np.array(r_major_tp[4][0]),axis=0).reshape(ry0,12),axis=0)
+r_major_tpp_ven = np.nanmean(np.nansum(np.array(r_major_tp[5][0]),axis=0).reshape(ry0,12),axis=0)
+r_major_tpp_sbb = np.nanmean(np.nansum(np.array(r_major_tp[6][0]),axis=0).reshape(ry0,12),axis=0)
 
 ##############
 # river 24 yrs
@@ -225,23 +235,26 @@ minor_nh4 = np.array(minor_nc.variables['ammonium']) # mmol/m3
 minor_no3 = np.array(minor_nc.variables['nitrate']) # mmol/m3
 minor_po4 = np.array(minor_nc.variables['phosphate']) # mmol/m3
 minor_tn = np.array(minor_nc.variables['total_nitrogen'])
+minor_tp = np.array(minor_nc.variables['total_phosphorus'])
 
 minor_flo[minor_flo>1E20] = np.nan
 minor_tn[minor_tn>1E20] = np.nan
-minor_po4[minor_po4>1E20] = np.nan
+minor_tp[minor_tp>1E20] = np.nan
 
 r_minor_st_in = 84 # index for start of 1997
-r_minor_en_in = 287 # index for end of 2013
+r_minor_en_in = 251 # index for end of 2010
 r_minor_flo = [[] for i in range(maskarr.shape[0])]
 r_minor_tn = [[] for i in range(maskarr.shape[0])]
+r_minor_tp = [[] for i in range(maskarr.shape[0])]
 for r_i in range(len(r_minor_ind)):
     r_minor_flo[r_i].append(np.transpose(minor_flo[r_minor_st_in:r_minor_en_in+1,r_minor_ind[r_i],r_minor_ind[r_i]]).tolist())
     r_minor_tn[r_i].append(np.transpose(minor_flo[r_minor_st_in:r_minor_en_in+1,r_minor_ind[r_i],r_minor_ind[r_i]]*minor_tn[r_minor_st_in:r_minor_en_in+1,r_minor_ind[r_i],r_minor_ind[r_i]]).tolist())
+    r_minor_tp[r_i].append(np.transpose(minor_flo[r_minor_st_in:r_minor_en_in+1,r_minor_ind[r_i],r_minor_ind[r_i]]*minor_tp[r_minor_st_in:r_minor_en_in+1,r_minor_ind[r_i],r_minor_ind[r_i]]).tolist())
 
 # turn to array so can sum all rivers in region up
-# then reshape to (17,12) because this data set is 17 years (1997-2013)
-# then average over 17 years to get year average
-ry1 = 17
+# then reshape to (14,12) because this data set is 14 years (1997-2010)
+# then average over 14 years to get year average
+ry1 = 14
 #r_minor_flo_ssd = np.nanmean(np.nansum(np.array(r_minor_flo[0][0]),axis=0).reshape(ry1,12),axis=0)
 #r_minor_flo_nsd = np.nanmean(np.nansum(np.array(r_minor_flo[1][0]),axis=0).reshape(ry1,12),axis=0)
 r_minor_flo_ssd = np.array(()) # no rivers fall into these regions
@@ -262,6 +275,16 @@ r_minor_tnn_smm = np.nanmean(np.nansum(np.array(r_minor_tn[4][0]),axis=0).reshap
 r_minor_tnn_ven = np.nanmean(np.nansum(np.array(r_minor_tn[5][0]),axis=0).reshape(ry1,12),axis=0)
 r_minor_tnn_sbb = np.nanmean(np.nansum(np.array(r_minor_tn[6][0]),axis=0).reshape(ry1,12),axis=0)
 
+#r_minor_tpp_ssd = np.nanmean(np.nansum(np.array(r_minor_tn[0][0]),axis=0).reshape(ry1,12),axis=0)
+#r_minor_tpp_nsd = np.nanmean(np.nansum(np.array(r_minor_tn[1][0]),axis=0).reshape(ry1,12),axis=0)
+r_minor_tpp_ssd = np.array(()) # no rivers fall into these regions
+r_minor_tpp_nsd = np.array(())
+r_minor_tpp_occ = np.nanmean(np.nansum(np.array(r_minor_tn[2][0]),axis=0).reshape(ry1,12),axis=0)
+r_minor_tpp_spp = np.nanmean(np.nansum(np.array(r_minor_tn[3][0]),axis=0).reshape(ry1,12),axis=0)
+r_minor_tpp_smm = np.nanmean(np.nansum(np.array(r_minor_tn[4][0]),axis=0).reshape(ry1,12),axis=0)
+r_minor_tpp_ven = np.nanmean(np.nansum(np.array(r_minor_tn[5][0]),axis=0).reshape(ry1,12),axis=0)
+r_minor_tpp_sbb = np.nanmean(np.nansum(np.array(r_minor_tn[6][0]),axis=0).reshape(ry1,12),axis=0)
+
 # sum different river datasets
 r_flo_ssd = r_major_flo_ssd
 r_flo_nsd = r_major_flo_nsd
@@ -279,15 +302,23 @@ r_tnn_smm = r_major_tnn_occ+r_minor_tnn_smm
 r_tnn_ven = r_major_tnn_occ+r_minor_tnn_ven
 r_tnn_sbb = r_major_tnn_occ+r_minor_tnn_sbb
 
+r_tpp_ssd = r_major_tpp_ssd
+r_tpp_nsd = r_major_tpp_nsd
+r_tpp_occ = r_major_tpp_occ+r_minor_tpp_occ
+r_tpp_spp = r_major_tpp_occ+r_minor_tpp_spp
+r_tpp_smm = r_major_tpp_occ+r_minor_tpp_smm
+r_tpp_ven = r_major_tpp_occ+r_minor_tpp_ven
+r_tpp_sbb = r_major_tpp_occ+r_minor_tpp_sbb
+
 ######################
 # potw
 ######################
 potw_ma_nc = Dataset(potw_major_path,'r')
 
 major_potw_time = num2date(np.array(potw_ma_nc.variables['time']),potw_ma_nc.variables['time'].units)
-# start and end indices of potw for 1997-2013
+# start and end indices of potw for 1997-2010
 potw_1997 = 313 # 1997-01-31
-potw_2013 = 517 # 2014-01-13
+potw_2013 = 481 # 2011-01-01
 
 # convert real_datetime to datetime
 major_potw_time_l = []
@@ -341,15 +372,17 @@ major_tp[major_tp>1E20] = np.nan
 
 p_major_flo = [[] for i in range(maskarr.shape[0])]
 p_major_tn = [[] for i in range(maskarr.shape[0])] # TN flux
+p_major_tp = [[] for i in range(maskarr.shape[0])] # TP flux
 for r_i in range(len(p_major_ind)):
     p_major_flo[r_i].append(np.transpose(major_flo[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]).tolist())
     # flux mmol/s
     p_major_tn[r_i].append(np.transpose(major_flo[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]*major_tn[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]).tolist())
+    p_major_tp[r_i].append(np.transpose(major_flo[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]*major_tp[potw_1997:potw_2013,p_major_ind[r_i],p_major_ind[r_i]]).tolist())
 
 # turn to array so can sum all potw in region up
-# then reshape to (17,12) because this data set is 17 years
-# then average over 17 years to get year average
-ry0 = 17
+# then reshape to (14,12) because this data set is 14 years 1997-2010
+# then average over 14 years to get year average
+ry0 = 14
 
 #p_major_flo_nsd = np.nanmean(np.nansum(np.array(p_major_flo[1][0]),axis=0).reshape(ry0,12),axis=0)
 p_major_flo_ssd = np.nanmean(np.nansum(np.array(p_major_flo[0][0]),axis=0).reshape(ry0,12),axis=0)
@@ -373,6 +406,17 @@ p_major_tnn_sbb = np.zeros((12))
 #p_major_tnn_ven = np.nanmean(np.nansum(np.array(p_major_tn[5][0]),axis=0).reshape(ry0,12),axis=0)
 #p_major_tnn_sbb = np.nanmean(np.nansum(np.array(p_major_tn[6][0]),axis=0).reshape(ry0,12),axis=0)
 
+
+#p_major_tpp_nsd = np.nanmean(np.nansum(np.array(p_major_tp[1][0]),axis=0).reshape(ry0,12),axis=0)
+p_major_tpp_ssd = np.nanmean(np.nansum(np.array(p_major_tp[0][0]),axis=0).reshape(ry0,12),axis=0)
+p_major_tpp_nsd = np.zeros((12))
+p_major_tpp_occ = np.nanmean(np.nansum(np.array(p_major_tp[2][0]),axis=0).reshape(ry0,12),axis=0)
+p_major_tpp_spp = np.nanmean(np.nansum(np.array(p_major_tp[3][0]),axis=0).reshape(ry0,12),axis=0)
+p_major_tpp_smm = np.nanmean(np.nansum(np.array(p_major_tp[4][0]),axis=0).reshape(ry0,12),axis=0)
+p_major_tpp_ven = np.zeros((12))
+p_major_tpp_sbb = np.zeros((12))
+#p_major_tpp_ven = np.nanmean(np.nansum(np.array(p_major_tp[5][0]),axis=0).reshape(ry0,12),axis=0)
+#p_major_tpp_sbb = np.nanmean(np.nansum(np.array(p_major_tp[6][0]),axis=0).reshape(ry0,12),axis=0)
 
 ##############
 # minor potw
@@ -420,9 +464,11 @@ minor_po4[minor_po4>1E20] = np.nan
 
 p_minor_flo = [[] for i in range(maskarr.shape[0])]
 p_minor_tn = [[] for i in range(maskarr.shape[0])]
+p_minor_tp = [[] for i in range(maskarr.shape[0])]
 for r_i in range(len(r_minor_ind)):
     p_minor_flo[r_i].append(np.transpose(minor_flo[:12,p_minor_ind[r_i],p_minor_ind[r_i]]).tolist())
     p_minor_tn[r_i].append(np.transpose(minor_flo[:12,p_minor_ind[r_i],p_minor_ind[r_i]]*minor_tn[:12,p_minor_ind[r_i],p_minor_ind[r_i]]).tolist())
+    p_minor_tp[r_i].append(np.transpose(minor_flo[:12,p_minor_ind[r_i],p_minor_ind[r_i]]*minor_po4[:12,p_minor_ind[r_i],p_minor_ind[r_i]]).tolist())
 
 # turn to array so can sum all minor potw in region up
 p_minor_flo_ssd = np.nansum(np.array(p_minor_flo[0][0]),axis=0)
@@ -441,6 +487,14 @@ p_minor_tnn_smm = np.nansum(np.array(p_minor_tn[4][0]),axis=0)
 p_minor_tnn_ven = np.nansum(np.array(p_minor_tn[5][0]),axis=0)
 p_minor_tnn_sbb = np.nansum(np.array(p_minor_tn[6][0]),axis=0)
 
+p_minor_tpp_ssd = np.nansum(np.array(p_minor_tp[0][0]),axis=0)
+p_minor_tpp_nsd = np.nansum(np.array(p_minor_tp[1][0]),axis=0)
+p_minor_tpp_occ = np.nansum(np.array(p_minor_tp[2][0]),axis=0)
+p_minor_tpp_spp = np.nansum(np.array(p_minor_tp[3][0]),axis=0)
+p_minor_tpp_smm = np.nansum(np.array(p_minor_tp[4][0]),axis=0)
+p_minor_tpp_ven = np.nansum(np.array(p_minor_tp[5][0]),axis=0)
+p_minor_tpp_sbb = np.nansum(np.array(p_minor_tp[6][0]),axis=0)
+
 # sum major and minor potw datasets
 p_flo_ssd = p_major_flo_ssd+p_minor_flo_ssd
 p_flo_nsd = p_major_flo_nsd+p_minor_flo_nsd
@@ -458,6 +512,14 @@ p_tnn_smm = p_major_tnn_smm+p_minor_tnn_smm
 p_tnn_ven = p_major_tnn_ven+p_minor_tnn_ven
 p_tnn_sbb = p_major_tnn_sbb+p_minor_tnn_sbb
 
+p_tpp_ssd = p_major_tpp_ssd+p_minor_tpp_ssd
+p_tpp_nsd = p_major_tpp_nsd+p_minor_tpp_nsd
+p_tpp_occ = p_major_tpp_occ+p_minor_tpp_occ
+p_tpp_spp = p_major_tpp_spp+p_minor_tpp_spp
+p_tpp_smm = p_major_tpp_smm+p_minor_tpp_smm
+p_tpp_ven = p_major_tpp_ven+p_minor_tpp_ven
+p_tpp_sbb = p_major_tpp_sbb+p_minor_tpp_sbb
+
 # convert to kg/month, then sum
 s_to_d = 86400
 d_to_mo = 30
@@ -465,12 +527,17 @@ mmol_to_mol = 1./1000
 g_to_kg = 1./1000
 g_N = 14
 
-p_yr_nobight = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_sbb)))
-r_yr_nobight = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_sbb)))
+p_yr_nobight_tn = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tnn_sbb)))
+r_yr_nobight_tn = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tnn_sbb)))
+
+p_yr_nobight_tp = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*p_tpp_sbb)))
+r_yr_nobight_tp = np.array((np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_ssd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_nsd),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_occ),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_spp),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_smm),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_ven),np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*r_tpp_sbb)))
 
 # bightwide sum
-p_bight = np.nansum(p_yr_nobight)
-r_bight = np.nansum(r_yr_nobight)
+p_bight_tn = np.nansum(p_yr_nobight_tn)
+r_bight_tn = np.nansum(r_yr_nobight_tn)
+p_bight_tp = np.nansum(p_yr_nobight_tp)
+r_bight_tp = np.nansum(r_yr_nobight_tp)
 a_bight = np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*atmos_plt)
 atmos_plt = atmos_plt*((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))
 
@@ -478,40 +545,179 @@ atmos_plt = atmos_plt*((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))
 # plot
 #############
 a_yr = np.append(atmos_plt,a_bight)
-p_yr = np.append(p_yr_nobight,p_bight)
-r_yr = np.append(r_yr_nobight,r_bight)
+p_yr_tn = np.append(p_yr_nobight_tn,p_bight_tn)
+r_yr_tn = np.append(r_yr_nobight_tn,r_bight_tn)
+p_yr_tp = np.append(p_yr_nobight_tp,p_bight_tp)
+r_yr_tp = np.append(r_yr_nobight_tp,r_bight_tp)
 
-figw = 12
+p_yr_kg_tn = p_yr_tn
+r_yr_kg_tn = r_yr_tn
+p_yr_kg_tp = p_yr_tp
+r_yr_kg_tp = r_yr_tp
+
+figw = 14
 figh = 8
 regions = ['S SD','N SD','OC','SP','SM','Ventura','SB','Bightwide']
 width = 0.2
 axis_font = 18
 if log_set == True:
-    savename = './figs/inputs_compare_region_1997_2013.pdf'
+    savename = './figs/inputs_compare_region_1997_2010_tptn.pdf'
 else:
-    savename = './figs/inputs_compare_region_1997_2013_nolog.pdf'
+    savename = './figs/inputs_compare_region_1997_2010_nolog_tptn.pdf'
+
+x_ind = np.arange(len(regions))
 
 plt.ion()
-fig,ax = plt.subplots(1,1,figsize=[figw,figh])
-x_ind = np.arange(len(regions))
-ax.bar(x_ind,a_yr,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
-ax.bar(x_ind+width,p_yr,color='orange',width=width,label='All POTWs')
-ax.bar(x_ind+(2*width),r_yr,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
-ax.set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
+
+r_col = 'lightskyblue'
+p_col = 'gray'
+
+y1 = 1E3
+y2 = 1E9
+
+fig,ax = plt.subplots(1,1,sharex=True,figsize=[figw,figh])
+ax.bar(x_ind,p_yr_kg_tn,color=p_col,width=width,hatch='\\')
+ax.bar(x_ind+width,r_yr_kg_tn,color=r_col,width=width,hatch='\\')
+ax.bar(x_ind+(2.4*width),p_yr_kg_tp,color=p_col,width=width,hatch='.')
+ax.bar(x_ind+(3.4*width),r_yr_kg_tp,color=r_col,width=width,hatch='.')
+ax.bar(np.nan,np.nan,color=p_col,width=width,label='Ocean Outfalls')
+ax.bar(np.nan,np.nan,color=r_col,width=width,label='Rivers')
+ax.bar(np.nan,np.nan,color='white',hatch='\\',width=width,label='TN')
+ax.bar(np.nan,np.nan,color='white',hatch='.',width=width,label='TP')
+ax.set_xticks([width+.15,1+width+.15,2+width+.15,3+width+.15,4+width+.15,5+width+.15,6+width+.15,7+width+.15])
 ax.set_xticklabels(regions)
+
+ax.legend().set_visible(False)
+
+ax.legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=4,handlelength=2.5,handleheight=1.5)
+ax.tick_params(axis='both',which='major',labelsize=axis_font)
+ax.tick_params(axis='both',which='major',labelsize=axis_font)
+ax.set_ylabel('Total Flux kg y$^{-1}$',fontsize=axis_font)
+ax.set_xlabel('Region',fontsize=axis_font)
+# set to log scale
 if log_set == True:
     ax.set_yscale('log')
-    ax.set_ybound(lower=10E-1,upper=25E5)
-ax.set_ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
-ax.tick_params(axis='both',which='major',labelsize=axis_font)
-#ax.tick_params(axis='both',which='minor',labelsize=axis_font)
-ax.legend(loc='lower left',fontsize=20,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=3,handlelength=2.5,handleheight=1.5)
+    ax.set_ybound(lower=y1,upper=y2)
+
+ax.text(x_ind[0],p_yr_kg_tn[0]+3E6,format(np.floor(p_yr_kg_tn[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[1],p_yr_kg_tn[1]+3E5,format(np.floor(p_yr_kg_tn[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[2],p_yr_kg_tn[2]+3E6,format(np.floor(p_yr_kg_tn[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[3],p_yr_kg_tn[3]+3E6,format(np.floor(p_yr_kg_tn[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[4],p_yr_kg_tn[4]+3E6,format(np.floor(p_yr_kg_tn[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[5],p_yr_kg_tn[5]+2E5,format(np.floor(p_yr_kg_tn[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[6],p_yr_kg_tn[6]+5E4,format(np.floor(p_yr_kg_tn[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[7],p_yr_kg_tn[7]+1E7,format(np.floor(p_yr_kg_tn[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+ax.text(x_ind[0]+width,r_yr_kg_tn[0]+2E5,format(np.floor(r_yr_kg_tn[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[1]+width,r_yr_kg_tn[1]+5E4,format(np.floor(r_yr_kg_tn[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[2]+width,r_yr_kg_tn[2]+2E5,format(np.floor(r_yr_kg_tn[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[3]+width,r_yr_kg_tn[3]+2E5,format(np.floor(r_yr_kg_tn[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[4]+width,r_yr_kg_tn[4]+2E5,format(np.floor(r_yr_kg_tn[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[5]+width,r_yr_kg_tn[5]+2E5,format(np.floor(r_yr_kg_tn[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[6]+width,r_yr_kg_tn[6]+2E5,format(np.floor(r_yr_kg_tn[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[7]+width,r_yr_kg_tn[7]+1E6,format(np.floor(r_yr_kg_tn[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+ax.text(x_ind[0]+(2.4*width),p_yr_kg_tp[0]+5E4,format(np.floor(p_yr_kg_tp[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[1]+(2.4*width),p_yr_kg_tp[1]+5E4,format(np.floor(p_yr_kg_tp[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[2]+(2.4*width),p_yr_kg_tp[2]+2E5,format(np.floor(p_yr_kg_tp[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[3]+(2.4*width),p_yr_kg_tp[3]+2E5,format(np.floor(p_yr_kg_tp[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[4]+(2.4*width),p_yr_kg_tp[4]+2E5,format(np.floor(p_yr_kg_tp[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[5]+(2.4*width),p_yr_kg_tp[5]+4E4,format(np.floor(p_yr_kg_tp[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[6]+(2.4*width),p_yr_kg_tp[6]+4E2,format(np.floor(p_yr_kg_tp[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[7]+(2.4*width),p_yr_kg_tp[7]+1E6,format(np.floor(p_yr_kg_tp[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+ax.text(x_ind[0]+(3.4*width),r_yr_kg_tp[0]+3E4,format(np.floor(r_yr_kg_tp[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[1]+(3.4*width),r_yr_kg_tp[1]+8E3,format(np.floor(r_yr_kg_tp[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[2]+(3.4*width),r_yr_kg_tp[2]+3E4,format(np.floor(r_yr_kg_tp[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[3]+(3.4*width),r_yr_kg_tp[3]+3E4,format(np.floor(r_yr_kg_tp[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[4]+(3.4*width),r_yr_kg_tp[4]+3E4,format(np.floor(r_yr_kg_tp[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[5]+(3.4*width),r_yr_kg_tp[5]+3E4,format(np.floor(r_yr_kg_tp[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[6]+(3.4*width),r_yr_kg_tp[6]+3E4,format(np.floor(r_yr_kg_tp[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+ax.text(x_ind[7]+(3.4*width),r_yr_kg_tp[7]+2E5,format(np.floor(r_yr_kg_tp[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 
 plt.savefig(savename,bbox_inches='tight')
 
-
+#####################################
 # broken y axis plot with kg/day units
-savename = './figs/inputs_compare_region_1997_2013_brokeny.pdf'
+#####################################
+savename = './figs/inputs_compare_region_1997_2010_tntp_brokeny.pdf'
+
+a_yr_kg = a_yr
+p_yr_kg_tn = p_yr_tn
+r_yr_kg_tn = r_yr_tn
+p_yr_kg_tp = p_yr_tp
+r_yr_kg_tp = r_yr_tp
+
+offset1 = 50000
+offset0 = 1000000
+
+# y0: upper lim of bottom axis, y1: lower lim of top axis
+y0 = 1E6
+#y1 = 9500000
+y1 = 8.5E6
+#y2 = np.max(p_yr_kg)+offset0
+y2 = 1E8
+
+fig,axes = plt.subplots(2,1,sharex=True,figsize=[figw,figh])
+axes.flat[0].bar(x_ind,p_yr_kg_tn,color='orange',width=width,label='Ocean Outfalls TN')
+axes.flat[1].bar(x_ind,p_yr_kg_tn,color='orange',width=width,label='Ocean Outfalls TN')
+axes.flat[0].bar(x_ind+width,r_yr_kg_tn,color='cornflowerblue',width=width,hatch='\\',label='Rivers TN')
+axes.flat[1].bar(x_ind+width,r_yr_kg_tn,color='cornflowerblue',width=width,hatch='\\',label='Rivers TN')
+axes.flat[0].bar(x_ind+(2*width),p_yr_kg_tp,color='coral',width=width,hatch='x',label='Ocean Outfalls TP')
+axes.flat[1].bar(x_ind+(2*width),p_yr_kg_tp,color='coral',width=width,hatch='x',label='Ocean Outfalls TP')
+axes.flat[0].bar(x_ind+(3*width),r_yr_kg_tp,color='teal',width=width,hatch='/',label='Rivers TP')
+axes.flat[1].bar(x_ind+(3*width),r_yr_kg_tp,color='teal',width=width,hatch='/',label='Rivers TP')
+axes.flat[0].set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
+axes.flat[0].set_xticklabels(regions)
+
+axes.flat[0].set_ylim(y1, y2)
+axes.flat[1].set_ylim(0, y0)
+axes.flat[1].legend().set_visible(False)
+
+d = .01  # how big to make the diagonal lines in axes coordinates
+# arguments to pass to plot, just so we don't keep repeating them
+kwargs = dict(transform=axes.flat[0].transAxes, color='k', clip_on=False)
+axes.flat[0].plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
+axes.flat[0].plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
+
+kwargs.update(transform=axes.flat[1].transAxes)  # switch to the bottom axes
+axes.flat[1].plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
+axes.flat[1].plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagona
+
+axes.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=3,handlelength=2.5,handleheight=1.5)
+axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_font)
+axes.flat[1].tick_params(axis='both',which='major',labelsize=axis_font)
+axes.flat[0].set_ylabel('Total N Flux kg y$^{-1}$',fontsize=axis_font)
+axes.flat[1].set_xlabel('Region',fontsize=axis_font)
+# set top plot to log scale
+if log_set == True:
+    axes.flat[0].set_yscale('log')
+    axes.flat[0].set_ybound(lower=y1,upper=y2)
+# put numbers above bars
+#axes[0].text(x_ind[-1],a_yr_kg[-1]+10000,str(np.floor(a_yr_kg[-1]).astype(int)),fontsize=12,rotation=90,horizontalalignment='center')
+p0_ind = [1,5,6]
+for i in range(len(a_yr_kg)-1):
+    axes.flat[1].text(x_ind[i]+width,r_yr_kg[i]+offset1,format(np.floor(r_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+    if i not in p0_ind:
+        axes.flat[0].text(x_ind[i],p_yr_kg[i]+offset0,format(np.floor(p_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+# manually set bars that are too close to border
+#axes[0].text(x_ind[-1],a_yr_kg[-1]+(offset0*.5),format(np.floor(a_yr_kg[-1]).astype(int)),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[0].text(x_ind[-1]+width,r_yr_kg[-1]+(offset0),format(np.floor(r_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[0].text(x_ind[-1],p_yr_kg[-1]-(offset0*45),format(np.floor(p_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[1].text(x_ind[1],p_yr_kg[1]-(offset1*9),format(np.floor(p_yr_kg[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[1].text(x_ind[5],p_yr_kg[5]+(offset1),format(np.floor(p_yr_kg[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[1].text(x_ind[6],p_yr_kg[6]+(offset1),format(np.floor(p_yr_kg[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+
+fig.subplots_adjust(hspace=0.1)
+plt.savefig(savename,bbox_inches='tight')
+
+#ax.ticklabel_format(style='plain',axis='y')
+
+
+'''
+# broken y axis plot with kg/day units
+savename = './figs/inputs_compare_region_1997_2010_brokeny.pdf'
 
 a_yr_kg = a_yr
 p_yr_kg = p_yr
@@ -523,65 +729,57 @@ offset0 = 1000000
 # y0: upper lim of bottom axis, y1: lower lim of top axis
 y0 = 1.4E6
 #y1 = 9500000
-y1 = 3E6
+y1 = 4E6
 #y2 = np.max(p_yr_kg)+offset0
 y2 = 1E8
 
-fig,axes = plt.subplots(2,1,sharex=True,figsize=[figw,figh])
-axes[0].bar(x_ind,a_yr_kg,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
-axes[1].bar(x_ind,a_yr_kg,color='gray',width=width,hatch='//',label='Atmospheric Deposition')
-axes[0].bar(x_ind+width,p_yr_kg,color='orange',width=width,label='All POTWs')
-axes[1].bar(x_ind+width,p_yr_kg,color='orange',width=width,label='All POTWs')
-axes[0].bar(x_ind+(2*width),r_yr_kg,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
-axes[1].bar(x_ind+(2*width),r_yr_kg,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
-axes[0].set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
-axes[0].set_xticklabels(regions)
+fig,axes = plt.subplots(2,2,sharex=True,figsize=[figw,figh])
+axes.flat[0].bar(x_ind,p_yr_kg,color='orange',width=width,label='Ocean Outfalls')
+axes.flat[2].bar(x_ind,p_yr_kg,color='orange',width=width,label='Ocean Outfalls')
+axes.flat[0].bar(x_ind+width,r_yr_kg,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
+axes.flat[2].bar(x_ind+width,r_yr_kg,color='cornflowerblue',width=width,hatch='\\',label='Rivers')
+axes.flat[0].set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
+axes.flat[0].set_xticklabels(regions)
 
-axes[0].set_ylim(y1, y2)
-axes[1].set_ylim(0, y0)
-axes[1].legend().set_visible(False)
+axes.flat[0].set_ylim(y1, y2)
+axes.flat[2].set_ylim(0, y0)
+axes.flat[2].legend().set_visible(False)
 
 d = .01  # how big to make the diagonal lines in axes coordinates
 # arguments to pass to plot, just so we don't keep repeating them
-kwargs = dict(transform=axes[0].transAxes, color='k', clip_on=False)
-axes[0].plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
-axes[0].plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
+kwargs = dict(transform=axes.flat[0].transAxes, color='k', clip_on=False)
+axes.flat[0].plot((-d, +d), (-d, +d), **kwargs)        # top-left diagonal
+axes.flat[0].plot((1 - d, 1 + d), (-d, +d), **kwargs)  # top-right diagonal
 
-kwargs.update(transform=axes[1].transAxes)  # switch to the bottom axes
-axes[1].plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
-axes[1].plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagona
+kwargs.update(transform=axes.flat[2].transAxes)  # switch to the bottom axes
+axes.flat[2].plot((-d, +d), (1 - d, 1 + d), **kwargs)  # bottom-left diagonal
+axes.flat[2].plot((1 - d, 1 + d), (1 - d, 1 + d), **kwargs)  # bottom-right diagona
 
-axes[0].legend(loc='lower left',fontsize=20,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=3,handlelength=2.5,handleheight=1.5)
-axes[0].tick_params(axis='both',which='major',labelsize=axis_font)
-axes[1].tick_params(axis='both',which='major',labelsize=axis_font)
-#fig.add_subplot(111, frameon=False)
-## hide tick and tick label of the big axis
-#plt.tick_params(labelcolor='none', top=False, bottom=False, left=False, right=False)
-#plt.xlabel('Region')
-#plt.ylabel('Total N Flux mmol s$^{-1}$',fontsize=axis_font)
-axes[0].set_ylabel('Total N Flux kg y$^{-1}$',fontsize=axis_font)
-axes[1].set_xlabel('Region',fontsize=axis_font)
+axes.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=(0,1.02,2.,.102),mode='expand',borderaxespad=0.,ncol=3,handlelength=2.5,handleheight=1.5)
+axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_font)
+axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_font)
+axes.flat[0].set_ylabel('Total N Flux kg y$^{-1}$',fontsize=axis_font)
+axes.flat[2].set_xlabel('Region',fontsize=axis_font)
 # set top plot to log scale
 if log_set == True:
-    axes[0].set_yscale('log')
-    axes[0].set_ybound(lower=y1,upper=y2)
+    axes.flat[0].set_yscale('log')
+    axes.flat[0].set_ybound(lower=y1,upper=y2)
 # put numbers above bars
 #axes[0].text(x_ind[-1],a_yr_kg[-1]+10000,str(np.floor(a_yr_kg[-1]).astype(int)),fontsize=12,rotation=90,horizontalalignment='center')
 p0_ind = [1,5,6]
 for i in range(len(a_yr_kg)-1):
-    axes[1].text(x_ind[i],a_yr_kg[i]+offset1,format(np.floor(a_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-    axes[1].text(x_ind[i]+(2*width),r_yr_kg[i]+offset1,format(np.floor(r_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+    axes.flat[2].text(x_ind[i]+width,r_yr_kg[i]+offset1,format(np.floor(r_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
     if i not in p0_ind:
-        axes[0].text(x_ind[i]+(width),p_yr_kg[i]+offset0,format(np.floor(p_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+        axes.flat[0].text(x_ind[i],p_yr_kg[i]+offset0,format(np.floor(p_yr_kg[i]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 
 # manually set bars that are too close to border
 #axes[0].text(x_ind[-1],a_yr_kg[-1]+(offset0*.5),format(np.floor(a_yr_kg[-1]).astype(int)),fontsize=12,rotation=90,horizontalalignment='center')
-axes[0].text(x_ind[-1],a_yr_kg[-1]+(offset0*.5),format(np.floor(a_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-axes[0].text(x_ind[-1]+(2*width),r_yr_kg[-1]+(offset0),format(np.floor(r_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-axes[0].text(x_ind[-1]+(width),p_yr_kg[-1]-(offset0*45),format(np.floor(p_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-axes[1].text(x_ind[1]+(width),p_yr_kg[1]-(offset1*9),format(np.floor(p_yr_kg[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-axes[1].text(x_ind[5]+(width),p_yr_kg[5]+(offset1),format(np.floor(p_yr_kg[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-axes[1].text(x_ind[6]+(width),p_yr_kg[6]+(offset1),format(np.floor(p_yr_kg[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[0].text(x_ind[-1]+width,r_yr_kg[-1]+(offset0),format(np.floor(r_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[0].text(x_ind[-1],p_yr_kg[-1]-(offset0*45),format(np.floor(p_yr_kg[-1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[2].text(x_ind[1],p_yr_kg[1]-(offset1*9),format(np.floor(p_yr_kg[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[2].text(x_ind[5],p_yr_kg[5]+(offset1),format(np.floor(p_yr_kg[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
+axes.flat[2].text(x_ind[6],p_yr_kg[6]+(offset1),format(np.floor(p_yr_kg[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 
 fig.subplots_adjust(hspace=0.1)
 plt.savefig(savename,bbox_inches='tight')
+'''

@@ -7,6 +7,7 @@ from netCDF4 import Dataset,num2date,date2num
 import datetime as datetime
 import h5py
 import scipy.io
+import pandas as pd
 
 fig_path = './figs/'
 # data paths
@@ -15,6 +16,9 @@ minor_path = '/data/project1/minnaho/river_data/south_coast_rivers_24_years_mont
 
 potw_major_path = '/data/project1/minnaho/potw_outfall_data/major_potw_data.nc'
 potw_minor_path = '/data/project1/minnaho/potw_outfall_data/minor_potw_data_new.nc'
+
+ocsd_data = '/data/project1/minnaho/potw_outfall_data/OO10-OCSD _REvised 06052020.xlsx'
+
 
 atmos_path = '/data/project1/minnaho/atmos_deposition_data/L2_SCB_atmos_deposition.nc'
 log_set = True
@@ -222,9 +226,9 @@ r_season_tnn = np.array([(r_tnn_sum[11])+(r_tnn_sum[1])+(r_tnn_sum[0]),(r_tnn_su
 potw_ma_nc = Dataset(potw_major_path,'r')
 
 major_potw_time = num2date(np.array(potw_ma_nc.variables['time']),potw_ma_nc.variables['time'].units)
-# start and end indices of potw for 1997-2013
+# start and end indices of potw for 1997-2010
 potw_1997 = 313 # 1997-01-31
-potw_2013 = 517 # 2014-01-13
+potw_2013 = 481 # 2011-01-13
 
 # convert real_datetime to datetime
 major_potw_time_l = []
@@ -254,10 +258,30 @@ major_flo[major_flo>1E20] = np.nan
 major_tn[major_tn>1E20] = np.nan
 major_tp[major_tp>1E20] = np.nan
 
+# replace NO3/NO2 OCSD data with Martha's new calculations of NO3 + NO2
+ocsd_df = pd.read_excel(ocsd_data,header=None,sheet_name='Sheet1')
+# new NO3+NO2
+# is it actually mg/L, not kg/m3? makes more sense as mg/L
+kg_to_g = 1000
+g_to_mol = 1./14
+mol_to_mmol = 1000
+mgL_to_mmolm3 = 1000./14
+
+# starts at 12-1970 instead of 1-1971 [potw_1997+1:potw_2013+1]
+ocsd_nox_l = list(ocsd_df[3][1:])
+for i in range(len(major_nh4[:,2,2])-len(ocsd_df[3][1:])):
+    ocsd_nox_l.append(np.nan)
+
+ocsd_nox = np.array(ocsd_nox_l).astype(float)*mgL_to_mmolm3
+
+# replace ocsd major tn data with new calculations
+major_tn[:,2,2] = major_nh4[:,2,2]+major_on[:,2,2]+ocsd_nox
+
+
 # turn to array so can sum all potw in region up
 # then reshape to (17,12) because this data set is 17 years
 # then average over 17 years to get year average
-ry0 = 17
+ry0 = 14
 
 p_major_flo = np.nanmean(np.nansum(np.nansum(np.array(major_flo),axis=1),axis=1).reshape(ry1,12),axis=0)
 
