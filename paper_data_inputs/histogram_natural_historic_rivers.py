@@ -583,136 +583,161 @@ r_bight_tp = np.nansum(r_yr_nobight_tp)
 a_bight = np.nansum(((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))*atmos_plt)
 atmos_plt = atmos_plt*((s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol))
 
-#############
-# plot
-#############
-#plt.ion()
-
 a_yr = np.append(atmos_plt,a_bight)
 p_yr_tn = np.append(p_yr_nobight_tn,p_bight_tn)
 r_yr_tn = np.append(r_yr_nobight_tn,r_bight_tn)
 p_yr_tp = np.append(p_yr_nobight_tp,p_bight_tp)
 r_yr_tp = np.append(r_yr_nobight_tp,r_bight_tp)
 
-p_yr_kg_tn = p_yr_tn
-r_yr_kg_tn = r_yr_tn
-p_yr_kg_tp = p_yr_tp
-r_yr_kg_tp = r_yr_tp
+
+# inland POTW
+# escondido = minor potw
+inland_tnn = np.load('inland_potw_tnn_region.npy')
+inland_tpp = np.load('inland_potw_tpp_region.npy')
+inland_din = np.load('inland_potw_din_region.npy')
+inland_dip = np.load('inland_potw_dip_region.npy')
+
+p_yr_tn[1] = p_yr_tn[1]+inland_tnn[1]
+p_yr_tp[1] = p_yr_tp[1]+inland_tpp[1]
+
+inland_tnn[1] = 0
+inland_tpp[1] = 0
+
+inland_tnn[6] = 0
+inland_tpp[6] = 0
+
+# natural current riverine 
+# ssd, nsd, occ, spp, smm, ven, sbb
+nat_cur_tpp =[637,1463,2602,2901,95,1921,317,9937]
+nat_cur_dip = [56,128,227,253,8,168,28,866]
+nat_cur_tnn = [4584,10524,18710,20863,685,13817,2278,33289]
+nat_cur_din = [863,1808,2900,3234,120,2122,359,5463]
+
+# nonpoint sourse nps NPS
+
+nps_tnn = np.empty((8))
+nps_tnn[0] = r_yr_tn[0]-nat_cur_tnn[0]-inland_tnn[0]
+nps_tnn[1] = r_yr_tn[1]-nat_cur_tnn[1]-inland_tnn[1]
+nps_tnn[2] = r_yr_tn[2]-nat_cur_tnn[2]-inland_tnn[2]
+nps_tnn[3] = r_yr_tn[3]-nat_cur_tnn[3]-(r_yr_tn[3]*.95)
+nps_tnn[4] = r_yr_tn[4]-nat_cur_tnn[4]-(r_yr_tn[4]*.95)
+#nps_tnn[5] = r_yr_tn[5]-nat_cur_tnn[5]-(r_yr_tn[5]*.95)+(r_din_ven-nat_din[5]-inland_din[5])
+nps_tnn[5] = 1.30e+05 # copied and pasted from table_median.py
+nps_tnn[6] = r_yr_tn[6]-nat_cur_tnn[6]-inland_tnn[6]
+nps_tnn[7] = np.nansum((nps_tnn[0]+nps_tnn[1]+nps_tnn[2]+nps_tnn[3]+nps_tnn[4]+nps_tnn[5]+nps_tnn[6]))
+
+
+nps_tpp = np.empty((8))
+nps_tpp[7] = np.nansum((r_yr_tp[0]-nat_cur_tpp[0]-inland_tpp[0],r_yr_tp[1]-nat_cur_tpp[1]-inland_tpp[1],r_yr_tp[2]-nat_cur_tpp[2]-inland_tpp[2],r_yr_tp[3]-nat_cur_tpp[3]-inland_tpp[3],r_yr_tp[4]-nat_cur_tpp[4]-(r_yr_tp[4]*.95),r_yr_tp[5]-nat_cur_tpp[5]-(r_yr_tp[5]*.95),r_yr_tp[6]-nat_cur_tpp[6]-inland_tpp[6]))
+nps_tpp[0] = r_yr_tp[0]-nat_cur_tpp[0]-inland_tpp[0]
+nps_tpp[1] = r_yr_tp[1]-nat_cur_tpp[1]-inland_tpp[1]
+nps_tpp[2] = r_yr_tp[2]-nat_cur_tpp[2]-inland_tpp[2]
+nps_tpp[3] = r_yr_tp[3]-nat_cur_tpp[3]-inland_tpp[3]
+nps_tpp[4] = r_yr_tp[4]-nat_cur_tpp[4]-(r_yr_tp[4]*.95)
+nps_tpp[5] = r_yr_tp[5]-nat_cur_tpp[5]-(r_yr_tp[5]*.95)
+nps_tpp[6] = r_yr_tp[6]-nat_cur_tpp[6]-inland_tpp[6]
+
+# natural historic
+nat_his_tpp = [
+8279,
+19512, 
+5309, 
+5920, 
+1983, 
+23148, 
+3910, 
+68063] 
+
+nat_his_dip = [
+722,
+1701,
+463,
+516,
+173,
+2018,
+341,
+5934]
+
+nat_his_tnn = [
+59537,
+140326,
+38183,
+42577,
+14264,
+166474,
+28122,
+489540]
+
+nat_his_din = [
+80345,
+4430,
+25564,
+2501,
+6599,
+5918,
+24101,
+11214]
+
+
+
+#############
+# plot
+#############
 
 figw = 14
 figh = 8
 regions = ['S SD','N SD','OC','SP','SM','Ventura','SB','Bightwide']
 width = 0.2
 axis_font = 18
-if log_set == True:
-    savename = './figs/inputs_compare_region_1997_2010_tptn.pdf'
-else:
-    savename = './figs/inputs_compare_region_1997_2010_nolog_tptn.pdf'
 
 x_ind = np.arange(len(regions))
-
-'''
-r_col = 'lightskyblue'
-p_col = 'gray'
-
-y1 = 1E3
-y2 = 1E9
-
-fig,ax = plt.subplots(1,1,sharex=True,figsize=[figw,figh])
-ax.bar(x_ind,p_yr_kg_tn,color=p_col,width=width,hatch='\\')
-ax.bar(x_ind+width,r_yr_kg_tn,color=r_col,width=width,hatch='\\')
-ax.bar(x_ind+(2.4*width),p_yr_kg_tp,color=p_col,width=width,hatch='.')
-ax.bar(x_ind+(3.4*width),r_yr_kg_tp,color=r_col,width=width,hatch='.')
-ax.bar(np.nan,np.nan,color=p_col,width=width,label='Ocean Outfalls')
-ax.bar(np.nan,np.nan,color=r_col,width=width,label='Rivers')
-ax.bar(np.nan,np.nan,color='white',hatch='\\',width=width,label='TN')
-ax.bar(np.nan,np.nan,color='white',hatch='.',width=width,label='TP')
-ax.set_xticks([width+.15,1+width+.15,2+width+.15,3+width+.15,4+width+.15,5+width+.15,6+width+.15,7+width+.15])
-ax.set_xticklabels(regions)
-
-ax.legend().set_visible(False)
-
-ax.legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=(0,1.02,1.,.102),mode='expand',borderaxespad=0.,ncol=4,handlelength=2.5,handleheight=1.5)
-ax.tick_params(axis='both',which='major',labelsize=axis_font)
-ax.tick_params(axis='both',which='major',labelsize=axis_font)
-ax.set_ylabel('Total Flux kg y$^{-1}$',fontsize=axis_font)
-ax.set_xlabel('Region',fontsize=axis_font)
-# set to log scale
-if log_set == True:
-    ax.set_yscale('log')
-    ax.set_ybound(lower=y1,upper=y2)
-
-ax.text(x_ind[0],p_yr_kg_tn[0]+3E6,format(np.floor(p_yr_kg_tn[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[1],p_yr_kg_tn[1]+3E5,format(np.floor(p_yr_kg_tn[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[2],p_yr_kg_tn[2]+3E6,format(np.floor(p_yr_kg_tn[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[3],p_yr_kg_tn[3]+3E6,format(np.floor(p_yr_kg_tn[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[4],p_yr_kg_tn[4]+3E6,format(np.floor(p_yr_kg_tn[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[5],p_yr_kg_tn[5]+2E5,format(np.floor(p_yr_kg_tn[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[6],p_yr_kg_tn[6]+5E4,format(np.floor(p_yr_kg_tn[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[7],p_yr_kg_tn[7]+1E7,format(np.floor(p_yr_kg_tn[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-
-ax.text(x_ind[0]+width,r_yr_kg_tn[0]+2E5,format(np.floor(r_yr_kg_tn[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[1]+width,r_yr_kg_tn[1]+5E4,format(np.floor(r_yr_kg_tn[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[2]+width,r_yr_kg_tn[2]+2E5,format(np.floor(r_yr_kg_tn[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[3]+width,r_yr_kg_tn[3]+2E5,format(np.floor(r_yr_kg_tn[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[4]+width,r_yr_kg_tn[4]+2E5,format(np.floor(r_yr_kg_tn[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[5]+width,r_yr_kg_tn[5]+2E5,format(np.floor(r_yr_kg_tn[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[6]+width,r_yr_kg_tn[6]+2E5,format(np.floor(r_yr_kg_tn[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[7]+width,r_yr_kg_tn[7]+1E6,format(np.floor(r_yr_kg_tn[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-
-ax.text(x_ind[0]+(2.4*width),p_yr_kg_tp[0]+5E4,format(np.floor(p_yr_kg_tp[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[1]+(2.4*width),p_yr_kg_tp[1]+5E4,format(np.floor(p_yr_kg_tp[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[2]+(2.4*width),p_yr_kg_tp[2]+2E5,format(np.floor(p_yr_kg_tp[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[3]+(2.4*width),p_yr_kg_tp[3]+2E5,format(np.floor(p_yr_kg_tp[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[4]+(2.4*width),p_yr_kg_tp[4]+2E5,format(np.floor(p_yr_kg_tp[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[5]+(2.4*width),p_yr_kg_tp[5]+4E4,format(np.floor(p_yr_kg_tp[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[6]+(2.4*width),p_yr_kg_tp[6]+4E2,format(np.floor(p_yr_kg_tp[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[7]+(2.4*width),p_yr_kg_tp[7]+1E6,format(np.floor(p_yr_kg_tp[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-
-ax.text(x_ind[0]+(3.4*width),r_yr_kg_tp[0]+3E4,format(np.floor(r_yr_kg_tp[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[1]+(3.4*width),r_yr_kg_tp[1]+8E3,format(np.floor(r_yr_kg_tp[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[2]+(3.4*width),r_yr_kg_tp[2]+3E4,format(np.floor(r_yr_kg_tp[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[3]+(3.4*width),r_yr_kg_tp[3]+3E4,format(np.floor(r_yr_kg_tp[3]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[4]+(3.4*width),r_yr_kg_tp[4]+3E4,format(np.floor(r_yr_kg_tp[4]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[5]+(3.4*width),r_yr_kg_tp[5]+3E4,format(np.floor(r_yr_kg_tp[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[6]+(3.4*width),r_yr_kg_tp[6]+3E4,format(np.floor(r_yr_kg_tp[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-ax.text(x_ind[7]+(3.4*width),r_yr_kg_tp[7]+2E5,format(np.floor(r_yr_kg_tp[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-
-plt.savefig(savename,bbox_inches='tight')
-'''
 
 ###################################
 # make it two panel with TN and TP
 ###################################
 figw = 12
-figh = 14
+figh = 12
 regions = ['S SD','N SD','OC','SP','SM','Ventura','SB','Bightwide']
-width = 0.2
+width = 0.15
 axis_font = 18
 if log_set == True:
-    savename = './figs/inputs_compare_region_1997_2010_tptn_2panel.pdf'
-else:
-    savename = './figs/inputs_compare_region_1997_2010_nolog_tptn_2panel.pdf'
+    savename = './figs/river_natural_historic_compare_region_tptn.pdf'
 
 x_ind = np.arange(len(regions))
 
-#plt.ion()
+plt.ion()
+his_col = 'k'
+cur_col = 'dimgrey'
+nps_col = 'grey'
+ps_col = 'silver'
+in_col = 'white'
 
-r_col = 'lightskyblue'
-p_col = 'orange'
-a_col = 'gray'
-
-y1 = 1E3
+y1 = 1E2
 y2 = 1E9
 
 fig,ax = plt.subplots(2,1,sharex=True,figsize=[figw,figh])
-ax[0].bar(x_ind,p_yr_kg_tn,color=p_col,width=width,label='Ocean Outfalls')
-ax[0].bar(x_ind+width,r_yr_kg_tn,color=r_col,width=width,hatch='\\',label='Rivers')
-ax[0].bar(x_ind+(2*width),a_yr,color=a_col,width=width,hatch='.',label='Atmospheric Deposition')
-ax[1].bar(x_ind,p_yr_kg_tp,color=p_col,width=width)
-ax[1].bar(x_ind+width,r_yr_kg_tp,color=r_col,width=width,hatch='\\')
+ax[0].bar(x_ind,nat_his_tnn,color=his_col,width=width,label='Natural (Historic)')
+ax[0].bar(x_ind+width,nat_cur_tnn,color=cur_col,width=width,label='Natural (Current)',hatch='o')
+ax[0].bar(x_ind+(2*width),nps_tnn,color=nps_col,width=width,label='NPS',hatch='/')
+ax[0].bar(x_ind+(3*width),inland_tnn,color=in_col,edgecolor='k',width=width,label='Inland PS',hatch='\\')
+ax[0].bar(x_ind+(4*width),p_yr_tn,color=ps_col,width=width,label='PS')
+#ax[0].bar(x_ind+(3*width),p_yr_tn,bottom=inland_tnn,color=ps_col,width=width,label='PS')
+
+ax[1].bar(x_ind,nat_his_tpp,color=his_col,width=width,label='Natural (Historic)')
+ax[1].bar(x_ind+width,nat_cur_tpp,color=cur_col,width=width,label='Natural (Current)',hatch='o')
+ax[1].bar(x_ind+(2*width),nps_tpp,color=nps_col,width=width,label='NPS',hatch='/')
+ax[1].bar(x_ind+(3*width),inland_tpp,color=in_col,edgecolor='k',width=width,label='Inland PS',hatch='\\')
+ax[1].bar(x_ind+(4*width),p_yr_tp,color=ps_col,width=width,label='PS')
+#ax[1].bar(x_ind+(3*width),p_yr_tp,bottom=inland_tpp,color=ps_col,width=width,label='PS')
+
 ax[1].set_xticks([width,1+width,2+width,3+width,4+width,5+width,6+width,7+width])
 ax[1].set_xticklabels(regions)
+
+tsize = 9
+ax[0].text(x_ind[1]+(3*width),150,'N/A',fontsize=tsize,horizontalalignment='center',verticalalignment='center')
+ax[0].text(x_ind[6]+(3*width),150,'N/A',fontsize=tsize,horizontalalignment='center',verticalalignment='center')
+ax[1].text(x_ind[1]+(3*width),20,'N/A',fontsize=tsize,horizontalalignment='center',verticalalignment='center')
+ax[1].text(x_ind[6]+(3*width),20,'N/A',fontsize=tsize,horizontalalignment='center',verticalalignment='center')
 
 #ax.legend().set_visible(False)
 
@@ -725,10 +750,11 @@ ax[1].set_xlabel('Region',fontsize=axis_font)
 # set to log scale
 #if log_set == True:
 ax[0].set_yscale('log')
-ax[0].set_ybound(lower=1E4,upper=1E8)
+ax[0].set_ybound(lower=1E2,upper=1E8)
 ax[1].set_yscale('log')
-ax[1].set_ybound(lower=y1,upper=1E7)
+ax[1].set_ybound(lower=1E1,upper=1E7)
 
+'''
 ax[0].text(x_ind[0],p_yr_kg_tn[0]+1E6,format(np.floor(p_yr_kg_tn[0]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 ax[0].text(x_ind[1],p_yr_kg_tn[1]+1.5E5,format(np.floor(p_yr_kg_tn[1]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 ax[0].text(x_ind[2],p_yr_kg_tn[2]-1.25E7,format(np.floor(p_yr_kg_tn[2]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
@@ -773,9 +799,9 @@ ax[1].text(x_ind[4]+width,r_yr_kg_tp[4]+2E3,format(np.floor(r_yr_kg_tp[4]).astyp
 ax[1].text(x_ind[5]+width,r_yr_kg_tp[5]+2E4,format(np.floor(r_yr_kg_tp[5]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 ax[1].text(x_ind[6]+width,r_yr_kg_tp[6]+1E4,format(np.floor(r_yr_kg_tp[6]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
 ax[1].text(x_ind[7]+width,r_yr_kg_tp[7]+2E5,format(np.floor(r_yr_kg_tp[7]).astype(int),',d'),fontsize=12,rotation=90,horizontalalignment='center')
-
-ax[0].text(-.4,60000000,'a)',fontsize=20)
-ax[1].text(-.4,5000000,'b)',fontsize=20)
+'''
+#ax[0].text(-.4,60000000,'a)',fontsize=20)
+#ax[1].text(-.4,5000000,'b)',fontsize=20)
 #ax[0].text(x_ind[7]+(2*width),60000000,'a)',fontsize=18)
 #ax[1].text(x_ind[7]+(2*width),5000000,'b)',fontsize=18)
 fig.subplots_adjust(hspace=0.1)

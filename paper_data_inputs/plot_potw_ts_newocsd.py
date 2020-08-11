@@ -177,23 +177,31 @@ fig.savefig(savename_major_flux,bbox_inches='tight')
 # fluxes only, TN and TP
 savename_major_flux = fig_path+'major_potw_ts_tptn_newocsd.pdf'
 
+#convert to kg/month
+s_to_d = 86400
+d_to_mo = 30
+mmol_to_mol = 1./1000
+g_to_kg = 1./1000
+g_N = 14
+
 fig,axes = plt.subplots(3,1,sharex=True,figsize=[figw,figh+7])
 for p_i in range(len(major_names)):
     axes.flat[0].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
-    axes.flat[1].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i]*major_tn[ind_1997:ind_2010,p_i,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
-    axes.flat[2].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i]*major_tp[ind_1997:ind_2010,p_i,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[1].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i]*major_tn[ind_1997:ind_2010,p_i,p_i]*s_to_d*d_to_mo*mmol_to_mol*g_to_kg*g_N,linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[2].plot(major_time_dt[ind_1997:ind_2010],major_flo[ind_1997:ind_2010,p_i,p_i]*major_tp[ind_1997:ind_2010,p_i,p_i]*s_to_d*d_to_mo*mmol_to_mol*g_to_kg*g_N,linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
 
 axes.flat[0].set_ybound(lower=0)
 axes.flat[1].set_ybound(lower=0)
 axes.flat[2].set_ybound(lower=0)
 axes.flat[0].set_ylabel('Volume Flux\n m$^3$ s$^{-1}$',fontsize=axis_font)
-axes.flat[1].set_ylabel('Total N Flux\n mmol s$^{-1}$',fontsize=axis_font)
-axes.flat[2].set_ylabel('Total P Flux\n mmol s$^{-1}$',fontsize=axis_font)
+axes.flat[1].set_ylabel('Total N Flux\n kg month$^{-1}$',fontsize=axis_font)
+axes.flat[2].set_ylabel('Total P Flux\n kg month$^{-1}$',fontsize=axis_font)
 axes.flat[0].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 axes.flat[1].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 axes.flat[2].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 #axes.flat[0].legend(loc='best',fontsize=axis_tick_font,bbox_to_anchor=[1.,1],handlelength=3)
 axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
+fig.subplots_adjust(hspace=0.08)
 #loc = mtick.MultipleLocator(base=50000) 
 #axes.flat[3].yaxis.set_major_locator(loc)
 fig.savefig(savename_major_flux,bbox_inches='tight')

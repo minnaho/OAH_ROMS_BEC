@@ -64,8 +64,6 @@ mask_nc[mask_nc==0.0] = np.nan
 lat_nc = np.array(grid_nc.variables['lat_rho'])
 lon_nc = np.array(grid_nc.variables['lon_rho'])
 
-lat_mean = np.mean(lat_nc)
-lon_mean = np.mean(lon_nc)
 
 lat_min = 32.4
 lat_max = 34.6
@@ -90,13 +88,14 @@ fig_h = 12
 colormaps = [cmocean.cm.thermal,cmocean.cm.thermal,cmocean.cm.thermal,cmocean.cm.thermal,cmocean.cm.thermal,cmocean.cm.thermal,cmocean.cm.thermal]
 
 fig,ax = plt.subplots(1,1,figsize=[fig_w,fig_h],subplot_kw=dict(projection=ccrs.PlateCarree()))
+
 # plot region masks
 for m_i in range(len(all_regions)):
     ax.contourf(lon_nc,lat_nc,all_regions[m_i],transform=ccrs.PlateCarree(),cmap=colormaps[m_i],vmin=0,vmax=7)
 
 # plot MPA masks
-#for m_i in range(len(all_mpas)):
-#    ax.contour(lon_nc,lat_nc,all_mpas[m_i],levels=1,colors='lightslategrey',linewidths=2,transform=ccrs.PlateCarree())
+for m_i in range(len(all_mpas)):
+    ax.contour(lon_nc,lat_nc,all_mpas[m_i],levels=1,colors='lightslategrey',linewidths=2,transform=ccrs.PlateCarree())
 
 ax.set_extent(extent)
 gl = ax.gridlines(draw_labels=True,linestyle='--')
