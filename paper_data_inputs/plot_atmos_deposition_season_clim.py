@@ -21,8 +21,8 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 ####################
 save_figs_path = './figs/'
 
-setting = 'cal'
-#setting = 'bight'
+#setting = 'cal'
+setting = 'bight'
 
 ##################################
 # load atmospheric deposition data
