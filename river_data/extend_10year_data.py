@@ -7,13 +7,14 @@ import datetime as datetime
 import time
 
 # read in 2007-2010 river data
+fol = './usgs_rivers/'
 order_files = ['monthly_flow_2007_2010_san_juan_creek.txt','monthly_flow_2007_2010_san_jose_creek.txt','monthly_flow_2007_2010_san_diego_river.txt','monthly_flow_2007_2010_atascadero_creek.txt','monthly_flow_2007_2010_santa_margarita.txt','monthly_flow_2007_2010_santa_clara.txt','monthly_flow_2007_2010_los_penasquitos_lagoon.txt','monthly_flow_2007_2010_ventura_river.txt','monthly_flow_2007_2010_calleguas_creek.txt']
 
 # 48 for 4 years of data 
 ft3_to_m3 = 0.02831685
 usgs_rivs = np.empty((len(order_files),48))
 for f_i in range(len(order_files)):
-    usgs_rivs[f_i] = pd.read_csv(order_files[f_i],header=None,sep='\t',comment='#')[6][2:].astype(float)*ft3_to_m3
+    usgs_rivs[f_i] = pd.read_csv(fol+order_files[f_i],header=None,sep='\t',comment='#')[6][2:].astype(float)*ft3_to_m3
 
 # timeperiod
 date_months_pd = pd.date_range(start='1997-01-01',end='2010-12-01',freq='MS')

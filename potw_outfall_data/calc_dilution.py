@@ -12,7 +12,7 @@ time_dt = num2date(np.array(time_all),time_all.units)
 h_w = .25/9 # horizontal weight
 v_w = 0.23 # vertical weight
 split = 0.5 # how is flow split into diffusers
-vol = 108900
+vol = 108900 # 300 * 300
 dt = 30
 
 n_conv = 14./1000

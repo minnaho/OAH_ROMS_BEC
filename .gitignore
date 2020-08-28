@@ -150,6 +150,7 @@ miniconda2/
 *.dat
 *.mat
 *.gz
+*.npy
 
 # image, pdf, text, etc
 *.pdf
@@ -158,6 +159,7 @@ miniconda2/
 *.mp4
 *.txt
 *.in
+*.wmv
 
 # fortran
 *.o

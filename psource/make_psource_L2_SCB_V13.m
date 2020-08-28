@@ -43,14 +43,13 @@
 clear all;
 close all;
 addpath(genpath('/data/project3/kesf/tools_matlab/'))
-addpath('/data/project3/kesf/tools_roms/B2B/packages')
+%addpath('/data/project3/kesf/tools_roms/B2B/packages')
 
 psrc_title='point source for the southern California Bight L2 300-m grid';
-%psrc_fname='roms_psource_V2.nc';
-psrc_fname='roms_psource_032020.nc';
+psrc_fname='roms_psource_newocsd.nc';
 
 % input files
-grdname = '/data/project4/kesf/ROMS/L2_SCB/grid_3/roms_grd.nc';
+grdname = '/data/project5/kesf/ROMS/L2_SCB/roms_grd.nc';
 load_grid_L2_SCB
 % max monthly-mean discharge of Abukuma River is 212.2469 m3/s.
 % qave=40;	% m3/s.  ==> crudely assumed that discharge from minor rivers
@@ -59,7 +58,7 @@ load_grid_L2_SCB
 % number of passive tracers (must be >= 2, including T and S)
 %Npas=36; % all tracers		% 4: T, S, sand, silt
 % from a random file
-par_file = '/data/project3/kesf/ROMS/USSW1/DAILY/ussw1_avg.Y2000M01D01.nc'
+par_file = '/data/project5/kesf/ROMS/USSW1/daily/ussw1_avg.Y2000M01D01.nc'
 [varnames_bgc,longnames_bgc,units_bgc,varnames_bgc_or] = det_bgc_tracers(par_file);
 varnames_bgc = ['temp','salt',varnames_bgc] ;
 varnames_bgc = varnames_bgc([1 2 3 4 6 7 8 9 10 11 24 26 27]); % 'temp'    'salt'    'PO4'    'NO3'    'NH4'    'Fe'    'Alk'    'DOC'    'DON'    'DOP'    'NO2'
@@ -77,7 +76,8 @@ psunit=units_bgc([1 2 3 4 6 8 9 7 10 11 24 26 27]) ;
 %%%%%%%%%%%%%%
 disp('MAJOR POTW ... ')
 %% DEFINE THE TIME
-ptime = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','time')+datenum(1970,1,1); % 
+f_majoro_name = '/data/project1/minnaho/potw_outfall_data/major_potw_data_newocsd.nc';
+ptime = ncread(f_majoro_name,'time')+datenum(1970,1,1); % 
 time = ptime  - datenum(1994,1,1) ;
 time_t = find(time>0); 
 test_t = find(ptime>=datenum(1997,1,1)) ; datestart = test_t(1) ;
@@ -86,23 +86,23 @@ sz_psrc_time = size(psrc_time,1) ;
 
 % test: tutu = psrc_time/86400 + datenum(1994,1,1)
 % datestr(time(289)/86400 + datenum(1994,1,1) ) = 02-Jan-1994
-pflow = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','flow'); % m3/s
-pNO3 = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','NO3'); % 
-pNH4 = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','NH4');
-pNO2 = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','NO2');
-pPO4 = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','PO4');
-pFe = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','Fe');
-pSO2 = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','SO2');
-palkalinity = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','alkalinity');
-ppH = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','pH');
-psulfate = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','sulfate');
-pBOD = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','BOD');
-pTOC = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','TOC');
-pON = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','ON');
-pOP = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','OP');
-pO2 = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','dissolved_oxygen');
-psalt = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','salinity');
-ptemp = ncread('/data/project1/minnaho/potw_outfall_data/major_potw_data.nc','temperature');
+pflow = ncread(f_majoro_name,'flow'); % m3/s
+pNO3 = ncread(f_majoro_name,'NO3'); % 
+pNH4 = ncread(f_majoro_name,'NH4');
+pNO2 = ncread(f_majoro_name,'NO2');
+pPO4 = ncread(f_majoro_name,'PO4');
+pFe = ncread(f_majoro_name,'Fe');
+pSO2 = ncread(f_majoro_name,'SO2');
+palkalinity = ncread(f_majoro_name,'alkalinity');
+ppH = ncread(f_majoro_name,'pH');
+psulfate = ncread(f_majoro_name,'sulfate');
+pBOD = ncread(f_majoro_name,'BOD');
+pTOC = ncread(f_majoro_name,'TOC');
+pON = ncread(f_majoro_name,'ON');
+pOP = ncread(f_majoro_name,'OP');
+pO2 = ncread(f_majoro_name,'dissolved_oxygen');
+psalt = ncread(f_majoro_name,'salinity');
+ptemp = ncread(f_majoro_name,'temperature');
 
 dodic=1;
 for i=1:4 % (POTWs)
@@ -467,18 +467,19 @@ Dsrc1 = ones(psNOW,1) .* 2 ;
 %======================================================
 %% PART 2
 disp('Minor POTW ... ')
-pflow = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','flow'); % m3/s
-pNO3 = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','NO3'); %
-pNH4 = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','NH4'); % 
-pNO2 = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','NO2'); %
-pPO4 = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','PO4'); %
-palkalinity = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','alkalinity'); %
-pph = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','pH'); %
-ptoc =  ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','TOC'); %
-ptemp =  ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','temperature'); %
+f_minoro_name = '/data/project1/minnaho/potw_outfall_data/minor_potw_data_new.nc';
+pflow = ncread(f_minoro_name,'flow'); % m3/s
+pNO3 = ncread(f_minoro_name,'NO3'); %
+pNH4 = ncread(f_minoro_name,'NH4'); % 
+pNO2 = ncread(f_minoro_name,'NO2'); %
+pPO4 = ncread(f_minoro_name,'PO4'); %
+palkalinity = ncread(f_minoro_name,'alkalinity'); %
+pph = ncread(f_minoro_name,'pH'); %
+ptoc =  ncread(f_minoro_name,'TOC'); %
+ptemp =  ncread(f_minoro_name,'temperature'); %
 
 %% DEFINE THE TIME
-ptime = ncread('/data/project1/minnaho/potw_outfall_data/minor_potw_data.nc','time'); %
+ptime = ncread(f_minoro_name,'time'); %
 time = ptime  + datenum(1997,1,1) ;
 test_t = find(time>=datenum(1997,1,1)) ;
 

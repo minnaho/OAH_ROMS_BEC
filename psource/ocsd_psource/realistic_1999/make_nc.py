@@ -1,58 +1,48 @@
 from netCDF4 import Dataset
 import numpy as np
 
-file_path = '/data/project1/minnaho/psource/freshwater_nutrients/roms_psource.nc'
-file_path_out = '/data/project1/minnaho/psource/freshwater_nutrients/roms_psource_freshwater.nc'
+file_path = '/data/project1/minnaho/psource/roms_psource_newocsd.nc'
+file_path_out = 'roms_psource_ocsd_realistic1999.nc'
 file_nc = Dataset(file_path,'r')
 
-# end psources before rivers to exclude rivers
-end_ind = 96
+ocsd_in = range(56,69+1) # ocsd indices are 56-69
+ocsd_st = 56
+ocsd_en = 69+1
 
 psource_time_nc   = np.array(file_nc.variables['psrc_time'][:])
-Qbar_nc   = np.array(file_nc.variables['Qbar'][:end_ind,:])
-Qshape_nc = np.array(file_nc.variables['Qshape'][:,:end_ind])
+Qbar_nc   = np.array(file_nc.variables['Qbar'][ocsd_st:ocsd_en,:])
+Qshape_nc = np.array(file_nc.variables['Qshape'][:,ocsd_st:ocsd_en])
                                                    
-Isrc_nc   = np.array(file_nc.variables['Isrc'][:end_ind])
-Jsrc_nc   = np.array(file_nc.variables['Jsrc'][:end_ind])
-Dsrc_nc   = np.array(file_nc.variables['Dsrc'][:end_ind])
-Lsrc_nc   = np.array(file_nc.variables['Lsrc'][:,:end_ind])
+Isrc_nc   = np.array(file_nc.variables['Isrc'][ocsd_st:ocsd_en])
+Jsrc_nc   = np.array(file_nc.variables['Jsrc'][ocsd_st:ocsd_en])
+Dsrc_nc   = np.array(file_nc.variables['Dsrc'][ocsd_st:ocsd_en])
+Lsrc_nc   = np.array(file_nc.variables['Lsrc'][:,ocsd_st:ocsd_en])
 
-temp_nc   = np.array(file_nc.variables['temp'][:end_ind,:])
-salt_nc   = np.array(file_nc.variables['salt'][:end_ind,:])
-
-PO4_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-PO4_nc.fill(0)
-NO3_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-NO3_nc.fill(0)
-NH4_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-NH4_nc.fill(0)
-Fe_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-Fe_nc.fill(0)
-O2_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-O2_nc.fill(0)
-DIC_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-DIC_nc.fill(0)
-Alk_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-Alk_nc.fill(0)
-DOC_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-DOC_nc.fill(0)
-DON_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-DON_nc.fill(0)
-DOP_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-DOP_nc.fill(0)
-NO2_nc = np.empty((temp_nc.shape[0],temp_nc.shape[1]))
-NO2_nc.fill(0)
+temp_nc   = np.array(file_nc.variables['temp'][ocsd_st:ocsd_en,:])
+salt_nc   = np.array(file_nc.variables['salt'][ocsd_st:ocsd_en,:])
+PO4_nc   = np.array(file_nc.variables['PO4'][ocsd_st:ocsd_en,:])
+NO3_nc   = np.array(file_nc.variables['NO3'][ocsd_st:ocsd_en,:])
+NH4_nc   = np.array(file_nc.variables['NH4'][ocsd_st:ocsd_en,:])
+Fe_nc   = np.array(file_nc.variables['Fe'][ocsd_st:ocsd_en,:])
+O2_nc   = np.array(file_nc.variables['O2'][ocsd_st:ocsd_en,:])
+DIC_nc   = np.array(file_nc.variables['DIC'][ocsd_st:ocsd_en,:])
+Alk_nc   = np.array(file_nc.variables['Alk'][ocsd_st:ocsd_en,:])
+DOC_nc   = np.array(file_nc.variables['DOC'][ocsd_st:ocsd_en,:])
+DON_nc   = np.array(file_nc.variables['DON'][ocsd_st:ocsd_en,:])
+DOP_nc   = np.array(file_nc.variables['DOP'][ocsd_st:ocsd_en,:])
+NO2_nc   = np.array(file_nc.variables['NO2'][ocsd_st:ocsd_en,:])
 
 # make new netcdf
 
 file_out = Dataset(file_path_out,'w')
+file_out.title = 'psource file of just OCSD inputs for realistic 1999 run'
 Nsrc_dim = file_out.createDimension('Nsrc',Qbar_nc.shape[0])
 Npas_dim = file_out.createDimension('Npas',Lsrc_nc.shape[0])
 s_rho_dim = file_out.createDimension('s_rho',Qshape_nc.shape[0])
 psrc_time_dim = file_out.createDimension('psrc_time',psource_time_nc.shape[0])
 
 psrc_time_var = file_out.createVariable('psrc_time','float64',('psrc_time'))
-psrc_time_var.units = 's'
+psrc_time_var.units = 'days since 1994-01-01'
 psrc_time_var.longname = 'point source time from 1994-1-1'
 psrc_time_var[:] = psource_time_nc
 
