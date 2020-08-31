@@ -2,7 +2,7 @@ from netCDF4 import Dataset
 import numpy as np
 
 file_path = '/data/project1/minnaho/psource/roms_psource_newocsd.nc'
-file_path_out = 'roms_psource_ocsd_realistic1999.nc'
+file_path_out = 'roms_psource_ocsd_realistic_1999_2008.nc'
 file_nc = Dataset(file_path,'r')
 
 ocsd_in = range(56,69+1) # ocsd indices are 56-69
