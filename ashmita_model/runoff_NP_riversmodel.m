@@ -75,23 +75,6 @@ other = data_surf(:,8) ;
 water = data_surf(:,9) ;
 
 coef = load([rep_data,'Coef.txt']) ;
-%coord = load([rep_data,'coordinates_river_mouths.txt']) ;
-
-%lon = coord(:,3) ;
-%lat = coord(:,2) ;
-%id_rivers = coord(:,1) ;
-
-% %% read the mean annual runoff data
-% data_runoff = load([rep_data,'Runoff-rec2.txt']) ;
-% index_runoff = data_runoff(1,4:end) ;
-% data_runoff2 = data_runoff(2:end ,4:end) ;
-
-%%
-% R(:,i) = ag(num(1)).*run.* coef(1) + com(num(1)).*run.* coef(2) + ind(num(1)).*run.* coef(3) +...
-%     open(num(1)).*run.* coef(4) + res(num(1)).*run.* coef(5) + other(num(1)).*run.* coef(6) + ...
-%     + water(num(1)).*run.* coef(7);
-% 
-%% name and position and name of rivers where BGD data are available
 
 name{1} = 'Agua Hedionda' ;
 name{2} = 'Arroyo Trabuco' ;
@@ -255,11 +238,6 @@ for num=1:size(riv_index)
     runoff_BGC_vec(2:length(R_gr_num_bis)+1,num+1) = R_gr_num_bis ;
 end
 
-% test
-% figure
-% hold on
-% plot( R_gr_num_bis(:) ,'r')
-% plot( R_gr_num(:) ,'b')
 
 %%  Nutrients
 %%%%%%%%%%%%
