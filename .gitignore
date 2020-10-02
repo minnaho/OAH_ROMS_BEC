@@ -151,6 +151,7 @@ miniconda2/
 *.mat
 *.gz
 *.npy
+*.hbn
 
 # image, pdf, text, etc
 *.pdf

@@ -58,11 +58,13 @@ for n_i in range(len(rain_files)):
 ##################################################
 ppt = pd.read_csv(rain_files[0],header=None,skiprows=11) # read file
 river_ts = np.empty((ppt[0].shape[0],len(rain_files)))
+river_num = np.empty((len(rain_files)))
 for r_i in range(len(rain_files)):
     print('river '+str(r_i)+' of '+str(len(rain_files)))
     ppt = pd.read_csv(rain_files[r_i],header=None,skiprows=11) # read file
     precip = np.array(ppt[1])*(1./1000) # precipitation convert mm to m
     wnum = ppt[2][0] # watershed number
+    river_num[r_i] = wnum
     # two columns of potential watershed numbers, 
     # try the one with more unique values first
     try:
@@ -99,6 +101,6 @@ for r_i in range(len(rain_files)):
 ###################
 savepath = '/data/project1/minnaho/river_data/updated_2013_2017/rational_method_rivers/runoff_model_output/'
 for n_i in range(len(names)):
-    riv_df = pd.DataFrame({'date':ppt[0],'flow m3/s':river_ts[:,n_i]},index=None)
+    riv_df = pd.DataFrame({'date':ppt[0],'flow m3/s':river_ts[:,n_i],'watershed number':river_num[n_i]},index=None)
     riv_df.to_csv(savepath+names[n_i]+'_2007_2018.csv')
                  
