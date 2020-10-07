@@ -152,11 +152,11 @@ g_to_kg = 1./1000
 g_N = 14
 
 #r10 = Dataset('../river_data/south_coast_rivers_10_years_monthly_new.nc','r')
-r10 = Dataset('../river_data/south_coast_rivers_updated_14_years_1997_2010_monthly.nc','r')
-r24 = Dataset('../river_data/south_coast_rivers_24_years_monthly_new.nc','r')
+r10 = Dataset('../river_data/inputs_1997_2000/south_coast_rivers_updated_14_years_1997_2010_monthly.nc','r')
+r24 = Dataset('../river_data/inputs_1997_2000/south_coast_rivers_24_years_monthly_new.nc','r')
 
-river_names_10 = pickle.load(open('../river_data/river_names_10.pkl','rb'))
-river_names_24 = pickle.load(open('../river_data/river_names_24.pkl','rb'))
+river_names_10 = pickle.load(open('../river_data/inputs_1997_2000/river_names_10.pkl','rb'))
+river_names_24 = pickle.load(open('../river_data/inputs_1997_2000/river_names_24.pkl','rb'))
 
 flo10 = np.array(r10.variables['flow'])
 tn10 = np.array(r10.variables['total_nitrogen'])
