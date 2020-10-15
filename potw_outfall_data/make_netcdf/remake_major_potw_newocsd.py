@@ -1,12 +1,12 @@
-from netCDF4 import Dataset
+from netCDF4 import Dataset,num2date
 import numpy as np
 import pandas as pd
 
-oldf = Dataset('major_potw_data.nc','r')
+oldf = Dataset('../run_1997_2000/major_potw_data.nc','r')
 
-newf = Dataset('major_potw_data_newocsd.nc','w')
+newf = Dataset('../run_1997_2000/major_potw_data_newocsd.nc','w')
 
-ocsd_data = '/data/project1/minnaho/potw_outfall_data/OO10-OCSD _REvised 06052020.xlsx'
+ocsd_data = '/data/project1/minnaho/potw_outfall_data/run_1997_2000/OO10-OCSD _REvised 06052020.xlsx'
 ocsd_df = pd.read_excel(ocsd_data,header=None,sheet_name='Sheet1')
 # new NO3,NO2
 # is it actually mg/L, not kg/m3? makes more sense as mg/L
@@ -73,7 +73,10 @@ tim_v[:] = np.array(oldf.variables['time'][:])
 lat_v[:] = np.array(oldf.variables['latitude'][:])
 lon_v[:] = np.array(oldf.variables['longitude'][:])
 
-flow_v[:,:,:] = np.array(oldf.variables['flow'][:,:,:])
+# uk mgd to m3/s to us mgd to m3/s
+a = oldf.variables['flow'][:,:,:]
+a[a>1E10]=np.nan
+flow_v[:,:,:] = np.array(a)*19.005343053041333*0.043812636574074
 NO3_v[:,:,:] = np.array(oldf.variables['NO3'][:,:,:])
 NO3_v[:,2,2] = np.array(ocsd_no3)
 NH4_v[:,:,:] = np.array(oldf.variables['NH4'][:,:,:])
@@ -95,5 +98,37 @@ salt_v[:,:,:] = np.array(oldf.variables['salinity'][:,:,:])
 
 newf.title = 'Major Southern California Bight POTW (Hyperion, JWPCP, OCSD, PLWTP) interpolated data 1970-2014'
 newf.source = 'Dr. Martha Sutula from Southern California Coastal Water Research Project'
+
+writer = pd.ExcelWriter('major_potw_1970_2012.xlsx')
+
+rnames = ['HTP','JWPCP','OCSD','PLWTP']
+dates_py = num2date(np.array(oldf.variables['time'][:]),'days since 1970-12-31',only_use_python_datetimes=True)
+
+# print to excel file
+for p_i in range(4):
+    df = pd.DataFrame({'date':dates_py,
+    'flow m3/s':flow_v[:,p_i,p_i],
+    'NO3 mmol/m3':NO3_v[:,p_i,p_i],
+    'NH4 mmol/m3':NH4_v[:,p_i,p_i],
+    'NO2 mmol/m3':NO2_v[:,p_i,p_i],
+    'PO4 mmol/m3':PO4_v[:,p_i,p_i],
+    'Fe mmol/m3':Fe_v[:,p_i,p_i],
+    'SO2 mmol/m3':so2_v[:,p_i,p_i],
+    'BOD mmol/m3':BOD_v[:,p_i,p_i],
+    'TOC mmol/m3':TOC_v[:,p_i,p_i],
+    'ON mmol/m3':ON_v[:,p_i,p_i],
+    'OP mmol/m3':OP_v[:,p_i,p_i],
+    'Alk mmol/m3':alkalinity_v[:,p_i,p_i],
+    'pH':pH_v[:,p_i,p_i],
+    'SO4 mmol/m3':sulfate_v[:,p_i,p_i],
+    'temperature C':temperature_v[:,p_i,p_i],
+    'DO mmol/m3':do_v[:,p_i,p_i],
+    'salinity PSU':salt_v[:,p_i,p_i],
+    'latitude':lat_v[p_i],
+    'longitude':lon_v[p_i]},index=None,columns=None)
+    df.to_excel(writer,sheet_name=rnames[p_i])
+
+writer.save()
+
 
 newf.close()

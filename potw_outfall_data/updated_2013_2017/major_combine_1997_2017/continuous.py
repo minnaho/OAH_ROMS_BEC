@@ -17,43 +17,70 @@ maj_newp = '/data/project1/minnaho/potw_outfall_data/updated_2013_2017/major_com
 
 majfi = sorted(glob.glob(maj_newp+'*xlsx'))
 
-htp_up = pd.read_excel(majfi[0],sheet_name='formatted',header=None)
-jwp_up = pd.read_excel(majfi[1],sheet_name='formatted',header=None)
-ocs_up = pd.read_excel(majfi[2],sheet_name='formatted',header=None,skiprows=2)
-plw_up = pd.read_excel(majfi[3],sheet_name='formatted',header=None)
+# conversion
+convn = 14./1000 # mmol/m3 to mg/L
+convp = 30.97/1000 # mmol/m3 to kg/L
+convnf = (14.*86400)/1E6 # mmol/s to kg/d
+convpf = (30.97*86400)/1E6 # mmol/s to kg/d
+convv = 0.043812645072430365 # mgd to m3/s 
+conva = 3.78541178 # million gal/day * mg/L to kg/d
 
-htp_dt = np.array(pd.to_datetime(htp_up[0][1:]))
-jwp_dt = np.array(pd.to_datetime(jwp_up[0][1:]))
-ocs_dt = np.array(pd.to_datetime(ocs_up[0][1:]))
-plw_dt = np.array(pd.to_datetime(plw_up[0][1:]))
+htp_up = pd.read_excel(majfi[0],sheet_name='formatted',header=None,skiprows=1)
+jwp_up = pd.read_excel(majfi[1],sheet_name='formatted',header=None,skiprows=1)
+ocs_up = pd.read_excel(majfi[2],sheet_name='formatted',header=None,skiprows=3)
+plw_up = pd.read_excel(majfi[3],sheet_name='formatted',header=None,skiprows=1)
 
-htp_flo = np.array(htp_up[15][1:].astype(float))
-jwp_flo = np.array(jwp_up[1][1:].astype(float))
-ocs_flo = np.array(ocs_up[1][1:].astype(float))
-plw_flo = np.array(plw_up[10][1:].astype(float))
+htp_up.set_index(pd.to_datetime(htp_up[0]),inplace=True)
+htp_up.loc[pd.to_datetime('2007-01-01')] = htp_up.loc['2007-01-31']
+htp_up = htp_up.resample('D').interpolate()
+htp_up = htp_up.ffill()
+htp_up = htp_up.bfill()
 
-htp_nh4 = np.array(htp_up[9][1:].astype(float))
-jwp_nh4 = np.array(jwp_up[2][1:].astype(float))
-ocs_nh4 = np.array(ocs_up[17][1:].astype(float))
-plw_nh4 = np.array(plw_up[3][1:].astype(float))
+jwp_up.set_index(pd.to_datetime(jwp_up[0]),inplace=True)
+jwp_up.loc[pd.to_datetime('2007-01-01')] = jwp_up.loc['2007-01-31']
+jwp_up = jwp_up.resample('D').interpolate()
+jwp_up = jwp_up.ffill()
+jwp_up = jwp_up.bfill()
 
-htp_no3 = np.array(htp_up[6][1:].astype(float))
-jwp_no3 = np.array(jwp_up[19][1:].astype(float))
-ocs_no3 = np.array(ocs_up[18][1:].astype(float))
-plw_no3 = np.array(plw_up[5][1:].astype(float))
+ocs_up.set_index(pd.to_datetime(ocs_up[0]),inplace=True)
+ocs_up.loc[pd.to_datetime('2007-01-01')] = ocs_up.loc['2007-01-31']
+ocs_up = ocs_up.resample('D').interpolate()
+ocs_up = ocs_up.ffill()
+ocs_up = ocs_up.bfill()
 
-htp_no2 = np.array(htp_up[5][1:].astype(float))
-jwp_no2 = np.array(jwp_up[6][1:].astype(float))
+plw_up.set_index(pd.to_datetime(plw_up[0]),inplace=True)
+plw_up.loc[pd.to_datetime('2007-01-01')] = plw_up.loc['2007-01-31']
+plw_up = plw_up.resample('D').interpolate()
+plw_up = plw_up.ffill()
+plw_up = plw_up.bfill()
 
-htp_din = np.nansum((htp_nh4,htp_no3,htp_no2),axis=0)
-jwp_din = np.nansum((jwp_nh4,jwp_no3,jwp_no2),axis=0)
-ocs_din = np.nansum((ocs_nh4,ocs_no3),axis=0)
-plw_din = np.nansum((plw_nh4,plw_no3),axis=0)
+htp_flo = (htp_up[15].astype(float))*convv
+jwp_flo = (jwp_up[1].astype(float))*convv
+ocs_flo = (ocs_up[1].astype(float))*convv
+plw_flo = (plw_up[10].astype(float))*convv
 
-htp_din[htp_din==0] = np.nan
-jwp_din[jwp_din==0] = np.nan
-ocs_din[ocs_din==0] = np.nan
-plw_din[plw_din==0] = np.nan
+htp_nh4 = np.array(htp_up[9].astype(float))
+jwp_nh4 = np.array(jwp_up[2].astype(float))
+ocs_nh4 = np.array(ocs_up[17].astype(float))
+plw_nh4 = np.array(plw_up[3].astype(float))
+
+htp_no3 = np.array(htp_up[6].astype(float))
+jwp_no3 = np.array(jwp_up[19].astype(float))
+ocs_no3 = np.array(ocs_up[18].astype(float))
+plw_no3 = np.array(plw_up[5].astype(float))
+
+htp_no2 = np.array(htp_up[5].astype(float))
+jwp_no2 = np.array(jwp_up[6].astype(float))
+
+#htp_din = np.nansum((htp_nh4,htp_no3,htp_no2),axis=0)
+#jwp_din = np.nansum((jwp_nh4,jwp_no3,jwp_no2),axis=0)
+#ocs_din = np.nansum((ocs_nh4,ocs_no3),axis=0)
+#plw_din = np.nansum((plw_nh4,plw_no3),axis=0)
+
+#htp_din[htp_din==0] = np.nan
+#jwp_din[jwp_din==0] = np.nan
+#ocs_din[ocs_din==0] = np.nan
+#plw_din[plw_din==0] = np.nan
 
 # pandas dataframe with everything
 full_dt = pd.date_range(start='1997-01-01',end='2017-01-01')
@@ -170,22 +197,18 @@ df_old = pd.DataFrame({'date':major_time_dt[ind_1997:ind_2007],
 'ocs sal mmol/m3':major_sal[:,2,2],
 'plw sal mmol/m3':major_sal[:,3,3]})
 
-
 df_old.set_index(df_old['date'],inplace=True)
 df_old.loc[pd.to_datetime('1997-01-01')] = df_old.loc['1997-01-31']
-df_old.resample('D').bfill()
+df_old = df_old.resample('D').bfill()
+htp_flo = df_old['htp flo m3/s'].append(htp_flo)
+jwp_flo = df_old['jwp flo m3/s'].append(jwp_flo)
+ocs_flo = df_old['ocs flo m3/s'].append(ocs_flo)
+plw_flo = df_old['plw flo m3/s'].append(plw_flo)
+
+df_full_htp = pd.DataFrame({'date':htp_flo.index,'flow m3/s':htp_flo,},index=
 
 
 kg_to_g = 1000
 g_to_mol = 1./14
 mol_to_mmol = 1000
 mgL_to_mmolm3 = 1000./14
-
-# conversion
-convn = 14./1000 # mmol/m3 to mg/L
-convp = 30.97/1000 # mmol/m3 to kg/L
-convnf = (14.*86400)/1E6 # mmol/s to kg/d
-convpf = (30.97*86400)/1E6 # mmol/s to kg/d
-convv = 1./0.043812645072430365 # m3/s to mgd
-conva = 3.78541178 # million gal/day * mg/L to kg/d
-

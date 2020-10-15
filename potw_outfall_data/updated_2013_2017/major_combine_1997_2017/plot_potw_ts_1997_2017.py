@@ -12,7 +12,7 @@ import glob as glob
 # data paths
 major_path = '/data/project1/minnaho/potw_outfall_data/run_1997_2000/major_potw_data_newocsd.nc'
 minor_path = '/data/project1/minnaho/potw_outfall_data/run_1997_2000/minor_potw_data.nc'
-maj_newp = '/data/project1/minnaho/potw_outfall_data/updated_2013_2017/major_data_temp/'
+maj_newp = '/data/project1/minnaho/potw_outfall_data/updated_2013_2017/major_combine_1997_2017/'
 fig_path = './figs/'
 
 majfi = sorted(glob.glob(maj_newp+'*xlsx'))
