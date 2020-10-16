@@ -54,25 +54,28 @@ rinco_dail[3] = rinco_dail[3]/1000 # L/s to m3/s
 rinco_dail['2007':].to_csv('rincon_creek_daily_2007_2008.csv')
 
 # new river Bell Canyon
-bellc_hour = pd.read_excel(xl,sheet_name='BC02',header=None,skiprows=1,nrows=114342,usecols='C,E')
+bellc_hour = pd.read_excel(xl,sheet_name='BC02',header=None,skiprows=1,nrows=114342,usecols='C,E,F')
 bellc_hour.set_index(pd.to_datetime(bellc_hour[2]),inplace=True)
 bellc_dail = bellc_hour.resample('D').mean()
 bellc_dail[4][bellc_dail[4]<0]=np.nan
+bellc_dail[5][bellc_dail[5]<0]=np.nan
 bellc_dail[4] = bellc_dail[4]/1000 # L/s to m3/s
 bellc_dail['2007':'2017'].to_csv('bell_canyon_daily_2007_2018.csv')
 
 # new river Arroyo Honda
-honda_hour = pd.read_excel(xl,sheet_name='HO00',header=None,skiprows=1,nrows=122411,usecols='C,E')
+honda_hour = pd.read_excel(xl,sheet_name='HO00',header=None,skiprows=1,nrows=122411,usecols='C,E,F')
 honda_hour.set_index(pd.to_datetime(honda_hour[2]),inplace=True)
 honda_dail = honda_hour.resample('D').mean()
 honda_dail[4][honda_dail[4]<0]=np.nan
+honda_dail[5][honda_dail[5]<0]=np.nan
 honda_dail[4] = honda_dail[4]/1000 # L/s to m3/s
 honda_dail['2007':'2017'].to_csv('arroyo_honda_creek_daily_2007_2018.csv')
 
 # new river Refugio Creek
-refug_hour = pd.read_excel(xl,sheet_name='RG01',header=None,skiprows=1,nrows=131169,usecols='C,E')
+refug_hour = pd.read_excel(xl,sheet_name='RG01',header=None,skiprows=1,nrows=131169,usecols='C,E,F')
 refug_hour.set_index(pd.to_datetime(refug_hour[2]),inplace=True)
 refug_dail = refug_hour.resample('D').mean()
 refug_dail[4][refug_dail[4]<0]=np.nan
+refug_dail[5][refug_dail[5]<0]=np.nan
 refug_dail[4] = refug_dail[4]/1000 # L/s to m3/s
 refug_dail['2007':'2017'].to_csv('refugio_creek_daily_2007_2018.csv')
