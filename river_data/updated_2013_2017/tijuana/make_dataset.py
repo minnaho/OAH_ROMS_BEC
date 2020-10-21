@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 # flow gauge
-gauge_csv = pd.read_csv('Tijuana_River_gauge_IBWC_2007_2018.csv',skiprows=2,header=None)
+gauge_csv = pd.read_csv('tijuana_river_gauge_1997_2018.csv',skiprows=2,header=None)
 form = '%m/%d/%Y %H:%M'
 dates = pd.to_datetime(gauge_csv[0],format=form).dt.date
 gauge_csv.set_index(dates,inplace=True)

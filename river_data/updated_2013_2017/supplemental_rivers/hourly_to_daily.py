@@ -60,7 +60,7 @@ bellc_dail = bellc_hour.resample('D').mean()
 bellc_dail[4][bellc_dail[4]<0]=np.nan
 bellc_dail[5][bellc_dail[5]<0]=np.nan
 bellc_dail[4] = bellc_dail[4]/1000 # L/s to m3/s
-bellc_dail['2007':'2017'].to_csv('bell_canyon_daily_2007_2018.csv')
+bellc_dail['2001':'2017'].to_csv('bell_canyon_daily_2004_2018.csv')
 
 # new river Arroyo Honda
 honda_hour = pd.read_excel(xl,sheet_name='HO00',header=None,skiprows=1,nrows=122411,usecols='C,E,F')
@@ -69,7 +69,7 @@ honda_dail = honda_hour.resample('D').mean()
 honda_dail[4][honda_dail[4]<0]=np.nan
 honda_dail[5][honda_dail[5]<0]=np.nan
 honda_dail[4] = honda_dail[4]/1000 # L/s to m3/s
-honda_dail['2007':'2017'].to_csv('arroyo_honda_creek_daily_2007_2018.csv')
+honda_dail['2001':'2017'].to_csv('arroyo_honda_creek_daily_2001_2018.csv')
 
 # new river Refugio Creek
 refug_hour = pd.read_excel(xl,sheet_name='RG01',header=None,skiprows=1,nrows=131169,usecols='C,E,F')
@@ -78,4 +78,4 @@ refug_dail = refug_hour.resample('D').mean()
 refug_dail[4][refug_dail[4]<0]=np.nan
 refug_dail[5][refug_dail[5]<0]=np.nan
 refug_dail[4] = refug_dail[4]/1000 # L/s to m3/s
-refug_dail['2007':'2017'].to_csv('refugio_creek_daily_2007_2018.csv')
+refug_dail['2001':'2017'].to_csv('refugio_creek_daily_2001_2018.csv')

@@ -195,6 +195,7 @@ for f_i in range(len(fnames)):
     dat_fi.loc['1999-10-31'] = dat_fi.loc['2000-10-31']
     dat_fi.loc['1999-11-30'] = dat_fi.loc['2000-11-30']
     dat_fi.loc['1999-12-31'] = dat_fi.loc['2000-12-31']
+
     if fnames[f_i] not in exceptions:
         # linearly interpolate by month
         int01 = np.linspace(dat_fi.loc['2000-01-31'].astype(float),dat_fi.loc['2007-01-31'].astype(float),6)[0][0]
@@ -345,6 +346,7 @@ for f_i in range(len(fnames)):
     dat_fi = dat_fi.resample('D').bfill()
     dat_fi = dat_fi.resample('D').ffill()
 
+    # have to repeat for some reason
     dat_fi.loc['1997-01-01'] = dat_fi.loc['2000-01-31']
     dat_fi.loc['1997-01-31'] = dat_fi.loc['2000-01-31']
     dat_fi.loc['1997-02-28'] = dat_fi.loc['2000-02-29']
@@ -384,6 +386,137 @@ for f_i in range(len(fnames)):
     dat_fi.loc['1999-10-31'] = dat_fi.loc['2000-10-31']
     dat_fi.loc['1999-11-30'] = dat_fi.loc['2000-11-30']
     dat_fi.loc['1999-12-31'] = dat_fi.loc['2000-12-31']
+    # have to repeat for some reason
+    if fnames[f_i] not in exceptions:
+        dat_fi.loc['2001-01-31'] = int01[0]
+        dat_fi.loc['2002-01-31'] = int01[1]
+        dat_fi.loc['2003-01-31'] = int01[2]
+        dat_fi.loc['2004-01-31'] = int01[3]
+        dat_fi.loc['2005-01-31'] = int01[4]
+        dat_fi.loc['2006-01-31'] = int01[5]
+
+        dat_fi.loc['2001-02-28'] = int02[0]
+        dat_fi.loc['2002-02-28'] = int02[1]
+        dat_fi.loc['2003-02-28'] = int02[2]
+        dat_fi.loc['2004-02-28'] = int02[3]
+        dat_fi.loc['2005-02-28'] = int02[4]
+        dat_fi.loc['2006-02-28'] = int02[5]
+
+        dat_fi.loc['2001-03-31'] = int03[0]
+        dat_fi.loc['2002-03-31'] = int03[1]
+        dat_fi.loc['2003-03-31'] = int03[2]
+        dat_fi.loc['2004-03-31'] = int03[3]
+        dat_fi.loc['2005-03-31'] = int03[4]
+        dat_fi.loc['2006-03-31'] = int03[5]
+
+        dat_fi.loc['2001-04-30'] = int04[0]
+        dat_fi.loc['2002-04-30'] = int04[1]
+        dat_fi.loc['2003-04-30'] = int04[2]
+        dat_fi.loc['2004-04-30'] = int04[3]
+        dat_fi.loc['2005-04-30'] = int04[4]
+        dat_fi.loc['2006-04-30'] = int04[5]
+
+        dat_fi.loc['2001-05-31'] = int05[0]
+        dat_fi.loc['2002-05-31'] = int05[1]
+        dat_fi.loc['2003-05-31'] = int05[2]
+        dat_fi.loc['2004-05-31'] = int05[3]
+        dat_fi.loc['2005-05-31'] = int05[4]
+        dat_fi.loc['2006-05-31'] = int05[5]
+
+        dat_fi.loc['2001-06-30'] = int06[0]
+        dat_fi.loc['2002-06-30'] = int06[1]
+        dat_fi.loc['2003-06-30'] = int06[2]
+        dat_fi.loc['2004-06-30'] = int06[3]
+        dat_fi.loc['2005-06-30'] = int06[4]
+        dat_fi.loc['2006-06-30'] = int06[5]
+
+        dat_fi.loc['2001-07-31'] = int07[0]
+        dat_fi.loc['2002-07-31'] = int07[1]
+        dat_fi.loc['2003-07-31'] = int07[2]
+        dat_fi.loc['2004-07-31'] = int07[3]
+        dat_fi.loc['2005-07-31'] = int07[4]
+        dat_fi.loc['2006-07-31'] = int07[5]
+
+        dat_fi.loc['2001-08-31'] = int08[0]
+        dat_fi.loc['2002-08-31'] = int08[1]
+        dat_fi.loc['2003-08-31'] = int08[2]
+        dat_fi.loc['2004-08-31'] = int08[3]
+        dat_fi.loc['2005-08-31'] = int08[4]
+        dat_fi.loc['2006-08-31'] = int08[5]
+
+        dat_fi.loc['2001-09-30'] = int09[0]
+        dat_fi.loc['2002-09-30'] = int09[1]
+        dat_fi.loc['2003-09-30'] = int09[2]
+        dat_fi.loc['2004-09-30'] = int09[3]
+        dat_fi.loc['2005-09-30'] = int09[4]
+        dat_fi.loc['2006-09-30'] = int09[5]
+
+        dat_fi.loc['2001-10-31'] = int10[0]
+        dat_fi.loc['2002-10-31'] = int10[1]
+        dat_fi.loc['2003-10-31'] = int10[2]
+        dat_fi.loc['2004-10-31'] = int10[3]
+        dat_fi.loc['2005-10-31'] = int10[4]
+        dat_fi.loc['2006-10-31'] = int10[5]
+
+        dat_fi.loc['2001-11-30'] = int11[0]
+        dat_fi.loc['2002-11-30'] = int11[1]
+        dat_fi.loc['2003-11-30'] = int11[2]
+        dat_fi.loc['2004-11-30'] = int11[3]
+        dat_fi.loc['2005-11-30'] = int11[4]
+        dat_fi.loc['2006-11-30'] = int11[5]
+
+        dat_fi.loc['2001-12-31'] = int12[0]
+        dat_fi.loc['2002-12-31'] = int12[1]
+        dat_fi.loc['2003-12-31'] = int12[2]
+        dat_fi.loc['2004-12-31'] = int12[3]
+        dat_fi.loc['2005-12-31'] = int12[4]
+        dat_fi.loc['2006-12-31'] = int12[5]
+
+    if fnames[f_i] in exceptions:
+        if fnames[f_i] == 'HaleAveResource' or fnames[f_i] == 'OceansideOceanOutfall':
+            for y_i in range(2001,2007):
+                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
+                dat_fi.loc[str(y_i)+'-02-28'] = dat_fi.loc['2007-02-28']
+                dat_fi.loc[str(y_i)+'-03-31'] = dat_fi.loc['2007-03-31']
+                dat_fi.loc[str(y_i)+'-04-30'] = dat_fi.loc['2007-04-30']
+                dat_fi.loc[str(y_i)+'-05-31'] = dat_fi.loc['2007-05-31']
+                dat_fi.loc[str(y_i)+'-06-30'] = dat_fi.loc['2007-06-30']
+                dat_fi.loc[str(y_i)+'-07-31'] = dat_fi.loc['2007-07-31']
+                dat_fi.loc[str(y_i)+'-08-31'] = dat_fi.loc['2007-08-31']
+                dat_fi.loc[str(y_i)+'-09-30'] = dat_fi.loc['2007-09-30']
+                dat_fi.loc[str(y_i)+'-10-31'] = dat_fi.loc['2007-10-31']
+                dat_fi.loc[str(y_i)+'-11-30'] = dat_fi.loc['2007-11-30']
+                dat_fi.loc[str(y_i)+'-12-31'] = dat_fi.loc['2007-12-31']
+                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
+
+        if fnames[f_i] == 'SouthBayReclamation':
+            # set to 0 before 2002 - plant not online
+            dat_fi.loc['2001-01-31'] = dat_fi.loc['2000-01-31']
+            dat_fi.loc['2001-02-28'] = dat_fi.loc['2000-02-28']
+            dat_fi.loc['2001-03-31'] = dat_fi.loc['2000-03-31']
+            dat_fi.loc['2001-04-30'] = dat_fi.loc['2000-04-30']
+            dat_fi.loc['2001-05-31'] = dat_fi.loc['2000-05-31']
+            dat_fi.loc['2001-06-30'] = dat_fi.loc['2000-06-30']
+            dat_fi.loc['2001-07-31'] = dat_fi.loc['2000-07-31']
+            dat_fi.loc['2001-08-31'] = dat_fi.loc['2000-08-31']
+            dat_fi.loc['2001-09-30'] = dat_fi.loc['2000-09-30']
+            dat_fi.loc['2001-10-31'] = dat_fi.loc['2000-10-31']
+            dat_fi.loc['2001-11-30'] = dat_fi.loc['2000-11-30']
+            dat_fi.loc['2001-12-31'] = dat_fi.loc['2000-12-31']
+            for y_i in range(2002,2007):
+                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
+                dat_fi.loc[str(y_i)+'-02-28'] = dat_fi.loc['2007-02-28']
+                dat_fi.loc[str(y_i)+'-03-31'] = dat_fi.loc['2007-03-31']
+                dat_fi.loc[str(y_i)+'-04-30'] = dat_fi.loc['2007-04-30']
+                dat_fi.loc[str(y_i)+'-05-31'] = dat_fi.loc['2007-05-31']
+                dat_fi.loc[str(y_i)+'-06-30'] = dat_fi.loc['2007-06-30']
+                dat_fi.loc[str(y_i)+'-07-31'] = dat_fi.loc['2007-07-31']
+                dat_fi.loc[str(y_i)+'-08-31'] = dat_fi.loc['2007-08-31']
+                dat_fi.loc[str(y_i)+'-09-30'] = dat_fi.loc['2007-09-30']
+                dat_fi.loc[str(y_i)+'-10-31'] = dat_fi.loc['2007-10-31']
+                dat_fi.loc[str(y_i)+'-11-30'] = dat_fi.loc['2007-11-30']
+                dat_fi.loc[str(y_i)+'-12-31'] = dat_fi.loc['2007-12-31']
+                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
 
     dat_fi = dat_fi.interpolate()
     dat_fi = dat_fi.bfill()

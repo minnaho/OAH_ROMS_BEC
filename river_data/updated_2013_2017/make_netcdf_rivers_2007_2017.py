@@ -350,6 +350,79 @@ alk_arr = alk_arr*mg_l_c
 doo_arr = doo_arr*mg_l_o
 tic_arr = tic_arr*mg_l_c
 
+# time array
+timeunit = 'days since 2007-01-01'
+timenum = date2num(df.index.to_pydatetime()[:flo_arr.shape[0]],timeunit)
+
+# make netcdf
+ncf = Dataset('rivers_2007_2017.nc','w')
+
+tim_d = ncf.createDimension('time',None)
+loc_d = ncf.createDimension('location',lat_arr.shape[0]) # 75 rivers
+
+tim_v = ncf.createVariable('time',np.float32,('time'))
+lat_v = ncf.createVariable('latitude',np.float32,('location'))
+lon_v = ncf.createVariable('longitude',np.float32,('location'))
+flo_v = ncf.createVariable('flow',np.float64,('time','location'))
+nh4_v = ncf.createVariable('NH4',np.float64,('time','location'))
+no3_v = ncf.createVariable('NO3',np.float64,('time','location'))
+doo_v = ncf.createVariable('dissolved_oxygen',np.float64,('time','location'))
+tem_v = ncf.createVariable('temperature',np.float64,('time','location'))
+phh_v = ncf.createVariable('pH',np.float64,('time','location'))
+tpp_v = ncf.createVariable('total_P',np.float64,('time','location'))
+tnn_v = ncf.createVariable('total_N',np.float64,('time','location'))
+po4_v = ncf.createVariable('PO4',np.float64,('time','location'))
+opp_v = ncf.createVariable('organic_P',np.float64,('time','location'))
+toc_v = ncf.createVariable('total_organic_C',np.float64,('time','location'))
+tic_v = ncf.createVariable('total_inorganic_C',np.float64,('time','location'))
+onn_v = ncf.createVariable('organic_N',np.float64,('time','location'))
+tfe_v = ncf.createVariable('total_Fe',np.float64,('time','location'))
+alk_v = ncf.createVariable('alkalinity',np.float64,('time','location'))
+sal_v = ncf.createVariable('salinity',np.float64,('time','location'))
+dfe_v = ncf.createVariable('dissolved_Fe',np.float64,('time','location'))
+
+tim_v.units = timeunit
+flo_v.units = 'm3/s'
+nh4_v.units = 'mmol/m3'
+no3_v.units = 'mmol/m3'
+doo_v.units = 'mmol/m3'
+tem_v.units = 'C'
+phh_v.units = 'mmol/m3'
+tpp_v.units = 'mmol/m3'
+tnn_v.units = 'mmol/m3'
+po4_v.units = 'mmol/m3'
+opp_v.units = 'mmol/m3'
+toc_v.units = 'mmol/m3'
+tic_v.units = 'mmol/m3'
+onn_v.units = 'mmol/m3'
+tfe_v.units = 'mmol/m3'
+alk_v.units = 'mmol/m3'
+sal_v.units = 'PSU'
+dfe_v.units = 'mmol/m3'
+
+tim_v[:] = timenum
+lat_v[:] = lat_arr
+lon_v[:] = lon_arr
+flo_v[:,:] = flo_arr
+nh4_v[:,:] = nh4_arr
+no3_v[:,:] = no3_arr
+doo_v[:,:] = doo_arr
+tem_v[:,:] = tem_arr
+phh_v[:,:] = phh_arr
+tpp_v[:,:] = tpp_arr
+tnn_v[:,:] = tnn_arr
+po4_v[:,:] = po4_arr
+opp_v[:,:] = opp_arr
+toc_v[:,:] = toc_arr
+tic_v[:,:] = tic_arr
+onn_v[:,:] = onn_arr
+tfe_v[:,:] = tfe_arr
+alk_v[:,:] = alk_arr
+sal_v[:,:] = sal_arr
+dfe_v[:,:] = dfe_arr
+
+ncf.close()
+
 
 writer = pd.ExcelWriter('rivers_2007_2017.xlsx')
 

@@ -10,14 +10,14 @@ import glob
 import datetime as datetime
 
 # path to files
-fol = '/data/project1/minnaho/potw_outfall_data/updated_2013_2017/minor_potw_data/formatted/'
-fnames = sorted(glob.glob(fol+'*'))
+fol = '/data/project1/minnaho/potw_outfall_data/updated_2013_2017/major_potw_data/'
+fnames = sorted(glob.glob(fol+'*.csv'))
 
 # get potw minor names
 # order of potw minors in netcdf will be alphabetical
 rnames = []
 for f_i in fnames:
-    rnames.append(f_i[85:f_i.index('.xl')])
+    rnames.append(f_i[75:f_i.index('_1971')])
 
 # mg/L to mmol/m3
 mg_l_n = 1000./14
@@ -26,15 +26,18 @@ mg_l_o = 1000./16
 mg_l_c = 1000./12
 mg_l_f = 1000./55.845
 mg_l_s = 1000./28.0855
+mg_l_a = 1000/100.09 # mg/L CaCO3 to mmol/m3
 
-example = pd.read_excel(fnames[0],sheet_name='reordered',header=None,skiprows=1)
+example = pd.read_csv(fnames[0])
 #example[0][0] = '01/01/2007' # set first time to 01/01/2007
-example[0] = pd.to_datetime(example[0]) # make dates index to resample to daily
-example.set_index(0,inplace=True)
-example.loc[pd.to_datetime('1997-01-01')] = example.loc['2000-01-31']
+example['date'] = pd.to_datetime(example['date']) # make dates index to resample to daily
+example.set_index('date',inplace=True)
+example.loc[pd.to_datetime('1971-01-01')] = np.nan
+example.loc['1971-01-01'] = example.loc['1971-01-31']
+#example.loc[pd.to_datetime('1971-01-01')] = example.loc['1971-01-31']
 daily_ex = example.resample('D').bfill()
 
-df = daily_ex.loc['1997':'2017']
+df = daily_ex.loc['1971':'2017']
 
 # make arrays
 tim_arr = np.arange(0,df.shape[0])
@@ -61,12 +64,8 @@ alk_arr = np.empty((df.shape[0],len(fnames)))
 sal_arr = np.empty((df.shape[0],len(fnames)))
 dfe_arr = np.empty((df.shape[0],len(fnames)))
 
-# set no2 to 0.01 mg/L
-no2_val = 0.01*mg_l_n
-no2_arr.fill(no2_val)
-
-# 1997-2017
-tim_mon = np.arange(0,252)
+# 1971-2017
+tim_mon = np.arange(0,564)
 
 lat_mon = np.empty((len(fnames)))
 lon_mon = np.empty((len(fnames)))
@@ -90,354 +89,88 @@ alk_mon = np.empty((tim_mon.shape[0],len(fnames)))
 sal_mon = np.empty((tim_mon.shape[0],len(fnames)))
 dfe_mon = np.empty((tim_mon.shape[0],len(fnames)))
 
-# set no2 to 0.01 mg/L
-no2_mon.fill(no2_val)
-
 mgd_to_m3s = 0.043812645072430365
 
-
-# Hale and Oceanside - extend 2007 back to 2001 and use 2000 for 1997-2000
-# SBR - extend 2007 back to 2002 (plant came online in 2002)
-exceptions = ['HaleAveResource','OceansideOceanOutfall','SouthBayReclamation']
 
 # loop through files
 for f_i in range(len(fnames)):
     # read file
-    dat_fi = pd.read_excel(fnames[f_i],sheet_name='reordered',header=None,skiprows=1)
+    dat_fi = pd.read_csv(fnames[f_i])
     # make monthly into daily data
-    dat_fi[0] = pd.to_datetime(dat_fi[0]) # make dates index to resample to daily
-    dat_fi.set_index(0,inplace=True)
-    dat_fi.loc[pd.to_datetime('1997-01-01')] = np.nan
+    dat_fi['date'] = pd.to_datetime(dat_fi['date']) # make dates index to resample to daily
+    dat_fi.set_index('date',inplace=True)
+    dat_fi.loc[pd.to_datetime('1971-01-01')] = np.nan
 
-    dat_fi.loc[pd.to_datetime('1997-01-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-02-28')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-03-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-04-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-05-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-06-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-07-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-08-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-09-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-10-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-11-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1997-12-31')] = np.nan
-
-    dat_fi.loc[pd.to_datetime('1998-01-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-02-28')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-03-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-04-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-05-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-06-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-07-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-08-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-09-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-10-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-11-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1998-12-31')] = np.nan
-
-    dat_fi.loc[pd.to_datetime('1999-01-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-02-28')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-03-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-04-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-05-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-06-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-07-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-08-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-09-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-10-31')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-11-30')] = np.nan
-    dat_fi.loc[pd.to_datetime('1999-12-31')] = np.nan
-
-    dat_fi.loc['1997-01-01'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1997-01-31'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1997-02-28'] = dat_fi.loc['2000-02-29']
-    dat_fi.loc['1997-03-31'] = dat_fi.loc['2000-03-31']
-    dat_fi.loc['1997-04-30'] = dat_fi.loc['2000-04-30']
-    dat_fi.loc['1997-05-31'] = dat_fi.loc['2000-05-31']
-    dat_fi.loc['1997-06-30'] = dat_fi.loc['2000-06-30']
-    dat_fi.loc['1997-07-31'] = dat_fi.loc['2000-07-31']
-    dat_fi.loc['1997-08-31'] = dat_fi.loc['2000-08-31']
-    dat_fi.loc['1997-09-30'] = dat_fi.loc['2000-09-30']
-    dat_fi.loc['1997-10-31'] = dat_fi.loc['2000-10-31']
-    dat_fi.loc['1997-11-30'] = dat_fi.loc['2000-11-30']
-    dat_fi.loc['1997-12-31'] = dat_fi.loc['2000-12-31']
-
-    dat_fi.loc['1998-01-31'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1998-02-28'] = dat_fi.loc['2000-02-29']
-    dat_fi.loc['1998-03-31'] = dat_fi.loc['2000-03-31']
-    dat_fi.loc['1998-04-30'] = dat_fi.loc['2000-04-30']
-    dat_fi.loc['1998-05-31'] = dat_fi.loc['2000-05-31']
-    dat_fi.loc['1998-06-30'] = dat_fi.loc['2000-06-30']
-    dat_fi.loc['1998-07-31'] = dat_fi.loc['2000-07-31']
-    dat_fi.loc['1998-08-31'] = dat_fi.loc['2000-08-31']
-    dat_fi.loc['1998-09-30'] = dat_fi.loc['2000-09-30']
-    dat_fi.loc['1998-10-31'] = dat_fi.loc['2000-10-31']
-    dat_fi.loc['1998-11-30'] = dat_fi.loc['2000-11-30']
-    dat_fi.loc['1998-12-31'] = dat_fi.loc['2000-12-31']
-
-    dat_fi.loc['1999-01-31'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1999-02-28'] = dat_fi.loc['2000-02-29']
-    dat_fi.loc['1999-03-31'] = dat_fi.loc['2000-03-31']
-    dat_fi.loc['1999-04-30'] = dat_fi.loc['2000-04-30']
-    dat_fi.loc['1999-05-31'] = dat_fi.loc['2000-05-31']
-    dat_fi.loc['1999-06-30'] = dat_fi.loc['2000-06-30']
-    dat_fi.loc['1999-07-31'] = dat_fi.loc['2000-07-31']
-    dat_fi.loc['1999-08-31'] = dat_fi.loc['2000-08-31']
-    dat_fi.loc['1999-09-30'] = dat_fi.loc['2000-09-30']
-    dat_fi.loc['1999-10-31'] = dat_fi.loc['2000-10-31']
-    dat_fi.loc['1999-11-30'] = dat_fi.loc['2000-11-30']
-    dat_fi.loc['1999-12-31'] = dat_fi.loc['2000-12-31']
-    if fnames[f_i] not in exceptions:
-        # linearly interpolate by month
-        int01 = np.linspace(dat_fi.loc['2000-01-31'].astype(float),dat_fi.loc['2007-01-31'].astype(float),6)[0][0]
-        int02 = np.linspace(dat_fi.loc['2000-02-29'].astype(float),dat_fi.loc['2007-02-28'].astype(float),6)[0][0]
-        int03 = np.linspace(dat_fi.loc['2000-03-31'].astype(float),dat_fi.loc['2007-03-31'].astype(float),6)[0][0]
-        int04 = np.linspace(dat_fi.loc['2000-04-30'].astype(float),dat_fi.loc['2007-04-30'].astype(float),6)[0][0]
-        int05 = np.linspace(dat_fi.loc['2000-05-31'].astype(float),dat_fi.loc['2007-05-31'].astype(float),6)[0][0]
-        int06 = np.linspace(dat_fi.loc['2000-06-30'].astype(float),dat_fi.loc['2007-06-30'].astype(float),6)[0][0]
-        int07 = np.linspace(dat_fi.loc['2000-07-31'].astype(float),dat_fi.loc['2007-07-31'].astype(float),6)[0][0]
-        int08 = np.linspace(dat_fi.loc['2000-08-31'].astype(float),dat_fi.loc['2007-08-31'].astype(float),6)[0][0]
-        int09 = np.linspace(dat_fi.loc['2000-09-30'].astype(float),dat_fi.loc['2007-09-30'].astype(float),6)[0][0]
-        int10 = np.linspace(dat_fi.loc['2000-10-31'].astype(float),dat_fi.loc['2007-10-31'].astype(float),6)[0][0]
-        int11 = np.linspace(dat_fi.loc['2000-11-30'].astype(float),dat_fi.loc['2007-11-30'].astype(float),6)[0][0]
-        int12 = np.linspace(dat_fi.loc['2000-12-31'].astype(float),dat_fi.loc['2007-12-31'].astype(float),6)[0][0]
-
-        dat_fi.loc['2001-01-31'] = int01[0]
-        dat_fi.loc['2002-01-31'] = int01[1]
-        dat_fi.loc['2003-01-31'] = int01[2]
-        dat_fi.loc['2004-01-31'] = int01[3]
-        dat_fi.loc['2005-01-31'] = int01[4]
-        dat_fi.loc['2006-01-31'] = int01[5]
-
-        dat_fi.loc['2001-02-28'] = int02[0]
-        dat_fi.loc['2002-02-28'] = int02[1]
-        dat_fi.loc['2003-02-28'] = int02[2]
-        dat_fi.loc['2004-02-28'] = int02[3]
-        dat_fi.loc['2005-02-28'] = int02[4]
-        dat_fi.loc['2006-02-28'] = int02[5]
-
-        dat_fi.loc['2001-03-31'] = int03[0]
-        dat_fi.loc['2002-03-31'] = int03[1]
-        dat_fi.loc['2003-03-31'] = int03[2]
-        dat_fi.loc['2004-03-31'] = int03[3]
-        dat_fi.loc['2005-03-31'] = int03[4]
-        dat_fi.loc['2006-03-31'] = int03[5]
-
-        dat_fi.loc['2001-04-30'] = int04[0]
-        dat_fi.loc['2002-04-30'] = int04[1]
-        dat_fi.loc['2003-04-30'] = int04[2]
-        dat_fi.loc['2004-04-30'] = int04[3]
-        dat_fi.loc['2005-04-30'] = int04[4]
-        dat_fi.loc['2006-04-30'] = int04[5]
-
-        dat_fi.loc['2001-05-31'] = int05[0]
-        dat_fi.loc['2002-05-31'] = int05[1]
-        dat_fi.loc['2003-05-31'] = int05[2]
-        dat_fi.loc['2004-05-31'] = int05[3]
-        dat_fi.loc['2005-05-31'] = int05[4]
-        dat_fi.loc['2006-05-31'] = int05[5]
-
-        dat_fi.loc['2001-06-30'] = int06[0]
-        dat_fi.loc['2002-06-30'] = int06[1]
-        dat_fi.loc['2003-06-30'] = int06[2]
-        dat_fi.loc['2004-06-30'] = int06[3]
-        dat_fi.loc['2005-06-30'] = int06[4]
-        dat_fi.loc['2006-06-30'] = int06[5]
-
-        dat_fi.loc['2001-07-31'] = int07[0]
-        dat_fi.loc['2002-07-31'] = int07[1]
-        dat_fi.loc['2003-07-31'] = int07[2]
-        dat_fi.loc['2004-07-31'] = int07[3]
-        dat_fi.loc['2005-07-31'] = int07[4]
-        dat_fi.loc['2006-07-31'] = int07[5]
-
-        dat_fi.loc['2001-08-31'] = int08[0]
-        dat_fi.loc['2002-08-31'] = int08[1]
-        dat_fi.loc['2003-08-31'] = int08[2]
-        dat_fi.loc['2004-08-31'] = int08[3]
-        dat_fi.loc['2005-08-31'] = int08[4]
-        dat_fi.loc['2006-08-31'] = int08[5]
-
-        dat_fi.loc['2001-09-30'] = int09[0]
-        dat_fi.loc['2002-09-30'] = int09[1]
-        dat_fi.loc['2003-09-30'] = int09[2]
-        dat_fi.loc['2004-09-30'] = int09[3]
-        dat_fi.loc['2005-09-30'] = int09[4]
-        dat_fi.loc['2006-09-30'] = int09[5]
-
-        dat_fi.loc['2001-10-31'] = int10[0]
-        dat_fi.loc['2002-10-31'] = int10[1]
-        dat_fi.loc['2003-10-31'] = int10[2]
-        dat_fi.loc['2004-10-31'] = int10[3]
-        dat_fi.loc['2005-10-31'] = int10[4]
-        dat_fi.loc['2006-10-31'] = int10[5]
-
-        dat_fi.loc['2001-11-30'] = int11[0]
-        dat_fi.loc['2002-11-30'] = int11[1]
-        dat_fi.loc['2003-11-30'] = int11[2]
-        dat_fi.loc['2004-11-30'] = int11[3]
-        dat_fi.loc['2005-11-30'] = int11[4]
-        dat_fi.loc['2006-11-30'] = int11[5]
-
-        dat_fi.loc['2001-12-31'] = int12[0]
-        dat_fi.loc['2002-12-31'] = int12[1]
-        dat_fi.loc['2003-12-31'] = int12[2]
-        dat_fi.loc['2004-12-31'] = int12[3]
-        dat_fi.loc['2005-12-31'] = int12[4]
-        dat_fi.loc['2006-12-31'] = int12[5]
-
-    # special cases 
-    if fnames[f_i] in exceptions:
-        if fnames[f_i] == 'HaleAveResource' or fnames[f_i] == 'OceansideOceanOutfall':
-            for y_i in range(2001,2007):
-                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
-                dat_fi.loc[str(y_i)+'-02-28'] = dat_fi.loc['2007-02-28']
-                dat_fi.loc[str(y_i)+'-03-31'] = dat_fi.loc['2007-03-31']
-                dat_fi.loc[str(y_i)+'-04-30'] = dat_fi.loc['2007-04-30']
-                dat_fi.loc[str(y_i)+'-05-31'] = dat_fi.loc['2007-05-31']
-                dat_fi.loc[str(y_i)+'-06-30'] = dat_fi.loc['2007-06-30']
-                dat_fi.loc[str(y_i)+'-07-31'] = dat_fi.loc['2007-07-31']
-                dat_fi.loc[str(y_i)+'-08-31'] = dat_fi.loc['2007-08-31']
-                dat_fi.loc[str(y_i)+'-09-30'] = dat_fi.loc['2007-09-30']
-                dat_fi.loc[str(y_i)+'-10-31'] = dat_fi.loc['2007-10-31']
-                dat_fi.loc[str(y_i)+'-11-30'] = dat_fi.loc['2007-11-30']
-                dat_fi.loc[str(y_i)+'-12-31'] = dat_fi.loc['2007-12-31']
-                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
-
-        if fnames[f_i] == 'SouthBayReclamation':
-            # set to 0 before 2002 - plant not online
-            dat_fi.loc['2001-01-31'] = dat_fi.loc['2000-01-31']
-            dat_fi.loc['2001-02-28'] = dat_fi.loc['2000-02-28']
-            dat_fi.loc['2001-03-31'] = dat_fi.loc['2000-03-31']
-            dat_fi.loc['2001-04-30'] = dat_fi.loc['2000-04-30']
-            dat_fi.loc['2001-05-31'] = dat_fi.loc['2000-05-31']
-            dat_fi.loc['2001-06-30'] = dat_fi.loc['2000-06-30']
-            dat_fi.loc['2001-07-31'] = dat_fi.loc['2000-07-31']
-            dat_fi.loc['2001-08-31'] = dat_fi.loc['2000-08-31']
-            dat_fi.loc['2001-09-30'] = dat_fi.loc['2000-09-30']
-            dat_fi.loc['2001-10-31'] = dat_fi.loc['2000-10-31']
-            dat_fi.loc['2001-11-30'] = dat_fi.loc['2000-11-30']
-            dat_fi.loc['2001-12-31'] = dat_fi.loc['2000-12-31']
-            for y_i in range(2002,2007):
-                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
-                dat_fi.loc[str(y_i)+'-02-28'] = dat_fi.loc['2007-02-28']
-                dat_fi.loc[str(y_i)+'-03-31'] = dat_fi.loc['2007-03-31']
-                dat_fi.loc[str(y_i)+'-04-30'] = dat_fi.loc['2007-04-30']
-                dat_fi.loc[str(y_i)+'-05-31'] = dat_fi.loc['2007-05-31']
-                dat_fi.loc[str(y_i)+'-06-30'] = dat_fi.loc['2007-06-30']
-                dat_fi.loc[str(y_i)+'-07-31'] = dat_fi.loc['2007-07-31']
-                dat_fi.loc[str(y_i)+'-08-31'] = dat_fi.loc['2007-08-31']
-                dat_fi.loc[str(y_i)+'-09-30'] = dat_fi.loc['2007-09-30']
-                dat_fi.loc[str(y_i)+'-10-31'] = dat_fi.loc['2007-10-31']
-                dat_fi.loc[str(y_i)+'-11-30'] = dat_fi.loc['2007-11-30']
-                dat_fi.loc[str(y_i)+'-12-31'] = dat_fi.loc['2007-12-31']
-                dat_fi.loc[str(y_i)+'-01-31'] = dat_fi.loc['2007-01-31']
+    dat_fi.loc['1971-01-01'] = dat_fi.loc['1971-01-31']
         
     dat_fi = dat_fi.resample('D').interpolate()
     dat_fi = dat_fi.resample('D').bfill()
     dat_fi = dat_fi.resample('D').ffill()
-
-    dat_fi.loc['1997-01-01'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1997-01-31'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1997-02-28'] = dat_fi.loc['2000-02-29']
-    dat_fi.loc['1997-03-31'] = dat_fi.loc['2000-03-31']
-    dat_fi.loc['1997-04-30'] = dat_fi.loc['2000-04-30']
-    dat_fi.loc['1997-05-31'] = dat_fi.loc['2000-05-31']
-    dat_fi.loc['1997-06-30'] = dat_fi.loc['2000-06-30']
-    dat_fi.loc['1997-07-31'] = dat_fi.loc['2000-07-31']
-    dat_fi.loc['1997-08-31'] = dat_fi.loc['2000-08-31']
-    dat_fi.loc['1997-09-30'] = dat_fi.loc['2000-09-30']
-    dat_fi.loc['1997-10-31'] = dat_fi.loc['2000-10-31']
-    dat_fi.loc['1997-11-30'] = dat_fi.loc['2000-11-30']
-    dat_fi.loc['1997-12-31'] = dat_fi.loc['2000-12-31']
-
-    dat_fi.loc['1998-01-31'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1998-02-28'] = dat_fi.loc['2000-02-29']
-    dat_fi.loc['1998-03-31'] = dat_fi.loc['2000-03-31']
-    dat_fi.loc['1998-04-30'] = dat_fi.loc['2000-04-30']
-    dat_fi.loc['1998-05-31'] = dat_fi.loc['2000-05-31']
-    dat_fi.loc['1998-06-30'] = dat_fi.loc['2000-06-30']
-    dat_fi.loc['1998-07-31'] = dat_fi.loc['2000-07-31']
-    dat_fi.loc['1998-08-31'] = dat_fi.loc['2000-08-31']
-    dat_fi.loc['1998-09-30'] = dat_fi.loc['2000-09-30']
-    dat_fi.loc['1998-10-31'] = dat_fi.loc['2000-10-31']
-    dat_fi.loc['1998-11-30'] = dat_fi.loc['2000-11-30']
-    dat_fi.loc['1998-12-31'] = dat_fi.loc['2000-12-31']
-
-    dat_fi.loc['1999-01-31'] = dat_fi.loc['2000-01-31']
-    dat_fi.loc['1999-02-28'] = dat_fi.loc['2000-02-29']
-    dat_fi.loc['1999-03-31'] = dat_fi.loc['2000-03-31']
-    dat_fi.loc['1999-04-30'] = dat_fi.loc['2000-04-30']
-    dat_fi.loc['1999-05-31'] = dat_fi.loc['2000-05-31']
-    dat_fi.loc['1999-06-30'] = dat_fi.loc['2000-06-30']
-    dat_fi.loc['1999-07-31'] = dat_fi.loc['2000-07-31']
-    dat_fi.loc['1999-08-31'] = dat_fi.loc['2000-08-31']
-    dat_fi.loc['1999-09-30'] = dat_fi.loc['2000-09-30']
-    dat_fi.loc['1999-10-31'] = dat_fi.loc['2000-10-31']
-    dat_fi.loc['1999-11-30'] = dat_fi.loc['2000-11-30']
-    dat_fi.loc['1999-12-31'] = dat_fi.loc['2000-12-31']
-
     dat_fi = dat_fi.interpolate()
     dat_fi = dat_fi.bfill()
-    dat_fi = dat_fi.ffill()
+
     # get only 1997-01-01 - 2017-12-31
-    dat_fi = dat_fi['1997-01-01':'2017-12-31']
-    dat_fi[2] = dat_fi[2].replace(to_replace=' ',value=np.nan).astype(float)
-    dat_fi[12] = dat_fi[12].replace(to_replace=' ',value=np.nan).astype(float)
+    dat_fi = dat_fi['1971-01-01':'2017-12-31']
+    #dat_fi[2] = dat_fi[2].replace(to_replace=' ',value=np.nan).astype(float)
+    #dat_fi[12] = dat_fi[12].replace(to_replace=' ',value=np.nan).astype(float)
     # assign values
-    lat_arr[f_i] = dat_fi[18][0]
-    lon_arr[f_i] = dat_fi[19][0]
-    flo_arr[:,f_i] = np.array(dat_fi[1]).astype(float)*mgd_to_m3s
-    nh4_arr[:,f_i] = np.array(dat_fi[2].replace(to_replace=' ',value=np.nan)).astype(float)*mg_l_n
-    no3_arr[:,f_i] = np.array(dat_fi[3]).astype(float)*mg_l_n
-    doo_arr[:,f_i] = np.array(dat_fi[4]).astype(float)*mg_l_o
-    tem_arr[:,f_i] = np.array(dat_fi[5]).astype(float)
-    bod_arr[:,f_i] = np.array(dat_fi[6]).astype(float)*mg_l_o
-    phh_arr[:,f_i] = np.array(dat_fi[7]).astype(float)
-    tpp_arr[:,f_i] = np.array(dat_fi[8]).astype(float)*mg_l_p
-    po4_arr[:,f_i] = np.array(dat_fi[9]).astype(float)*mg_l_p
-    opp_arr[:,f_i] = np.array(dat_fi[10]).astype(float)*mg_l_p
-    toc_arr[:,f_i] = np.array(dat_fi[11]).astype(float)*mg_l_c
-    onn_arr[:,f_i] = np.array(dat_fi[12].replace(to_replace=' ',value=np.nan)).astype(float)*mg_l_n
+    lat_arr[f_i] = dat_fi['lat'][0]
+    lon_arr[f_i] = dat_fi['lon'][0]
+    flo_arr[:,f_i] = np.array(dat_fi['flow mgd']).astype(float)*mgd_to_m3s
+    nh4_arr[:,f_i] = np.array(dat_fi['NH4 mg/L']).astype(float)*mg_l_n
+    no3_arr[:,f_i] = np.array(dat_fi['NO3 mg/L']).astype(float)*mg_l_n
+    no2_arr[:,f_i] = np.array(dat_fi['NO2 mg/L']).astype(float)*mg_l_n
+    doo_arr[:,f_i] = np.array(dat_fi['dissolved oxygen mg/L']).astype(float)*mg_l_o
+    tem_arr[:,f_i] = np.array(dat_fi['temperature C']).astype(float)
+    bod_arr[:,f_i] = np.array(dat_fi['BOD mg/L']).astype(float)*mg_l_o
+    phh_arr[:,f_i] = np.array(dat_fi['pH']).astype(float)
+    tpp_arr[:,f_i] = np.array(dat_fi['TP mg/L']).astype(float)*mg_l_p
+    po4_arr[:,f_i] = np.array(dat_fi['PO4 mg/L']).astype(float)*mg_l_p
+    opp_arr[:,f_i] = np.array(dat_fi['OP mg/L']).astype(float)*mg_l_p
+    toc_arr[:,f_i] = np.array(dat_fi['TOC mg/L']).astype(float)*mg_l_c
+    onn_arr[:,f_i] = np.array(dat_fi['ON mg/L'].replace(to_replace=' ',value=np.nan)).astype(float)*mg_l_n
     tnn_arr[:,f_i] = np.nansum((nh4_arr[:,f_i],no3_arr[:,f_i],no2_arr[:,f_i],onn_arr[:,f_i]),axis=0)
-    tfe_arr[:,f_i] = (np.array(dat_fi[13]).astype(float)*mg_l_f)/1000
-    sil_arr[:,f_i] = np.array(dat_fi[14]).astype(float)*mg_l_s
-    alk_arr[:,f_i] = np.array(dat_fi[15]).astype(float)*mg_l_c
-    sal_arr[:,f_i] = np.array(dat_fi[16]).astype(float)
-    dfe_arr[:,f_i] = (np.array(dat_fi[17]).astype(float)*mg_l_f)/1000
+    tfe_arr[:,f_i] = (np.array(dat_fi['total iron ug/L']).astype(float)*mg_l_f)/1000
+    sil_arr[:,f_i] = np.array(dat_fi['SiO4 mg/L']).astype(float)*mg_l_s
+    alk_arr[:,f_i] = np.array(dat_fi['Alk mg/L']).astype(float)*mg_l_a
+    sal_arr[:,f_i] = np.array(dat_fi['Salinity PSU']).astype(float)
+    # 20% of total
+    dfe_arr[:,f_i] = (np.array(dat_fi['total iron ug/L']).astype(float)*mg_l_f*.2)/1000
 
     # assign monthly values
     dat_mon = dat_fi.resample('M').mean()
-    lat_mon[f_i] = dat_mon[18][0]
-    lon_mon[f_i] = dat_mon[19][0]
-    flo_mon[:,f_i] = np.array(dat_mon[1]).astype(float)*mgd_to_m3s
-    nh4_mon[:,f_i] = np.array(dat_mon[2].replace(to_replace=' ',value=np.nan)).astype(float)*mg_l_n
-    no3_mon[:,f_i] = np.array(dat_mon[3]).astype(float)*mg_l_n
-    doo_mon[:,f_i] = np.array(dat_mon[4]).astype(float)*mg_l_o
-    tem_mon[:,f_i] = np.array(dat_mon[5]).astype(float)
-    bod_mon[:,f_i] = np.array(dat_mon[6]).astype(float)*mg_l_o
-    phh_mon[:,f_i] = np.array(dat_mon[7]).astype(float)
-    tpp_mon[:,f_i] = np.array(dat_mon[8]).astype(float)*mg_l_p
-    po4_mon[:,f_i] = np.array(dat_mon[9]).astype(float)*mg_l_p
-    opp_mon[:,f_i] = np.array(dat_mon[10]).astype(float)*mg_l_p
-    toc_mon[:,f_i] = np.array(dat_mon[11]).astype(float)*mg_l_c
-    onn_mon[:,f_i] = np.array(dat_mon[12].replace(to_replace=' ',value=np.nan)).astype(float)*mg_l_n
+    lat_mon[f_i] = dat_mon['lat'][0]
+    lon_mon[f_i] = dat_mon['lon'][0]
+    flo_mon[:,f_i] = np.array(dat_mon['flow mgd']).astype(float)*mgd_to_m3s
+    nh4_mon[:,f_i] = np.array(dat_mon['NH4 mg/L']).astype(float)*mg_l_n
+    no3_mon[:,f_i] = np.array(dat_mon['NO3 mg/L']).astype(float)*mg_l_n
+    no2_mon[:,f_i] = np.array(dat_mon['NO2 mg/L']).astype(float)*mg_l_n
+    doo_mon[:,f_i] = np.array(dat_mon['dissolved oxygen mg/L']).astype(float)*mg_l_o
+    tem_mon[:,f_i] = np.array(dat_mon['temperature C']).astype(float)
+    bod_mon[:,f_i] = np.array(dat_mon['BOD mg/L']).astype(float)*mg_l_o
+    phh_mon[:,f_i] = np.array(dat_mon['pH']).astype(float)
+    tpp_mon[:,f_i] = np.array(dat_mon['TP mg/L']).astype(float)*mg_l_p
+    po4_mon[:,f_i] = np.array(dat_mon['PO4 mg/L']).astype(float)*mg_l_p
+    opp_mon[:,f_i] = np.array(dat_mon['OP mg/L']).astype(float)*mg_l_p
+    toc_mon[:,f_i] = np.array(dat_mon['TOC mg/L']).astype(float)*mg_l_c
+    onn_mon[:,f_i] = np.array(dat_mon['ON mg/L'].replace(to_replace=' ',value=np.nan)).astype(float)*mg_l_n
     tnn_mon[:,f_i] = np.nansum((nh4_mon[:,f_i],no3_mon[:,f_i],no2_mon[:,f_i],onn_mon[:,f_i]),axis=0)
-    tfe_mon[:,f_i] = (np.array(dat_mon[13]).astype(float)*mg_l_f)/1000
-    sil_mon[:,f_i] = np.array(dat_mon[14]).astype(float)*mg_l_s
-    alk_mon[:,f_i] = np.array(dat_mon[15]).astype(float)*mg_l_c
-    sal_mon[:,f_i] = np.array(dat_mon[16]).astype(float)
-    dfe_mon[:,f_i] = (np.array(dat_mon[17]).astype(float)*mg_l_f)/1000
+    tfe_mon[:,f_i] = (np.array(dat_mon['total iron ug/L']).astype(float)*mg_l_f)/1000
+    sil_mon[:,f_i] = np.array(dat_mon['SiO4 mg/L']).astype(float)*mg_l_s
+    alk_mon[:,f_i] = np.array(dat_mon['Alk mg/L']).astype(float)*mg_l_a
+    sal_mon[:,f_i] = np.array(dat_mon['Salinity PSU']).astype(float)
+    # 20% of total
+    dfe_mon[:,f_i] = (np.array(dat_mon['total iron ug/L']).astype(float)*mg_l_f*.2)/1000
 
 # time array
-timeunit = 'days since 1997-01-01'
+timeunit = 'days since 1971-01-01'
 timenum = date2num(dat_fi.index.to_pydatetime(),timeunit)
 
 # make netcdf
-ncf = Dataset('../minor_potw_data/minor_potw_1997_2017.nc','w')
+ncf = Dataset('../major_potw_data/major_potw_1971_2017.nc','w')
 
 tim_d = ncf.createDimension('time',None)
-loc_d = ncf.createDimension('location',lat_arr.shape[0]) # 19 minor potws
+loc_d = ncf.createDimension('location',lat_arr.shape[0]) # 4 major potws
 
 tim_v = ncf.createVariable('time',np.float32,('time'))
 lat_v = ncf.createVariable('latitude',np.float32,('location'))
@@ -463,7 +196,7 @@ sal_v = ncf.createVariable('salinity',np.float64,('time','location'))
 dfe_v = ncf.createVariable('dissolved_Fe',np.float64,('time','location'))
 
 tim_v.units = timeunit
-flo_v.units = 'mmol/m3'
+flo_v.units = 'm3/s'
 nh4_v.units = 'mmol/m3'
 no3_v.units = 'mmol/m3'
 no2_v.units = 'mmol/m3'
@@ -508,7 +241,7 @@ dfe_v[:,:] = dfe_arr
 
 ncf.close()
 
-writer = pd.ExcelWriter('../minor_potw_data/minor_potw_1997_2017.xlsx')
+writer = pd.ExcelWriter('../major_potw_data/major_potw_1971_2017.xlsx')
 
 # print to excel file
 for p_i in range(flo_arr.shape[1]):
@@ -539,11 +272,10 @@ for p_i in range(flo_arr.shape[1]):
 writer.save()
 
 # monthly
-timeunit = 'days since 1997-01-01'
 timenum = date2num(dat_mon.index.to_pydatetime(),timeunit)
 
 # make netcdf
-ncf = Dataset('../minor_potw_data/minor_potw_1997_2017_monthly.nc','w')
+ncf = Dataset('../major_potw_data/major_potw_1971_2017_monthly.nc','w')
 
 tim_d = ncf.createDimension('time',None)
 loc_d = ncf.createDimension('location',lat_mon.shape[0]) # 19 minor potws
@@ -617,7 +349,7 @@ dfe_v[:,:] = dfe_mon
 
 ncf.close()
 
-writer = pd.ExcelWriter('../minor_potw_data/minor_potw_1997_2017_monthly.xlsx')
+writer = pd.ExcelWriter('../major_potw_data/major_potw_1971_2017_monthly.xlsx')
 
 # print to excel file
 for p_i in range(flo_mon.shape[1]):
