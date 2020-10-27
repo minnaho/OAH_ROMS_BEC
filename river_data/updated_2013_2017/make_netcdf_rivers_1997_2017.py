@@ -34,7 +34,10 @@ df.set_index(df['date'],inplace=True)
 
 
 sm = pd.read_csv(riv_fi[rnames.index('santa_margarita')])
+sm['date'] = pd.to_datetime(sm['date'])
+sm.set_index(sm['date'],inplace=True)
 sm_temp = sm['temperature C']
+sm_temp_mean = sm['temperature C'].resample('M').mean()
 
 endind = 4018 # ends at 2017-12-31
 # usgs flow data
@@ -55,30 +58,40 @@ po4_arr = np.empty((flow.shape[0],len(rnames)))
 tnn_arr = np.empty((flow.shape[0],len(rnames)))
 tpp_arr = np.empty((flow.shape[0],len(rnames)))
 onn_arr = np.empty((flow.shape[0],len(rnames)))
+val_on = 1.68
+onn_arr.fill(val_on)
 opp_arr = np.empty((flow.shape[0],len(rnames)))
+val_op = 0.3
+opp_arr.fill(val_op)
 dfe_arr = np.empty((flow.shape[0],len(rnames)))
+val_df = .021508 # value based of 20% of average
+val_tf = .10787 # value based of 20% of average
 tfe_arr = np.empty((flow.shape[0],len(rnames)))
 alk_arr = np.empty((flow.shape[0],len(rnames)))
 sal_arr = np.empty((flow.shape[0],len(rnames)))
-sal_arr.fill(0.52)
+val_sa = 0.52
+sal_arr.fill(val_sa)
 tem_arr = np.empty((flow.shape[0],len(rnames)))
-# set all temps to santa monica temperature, except
-# tijuana that is changed in the loop
+# set all temps to santa margarita temperature, except
+# tijuana, bell c, arroyo honda, refugio that is changed in the loop
 for r_i in range(tem_arr.shape[1]):
     tem_arr[:,r_i] = sm_temp[:endind]
 
 # only tijuana and santa margarita have dissolved o
 doo_arr = np.empty((flow.shape[0],len(rnames)))
-doo_arr.fill(np.nan)
+val_do = 7
+doo_arr.fill(val_do)
 # only tijuana and santa margarita have pH
 phh_arr = np.empty((flow.shape[0],len(rnames)))
-phh_arr.fill(np.nan)
+val_ph = 7.5
+phh_arr.fill(val_ph)
 # only santa margarita has TIC
 tic_arr = np.empty((flow.shape[0],len(rnames)))
 tic_arr.fill(np.nan)
 # add silicate, but only for available rivers
 sil_arr = np.empty((flow.shape[0],len(rnames)))
-sil_arr.fill(np.nan)
+val_si = 19.17
+sil_arr.fill(val_si)
 
 # use wet concentrations for 3 days after flow/wet_med > 2
 for r_i in range(len(riv_fi)):
@@ -172,14 +185,14 @@ for r_i in range(len(riv_fi)):
             wetpo4 = df['Wet Phosphate  (mg/L)'][0]
         wettnn = df['Wet TN (mg/L)'][0]
         wettpp = df['Wet TP (mg/L)'][0]
-        wetonn = np.nan 
-        wetopp = np.nan 
-        wetdfe = np.nan 
-        wettfe = np.nan 
+        wetonn = val_on
+        wetopp = val_op
+        wetdfe = val_df
+        wettfe = val_tf 
         wetalk = df['alkalinity mg/L'][0]
-        wetsil = np.nan 
-        winsil = np.nan 
-        sumsil = np.nan 
+        wetsil = val_si 
+        winsil = val_si 
+        sumsil = val_si 
         # winter dry conc
         if np.isnan(df['Dry Ammonia (mg/L)'][0]):
             wintoc = wettoc
@@ -203,10 +216,10 @@ for r_i in range(len(riv_fi)):
             winpo4 = df['Dry Phosphate \n(mg/L)'][0]
             wintnn = df['Dry TN (mg/L)'][0]
             wintpp = df['Dry TP (mg/L)'][0]
-            winonn = np.nan 
-            winopp = np.nan 
-            windfe = np.nan 
-            wintfe = np.nan 
+            winonn = val_on 
+            winopp = val_op 
+            windfe = val_df 
+            wintfe = val_tf 
             winalk = df['alkalinity mg/L'][0]
         # summer dry conc
         if np.isnan(df['Dry Ammonia (mg/L)'][0]):
@@ -231,10 +244,10 @@ for r_i in range(len(riv_fi)):
             sumpo4 = df['Dry Phosphate \n(mg/L)'][0]
             sumtnn = df['Dry TN (mg/L)'][0]
             sumtpp = df['Dry TP (mg/L)'][0]
-            sumonn = np.nan 
-            sumopp = np.nan 
-            sumdfe = np.nan 
-            sumtfe = np.nan 
+            sumonn = val_on 
+            sumopp = val_op 
+            sumdfe = val_df 
+            sumtfe = val_tf 
             sumalk = df['alkalinity mg/L'][0]
 
     for d_i in range(flow.shape[0]):
@@ -336,11 +349,22 @@ for r_i in range(len(riv_fi)):
             dfe_arr[d_i,r_i] = np.nan 
             tfe_arr[d_i,r_i] = np.nan 
             alk_arr[d_i,r_i] = df['alkalinity mg/L'][d_i]
-            sal_arr[d_i,r_i] = 0.52
+            sal_arr[d_i,r_i] = val_sa
             tem_arr[d_i,r_i] = df['temperature C'][d_i]
             doo_arr[d_i,r_i] = df['dissolved oxygen mg/L'][d_i]
             phh_arr[d_i,r_i] = df['pH'][d_i]
             tic_arr[d_i,r_i] = df['TIC mg/L total inorganic C'][d_i]
+    if (
+        rnames[r_i] == 'bell_canyon' or
+        rnames[r_i] == 'arroyo_honda_creek' or
+        rnames[r_i] == 'refugio_creek'):
+        df['temperature C'] = df['temperature C'].interpolate()
+        df['temperature C'] = df['temperature C'].bfill()
+        for d_i in range(flow.shape[0]):
+            tem_arr[d_i,r_i] = df['temperature C'][d_i]
+        
+        
+        
 
 # mg/L to mmol/m3 
 mg_l_n = 1000./14
@@ -351,6 +375,7 @@ mg_l_f = 1000./55.845
 mg_l_s = 1000./28.0855 # silicon
 mg_l_a = 1000/100.09 # mg/L CaCO3 to mmol/m3 CaCO3
 
+flo_arr[np.isnan(flo_arr)]=0
 toc_arr = toc_arr*mg_l_c
 nh4_arr = nh4_arr*mg_l_n
 no3_arr = no3_arr*mg_l_n
@@ -365,6 +390,21 @@ alk_arr = alk_arr*mg_l_a
 doo_arr = doo_arr*mg_l_o
 tic_arr = tic_arr*mg_l_c
 sil_arr = sil_arr*mg_l_s
+
+toc_arr[toc_arr<0] = 0
+nh4_arr[nh4_arr<0] = 0
+no3_arr[no3_arr<0] = 0
+po4_arr[po4_arr<0] = 0
+tnn_arr[tnn_arr<0] = 0
+tpp_arr[tpp_arr<0] = 0
+onn_arr[onn_arr<0] = 0
+opp_arr[opp_arr<0] = 0
+dfe_arr[dfe_arr<0] = 0
+tfe_arr[tfe_arr<0] = 0
+alk_arr[alk_arr<0] = 0
+doo_arr[doo_arr<0] = 0
+tic_arr[tic_arr<0] = 0
+sil_arr[sil_arr<0] = 0
 
 # time array
 timeunit = 'days since 2007-01-01'
@@ -667,27 +707,46 @@ dat_com = pd.date_range(start='1997-01-01',end='2017-12-31',freq='M')
 # combined datasets
 flo_com = np.empty((dat_com.shape[0],len(rnames)))
 toc_com = np.empty((dat_com.shape[0],len(rnames)))
+val_to = np.nanmean(toc_arr*.2)
+toc_com.fill(val_to)
 nh4_com = np.empty((dat_com.shape[0],len(rnames)))
+val_nh = np.nanmean(nh4_arr*.2)
+nh4_com.fill(val_nh)
 no3_com = np.empty((dat_com.shape[0],len(rnames)))
+val_no = np.nanmean(no3_arr*.2)
+no3_com.fill(val_no)
 po4_com = np.empty((dat_com.shape[0],len(rnames)))
+val_po = np.nanmean(po4_arr*.2)
+po4_com.fill(val_po)
 tnn_com = np.empty((dat_com.shape[0],len(rnames)))
 tpp_com = np.empty((dat_com.shape[0],len(rnames)))
 onn_com = np.empty((dat_com.shape[0],len(rnames)))
+onn_com.fill(val_on*mg_l_n)
 opp_com = np.empty((dat_com.shape[0],len(rnames)))
+opp_com.fill(val_op*mg_l_p)
 dfe_com = np.empty((dat_com.shape[0],len(rnames)))
+val_df = np.nanmean(dfe_arr*.2)
+dfe_com.fill(val_df)
 tfe_com = np.empty((dat_com.shape[0],len(rnames)))
+val_tf = np.nanmean(tfe_arr*.2)
+tfe_com.fill(val_tf)
 alk_com = np.empty((dat_com.shape[0],len(rnames)))
+val_al = np.nanmean(alk_arr*.2)
+alk_com.fill(val_al)
 sal_com = np.empty((dat_com.shape[0],len(rnames)))
-sal_com.fill(0.52)
+sal_com.fill(val_sa)
 tem_com = np.empty((dat_com.shape[0],len(rnames)))
+tem_com[flo10.shape[0]:,r_i] = sm_temp_mean['2007':'2017']
+tem_com[:flo10.shape[0],r_i] = np.array(list(sm_temp_mean['2007-01':'2007-12'])*10)
 doo_com = np.empty((dat_com.shape[0],len(rnames)))
-doo_com.fill(np.nan)
+doo_com.fill(val_do*mg_l_o)
 phh_com = np.empty((dat_com.shape[0],len(rnames)))
-phh_com.fill(np.nan)
+phh_com.fill(val_ph)
 tic_com = np.empty((dat_com.shape[0],len(rnames)))
-tic_com.fill(np.nan)
+val_ti = np.nanmean(tic_com*.2*(12/1000))
+tic_com.fill(val_ti*mg_l_c)
 sil_com = np.empty((dat_com.shape[0],len(rnames)))
-sil_com.fill(np.nan)
+sil_com.fill(val_si*mg_l_s)
 
 for r_i in range(len(nm10)):
     rind = rnames.index(nm10[r_i])
@@ -765,8 +824,10 @@ dfe_com[:flo10.shape[0],rind] = tjmon['iron mg/L']['1997':'2006']*mg_l_f*.2
 tfe_com[:flo10.shape[0],rind] = tjmon['iron mg/L']['1997':'2006']*mg_l_f*.2
 alk_com[:flo10.shape[0],rind] = tjmon['alkalinity mg/L']['1997':'2006']*mg_l_a
 sal_com[:flo10.shape[0],rind] = tjmon['salinity PSU']['1997':'2006']
+sal_com[flo10.shape[0]:,rind] = tjmon['salinity PSU']['2007':'2017']
 tem_com[:flo10.shape[0],rind] = tjmon['temperature C']['1997':'2006']
 doo_com[:flo10.shape[0],rind] = tjmon['dissolved oxygen mg/L']['1997':'2006']*mg_l_o
+doo_com[flo10.shape[0]:,rind] = tjmon['dissolved oxygen mg/L']['2007':'2017']*mg_l_o
 phh_com[:flo10.shape[0],rind] = tjmon['pH']['1997':'2006']
 sil_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*sil_mon[0,rind]
 
@@ -784,12 +845,16 @@ no3_com[:flo10.shape[0],rind] = smmon['NO3 mg/L']['1997':'2006']*mg_l_n
 po4_com[:flo10.shape[0],rind] = smmon['PO4 mg/L']['1997':'2006']*mg_l_p
 tnn_com[:flo10.shape[0],rind] = (smmon['NH4 mg/L']+smmon['NO3 mg/L']+smmon['NO2 mg/L'])*mg_l_n
 tpp_com[:flo10.shape[0],rind] = smmon['PO4 mg/L']['1997':'2006']*mg_l_p
-onn_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*np.nan
-opp_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*np.nan
-dfe_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*np.nan
-tfe_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*np.nan
+onn_com[:flo10.shape[0],r_i] = np.array(list(onn_mon[:12,rind])*10)
+onn_com[flo10.shape[0]:,r_i] = onn_mon[:,rind]
+opp_com[:flo10.shape[0],r_i] = np.array(list(opp_mon[:12,rind])*10)
+opp_com[flo10.shape[0]:,r_i] = opp_mon[:,rind]
+tfe_com[:flo10.shape[0],r_i] = np.array(list(tfe_mon[:12,rind])*10)
+tfe_com[flo10.shape[0]:,r_i] = tfe_mon[:,rind]
+dfe_com[:flo10.shape[0],r_i] = np.array(list(dfe_mon[:12,rind])*10)
+dfe_com[flo10.shape[0]:,r_i] = dfe_mon[:,rind]
 alk_com[:flo10.shape[0],rind] = smmon['alk mg/L']['1997':'2006']*mg_l_a
-sal_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*0.52
+sal_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*val_sa
 tem_com[:flo10.shape[0],rind] = np.array((list(tem_com[:12,rind])*10))
 doo_com[:flo10.shape[0],rind] = smmon['DO mg/L']['1997':'2006']*mg_l_o
 phh_com[:flo10.shape[0],rind] = smmon['pH']['1997':'2006']
@@ -801,7 +866,10 @@ bcdf = pd.read_csv('/data/project1/minnaho/river_data/updated_2013_2017/suppleme
 bcdf['2'] = pd.to_datetime(bcdf['2'])
 bcdf.set_index(bcdf['2'],inplace=True)
 bcmon = bcdf.resample('M').mean()
+bcmon['4'][np.isnan(bcmon['4'])] = 0
 r_i = rnames.index('bell_canyon')
+tem_com[:,r_i] = bcmon['5']
+doo_com[:,r_i] = doo_com[:,r_i]*mg_l_o
 
 wet_flows_l = []
 for f_i in range(bcmon['4'].shape[0]):
@@ -829,44 +897,44 @@ print('dry median: ',dry_med)
 # river rows
 rind = np.where(con_fi[0]==rnames[r_i])[0]
 # wet conc
-wettoc = con_fi[2][rind[0]]
-wetnh4 = con_fi[3][rind[0]]
-wetno3 = con_fi[4][rind[0]]
-wetpo4 = con_fi[5][rind[0]]
-wettnn = con_fi[6][rind[0]]
-wettpp = con_fi[7][rind[0]]
-wetonn = con_fi[8][rind[0]]
-wetopp = con_fi[9][rind[0]]
-wetdfe = con_fi[10][rind[0]]
-wettfe = con_fi[11][rind[0]]
-wetalk = con_fi[12][rind[0]]
-wetsil = con_fi[14][rind[0]]
+wettoc = con_fi[2][rind[0]]*mg_l_c
+wetnh4 = con_fi[3][rind[0]]*mg_l_n
+wetno3 = con_fi[4][rind[0]]*mg_l_n
+wetpo4 = con_fi[5][rind[0]]*mg_l_p
+wettnn = con_fi[6][rind[0]]*mg_l_n
+wettpp = con_fi[7][rind[0]]*mg_l_p
+wetonn = con_fi[8][rind[0]]*mg_l_n
+wetopp = con_fi[9][rind[0]]*mg_l_p
+wetdfe = con_fi[10][rind[0]]*mg_l_f*(1./1000)
+wettfe = con_fi[11][rind[0]]*mg_l_f*(1./1000)
+wetalk = con_fi[12][rind[0]]*mg_l_a
+wetsil = con_fi[14][rind[0]]*mg_l_s
 # winter dry conc
-wintoc = con_fi[2][rind[1]]
-winnh4 = con_fi[3][rind[1]]
-winno3 = con_fi[4][rind[1]]
-winpo4 = con_fi[5][rind[1]]
-wintnn = con_fi[6][rind[1]]
-wintpp = con_fi[7][rind[1]]
-winonn = con_fi[8][rind[1]]
-winopp = con_fi[9][rind[1]]
-windfe = con_fi[10][rind[1]]
-wintfe = con_fi[11][rind[1]]
-winalk = con_fi[12][rind[1]]
-winsil = con_fi[14][rind[1]]
+wintoc = con_fi[2][rind[1]]*mg_l_c
+winnh4 = con_fi[3][rind[1]]*mg_l_n
+winno3 = con_fi[4][rind[1]]*mg_l_n
+winpo4 = con_fi[5][rind[1]]*mg_l_p
+wintnn = con_fi[6][rind[1]]*mg_l_n
+wintpp = con_fi[7][rind[1]]*mg_l_p
+winonn = con_fi[8][rind[1]]*mg_l_n
+winopp = con_fi[9][rind[1]]*mg_l_p
+windfe = con_fi[10][rind[1]]*mg_l_f*(1./1000)
+wintfe = con_fi[11][rind[1]]*mg_l_f*(1./1000)
+winalk = con_fi[12][rind[1]]*mg_l_a
+winsil = con_fi[14][rind[1]]*mg_l_s
 # summer dry conc
-sumtoc = con_fi[2][rind[2]]
-sumnh4 = con_fi[3][rind[2]]
-sumno3 = con_fi[4][rind[2]]
-sumpo4 = con_fi[5][rind[2]]
-sumtnn = con_fi[6][rind[2]]
-sumtpp = con_fi[7][rind[2]]
-sumonn = con_fi[8][rind[2]]
-sumopp = con_fi[9][rind[2]]
-sumdfe = con_fi[10][rind[2]]
-sumtfe = con_fi[11][rind[2]]
-sumalk = con_fi[12][rind[2]]
-sumsil = con_fi[14][rind[2]]
+sumtoc = con_fi[2][rind[2]]*mg_l_c
+sumnh4 = con_fi[3][rind[2]]*mg_l_n
+sumno3 = con_fi[4][rind[2]]*mg_l_n
+sumpo4 = con_fi[5][rind[2]]*mg_l_p
+sumtnn = con_fi[6][rind[2]]*mg_l_n
+sumtpp = con_fi[7][rind[2]]*mg_l_p
+sumonn = con_fi[8][rind[2]]*mg_l_n
+sumopp = con_fi[9][rind[2]]*mg_l_p
+sumdfe = con_fi[10][rind[2]]*mg_l_f*(1./1000)
+sumtfe = con_fi[11][rind[2]]*mg_l_f*(1./1000)
+sumalk = con_fi[12][rind[2]]*mg_l_a
+sumsil = con_fi[14][rind[2]]*mg_l_s
 
 for d_i in range(bcmon['4'].shape[0]):
     flo_com[d_i,r_i] = bcmon['4'][d_i]
@@ -936,7 +1004,10 @@ bcdf = pd.read_csv('/data/project1/minnaho/river_data/updated_2013_2017/suppleme
 bcdf['2'] = pd.to_datetime(bcdf['2'])
 bcdf.set_index(bcdf['2'],inplace=True)
 bcmon = bcdf.resample('M').mean()
+bcmon['4'][np.isnan(bcmon['4'])] = 0
 r_i = rnames.index('arroyo_honda_creek')
+tem_com[:,r_i] = bcmon['5']
+doo_com[:,r_i] = doo_com[:,r_i]*mg_l_o
 
 wet_flows_l = []
 for f_i in range(bcmon['4'].shape[0]):
@@ -964,44 +1035,44 @@ print('dry median: ',dry_med)
 # river rows
 rind = np.where(con_fi[0]==rnames[r_i])[0]
 # wet conc
-wettoc = con_fi[2][rind[0]]
-wetnh4 = con_fi[3][rind[0]]
-wetno3 = con_fi[4][rind[0]]
-wetpo4 = con_fi[5][rind[0]]
-wettnn = con_fi[6][rind[0]]
-wettpp = con_fi[7][rind[0]]
-wetonn = con_fi[8][rind[0]]
-wetopp = con_fi[9][rind[0]]
-wetdfe = con_fi[10][rind[0]]
-wettfe = con_fi[11][rind[0]]
-wetalk = con_fi[12][rind[0]]
-wetsil = con_fi[14][rind[0]]
+wettoc = con_fi[2][rind[0]]*mg_l_c
+wetnh4 = con_fi[3][rind[0]]*mg_l_n
+wetno3 = con_fi[4][rind[0]]*mg_l_n
+wetpo4 = con_fi[5][rind[0]]*mg_l_p
+wettnn = con_fi[6][rind[0]]*mg_l_n
+wettpp = con_fi[7][rind[0]]*mg_l_p
+wetonn = con_fi[8][rind[0]]*mg_l_n
+wetopp = con_fi[9][rind[0]]*mg_l_p
+wetdfe = con_fi[10][rind[0]]*mg_l_f*(1./1000)
+wettfe = con_fi[11][rind[0]]*mg_l_f*(1./1000)
+wetalk = con_fi[12][rind[0]]*mg_l_a
+wetsil = con_fi[14][rind[0]]*mg_l_s
 # winter dry conc
-wintoc = con_fi[2][rind[1]]
-winnh4 = con_fi[3][rind[1]]
-winno3 = con_fi[4][rind[1]]
-winpo4 = con_fi[5][rind[1]]
-wintnn = con_fi[6][rind[1]]
-wintpp = con_fi[7][rind[1]]
-winonn = con_fi[8][rind[1]]
-winopp = con_fi[9][rind[1]]
-windfe = con_fi[10][rind[1]]
-wintfe = con_fi[11][rind[1]]
-winalk = con_fi[12][rind[1]]
-winsil = con_fi[14][rind[1]]
+wintoc = con_fi[2][rind[1]]*mg_l_c
+winnh4 = con_fi[3][rind[1]]*mg_l_n
+winno3 = con_fi[4][rind[1]]*mg_l_n
+winpo4 = con_fi[5][rind[1]]*mg_l_p
+wintnn = con_fi[6][rind[1]]*mg_l_n
+wintpp = con_fi[7][rind[1]]*mg_l_p
+winonn = con_fi[8][rind[1]]*mg_l_n
+winopp = con_fi[9][rind[1]]*mg_l_p
+windfe = con_fi[10][rind[1]]*mg_l_f*(1./1000)
+wintfe = con_fi[11][rind[1]]*mg_l_f*(1./1000)
+winalk = con_fi[12][rind[1]]*mg_l_a
+winsil = con_fi[14][rind[1]]*mg_l_s
 # summer dry conc
-sumtoc = con_fi[2][rind[2]]
-sumnh4 = con_fi[3][rind[2]]
-sumno3 = con_fi[4][rind[2]]
-sumpo4 = con_fi[5][rind[2]]
-sumtnn = con_fi[6][rind[2]]
-sumtpp = con_fi[7][rind[2]]
-sumonn = con_fi[8][rind[2]]
-sumopp = con_fi[9][rind[2]]
-sumdfe = con_fi[10][rind[2]]
-sumtfe = con_fi[11][rind[2]]
-sumalk = con_fi[12][rind[2]]
-sumsil = con_fi[14][rind[2]]
+sumtoc = con_fi[2][rind[2]]*mg_l_c
+sumnh4 = con_fi[3][rind[2]]*mg_l_n
+sumno3 = con_fi[4][rind[2]]*mg_l_n
+sumpo4 = con_fi[5][rind[2]]*mg_l_p
+sumtnn = con_fi[6][rind[2]]*mg_l_n
+sumtpp = con_fi[7][rind[2]]*mg_l_p
+sumonn = con_fi[8][rind[2]]*mg_l_n
+sumopp = con_fi[9][rind[2]]*mg_l_p
+sumdfe = con_fi[10][rind[2]]*mg_l_f*(1./1000)
+sumtfe = con_fi[11][rind[2]]*mg_l_f*(1./1000)
+sumalk = con_fi[12][rind[2]]*mg_l_a
+sumsil = con_fi[14][rind[2]]*mg_l_s
 
 for d_i in range(bcmon['4'].shape[0]):
     flo_com[d_i,r_i] = bcmon['4'][d_i]
@@ -1071,7 +1142,10 @@ bcdf = pd.read_csv('/data/project1/minnaho/river_data/updated_2013_2017/suppleme
 bcdf['2'] = pd.to_datetime(bcdf['2'])
 bcdf.set_index(bcdf['2'],inplace=True)
 bcmon = bcdf.resample('M').mean()
+bcmon['4'][np.isnan(bcmon['4'])] = 0
 r_i = rnames.index('refugio_creek')
+tem_com[:,r_i] = bcmon['5']
+doo_com[:,r_i] = doo_com[:,r_i]*mg_l_o
 
 wet_flows_l = []
 for f_i in range(bcmon['4'].shape[0]):
@@ -1099,44 +1173,44 @@ print('dry median: ',dry_med)
 # river rows
 rind = np.where(con_fi[0]==rnames[r_i])[0]
 # wet conc
-wettoc = con_fi[2][rind[0]]
-wetnh4 = con_fi[3][rind[0]]
-wetno3 = con_fi[4][rind[0]]
-wetpo4 = con_fi[5][rind[0]]
-wettnn = con_fi[6][rind[0]]
-wettpp = con_fi[7][rind[0]]
-wetonn = con_fi[8][rind[0]]
-wetopp = con_fi[9][rind[0]]
-wetdfe = con_fi[10][rind[0]]
-wettfe = con_fi[11][rind[0]]
-wetalk = con_fi[12][rind[0]]
-wetsil = con_fi[14][rind[0]]
+wettoc = con_fi[2][rind[0]]*mg_l_c
+wetnh4 = con_fi[3][rind[0]]*mg_l_n
+wetno3 = con_fi[4][rind[0]]*mg_l_n
+wetpo4 = con_fi[5][rind[0]]*mg_l_p
+wettnn = con_fi[6][rind[0]]*mg_l_n
+wettpp = con_fi[7][rind[0]]*mg_l_p
+wetonn = con_fi[8][rind[0]]*mg_l_n
+wetopp = con_fi[9][rind[0]]*mg_l_p
+wetdfe = con_fi[10][rind[0]]*mg_l_f*(1./1000)
+wettfe = con_fi[11][rind[0]]*mg_l_f*(1./1000)
+wetalk = con_fi[12][rind[0]]*mg_l_a
+wetsil = con_fi[14][rind[0]]*mg_l_s
 # winter dry conc
-wintoc = con_fi[2][rind[1]]
-winnh4 = con_fi[3][rind[1]]
-winno3 = con_fi[4][rind[1]]
-winpo4 = con_fi[5][rind[1]]
-wintnn = con_fi[6][rind[1]]
-wintpp = con_fi[7][rind[1]]
-winonn = con_fi[8][rind[1]]
-winopp = con_fi[9][rind[1]]
-windfe = con_fi[10][rind[1]]
-wintfe = con_fi[11][rind[1]]
-winalk = con_fi[12][rind[1]]
-winsil = con_fi[14][rind[1]]
+wintoc = con_fi[2][rind[1]]*mg_l_c
+winnh4 = con_fi[3][rind[1]]*mg_l_n
+winno3 = con_fi[4][rind[1]]*mg_l_n
+winpo4 = con_fi[5][rind[1]]*mg_l_p
+wintnn = con_fi[6][rind[1]]*mg_l_n
+wintpp = con_fi[7][rind[1]]*mg_l_p
+winonn = con_fi[8][rind[1]]*mg_l_n
+winopp = con_fi[9][rind[1]]*mg_l_p
+windfe = con_fi[10][rind[1]]*mg_l_f*(1./1000)
+wintfe = con_fi[11][rind[1]]*mg_l_f*(1./1000)
+winalk = con_fi[12][rind[1]]*mg_l_a
+winsil = con_fi[14][rind[1]]*mg_l_s
 # summer dry conc
-sumtoc = con_fi[2][rind[2]]
-sumnh4 = con_fi[3][rind[2]]
-sumno3 = con_fi[4][rind[2]]
-sumpo4 = con_fi[5][rind[2]]
-sumtnn = con_fi[6][rind[2]]
-sumtpp = con_fi[7][rind[2]]
-sumonn = con_fi[8][rind[2]]
-sumopp = con_fi[9][rind[2]]
-sumdfe = con_fi[10][rind[2]]
-sumtfe = con_fi[11][rind[2]]
-sumalk = con_fi[12][rind[2]]
-sumsil = con_fi[14][rind[2]]
+sumtoc = con_fi[2][rind[2]]*mg_l_c
+sumnh4 = con_fi[3][rind[2]]*mg_l_n
+sumno3 = con_fi[4][rind[2]]*mg_l_n
+sumpo4 = con_fi[5][rind[2]]*mg_l_p
+sumtnn = con_fi[6][rind[2]]*mg_l_n
+sumtpp = con_fi[7][rind[2]]*mg_l_p
+sumonn = con_fi[8][rind[2]]*mg_l_n
+sumopp = con_fi[9][rind[2]]*mg_l_p
+sumdfe = con_fi[10][rind[2]]*mg_l_f*(1./1000)
+sumtfe = con_fi[11][rind[2]]*mg_l_f*(1./1000)
+sumalk = con_fi[12][rind[2]]*mg_l_a
+sumsil = con_fi[14][rind[2]]*mg_l_s
 
 for d_i in range(bcmon['4'].shape[0]):
     flo_com[d_i,r_i] = bcmon['4'][d_i]
@@ -1200,6 +1274,28 @@ for d_i in range(bcmon['4'].shape[0]):
         tfe_com[d_i,r_i] = wintfe 
         alk_com[d_i,r_i] = winalk 
         sil_com[d_i,r_i] = winsil 
+
+toc_com[toc_com<0] = 0
+nh4_com[nh4_com<0] = 0
+no3_com[no3_com<0] = 0
+po4_com[po4_com<0] = 0
+tnn_com[tnn_com<0] = 0
+tpp_com[tpp_com<0] = 0
+onn_com[onn_com<0] = 0
+opp_com[opp_com<0] = 0
+dfe_com[dfe_com<0] = 0
+dfe_com[np.isnan(dfe_com)] = val_df
+tfe_com[tfe_com<0] = 0
+tfe_com[np.isnan(tfe_com)] = val_tf
+alk_com[alk_com<0] = 0
+doo_com[doo_com<0] = 0
+tic_com[tic_com<0] = 0
+sil_com[sil_com<0] = 0
+
+for s_i in range(sil_com.shape[1]):
+    sil_com[:,s_i] = np.nanmax(sil_com[:,s_i])  
+#    if s_i != rnames.index('tijuana_river'):
+#        dfe_com[:,s_i] = np.nanmax(dfe_com[:,s_i])  
 
 # time array
 timeunit = 'days since 1997-01-01'
@@ -1277,3 +1373,39 @@ dfe_v[:,:] = dfe_com
 sil_v[:,:] = sil_com
 
 ncf.close()
+
+# monthly xlsx
+
+writer = pd.ExcelWriter('rivers_1997_2017_monthly.xlsx')
+
+# print to excel file
+for r_i in range(flo_com.shape[1]):
+    lat_tem = np.empty((flo_com.shape[0]))
+    lat_tem.fill(lat_arr[r_i])
+    lon_tem = np.empty((flo_com.shape[0]))
+    lon_tem.fill(lon_arr[r_i])
+    save_df = pd.DataFrame({'date':bcmon.index.date,
+    'flow m3/s':flo_com[:,r_i],
+    'NH4 mmol/m3':nh4_com[:,r_i],
+    'NO3 mmol/m3':no3_com[:,r_i],
+    'DO mmol/m3':doo_com[:,r_i],
+    'temperature C':tem_com[:,r_i],
+    'pH':phh_com[:,r_i],
+    'TN mmol/m3':tnn_com[:,r_i],
+    'TP mmol/m3':tpp_com[:,r_i],
+    'PO4 mmol/m3':po4_com[:,r_i],
+    'OP mmol/m3':opp_com[:,r_i],
+    'TOC mmol/m3':toc_com[:,r_i],
+    'ON mmol/m3':onn_com[:,r_i],
+    'total Fe mmol/m3':tfe_com[:,r_i],
+    'Alk mmol/m3':alk_com[:,r_i],
+    'salinity PSU':sal_com[:,r_i],
+    'dissolved Fe mmol/m3':dfe_com[:,r_i],
+    'TIC mmol/m3':tic_com[:,r_i],
+    'SiO4 mmol/m3':sil_com[:,r_i],
+    'latitude':lat_tem,
+    'longitude':lon_tem},
+    index=None,columns=None)
+    save_df.to_excel(writer,sheet_name=rnames[r_i][:31])
+
+writer.save()
