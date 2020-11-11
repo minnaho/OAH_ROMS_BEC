@@ -17,8 +17,8 @@ start_year = 2000
 end_year = 2000
 
 # between 1 and 12
-start_month = 1
-end_month = 9
+start_month = 7
+end_month = 8
 
 ######################
 # PATHS
@@ -31,10 +31,9 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # path with outputs
-roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/V3/daily/'
+roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/daily/'
 # path to save monthly averages
-monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/monthly/' 
-
+monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/monthly/'
 
 #########################
 # get list of model file names 

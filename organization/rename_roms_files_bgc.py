@@ -1,24 +1,22 @@
 ##################################
-# Take monthly averages
-# of biogeochemical model outputs
-# and find min/max and standard deviation 
-# ROMS output file names must conform to
-# model_name_file_type.Y????M??D??.nc
-# Minna Ho, UCLA, March 2018 
+# rename model files e.g., l2_scb_avg.01328.nc to 
+# l2_scb_avg.Y????M??D??.nc
+# Minna Ho, SCCWRP, Nov 2020
 ##################################
 import subprocess
+import glob as glob
 
 #########################################
 # CHANGE THESE INPUTS TO CHANGE YEARS 
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 2000
+start_year = 1999
 end_year = 2000
 
 # between 1 and 12
-start_month = 1
-end_month = 9
+start_month = 6
+end_month = 6 
 
 ######################
 # PATHS
@@ -28,12 +26,13 @@ model_name = 'l2_scb'
 
 # model file types e.g. bgc_flux_avg
 #model_types = ['phys_flux','avg','bgc_flux_avg']
-model_types = ['avg']
+model_types = ['bgc_flux_avg']
 
-# path with outputs
-roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/V3/daily/'
-# path to save monthly averages
-monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/monthly/' 
+# roms file path
+roms_path = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/'
+
+# daily path
+day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/daily/'
 
 
 #########################
@@ -45,15 +44,11 @@ for i in model_types:
     file_types.append(model_name+'_'+i+'.')
 
 ##############################
-# CALCULATE 
-# DAYS IN EACH MONTH
-# AND FIND MONTHLY AVERAGE
-# FOR EACH VARIABLE
+# make symbolic link from roms folders
+# with numeric file name
+# to daily folder with Y????M??D??
+# naming convention
 ##############################
-
-months_w_31_days = [1,3,5,7,8,10,12]
-leap_years = [1992,1996,2000,2004,2008,2012,2016,2020]
-
 for y in range(start_year,end_year+1):
     print('year: '+str(y))
     # if we are on the first year, starts at s_m
@@ -69,11 +64,7 @@ for y in range(start_year,end_year+1):
     for m in range(s_m,e_m): 
         print('month: '+str(m))
         year_month = 'Y'+str(y)+'M'+'%02d'%m
-        # loop through each file type
-        for f in file_types:
-            #################################
-            # find monthly average using ncra
-            ################################
-            print('starting ncra on '+str(f))
-            subprocess.call('ncra -O '+roms_path+f+year_month+'D*.nc '+monthly_path+f+year_month+'.nc',shell=True) 
+        # use glob to find number of avg files
+        roms_fi = sorted(glob.glob(roms_path+'AVG_'+year_month+'/'+file_types[0]+'*'))
+        subprocess.call('ln -fs '+roms_fi[0]+' '+day_path+file_types[0]+year_month+'.nc',shell=True)
 
