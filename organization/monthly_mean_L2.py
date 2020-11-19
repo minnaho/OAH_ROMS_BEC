@@ -16,11 +16,11 @@ from netCDF4 import Dataset
 #########################################
 
 start_year = 1999
-end_year = 1999
+end_year = 2000
 
 # between 1 and 12
-start_month = 10
-end_month = 12
+start_month = 6
+end_month = 8
 
 ######################
 # PATHS
@@ -35,7 +35,8 @@ model_types = ['avg']
 # path with outputs
 roms_path    = '/data/project5/kesf/ROMS/L2_SCB/DAILY/'
 # path to save monthly averages
-monthly_path = '/data/project5/kesf/ROMS/L2_SCB/monthly/' 
+#monthly_path = '/data/project5/kesf/ROMS/L2_SCB/monthly/' 
+monthly_path = '/data/project3/minnaho/freshwater/postprocessing/monthly_avg_all/control/' 
 
 
 #########################

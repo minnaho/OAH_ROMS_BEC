@@ -16,7 +16,7 @@ end_year = 2000
 
 # between 1 and 12
 start_month = 6
-end_month = 6 
+end_month = 8 
 
 ######################
 # PATHS
@@ -32,7 +32,7 @@ model_types = ['bgc_flux_avg']
 roms_path = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/'
 
 # daily path
-day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/daily/'
+day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/monthly/'
 
 
 #########################

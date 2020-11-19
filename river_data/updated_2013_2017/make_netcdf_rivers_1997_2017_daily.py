@@ -52,6 +52,7 @@ lon_arr = np.empty((len(rnames)))
 
 flo_arr = np.empty((flow.shape[0],len(rnames)))
 toc_arr = np.empty((flow.shape[0],len(rnames)))
+val_to = 0.881 # value based off 20% of average
 nh4_arr = np.empty((flow.shape[0],len(rnames)))
 no3_arr = np.empty((flow.shape[0],len(rnames)))
 po4_arr = np.empty((flow.shape[0],len(rnames)))
@@ -338,7 +339,7 @@ for r_i in range(len(riv_fi)):
 
     if rnames[r_i] == 'santa_margarita':
         for d_i in range(flow.shape[0]):
-            toc_arr[d_i,r_i] = np.nan 
+            toc_arr[d_i,r_i] = val_to
             nh4_arr[d_i,r_i] = df['Ammonia (mg/L)'][d_i]
             no3_arr[d_i,r_i] = df['Nitrate (mg/L)'][d_i]
             po4_arr[d_i,r_i] = df['Phosphate (mg/L)'][d_i]
@@ -352,7 +353,10 @@ for r_i in range(len(riv_fi)):
             sal_arr[d_i,r_i] = val_sa
             tem_arr[d_i,r_i] = df['temperature C'][d_i]
             doo_arr[d_i,r_i] = df['dissolved oxygen mg/L'][d_i]
-            phh_arr[d_i,r_i] = df['pH'][d_i]
+            if df['pH'][d_i] == np.nan:
+                phh_arr[d_i,r_i] = 7
+            else:
+                phh_arr[d_i,r_i] = df['pH'][d_i]
             tic_arr[d_i,r_i] = df['TIC mg/L total inorganic C'][d_i]
     if (
         rnames[r_i] == 'bell_canyon' or
@@ -840,7 +844,7 @@ smmon = smdf.resample('M').mean()
 
 flo_com[:flo10.shape[0],rind] = smmon['flow m3/s']['1997':'2006']
 flo_com[:,rind][np.isnan(flo_com[:,rind])] = 0
-toc_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*np.nan
+toc_com[:flo10.shape[0],rind] = np.ones(flo10.shape[0])*val_to
 nh4_com[:flo10.shape[0],rind] = smmon['NH4 mg/L']['1997':'2006']*mg_l_n
 no3_com[:flo10.shape[0],rind] = smmon['NO3 mg/L']['1997':'2006']*mg_l_n
 po4_com[:flo10.shape[0],rind] = smmon['PO4 mg/L']['1997':'2006']*mg_l_p
@@ -869,7 +873,7 @@ bcdf.set_index(bcdf['2'],inplace=True)
 bcmon = bcdf.resample('M').mean()
 bcmon['4'][np.isnan(bcmon['4'])] = 0
 r_i = rnames.index('bell_canyon')
-tem_com[:,r_i] = bcmon['5']
+tem_com[:,r_i] = bcmon['5'].interpolate()
 doo_com[:,r_i] = doo_com[:,r_i]*mg_l_o
 
 wet_flows_l = []
@@ -1007,7 +1011,7 @@ bcdf.set_index(bcdf['2'],inplace=True)
 bcmon = bcdf.resample('M').mean()
 bcmon['4'][np.isnan(bcmon['4'])] = 0
 r_i = rnames.index('arroyo_honda_creek')
-tem_com[:,r_i] = bcmon['5']
+tem_com[:,r_i] = bcmon['5'].interpolate()
 doo_com[:,r_i] = doo_com[:,r_i]*mg_l_o
 
 wet_flows_l = []
@@ -1145,7 +1149,7 @@ bcdf.set_index(bcdf['2'],inplace=True)
 bcmon = bcdf.resample('M').mean()
 bcmon['4'][np.isnan(bcmon['4'])] = 0
 r_i = rnames.index('refugio_creek')
-tem_com[:,r_i] = bcmon['5']
+tem_com[:,r_i] = bcmon['5'].interpolate()
 doo_com[:,r_i] = doo_com[:,r_i]*mg_l_o
 
 wet_flows_l = []
@@ -1276,6 +1280,8 @@ for d_i in range(bcmon['4'].shape[0]):
         alk_com[d_i,r_i] = winalk 
         sil_com[d_i,r_i] = winsil 
 
+flo_com[np.where(np.isnan(flo_com))] = 0
+doo_com[np.where(np.isnan(doo_com))] = val_do*mg_l_o
 toc_com[toc_com<0] = 0
 nh4_com[nh4_com<0] = 0
 no3_com[no3_com<0] = 0

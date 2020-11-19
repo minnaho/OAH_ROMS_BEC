@@ -50,10 +50,10 @@ grid_nc = Dataset(grid_path,'r')
 lat_nc = np.array(grid_nc.variables['lat_rho'])
 lon_nc = np.array(grid_nc.variables['lon_rho'])
 
-lat_min = 32.4
-lat_max = 34.6
-lon_min = -120.8
-lon_max = -117
+lat_min = 33.5
+lat_max = 34.1
+lon_min = -118.9
+lon_max = -117.5
 
 # plot
 axis_tick_size = 16
