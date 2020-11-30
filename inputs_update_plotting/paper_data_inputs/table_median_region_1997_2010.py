@@ -864,7 +864,11 @@ pma_mean_dip_scb = pma_mean_dip_ssd+pma_mean_dip_nsd+pma_mean_dip_occ+pma_mean_d
 # natural current riverine flows
 # subtract from total to get non point source
 ####################################
-#Summary Table_natural_historical.xlsx
+#Summary Table_natural_historical_current.xlsx
+# m3/s
+nat_flo = [2.14E7,4.25E7,2.66E7,2.96E7,1.07E7,6.98E7,1.12E7,2.12E8]
+
+# kg/y
 nat_tpp =[637,1463,2602,2901,95,1921,317,9937]    
 nat_dip = [56,128,227,253,8,168,28,866]
 nat_tnn = [4584,10524,18710,20863,685,13817,2278,33289]          

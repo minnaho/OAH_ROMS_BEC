@@ -768,7 +768,7 @@ for f_i in range(len(fnames)):
     alk_arr[:,f_i] = np.array(dat_fi[15]).astype(float)*mg_l_a
     sal_arr[:,f_i] = np.array(dat_fi[16]).astype(float)
     dfe_arr[:,f_i] = (np.array(dat_fi[17]).astype(float)*mg_l_f)/1000
-
+    
     # assign monthly values
     dat_mon = dat_fi.resample('M').mean()
     lat_mon[f_i] = dat_mon[18][0]
@@ -791,6 +791,193 @@ for f_i in range(len(fnames)):
     alk_mon[:,f_i] = np.array(dat_mon[15]).astype(float)*mg_l_a
     sal_mon[:,f_i] = np.array(dat_mon[16]).astype(float)
     dfe_mon[:,f_i] = (np.array(dat_mon[17]).astype(float)*mg_l_f)/1000
+
+
+# get rid of all NaNs
+# arr 
+for f_i in range(len(fnames)):
+    ok = ~np.isnan(flo_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = flo_arr[:,f_i][~np.isnan(flo_arr[:,f_i])]
+    x  = np.isnan(flo_arr[:,f_i]).ravel().nonzero()[0]
+    flo_arr[:,f_i][np.isnan(flo_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(nh4_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = nh4_arr[:,f_i][~np.isnan(nh4_arr[:,f_i])]
+    x  = np.isnan(nh4_arr[:,f_i]).ravel().nonzero()[0]
+    nh4_arr[:,f_i][np.isnan(nh4_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(no3_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = no3_arr[:,f_i][~np.isnan(no3_arr[:,f_i])]
+    x  = np.isnan(no3_arr[:,f_i]).ravel().nonzero()[0]
+    no3_arr[:,f_i][np.isnan(no3_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(doo_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = doo_arr[:,f_i][~np.isnan(doo_arr[:,f_i])]
+    x  = np.isnan(doo_arr[:,f_i]).ravel().nonzero()[0]
+    doo_arr[:,f_i][np.isnan(doo_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tem_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tem_arr[:,f_i][~np.isnan(tem_arr[:,f_i])]
+    x  = np.isnan(tem_arr[:,f_i]).ravel().nonzero()[0]
+    tem_arr[:,f_i][np.isnan(tem_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(bod_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = bod_arr[:,f_i][~np.isnan(bod_arr[:,f_i])]
+    x  = np.isnan(bod_arr[:,f_i]).ravel().nonzero()[0]
+    bod_arr[:,f_i][np.isnan(bod_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(phh_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = phh_arr[:,f_i][~np.isnan(phh_arr[:,f_i])]
+    x  = np.isnan(phh_arr[:,f_i]).ravel().nonzero()[0]
+    phh_arr[:,f_i][np.isnan(phh_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tpp_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tpp_arr[:,f_i][~np.isnan(tpp_arr[:,f_i])]
+    x  = np.isnan(tpp_arr[:,f_i]).ravel().nonzero()[0]
+    tpp_arr[:,f_i][np.isnan(tpp_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(po4_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = po4_arr[:,f_i][~np.isnan(po4_arr[:,f_i])]
+    x  = np.isnan(po4_arr[:,f_i]).ravel().nonzero()[0]
+    po4_arr[:,f_i][np.isnan(po4_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(opp_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = opp_arr[:,f_i][~np.isnan(opp_arr[:,f_i])]
+    x  = np.isnan(opp_arr[:,f_i]).ravel().nonzero()[0]
+    opp_arr[:,f_i][np.isnan(opp_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(toc_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = toc_arr[:,f_i][~np.isnan(toc_arr[:,f_i])]
+    x  = np.isnan(toc_arr[:,f_i]).ravel().nonzero()[0]
+    toc_arr[:,f_i][np.isnan(toc_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(onn_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = onn_arr[:,f_i][~np.isnan(onn_arr[:,f_i])]
+    x  = np.isnan(onn_arr[:,f_i]).ravel().nonzero()[0]
+    onn_arr[:,f_i][np.isnan(onn_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tnn_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tnn_arr[:,f_i][~np.isnan(tnn_arr[:,f_i])]
+    x  = np.isnan(tnn_arr[:,f_i]).ravel().nonzero()[0]
+    tnn_arr[:,f_i][np.isnan(tnn_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tfe_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tfe_arr[:,f_i][~np.isnan(tfe_arr[:,f_i])]
+    x  = np.isnan(tfe_arr[:,f_i]).ravel().nonzero()[0]
+    tfe_arr[:,f_i][np.isnan(tfe_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(sil_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = sil_arr[:,f_i][~np.isnan(sil_arr[:,f_i])]
+    x  = np.isnan(sil_arr[:,f_i]).ravel().nonzero()[0]
+    sil_arr[:,f_i][np.isnan(sil_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(alk_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = alk_arr[:,f_i][~np.isnan(alk_arr[:,f_i])]
+    x  = np.isnan(alk_arr[:,f_i]).ravel().nonzero()[0]
+    alk_arr[:,f_i][np.isnan(alk_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(sal_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = sal_arr[:,f_i][~np.isnan(sal_arr[:,f_i])]
+    x  = np.isnan(sal_arr[:,f_i]).ravel().nonzero()[0]
+    sal_arr[:,f_i][np.isnan(sal_arr[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(dfe_arr[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = dfe_arr[:,f_i][~np.isnan(dfe_arr[:,f_i])]
+    x  = np.isnan(dfe_arr[:,f_i]).ravel().nonzero()[0]
+    dfe_arr[:,f_i][np.isnan(dfe_arr[:,f_i])] = np.interp(x, xp, fp)
+
+for f_i in range(len(fnames)):
+    ok = ~np.isnan(flo_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = flo_mon[:,f_i][~np.isnan(flo_mon[:,f_i])]
+    x  = np.isnan(flo_mon[:,f_i]).ravel().nonzero()[0]
+    flo_mon[:,f_i][np.isnan(flo_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(nh4_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = nh4_mon[:,f_i][~np.isnan(nh4_mon[:,f_i])]
+    x  = np.isnan(nh4_mon[:,f_i]).ravel().nonzero()[0]
+    nh4_mon[:,f_i][np.isnan(nh4_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(no3_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = no3_mon[:,f_i][~np.isnan(no3_mon[:,f_i])]
+    x  = np.isnan(no3_mon[:,f_i]).ravel().nonzero()[0]
+    no3_mon[:,f_i][np.isnan(no3_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(doo_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = doo_mon[:,f_i][~np.isnan(doo_mon[:,f_i])]
+    x  = np.isnan(doo_mon[:,f_i]).ravel().nonzero()[0]
+    doo_mon[:,f_i][np.isnan(doo_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tem_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tem_mon[:,f_i][~np.isnan(tem_mon[:,f_i])]
+    x  = np.isnan(tem_mon[:,f_i]).ravel().nonzero()[0]
+    tem_mon[:,f_i][np.isnan(tem_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(bod_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = bod_mon[:,f_i][~np.isnan(bod_mon[:,f_i])]
+    x  = np.isnan(bod_mon[:,f_i]).ravel().nonzero()[0]
+    bod_mon[:,f_i][np.isnan(bod_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(phh_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = phh_mon[:,f_i][~np.isnan(phh_mon[:,f_i])]
+    x  = np.isnan(phh_mon[:,f_i]).ravel().nonzero()[0]
+    phh_mon[:,f_i][np.isnan(phh_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tpp_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tpp_mon[:,f_i][~np.isnan(tpp_mon[:,f_i])]
+    x  = np.isnan(tpp_mon[:,f_i]).ravel().nonzero()[0]
+    tpp_mon[:,f_i][np.isnan(tpp_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(po4_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = po4_mon[:,f_i][~np.isnan(po4_mon[:,f_i])]
+    x  = np.isnan(po4_mon[:,f_i]).ravel().nonzero()[0]
+    po4_mon[:,f_i][np.isnan(po4_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(opp_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = opp_mon[:,f_i][~np.isnan(opp_mon[:,f_i])]
+    x  = np.isnan(opp_mon[:,f_i]).ravel().nonzero()[0]
+    opp_mon[:,f_i][np.isnan(opp_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(toc_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = toc_mon[:,f_i][~np.isnan(toc_mon[:,f_i])]
+    x  = np.isnan(toc_mon[:,f_i]).ravel().nonzero()[0]
+    toc_mon[:,f_i][np.isnan(toc_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(onn_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = onn_mon[:,f_i][~np.isnan(onn_mon[:,f_i])]
+    x  = np.isnan(onn_mon[:,f_i]).ravel().nonzero()[0]
+    onn_mon[:,f_i][np.isnan(onn_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tnn_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tnn_mon[:,f_i][~np.isnan(tnn_mon[:,f_i])]
+    x  = np.isnan(tnn_mon[:,f_i]).ravel().nonzero()[0]
+    tnn_mon[:,f_i][np.isnan(tnn_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tfe_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tfe_mon[:,f_i][~np.isnan(tfe_mon[:,f_i])]
+    x  = np.isnan(tfe_mon[:,f_i]).ravel().nonzero()[0]
+    tfe_mon[:,f_i][np.isnan(tfe_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(sil_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = sil_mon[:,f_i][~np.isnan(sil_mon[:,f_i])]
+    x  = np.isnan(sil_mon[:,f_i]).ravel().nonzero()[0]
+    sil_mon[:,f_i][np.isnan(sil_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(alk_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = alk_mon[:,f_i][~np.isnan(alk_mon[:,f_i])]
+    x  = np.isnan(alk_mon[:,f_i]).ravel().nonzero()[0]
+    alk_mon[:,f_i][np.isnan(alk_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(sal_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = sal_mon[:,f_i][~np.isnan(sal_mon[:,f_i])]
+    x  = np.isnan(sal_mon[:,f_i]).ravel().nonzero()[0]
+    sal_mon[:,f_i][np.isnan(sal_mon[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(dfe_mon[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = dfe_mon[:,f_i][~np.isnan(dfe_mon[:,f_i])]
+    x  = np.isnan(dfe_mon[:,f_i]).ravel().nonzero()[0]
+    dfe_mon[:,f_i][np.isnan(dfe_mon[:,f_i])] = np.interp(x, xp, fp)
 
 # time array
 timeunit = 'days since 1997-01-01'
@@ -1009,3 +1196,43 @@ for p_i in range(flo_mon.shape[1]):
     df.to_excel(writer,sheet_name=rnames[p_i])
 
 writer.save()
+
+np.where(np.isnan(flo_arr))
+np.where(np.isnan(nh4_arr))
+np.where(np.isnan(no3_arr))
+np.where(np.isnan(no2_arr))
+np.where(np.isnan(doo_arr))
+np.where(np.isnan(tem_arr))
+np.where(np.isnan(bod_arr))
+np.where(np.isnan(phh_arr))
+np.where(np.isnan(tpp_arr))
+np.where(np.isnan(tnn_arr))
+np.where(np.isnan(po4_arr))
+np.where(np.isnan(opp_arr))
+np.where(np.isnan(toc_arr))
+np.where(np.isnan(onn_arr))
+np.where(np.isnan(tfe_arr))
+np.where(np.isnan(sil_arr))
+np.where(np.isnan(alk_arr))
+np.where(np.isnan(sal_arr))
+np.where(np.isnan(dfe_arr))
+
+np.where(np.isnan(flo_mon))
+np.where(np.isnan(nh4_mon))
+np.where(np.isnan(no3_mon))
+np.where(np.isnan(no2_mon))
+np.where(np.isnan(doo_mon))
+np.where(np.isnan(tem_mon))
+np.where(np.isnan(bod_mon))
+np.where(np.isnan(phh_mon))
+np.where(np.isnan(tpp_mon))
+np.where(np.isnan(tnn_mon))
+np.where(np.isnan(po4_mon))
+np.where(np.isnan(opp_mon))
+np.where(np.isnan(toc_mon))
+np.where(np.isnan(onn_mon))
+np.where(np.isnan(tfe_mon))
+np.where(np.isnan(sil_mon))
+np.where(np.isnan(alk_mon))
+np.where(np.isnan(sal_mon))
+np.where(np.isnan(dfe_mon))

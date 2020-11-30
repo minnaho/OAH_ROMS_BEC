@@ -3,7 +3,7 @@
 # average wet season flows (Nov-Apr)
 import pandas as pd
 import numpy as np
-from netCDF4 import Dataset,date2num
+from netCDF4 import Dataset,date2num,num2date
 import glob as glob
 
 # wet/dry months
@@ -1294,6 +1294,7 @@ dfe_com[dfe_com<0] = 0
 dfe_com[np.isnan(dfe_com)] = val_df
 tfe_com[tfe_com<0] = 0
 tfe_com[np.isnan(tfe_com)] = val_tf
+phh_com[np.isnan(phh_com)] = val_ph
 alk_com[alk_com<0] = 0
 doo_com[doo_com<0] = 0
 tic_com[tic_com<0] = 0
@@ -1417,7 +1418,7 @@ for r_i in range(flo_com.shape[1]):
 
 writer.save()
 
-# make daily data that is monthly interpolated 1997-2006 and daily 2007-2017
+# make daily data that is old daily data 1997-2006 and daily 2007-2017
 pd_daily = pd.date_range(start='1997-01-01',end='2017-12-31',freq='D')
 in07 = 3652
 
@@ -1439,6 +1440,7 @@ alk_day = np.ones((pd_daily.shape[0],len(rnames)))*np.nan
 sal_day = np.ones((pd_daily.shape[0],len(rnames)))*np.nan
 dfe_day = np.ones((pd_daily.shape[0],len(rnames)))*np.nan
 sil_day = np.ones((pd_daily.shape[0],len(rnames)))*np.nan
+
 
 flo_day[in07:,:] = flo_arr[:,:]
 nh4_day[in07:,:] = nh4_arr[:,:]
@@ -1509,6 +1511,163 @@ for r_i in range(flo_com.shape[1]):
     sal_day[:in07,r_i] = day_df['dissolved Fe mmol/m3'][:in07]
     dfe_day[:in07,r_i] = day_df['TIC mmol/m3'][:in07]
     sil_day[:in07,r_i] = day_df['SiO4 mmol/m3'][:in07]
+
+# load old daily netcdf and 
+# overwrite 1997-2006 for all rivers except 3 new ones
+nc10_d = Dataset('../inputs_1997_2000/south_coast_rivers_10_years_no_watershed_new.nc','r')
+nc24_d = Dataset('../inputs_1997_2000/south_coast_rivers_24_years.nc','r')
+
+lat10_d = np.array(nc10_d.variables['latitude'])
+
+flo10_d = np.array(nc10_d.variables['flow'])
+nh410_d = np.array(nc10_d.variables['ammonium'])
+no310_d = np.array(nc10_d.variables['nitrate'])
+po410_d = np.array(nc10_d.variables['phosphate'])
+tnn10_d = np.array(nc10_d.variables['total_nitrogen'])
+tpp10_d = np.array(nc10_d.variables['total_phosphorus'])
+alk10_d = np.array(nc10_d.variables['alkalinity'])
+tem10_d = np.array(nc10_d.variables['temperature'])
+
+tim24_d = num2date(np.array(nc24_d.variables['time']),nc24_d.variables['time'].units,only_use_cftime_datetimes=False)
+
+flo24_d = np.array(nc24_d.variables['flow'])
+nh424_d = np.array(nc24_d.variables['ammonium'])
+no324_d = np.array(nc24_d.variables['nitrate'])
+po424_d = np.array(nc24_d.variables['phosphate'])
+tnn24_d = np.array(nc24_d.variables['total_nitrogen'])
+tpp24_d = np.array(nc24_d.variables['total_phosphorus'])
+alk24_d = np.array(nc24_d.variables['alkalinity'])
+tem24_d = np.array(nc24_d.variables['temperature'])
+
+# should be 3652 days but is only 3650 days
+for r_i in range(len(nm10)):
+    rind = rnames.index(nm10[r_i])
+    # exclude santa margarita and tijuana
+    if nm10[r_i] != 'santa_margarita' or nm10[r_i] != 'tijuana_river':
+        flo_day[:flo10_d.shape[0]+2,rind] = list(flo10_d[:,r_i,r_i])+(2*[flo10_d[-1,r_i,r_i]]) 
+        nh4_day[:nh410_d.shape[0]+2,rind] = list(nh410_d[:,r_i,r_i])+(2*[nh410_d[-1,r_i,r_i]])
+        no3_day[:no310_d.shape[0]+2,rind] = list(no310_d[:,r_i,r_i])+(2*[no310_d[-1,r_i,r_i]])
+        po4_day[:po410_d.shape[0]+2,rind] = list(po410_d[:,r_i,r_i])+(2*[po410_d[-1,r_i,r_i]])
+        tnn_day[:tnn10_d.shape[0]+2,rind] = list(tnn10_d[:,r_i,r_i])+(2*[tnn10_d[-1,r_i,r_i]])
+        tpp_day[:tpp10_d.shape[0]+2,rind] = list(tpp10_d[:,r_i,r_i])+(2*[tpp10_d[-1,r_i,r_i]])
+        alk_day[:alk10_d.shape[0]+2,rind] = list(alk10_d[:,r_i,r_i])+(2*[alk10_d[-1,r_i,r_i]])
+        tem_day[:tem10_d.shape[0]+2,rind] = list(tem10_d[:,r_i,r_i])+(2*[tem10_d[-1,r_i,r_i]])
+        doo_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*doo_mon[0,rind]
+        phh_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*phh_mon[0,rind]
+        tic_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*tic_mon[0,rind]
+        sil_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*sil_mon[0,rind]
+
+ind24_1997 = 2557  # 1997-01-01
+ind24_2006 = 6209 # 2007-01-01
+for r_i in range(len(nm24)):
+    rind = rnames.index(nm24[r_i])
+    flo_day[:flo10_d.shape[0]+2,rind] = flo24_d[ind24_1997:ind24_2006,r_i,r_i]
+    nh4_day[:nh410_d.shape[0]+2,rind] = nh424_d[ind24_1997:ind24_2006,r_i,r_i]
+    no3_day[:no310_d.shape[0]+2,rind] = no324_d[ind24_1997:ind24_2006,r_i,r_i]
+    po4_day[:po410_d.shape[0]+2,rind] = po424_d[ind24_1997:ind24_2006,r_i,r_i]
+    tnn_day[:tnn10_d.shape[0]+2,rind] = tnn24_d[ind24_1997:ind24_2006,r_i,r_i]
+    tpp_day[:tpp10_d.shape[0]+2,rind] = tpp24_d[ind24_1997:ind24_2006,r_i,r_i]
+    alk_day[:alk10_d.shape[0]+2,rind] = alk24_d[ind24_1997:ind24_2006,r_i,r_i]
+    tem_day[:tem10_d.shape[0]+2,rind] = tem24_d[ind24_1997:ind24_2006,r_i,r_i]
+    doo_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*doo_mon[0,rind]
+    phh_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*phh_mon[0,rind]
+    tic_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*tic_mon[0,rind]
+    sil_day[:flo10_d.shape[0]+2,rind] = np.ones(flo10_d.shape[0]+2)*sil_mon[0,rind]
+
+doo_day[np.isnan(doo_day)] = val_do*mg_l_o
+phh_day[np.isnan(phh_day)] = val_ph
+toc_day[np.isnan(toc_day)] = val_to
+tfe_day[np.isnan(tfe_day)] = val_tf
+dfe_day[np.isnan(dfe_day)] = val_df
+
+
+for f_i in range(len(rnames)):
+    ok = ~np.isnan(flo_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = flo_day[:,f_i][~np.isnan(flo_day[:,f_i])]
+    x  = np.isnan(flo_day[:,f_i]).ravel().nonzero()[0]
+    flo_day[:,f_i][np.isnan(flo_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(nh4_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = nh4_day[:,f_i][~np.isnan(nh4_day[:,f_i])]
+    x  = np.isnan(nh4_day[:,f_i]).ravel().nonzero()[0]
+    nh4_day[:,f_i][np.isnan(nh4_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(no3_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = no3_day[:,f_i][~np.isnan(no3_day[:,f_i])]
+    x  = np.isnan(no3_day[:,f_i]).ravel().nonzero()[0]
+    no3_day[:,f_i][np.isnan(no3_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(doo_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = doo_day[:,f_i][~np.isnan(doo_day[:,f_i])]
+    x  = np.isnan(doo_day[:,f_i]).ravel().nonzero()[0]
+    doo_day[:,f_i][np.isnan(doo_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tem_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tem_day[:,f_i][~np.isnan(tem_day[:,f_i])]
+    x  = np.isnan(tem_day[:,f_i]).ravel().nonzero()[0]
+    tem_day[:,f_i][np.isnan(tem_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(phh_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = phh_day[:,f_i][~np.isnan(phh_day[:,f_i])]
+    x  = np.isnan(phh_day[:,f_i]).ravel().nonzero()[0]
+    phh_day[:,f_i][np.isnan(phh_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tpp_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tpp_day[:,f_i][~np.isnan(tpp_day[:,f_i])]
+    x  = np.isnan(tpp_day[:,f_i]).ravel().nonzero()[0]
+    tpp_day[:,f_i][np.isnan(tpp_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(po4_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = po4_day[:,f_i][~np.isnan(po4_day[:,f_i])]
+    x  = np.isnan(po4_day[:,f_i]).ravel().nonzero()[0]
+    po4_day[:,f_i][np.isnan(po4_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(opp_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = opp_day[:,f_i][~np.isnan(opp_day[:,f_i])]
+    x  = np.isnan(opp_day[:,f_i]).ravel().nonzero()[0]
+    opp_day[:,f_i][np.isnan(opp_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(toc_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = toc_day[:,f_i][~np.isnan(toc_day[:,f_i])]
+    x  = np.isnan(toc_day[:,f_i]).ravel().nonzero()[0]
+    toc_day[:,f_i][np.isnan(toc_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(onn_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = onn_day[:,f_i][~np.isnan(onn_day[:,f_i])]
+    x  = np.isnan(onn_day[:,f_i]).ravel().nonzero()[0]
+    onn_day[:,f_i][np.isnan(onn_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tnn_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tnn_day[:,f_i][~np.isnan(tnn_day[:,f_i])]
+    x  = np.isnan(tnn_day[:,f_i]).ravel().nonzero()[0]
+    tnn_day[:,f_i][np.isnan(tnn_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(tfe_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = tfe_day[:,f_i][~np.isnan(tfe_day[:,f_i])]
+    x  = np.isnan(tfe_day[:,f_i]).ravel().nonzero()[0]
+    tfe_day[:,f_i][np.isnan(tfe_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(sil_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = sil_day[:,f_i][~np.isnan(sil_day[:,f_i])]
+    x  = np.isnan(sil_day[:,f_i]).ravel().nonzero()[0]
+    sil_day[:,f_i][np.isnan(sil_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(alk_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = alk_day[:,f_i][~np.isnan(alk_day[:,f_i])]
+    x  = np.isnan(alk_day[:,f_i]).ravel().nonzero()[0]
+    alk_day[:,f_i][np.isnan(alk_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(sal_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = sal_day[:,f_i][~np.isnan(sal_day[:,f_i])]
+    x  = np.isnan(sal_day[:,f_i]).ravel().nonzero()[0]
+    sal_day[:,f_i][np.isnan(sal_day[:,f_i])] = np.interp(x, xp, fp)
+    ok = ~np.isnan(dfe_day[:,f_i])
+    xp = ok.ravel().nonzero()[0]
+    fp = dfe_day[:,f_i][~np.isnan(dfe_day[:,f_i])]
+    x  = np.isnan(dfe_day[:,f_i]).ravel().nonzero()[0]
+    dfe_day[:,f_i][np.isnan(dfe_day[:,f_i])] = np.interp(x, xp, fp)
+
 
 
 # daily xlsx
@@ -1626,3 +1785,41 @@ sil_v[:,:] = sil_day
 
 ncf.close()
 
+# check if any nans
+np.where(np.isnan(flo_com))
+np.where(np.isnan(nh4_com))
+np.where(np.isnan(no3_com))
+np.where(np.isnan(doo_com))
+np.where(np.isnan(tem_com))
+np.where(np.isnan(phh_com))
+np.where(np.isnan(tpp_com))
+np.where(np.isnan(tnn_com))
+np.where(np.isnan(po4_com))
+np.where(np.isnan(opp_com))
+np.where(np.isnan(toc_com))
+np.where(np.isnan(tic_com))
+np.where(np.isnan(onn_com))
+np.where(np.isnan(tfe_com))
+np.where(np.isnan(alk_com))
+np.where(np.isnan(sal_com))
+np.where(np.isnan(dfe_com))
+np.where(np.isnan(sil_com))
+
+np.where(np.isnan(flo_day))
+np.where(np.isnan(nh4_day))
+np.where(np.isnan(no3_day))
+np.where(np.isnan(doo_day))
+np.where(np.isnan(tem_day))
+np.where(np.isnan(phh_day))
+np.where(np.isnan(tpp_day))
+np.where(np.isnan(tnn_day))
+np.where(np.isnan(po4_day))
+np.where(np.isnan(opp_day))
+np.where(np.isnan(toc_day))
+np.where(np.isnan(tic_day))
+np.where(np.isnan(onn_day))
+np.where(np.isnan(tfe_day))
+np.where(np.isnan(alk_day))
+np.where(np.isnan(sal_day))
+np.where(np.isnan(dfe_day))
+np.where(np.isnan(sil_day))
