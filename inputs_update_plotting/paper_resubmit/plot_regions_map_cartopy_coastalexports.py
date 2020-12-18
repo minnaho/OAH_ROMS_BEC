@@ -99,12 +99,12 @@ rivershp = cpf.ShapelyFeature(shpreader.Reader(shpfile).geometries(),ccrs.PlateC
 ax.add_feature(rivershp)
 
 # river dots
-m_size = 20
-ax.scatter(lons_river,lats_river,s=m_size,marker='o',facecolors='red',edgecolor='red',lw=1,label='River',zorder=10)
+m_size = 40
+ax.scatter(lons_river,lats_river,s=m_size,marker='^',facecolors='lightgreen',edgecolor='green',lw=1,label='River',zorder=10)
 
 # POTWs
 m_size = 150
-maj_potw_plt = ax.scatter(lons_major_potw,lats_major_potw,s=m_size,marker='o',facecolors='none',edgecolor='yellow',lw=3,label='Major POTW')
+maj_potw_plt = ax.scatter(lons_major_potw,lats_major_potw,s=m_size,marker='o',facecolors='none',edgecolor='gold',lw=3,label='Major POTW')
 #maj_potw_plt = ax.scatter(lons_major_potw,lats_major_potw,s=m_size,marker='o',facecolors='none',edgecolor='blue',lw=3)
 min_potw_plt = ax.scatter(lons_minor_potw,lats_minor_potw,s=m_size,marker='s',facecolors='none',edgecolor='k',lw=2,label='Minor POTW')
 

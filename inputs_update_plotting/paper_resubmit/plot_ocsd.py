@@ -86,35 +86,33 @@ rcol = 'blue'
 savename = fig_path+'ocsd_ts.pdf'
 fig,axes = plt.subplots(5,1,sharex=True,figsize=[figw,figh])
 
-axes.flat[0].plot(major_time_dt,major_flo,color=pcol)
+axes.flat[0].plot(major_time_dt,major_nh4*(1./mg_l_n),color=pcol)
 ax0 = axes.flat[0].twinx()
-ax0.plot(major_time_dt,major_sal,color=rcol,linestyle='--')
+ax0.plot(major_time_dt,major_no3*(1./mg_l_n),color=rcol,linestyle='--')
 
 axes.flat[1].plot(major_time_dt,major_on*(1./mg_l_n),color=pcol)
 ax1 = axes.flat[1].twinx()
 ax1.plot(major_time_dt,major_bod*(1./mg_l_o),color=rcol,linestyle='--')
 
-axes.flat[2].plot(major_time_dt,major_nh4*(1./mg_l_n),color=pcol)
-ax2 = axes.flat[2].twinx()
-ax2.plot(major_time_dt,major_no3*(1./mg_l_n),color=rcol,linestyle='--')
+axes.flat[2].plot(major_time_dt,major_sil*(1./mg_l_s),color=pcol)
 
-axes.flat[3].plot(major_time_dt,major_alk*(1./mg_l_a),color=pcol)
+axes.flat[3].plot(major_time_dt,major_flo,color=pcol)
 ax3 = axes.flat[3].twinx()
-ax3.plot(major_time_dt,major_sil*(1./mg_l_s),color=rcol,linestyle='--')
+ax3.plot(major_time_dt,major_sal,color=rcol,linestyle='--')
 
 axes.flat[4].plot(major_time_dt,major_flo*major_din*s_to_d*mmol_to_mol*g_to_kg*g_N,color=pcol)
 
-axes.flat[0].set_ylabel('Volume Flux\nm$^3$ s$^{-1}$',fontsize=axis_tick_font)
-ax0.set_ylabel('Salinity PSU',fontsize=axis_tick_font,color=rcol)
+
+axes.flat[0].set_ylabel('NH4 mg L$^{-1}$',fontsize=axis_tick_font)
+ax0.set_ylabel('NO3 mg L$^{-1}$',fontsize=axis_tick_font,color=rcol)
 
 axes.flat[1].set_ylabel('ON mg L$^{-1}$',fontsize=axis_tick_font)
 ax1.set_ylabel('BOD mg L$^{-1}$',fontsize=axis_tick_font,color=rcol)
 
-axes.flat[2].set_ylabel('NH4 mg L$^{-1}$',fontsize=axis_tick_font)
-ax2.set_ylabel('NO3 mg L$^{-1}$',fontsize=axis_tick_font,color=rcol)
+axes.flat[2].set_ylabel('SiO4 mg L$^{-1}$',fontsize=axis_tick_font)
 
-axes.flat[3].set_ylabel('Alk mg L$^{-1}$',fontsize=axis_tick_font)
-ax3.set_ylabel('SiO4 mg L$^{-1}$',fontsize=axis_tick_font,color=rcol)
+axes.flat[3].set_ylabel('Volume Flux\nm$^3$ s$^{-1}$',fontsize=axis_tick_font)
+ax3.set_ylabel('Salinity PSU',fontsize=axis_tick_font,color=rcol)
 
 axes.flat[4].set_ylabel('DIN Flux kg d$^{-1}$',fontsize=axis_tick_font)
 
@@ -122,8 +120,8 @@ axes.flat[0].tick_params(axis='y',labelcolor=pcol)
 ax0.tick_params(axis='y',labelcolor=rcol)
 axes.flat[1].tick_params(axis='y',labelcolor=pcol)
 ax1.tick_params(axis='y',labelcolor=rcol)
-axes.flat[2].tick_params(axis='y',labelcolor=pcol)
-ax2.tick_params(axis='y',labelcolor=rcol)
+#axes.flat[2].tick_params(axis='y',labelcolor=pcol)
+#ax2.tick_params(axis='y',labelcolor=rcol)
 axes.flat[3].tick_params(axis='y',labelcolor=pcol)
 ax3.tick_params(axis='y',labelcolor=rcol)
 
@@ -136,7 +134,7 @@ axes.flat[4].tick_params(axis='both',which='major',labelsize=axis_tick_font)
 
 ax0.tick_params(axis='both',which='major',labelsize=axis_tick_font)
 ax1.tick_params(axis='both',which='major',labelsize=axis_tick_font)
-ax2.tick_params(axis='both',which='major',labelsize=axis_tick_font)
+#ax2.tick_params(axis='both',which='major',labelsize=axis_tick_font)
 ax3.tick_params(axis='both',which='major',labelsize=axis_tick_font)
 
 axes.flat[1].xaxis.set_ticks_position('both')

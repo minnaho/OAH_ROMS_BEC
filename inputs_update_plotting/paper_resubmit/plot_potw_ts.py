@@ -60,6 +60,8 @@ major_alk = np.array(major_nc.variables['alkalinity'])
 major_temp = np.array(major_nc.variables['temperature']) 
 major_salt = np.array(major_nc.variables['salinity']) 
 major_toc = np.array(major_nc.variables['total_organic_C']) 
+major_tnn = np.array(major_nc.variables['total_N']) 
+
 
 major_nh4[major_nh4>1E10] == np.nan
 major_no3[major_no3>1E10] == np.nan
@@ -123,32 +125,36 @@ savename_major = fig_path+'major_potw_ts.pdf'
 
 plt.ion()
 
-fig,axes = plt.subplots(6,1,sharex=True,figsize=[figw,figh])
+fig,axes = plt.subplots(7,1,sharex=True,figsize=[figw,figh+2])
 for p_i in range(len(major_names)):
-    axes.flat[0].plot(major_time_dt,major_flo[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
-    axes.flat[1].plot(major_time_dt,(1./mg_l_n)*major_on[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
-    axes.flat[2].plot(major_time_dt,(1./mg_l_o)*major_bod[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
-    axes.flat[3].plot(major_time_dt,(1./mg_l_n)*major_nh4[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
-    axes.flat[4].plot(major_time_dt,(1./mg_l_n)*major_no3[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[0].plot(major_time_dt,(1./mg_l_n)*major_nh4[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[1].plot(major_time_dt,(1./mg_l_n)*major_no3[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[2].plot(major_time_dt,(1./mg_l_n)*major_on[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[3].plot(major_time_dt,(1./mg_l_o)*major_bod[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[4].plot(major_time_dt,major_flo[:,p_i],linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
     axes.flat[5].plot(major_time_dt,major_flo[:,p_i]*major_din[:,p_i]*s_to_d*mmol_to_mol*g_to_kg*g_N,linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
+    axes.flat[6].plot(major_time_dt,major_flo[:,p_i]*major_on[:,p_i]*s_to_d*mmol_to_mol*g_to_kg*g_N,linestyle=major_linesty[p_i],label=major_names[p_i],linewidth=lw)
     #axes.flat[0].set_ybound(lower=0)
-    axes.flat[0].set_ylabel('Volume Flux\nm$^3$ s$^{-1}$',fontsize=axis_font)
-    axes.flat[1].set_ylabel('ON\nmg L$^{-1}$',fontsize=axis_font)
-    axes.flat[2].set_ylabel('BOD\nmg L$^{-1}$',fontsize=axis_font)
-    axes.flat[3].set_ylabel('NH4\nmg L$^{-1}$',fontsize=axis_font)
-    axes.flat[4].set_ylabel('NO3\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[0].set_ylabel('NH4\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[1].set_ylabel('NO3\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[2].set_ylabel('ON\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[3].set_ylabel('BOD\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[4].set_ylabel('Volume Flux\nm$^3$ s$^{-1}$',fontsize=axis_font)
     axes.flat[5].set_ylabel('DIN Flux\nkg d$^{-1}$',fontsize=axis_font)
+    axes.flat[6].set_ylabel('ON Flux\nkg d$^{-1}$',fontsize=axis_font)
     for i in range(len(axes.flat)):
         axes.flat[i].tick_params(axis='both',which='major',labelsize=axis_tick_font)
         axes.flat[i].yaxis.set_ticks_position('both')
         axes.flat[i].xaxis.set_ticks_position('both')
         
 
-axes.flat[1].yaxis.set_major_locator(mtick.MultipleLocator(15))
-axes.flat[2].yaxis.set_major_locator(mtick.MultipleLocator(100))
-axes.flat[3].yaxis.set_major_locator(mtick.MultipleLocator(25))
-axes.flat[4].yaxis.set_major_locator(mtick.MultipleLocator(5))
-axes.flat[5].yaxis.set_major_locator(mtick.MultipleLocator(30000))
+axes.flat[0].yaxis.set_major_locator(mtick.MultipleLocator(10))
+axes.flat[1].yaxis.set_major_locator(mtick.MultipleLocator(5))
+axes.flat[2].yaxis.set_major_locator(mtick.MultipleLocator(5))
+axes.flat[3].yaxis.set_major_locator(mtick.MultipleLocator(100))
+#axes.flat[4].yaxis.set_major_locator(mtick.MultipleLocator(5))
+axes.flat[5].yaxis.set_major_locator(mtick.MultipleLocator(15000))
+axes.flat[6].yaxis.set_major_locator(mtick.MultipleLocator(10000))
 axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=4,mode='expand',borderaxespad=0.,handlelength=3)
 #axes.flat[5].set_yscale('log')
 #axes.flat[5].ticklabel_format(axis='y',style='sci',scilimits=(0,0))
@@ -335,46 +341,100 @@ minor_names = ['SSD','NSD','OC','SP','','V','SB'][::-1]
 savename_minor = fig_path+'minor_potw_ts.pdf'
 minor_linesty = ['-','--','-','-.',':',(0, (3, 1, 1, 1, 1, 1)),'-']
 
-fig,axes = plt.subplots(6,1,sharex=True,figsize=[figw,figh])
+fig,axes = plt.subplots(7,1,sharex=True,figsize=[figw,figh+2])
 for p_i in range(p_minor_flo.shape[0]):
     if minor_names[p_i] != '' or minor_names[p_i] != 'SSD':
-        axes.flat[0].plot(minor_time_dt,p_minor_flo[p_i],linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
-        axes.flat[1].plot(minor_time_dt,(1./mg_l_n)*(p_minor_onn[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
-        axes.flat[2].plot(minor_time_dt,(1./mg_l_o)*(p_minor_bod[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
-        axes.flat[3].plot(minor_time_dt,(1./mg_l_n)*(p_minor_nh4[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
-        axes.flat[4].plot(minor_time_dt,(1./mg_l_n)*(p_minor_no3[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
+        axes.flat[0].plot(minor_time_dt,(1./mg_l_n)*(p_minor_nh4[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
+        axes.flat[1].plot(minor_time_dt,(1./mg_l_n)*(p_minor_no3[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
+        axes.flat[2].plot(minor_time_dt,(1./mg_l_n)*(p_minor_onn[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
+        axes.flat[3].plot(minor_time_dt,(1./mg_l_o)*(p_minor_bod[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
+        axes.flat[4].plot(minor_time_dt,p_minor_flo[p_i],linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
         axes.flat[5].plot(minor_time_dt,p_minor_din[p_i]*s_to_d*mmol_to_mol*g_to_kg*g_N,linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
+        axes.flat[6].plot(minor_time_dt,p_minor_onn[p_i]*s_to_d*mmol_to_mol*g_to_kg*g_N,linestyle=minor_linesty[p_i],label=minor_names[p_i],color=cmcolors[p_i],linewidth=lw)
 
-    #if minor_names[p_i] == 'SSD':
-    #    axes.flat[0].plot(minor_time_dt,p_minor_flo[p_i],linestyle=minor_linesty[p_i],label=minor_names[p_i],color='gold',linewidth=lw)
-    #    axes.flat[1].plot(minor_time_dt,(1./mg_l_n)*(p_minor_onn[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color='gold',linewidth=lw)
-    #    axes.flat[2].plot(minor_time_dt,(1./mg_l_n)*(p_minor_bod[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color='gold',linewidth=lw)
-    #    axes.flat[3].plot(minor_time_dt,(1./mg_l_n)*(p_minor_nh4[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color='gold',linewidth=lw)
-    #    axes.flat[4].plot(minor_time_dt,(1./mg_l_n)*(p_minor_no3[p_i]/p_minor_flo[p_i]),linestyle=minor_linesty[p_i],label=minor_names[p_i],color='gold',linewidth=lw)
-    #    axes.flat[5].plot(minor_time_dt,p_minor_din[p_i]*s_to_d*mmol_to_mol*g_to_kg*g_N,linestyle=minor_linesty[p_i],label=minor_names[p_i],color='gold',linewidth=lw)
-
-
-    #axes.flat[0].set_ybound(lower=0)
-    axes.flat[0].set_ylabel('Volume Flux\nm$^3$ s$^{-1}$',fontsize=axis_font)
-    axes.flat[1].set_ylabel('ON\nmg L$^{-1}$',fontsize=axis_font)
-    axes.flat[2].set_ylabel('BOD\nmg L$^{-1}$',fontsize=axis_font)
-    axes.flat[3].set_ylabel('NH4\nmg L$^{-1}$',fontsize=axis_font)
-    axes.flat[4].set_ylabel('NO3\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[0].set_ylabel('NH4\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[1].set_ylabel('NO3\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[2].set_ylabel('ON\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[3].set_ylabel('BOD\nmg L$^{-1}$',fontsize=axis_font)
+    axes.flat[4].set_ylabel('Volume Flux\nm$^3$ s$^{-1}$',fontsize=axis_font)
     axes.flat[5].set_ylabel('DIN Flux\nkg d$^{-1}$',fontsize=axis_font)
+    axes.flat[6].set_ylabel('ON Flux\nkg d$^{-1}$',fontsize=axis_font)
     for i in range(len(axes.flat)):
         axes.flat[i].tick_params(axis='both',which='major',labelsize=axis_tick_font)
         axes.flat[i].yaxis.set_ticks_position('both')
         axes.flat[i].xaxis.set_ticks_position('both')
 
-axes.flat[0].yaxis.set_major_locator(mtick.MultipleLocator(.5))
-axes.flat[1].yaxis.set_major_locator(mtick.MultipleLocator(2))
-axes.flat[2].yaxis.set_major_locator(mtick.MultipleLocator(20))
-axes.flat[3].yaxis.set_major_locator(mtick.MultipleLocator(10))
-axes.flat[4].yaxis.set_major_locator(mtick.MultipleLocator(5))
+axes.flat[0].yaxis.set_major_locator(mtick.MultipleLocator(10))
+axes.flat[1].yaxis.set_major_locator(mtick.MultipleLocator(5))
+axes.flat[2].yaxis.set_major_locator(mtick.MultipleLocator(2))
+axes.flat[3].yaxis.set_major_locator(mtick.MultipleLocator(20))
+axes.flat[4].yaxis.set_major_locator(mtick.MultipleLocator(.5))
 axes.flat[5].yaxis.set_major_locator(mtick.MultipleLocator(2000))
+axes.flat[6].yaxis.set_major_locator(mtick.MultipleLocator(200))
 axes.flat[0].legend(loc='lower left',fontsize=axis_tick_font,bbox_to_anchor=[0,1.02,1,.102],ncol=6,mode='expand',borderaxespad=0.,handlelength=3)
 #axes.flat[5].set_yscale('log')
 #axes.flat[5].ticklabel_format(axis='y',style='sci',scilimits=(0,0))
 #axes.flat[5].set_ybound(lower=0,upper=1.7E5)
 fig.savefig(savename_minor,bbox_inches='tight')
 
+
+#major stats
+# % change in DIN 
+din_flux = major_flo[:,:]*major_din[:,:]*s_to_d*mmol_to_mol*g_to_kg*g_N
+# take first and last value
+din_perc = (din_flux[0,:]-din_flux[-1,:])/din_flux[0,:]
+print('reduction in DIN fluxes 1971, 2017',din_perc)
+
+# average over first 5 years and last 5 years
+din_perc = (np.nanmean(din_flux[:12*5,:],axis=0)-np.nanmean(din_flux[din_flux.shape[0]-(12*5):,:],axis=0))/np.nanmean(din_flux[:12*5,:],axis=0)
+print('reduction in DIN fluxes 1971-1976, 2013-2017',din_perc)
+
+din_kg_yr = major_flo[:,:]*major_din[:,:]*s_to_d*d_to_mo*mmol_to_mol*g_to_kg*g_N
+old_kg_yr = np.nanmean(np.nansum(np.nansum(din_kg_yr[:12*5,:],axis=1).reshape(5,12),axis=1))
+new_kg_yr = np.nanmean(np.nansum(np.nansum(din_kg_yr[din_flux.shape[0]-(12*5):,:],axis=1).reshape(5,12),axis=1))
+
+# DIN fluxes 1971-1976 kg/day vs 2013-2017 kg/day
+din_kg_d = major_flo[:,:]*major_din[:,:]*s_to_d*mmol_to_mol*g_to_kg*g_N
+old_kg_d = np.nanmean((np.nansum(din_kg_d[:12*5,:],axis=1)))
+new_kg_d = np.nanmean((np.nansum(din_kg_d[din_flux.shape[0]-(12*5):,:],axis=1)))
+
+
+# average over 1996-2000 and 2013-2017
+din_perc = (np.nanmean(din_flux[300:300+(12*5),:],axis=0)-np.nanmean(din_flux[din_flux.shape[0]-(12*5):,:],axis=0))/np.nanmean(din_flux[300:300+(12*5),:],axis=0)
+print('reduction in DIN fluxes 1996-2000, 2013-2017',din_perc)
+
+# % change in ON 1970-1990 and 2017
+on_flux = major_flo[:,:]*major_on[:,:]*s_to_d*mmol_to_mol*g_to_kg*g_N
+# take first and last value
+on_perc = (np.nanmean(on_flux[:12*20,:])-np.nanmean(on_flux[on_flux.shape[0]-(12):,:]))/np.nanmean(on_flux[:12*20,:])
+print('reduction in ON fluxes 1970-1990, 2017',on_perc)
+
+# minor stats
+# average over 2007-2008 and 2016-2017
+minor_din_flux = p_minor_din*s_to_d*mmol_to_mol*g_to_kg*g_N
+minor_din_perc = (np.nanmean(minor_din_flux[:,:12*2],axis=1)-np.nanmean(minor_din_flux[:,minor_din_flux.shape[1]-(12*2):],axis=1))/np.nanmean(minor_din_flux[:,:12*2],axis=1)
+
+
+# major average over 1997-2000 and 2013-2017 kg/d
+din_old = np.nanmean(din_flux[300+(12*1):300+(12*5),:],axis=0)
+din_new = np.nanmean(din_flux[din_flux.shape[0]-(12*5):,:],axis=0)
+din_perc = (din_new-din_old)/din_old
+print('din_old',din_old)
+print('din_new',din_new)
+print('reduction in din fluxes 1997-2000, 2013-2017',din_perc*100)
+
+onn_flux = major_flo[:,:]*major_on[:,:]*s_to_d*mmol_to_mol*g_to_kg*g_N
+onn_old = np.nanmean(onn_flux[300+(12*1):300+(12*5),:],axis=0)
+onn_new = np.nanmean(onn_flux[onn_flux.shape[0]-(12*5):,:],axis=0)
+onn_perc = (onn_new-onn_old)/onn_old
+print('onn_old',onn_old)
+print('onn_new',onn_new)
+print('reduction in onn fluxes 1997-2000, 2013-2017',onn_perc*100)
+
+tnn_flux = major_flo[:,:]*major_tnn*s_to_d*mmol_to_mol*g_to_kg*g_N
+tnn_old = np.nanmean(tnn_flux[300+(12*1):300+(12*5),:],axis=0)
+tnn_new = np.nanmean(tnn_flux[tnn_flux.shape[0]-(12*5):,:],axis=0)
+tnn_perc = (tnn_new-tnn_old)/tnn_old
+print('tnn_old',tnn_old)
+print('tnn_new',tnn_new)
+print('reduction in tnn fluxes 1997-2000, 2013-2017',tnn_perc*100)

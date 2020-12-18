@@ -545,13 +545,50 @@ print('smm tn km',smm_tn)
 print('ven tn km',ven_tn)
 print('sbb tn km',sbb_tn)
 
+# river: inland PS vs NPS vs natural
+#Summary Table_natural_historical_current.xlsx
+# m3/s
+nat_flo = [2.14E7,4.25E7,2.66E7,2.96E7,1.07E7,6.98E7,1.12E7,2.12E8]
+nnt_flo = np.nansum(nat_flo[:7])
+
+# kg/y
+nat_cur_tpp =[637,1463,2602,2901,95,1921,317,9937]
+nat_cur_dip = [56,128,227,253,8,168,28,866]
+nat_cur_tnn = [4584,10524,18710,20863,685,13817,2278,33289]
+nat_cur_din = [863,1808,2900,3234,120,2122,359,5463]
+
+nnt_tnn = np.nansum(nat_cur_tnn[:7])
+
+nat_tnn = np.nansum(nat_cur_tnn)
+inland_tnn[3] = r_yr_nobight_tn[3]*.95
+inland_tnn[4] = r_yr_nobight_tn[4]*.95
+inland_tnn[5] = r_yr_nobight_tn[5]*.95
+
+inl_flo = np.nansum(inland_flows[:7])
+inl_tnn = np.nansum(inland_tnn[:7])
+
 # ps vs nps flows
-ps_fl = np.nansum(inland_flows)+np.nansum(p_yr_nobight_fl)
-nps_fl = np.nansum(r_yr_nobight_fl)
-perc_fl = ps_fl/(ps_fl+nps_fl)
+ps_fl = inl_flo+np.nansum(p_yr_nobight_fl)
+nps_fl = np.nansum(r_yr_nobight_fl)-inl_flo-nnt_flo
+perc_fl = ps_fl/(ps_fl+nps_fl+nnt_flo)
 print('% PS flow vs all other freshwater flows',perc_fl)
 
-ps_tn = np.nansum(p_yr_nobight_tn)+np.nansum(inland_tnn)
-nps_tn = np.nansum(r_yr_nobight_tn)
-perc_tn = ps_tn/(ps_tn+nps_tn)
+ps_tn = np.nansum(p_yr_nobight_tn)+inl_tnn
+nps_tn = np.nansum(r_yr_nobight_tn)-inl_tnn-nnt_tnn
+perc_tn = ps_tn/(ps_tn+nps_tn+nnt_tnn)
 print('% PS TN vs all other TN',perc_tn)
+
+# major vs minor flow
+major_flow = np.nansum(p_major_flo_ssd+p_major_flo_nsd+p_major_flo_occ+p_major_flo_spp+p_major_flo_smm+p_major_flo_ven+p_major_flo_sbb)
+minor_flow = np.nansum(p_minor_flo_ssd+p_minor_flo_nsd+p_minor_flo_occ+p_minor_flo_spp+p_minor_flo_smm+p_minor_flo_ven+p_minor_flo_sbb)
+print('major potw flow percentage vs minor flow',major_flow/(major_flow+minor_flow))
+
+# major vs minor TN
+minor_tnn = np.nansum(p_minor_tnn_ssd+p_minor_tnn_nsd+p_minor_tnn_occ+p_minor_tnn_spp+p_minor_tnn_smm+p_minor_tnn_ven+p_minor_tnn_sbb)
+major_tnn = np.nansum(p_major_tnn_ssd+p_major_tnn_nsd+p_major_tnn_occ+p_major_tnn_spp+p_major_tnn_smm+p_major_tnn_ven+p_major_tnn_sbb)
+
+print('minor potw tnn percentage vs major',minor_tnn/(major_tnn+minor_tnn))
+
+
+print('river: inland PS vs all river',inl_tnn/(inl_tnn+nnt_tnn+nps_tn))
+print('river: NPS vs all river',nps_tn/(inl_tnn+nnt_tnn+nps_tn))

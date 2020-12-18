@@ -64,7 +64,8 @@ dip_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[2],header=None)[
 # LA river
 # City of LA Tillman- LA River
 din_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[3],header=None)[1][8]*lb_to_kg)
-dip_val.append(np.nan) # no P values
+# dip value as 90% of TP
+dip_val.append((pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][9]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][10]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][11]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][12])*.9)
 
 # Pomona-LA RIver
 din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[4],header=None)[1][8]*lb_to_kg)
@@ -89,16 +90,18 @@ din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[8],h
 
 # Los Coyotes- San Gabriel
 din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[9],header=None)[1][9]*lb_to_kg)
-dip_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[9],header=None)[1][16]*lb_to_kg)
+#dip_val[-1] = dip_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[9],header=None)[1][16]*lb_to_kg)
 
 # Whittier Narrows-San Gabriel
 din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[10],header=None)[1][7]*lb_to_kg)
-dip_val[-1] = dip_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[10],header=None)[1][15]*lb_to_kg)
+#dip_val[-1] = dip_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[10],header=None)[1][15]*lb_to_kg)
 
 # Long Beach - San Gabriel
 din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[11],header=None)[1][8]*lb_to_kg)
 # no P values
-
+# San Gabriel DIP value as 90% of TP
+dip_val.append((pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][14]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][15]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][16]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][17]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][18])*.9)
+   
 # Tapia- Malibu Creek
 din_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[12],header=None)[1][8]*lb_to_kg)
 dip_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[12],header=None)[1][11]*lb_to_kg)
@@ -114,17 +117,22 @@ din_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[14],header=None)
 
 # HillCanyon-Calleguas Creek
 din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[15],header=None)[1][8]*lb_to_kg)
-dip_val.append(np.nan)
+#dip_val.append(np.nan)
 # no DIP value
+
+# Calleguas river DIP as 90%
+dip_val.append((pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][22]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][23]+pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][24])*.9)
 
 # Santa Clara River
 # Ventura WWR-SAnta Clara River E
 din_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[16],header=None)[1][18]*lb_to_kg)
-dip_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[16],header=None)[1][8]*lb_to_kg)
+#dip_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[16],header=None)[1][8]*lb_to_kg)
 
 # Saugus- Santa Clara r
 din_val[-1] = din_val[-1]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[17],header=None)[1][8]*lb_to_kg)
 # no DIP values
+# Santa Clara R set as 90% of DIP
+dip_val.append((pd.read_excel(xl_path,sheet_name=xls.sheet_names[16],header=None)[1][8]*lb_to_kg)+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[0],header=None)[4][26]*.9))
 
 # Ojai-VEntura River
 din_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[18],header=None)[1][8]*lb_to_kg)
@@ -133,6 +141,9 @@ dip_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[18],header=None)
 # Camarillo-Conejo - Conejo Creek feeds into Calleguas Creek
 din_val[-3] = din_val[-3]+(pd.read_excel(xl_path,sheet_name=xls.sheet_names[19],header=None)[1][7]*lb_to_kg)
 # no DIP value
+
+
+
 
 # Lompoc WWT- Santa Inez (Santa Ynez) discharges above Point Conception
 #din_val.append(pd.read_excel(xl_path,sheet_name=xls.sheet_names[20],header=None)[1][8]*lb_to_kg)
@@ -150,92 +161,6 @@ d_to_mo = 30
 mmol_to_mol = 1./1000
 g_to_kg = 1./1000
 g_N = 14
-
-'''
-#r10 = Dataset('../river_data/south_coast_rivers_10_years_monthly_new.nc','r')
-r10 = Dataset('../river_data/inputs_1997_2000/south_coast_rivers_updated_14_years_1997_2010_monthly.nc','r')
-r24 = Dataset('../river_data/inputs_1997_2000/south_coast_rivers_24_years_monthly_new.nc','r')
-
-river_names_10 = pickle.load(open('../river_data/inputs_1997_2000/river_names_10.pkl','rb'))
-river_names_24 = pickle.load(open('../river_data/inputs_1997_2000/river_names_24.pkl','rb'))
-
-flo10 = np.array(r10.variables['flow'])
-tn10 = np.array(r10.variables['total_nitrogen'])
-tp10 = np.array(r10.variables['total_phosphorus'])
-nh4_10 = np.array(r10.variables['ammonium']) # mmol/m3
-no3_10 = np.array(r10.variables['nitrate']) # mmol/m3
-po4_10 = np.array(r10.variables['phosphate']) # mmol/m3
-
-flo10[flo10>1E20] = np.nan
-tn10[tn10>1E20] = np.nan
-tp10[tp10>1E20] = np.nan
-nh4_10[nh4_10>1E20] = np.nan
-no3_10[no3_10>1E20] = np.nan
-po4_10[po4_10>1E20] = np.nan
-
-din_10 = nh4_10+no3_10
-dip_10 = po4_10
-
-
-r_minor_st_in = 84 # index for start of 1997
-r_minor_en_in = 251 # index for end of 2010
-
-flo24 = np.array(r24.variables['flow'][r_minor_st_in:r_minor_en_in+1])
-tn24 = np.array(r24.variables['total_nitrogen'][r_minor_st_in:r_minor_en_in+1])
-tp24 = np.array(r24.variables['total_phosphorus'][r_minor_st_in:r_minor_en_in+1])
-nh4_24 = np.array(r24.variables['ammonium'][r_minor_st_in:r_minor_en_in+1]) # mmol/m3
-no3_24 = np.array(r24.variables['nitrate'][r_minor_st_in:r_minor_en_in+1]) # mmol/m3
-po4_24 = np.array(r24.variables['phosphate'][r_minor_st_in:r_minor_en_in+1]) # mmol/m3
-
-flo24[flo24>1E20] = np.nan
-tn24[tn24>1E20] = np.nan
-tp24[tp24>1E20] = np.nan
-nh4_24[nh4_24>1E20] = np.nan
-no3_24[no3_24>1E20] = np.nan
-po4_24[po4_24>1E20] = np.nan
-
-din_24 = nh4_24+no3_24
-dip_24 = po4_24
-
-ry0 = 14
-ry1 = 14
-
-#multiply by flow, kg/month
-tn_10 = tn10*flo10*s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol
-tn_24 = tn24*flo24*s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol
-
-tp_10 = tp10*flo10*s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol
-tp_24 = tp24*flo24*s_to_d*d_to_mo*g_N*g_to_kg*mmol_to_mol
-
-# kg/year
-tn_data = np.array((np.nansum(np.nanmean(tn_10[:,41,41].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_10[:,29,29].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_10[:,6,6].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_10[:,37,37].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_24[:,12,12].reshape(ry1,12),axis=0)),np.nansum(np.nanmean(tn_10[:,3,3].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_10[:,36,36].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_10[:,20,20].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tn_10[:,30,30].reshape(ry0,12),axis=0))))
-
-tp_data = np.array((np.nansum(np.nanmean(tp_10[:,41,41].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_10[:,29,29].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_10[:,6,6].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_10[:,37,37].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_24[:,12,12].reshape(ry1,12),axis=0)),np.nansum(np.nanmean(tp_10[:,3,3].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_10[:,36,36].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_10[:,20,20].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(tp_10[:,30,30].reshape(ry0,12),axis=0))))
-
-din_data = np.array((np.nansum(np.nanmean(din_10[:,41,41].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_10[:,29,29].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_10[:,6,6].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_10[:,37,37].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_24[:,12,12].reshape(ry1,12),axis=0)),np.nansum(np.nanmean(din_10[:,3,3].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_10[:,36,36].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_10[:,20,20].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(din_10[:,30,30].reshape(ry0,12),axis=0))))
-
-dip_data = np.array((np.nansum(np.nanmean(dip_10[:,41,41].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_10[:,29,29].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_10[:,6,6].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_10[:,37,37].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_24[:,12,12].reshape(ry1,12),axis=0)),np.nansum(np.nanmean(dip_10[:,3,3].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_10[:,36,36].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_10[:,20,20].reshape(ry0,12),axis=0)),np.nansum(np.nanmean(dip_10[:,30,30].reshape(ry0,12),axis=0))))
-
-diff_tn = tn_data-tnn_val
-diff_tp = tp_data-tpp_val
-
-diff_din = din_data-din_val
-diff_dip = dip_data-dip_val
-
-# some values of inland POTW data larger than river data, 
-# so make it 95% of TN/TP according to Martha
-tn_val_new = np.array((tn_data[0]*.95,tn_data[1]*.95,tn_data[2]*.95,tn_data[3]*.95,tn_data[4]*.95,tnn_val[5],tn_data[6]*.95,tn_data[7]*.95,tn_data[8]*.95))
-tp_val_new = np.array((tp_data[0]*.95,tp_data[1]*.95,tpp_val[2],tpp_val[3],tp_data[4]*.95,tpp_val[5],tp_data[6]*.95,tp_data[7]*.95,tp_data[8]*.95))
-
-diff_tn_new = tn_data-tn_val_new
-diff_tp_new = tp_data-tp_val_new
-
-din_val_new = np.array((din_data[0]*.95,din_data[1]*.95,din_data[2]*.95,din_data[3]*.95,din_data[4]*.95,din_val[5],din_data[6]*.95,din_data[7]*.95,din_data[8]*.95))
-dip_val_new = np.array((dip_val[0],dip_data[1]*.95,dip_val[2],dip_data[3]*.95,dip_data[4]*.95,dip_data[5]*.95,dip_val[6],dip_data[7]*.95,dip_data[8]*.95))
-
-diff_din_new = din_data-din_val_new
-diff_dip_new = dip_data-dip_val_new
-'''
 
 # separate into regions
 # will use numbers in excel for SI table 6 and 7, 
