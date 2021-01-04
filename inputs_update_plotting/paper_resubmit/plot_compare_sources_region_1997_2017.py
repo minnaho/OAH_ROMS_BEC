@@ -899,3 +899,8 @@ tj_din = np.nanmean(np.nansum(river_din[:,68].reshape(21,12),axis=0))
 # percent of mexican inputs compared to SSD din
 mx_din = (tj_din+sbiwtp_din)/ssd_din
 print('% mexican DIN inputs in SSD region (TJ river and SBIWTP)',mx_din)
+
+# N kg/day average 1997-2000 river, large POTW, small POTW
+river_kgd = np.nanmean(np.nansum(river_tn[:4*12]*river_flo[:4*12],axis=1)*s_to_d*g_N*g_to_kg*mmol_to_mol)
+major_kgd = np.nanmean(np.nansum(major_tn[potw_1997:potw_1997+(4*12)]*major_flo[potw_1997:potw_1997+(4*12)],axis=1)*s_to_d*g_N*g_to_kg*mmol_to_mol)
+minor_kgd = np.nanmean(np.nansum(minor_tn[:4*12]*minor_flo[:4*12],axis=1)*s_to_d*g_N*g_to_kg*mmol_to_mol)

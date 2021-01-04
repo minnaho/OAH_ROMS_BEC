@@ -357,11 +357,11 @@ ax5 = fig.add_subplot(gs[6:8,:])
 ax6 = fig.add_subplot(gs[8,:])
 
 ax1.plot(river_time_dt,river_fflux,color=rcol,linestyle=rsty,label='River')
-ax1.plot(river_time_dt,major_fflux,color=pcol,linestyle=psty,label='Major POTW')
-ax1.plot(river_time_dt,minor_fflux,color=mcol,linestyle=msty,label='Minor POTW')
+ax1.plot(river_time_dt,major_fflux,color=pcol,linestyle=psty,label='Large POTW')
+ax1.plot(river_time_dt,minor_fflux,color=mcol,linestyle=msty,label='Small POTW')
 
-ax2.plot(river_time_dt,major_fflux,color=pcol,linestyle=psty,label='Major POTW',zorder=2)
-ax2.plot(river_time_dt,minor_fflux,color=mcol,linestyle=msty,label='Minor POTW',zorder=3)
+ax2.plot(river_time_dt,major_fflux,color=pcol,linestyle=psty,label='Large POTW',zorder=2)
+ax2.plot(river_time_dt,minor_fflux,color=mcol,linestyle=msty,label='Small POTW',zorder=3)
 #ylim0_2 = ax2.get_ylim()[0]
 ylim0_2 = 0
 ylim1_2 = ax2.get_ylim()[1]
@@ -369,11 +369,11 @@ ax2.plot(river_time_dt,river_fflux,color=rcol,linestyle=rsty,label='River',zorde
 ax2.set_ylim([ylim0_2,ylim1_2])
 
 ax3.plot(river_time_dt,river_nflux,color=rcol,linestyle=rsty,label='River')
-ax3.plot(river_time_dt,major_nflux,color=pcol,linestyle=psty,label='Major POTW')
-ax3.plot(river_time_dt,minor_nflux,color=mcol,linestyle=msty,label='Minor POTW')
+ax3.plot(river_time_dt,major_nflux,color=pcol,linestyle=psty,label='Large POTW')
+ax3.plot(river_time_dt,minor_nflux,color=mcol,linestyle=msty,label='Small POTW')
 
-ax4.plot(river_time_dt,major_nflux,color=pcol,linestyle=psty,label='Major POTW',zorder=2)
-ax4.plot(river_time_dt,minor_nflux,color=mcol,linestyle=msty,label='Minor POTW',zorder=3)
+ax4.plot(river_time_dt,major_nflux,color=pcol,linestyle=psty,label='Large POTW',zorder=2)
+ax4.plot(river_time_dt,minor_nflux,color=mcol,linestyle=msty,label='Small POTW',zorder=3)
 #ylim0_4 = ax4.get_ylim()[0]
 ylim0_4 = 0
 ylim1_4 = ax4.get_ylim()[1]
@@ -381,11 +381,11 @@ ax4.plot(river_time_dt,river_nflux,color=rcol,linestyle=rsty,label='River',zorde
 ax4.set_ylim([ylim0_4,ylim1_4])
 
 ax5.plot(river_time_dt,river_pflux,color=rcol,linestyle=rsty,label='River')
-ax5.plot(river_time_dt,major_pflux,color=pcol,linestyle=psty,label='Major POTW')
-ax5.plot(river_time_dt,minor_pflux,color=mcol,linestyle=msty,label='Minor POTW')
+ax5.plot(river_time_dt,major_pflux,color=pcol,linestyle=psty,label='Large POTW')
+ax5.plot(river_time_dt,minor_pflux,color=mcol,linestyle=msty,label='Small POTW')
 
-ax6.plot(river_time_dt,major_pflux,color=pcol,linestyle=psty,label='Major POTW',zorder=2)
-ax6.plot(river_time_dt,minor_pflux,color=mcol,linestyle=msty,label='Minor POTW',zorder=3)
+ax6.plot(river_time_dt,major_pflux,color=pcol,linestyle=psty,label='Large POTW',zorder=2)
+ax6.plot(river_time_dt,minor_pflux,color=mcol,linestyle=msty,label='Small POTW',zorder=3)
 #ylim0_6 = ax6.get_ylim()[0]
 ylim0_6 = 0
 ylim1_6 = ax6.get_ylim()[1]
@@ -490,8 +490,17 @@ plt.plot(major_potw_time_all,major_nflux_each[:,2],label='OCSD')
 plt.plot(major_potw_time_all,major_nflux_each[:,3],label='PLWTP')
 
 # N all sources Jan 1997-Dec 1999
-dec1999 = 1095
+#dec1999 = 1095
+dec1999 = 1461 # dec 31 2000
 din_90s = np.nanmean(np.nansum(major_din[:dec1999]*major_flo[:dec1999]*s_to_d*g_N*g_to_kg*mmol_to_mol,axis=1)+np.nansum(river_din[:dec1999]*river_flo[:dec1999]*s_to_d*g_N*g_to_kg*mmol_to_mol,axis=1)+np.nansum(minor_tnn[:dec1999]*minor_flo[:dec1999]*s_to_d*g_N*g_to_kg*mmol_to_mol,axis=1))
 tnn_90s = np.nanmean(np.nansum(major_tnn[:dec1999]*major_flo[:dec1999]*s_to_d*g_N*g_to_kg*mmol_to_mol,axis=1)+np.nansum(river_tnn[:dec1999]*river_flo[:dec1999]*s_to_d*g_N*g_to_kg*mmol_to_mol,axis=1)+np.nansum(minor_tnn[:dec1999]*minor_flo[:dec1999]*s_to_d*g_N*g_to_kg*mmol_to_mol,axis=1))
 
-# DIN early 1970s
+# increase over natural
+tnn_fold = ((tnn_90s*365)/1E6)/.91
+
+# N kg/day average 1997-2000 river, large POTW, small POTW
+river_kgd = np.nanmean(np.nansum(river_tnn[:dec1999]*river_flo[:dec1999],axis=1)*s_to_d*g_N*g_to_kg*mmol_to_mol)
+major_kgd = np.nanmean(np.nansum(major_tnn[:dec1999]*major_flo[:dec1999],axis=1)*s_to_d*g_N*g_to_kg*mmol_to_mol)
+minor_kgd = np.nanmean(np.nansum(minor_tnn[:dec1999]*minor_flo[:dec1999],axis=1)*s_to_d*g_N*g_to_kg*mmol_to_mol)
+
+

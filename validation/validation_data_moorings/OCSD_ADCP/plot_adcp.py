@@ -52,7 +52,7 @@ else:
     month_name.append(calendar.month_abbr[month_chosen])
 
 # convert datetime numbers to dates
-date_conv = num2date(time_nc,time_unit)
+date_conv = num2date(time_nc,time_unit,only_use_cftime_datetimes=False)
 
 # get indexes of target months
 month_ind_l = []
