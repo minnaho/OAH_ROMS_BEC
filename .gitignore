@@ -152,6 +152,7 @@ miniconda2/
 *.gz
 *.npy
 *.hbn
+*.pkl
 
 # image, pdf, text, etc
 *.pdf
