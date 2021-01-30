@@ -47,7 +47,7 @@ data_sources = ['LACSD moorings','OCSD ADCP','San Diego ADCP','POTW Monitoring',
 
 
 # grid
-grid_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/roms_grd.nc'
+grid_path = '/data/project5/kesf/ROMS/L2_SCB/roms_grd.nc'
 grid_nc = Dataset(grid_path,'r')
 
 lat_nc = np.array(grid_nc.variables['lat_rho'])
@@ -108,13 +108,13 @@ ax.text(-118.1,33.47,'OCSD',color='maroon',fontsize=axis_tick_size-2)
 ax.text(-117.56,32.68,'PLWTP',color='maroon',fontsize=axis_tick_size-2)
 
 
-ax.text(-120.3,34.24,'Santa Barbara',fontsize=axis_tick_size)
+ax.text(-120.45,34.24,'Santa Barbara Channel',fontsize=axis_tick_size)
 ax.text(-119.2,34.18,'Ventura',fontsize=axis_tick_size)
 ax.text(-118.7,34.11,'Santa Monica',fontsize=axis_tick_size)
 #ax.text(-118.4,33.51,'SP',fontsize=axis_tick_size)
 ax.text(-118.37,33.8,'San Pedro',fontsize=axis_tick_size)
 ax.text(-118.05,33.73,'Orange County',fontsize=axis_tick_size)
-ax.text(-117.9,32.88,'San Diego',fontsize=axis_tick_size)
+ax.text(-117.9,32.6,'San Diego',fontsize=axis_tick_size)
 
 ax.text(-0.07, 0.55, 'Latitude', va='bottom', ha='center',
         rotation='vertical', rotation_mode='anchor',
@@ -164,33 +164,90 @@ rivershp = cpf.ShapelyFeature(shpreader.Reader(shpfile).geometries(),ccrs.PlateC
 ax.add_feature(rivershp)
 
 # POTW monitoring
-central_c = 'lightblue'
+
+lon_potw = np.array(lon_v[nan_ind[6]+1:nan_ind[7]])
+lat_potw = np.array(lat_v[nan_ind[6]+1:nan_ind[7]])
+
 m_size_small = 40
-central = ax.scatter(lon_v[nan_ind[6]+1:nan_ind[7]],lat_v[nan_ind[6]+1:nan_ind[7]],s=m_size_small,marker='o',color=central_c,label=data_sources[3],edgecolor='navy')
+#central = ax.scatter(lon_v[nan_ind[6]+1:nan_ind[7]],lat_v[nan_ind[6]+1:nan_ind[7]],s=m_size_small,marker='o',color=central_c,label=data_sources[3],edgecolor='navy')
+
+# oxnard
+v_ind = np.where(lon_potw<-118.85)[0]
+ax.scatter(lon_potw[v_ind],lat_potw[v_ind],s=m_size_small,marker='o',color='lightblue',label='City of Oxnard Stations',edgecolor='navy')
+
+# city of LA
+c_ind = np.where((lon_potw>-118.85)&(lat_potw>33.78))[0]
+ax.scatter(lon_potw[c_ind],lat_potw[c_ind],s=m_size_small,marker='o',color='palegreen',label='City of LA Stations',edgecolor='darkgreen')
+
+# LACSD
+l_ind = np.where(((lon_potw<-118.129032)&(lat_potw>33.629462)&(lat_potw<33.783))|((lon_potw<-118.12464)&(lat_potw>33.629462)&(lat_potw<33.783))|((lon_potw<-118.111321)&(lat_potw>33.721832)&(lat_potw<33.783)))[0]
+ax.scatter(lon_potw[l_ind],lat_potw[l_ind],s=m_size_small,marker='o',color='lightcoral',label='LACSD Stations',edgecolor='maroon')
+
+#OCSD
+o_ind = np.where(((lon_potw>-118.12464)&(lat_potw<33.629462)&(lat_potw>33.3))|((lon_potw>-118.111321)&(lat_potw<33.721832)&(lat_potw>33.3)))[0]
+ax.scatter(lon_potw[o_ind],lat_potw[o_ind],s=m_size_small,marker='o',color='orange',label='OCSD Stations',edgecolor='k')
+
+# San Diego
+s_ind = np.where(lat_potw<33)[0]
+ax.scatter(lon_potw[s_ind],lat_potw[s_ind],s=m_size_small,marker='o',color='orchid',label='City of San Diego Stations',edgecolor='k')
 
 # SMBO
-ax.scatter(-118.7051,33.9330,s=m_size,marker='X',facecolors='aqua',edgecolor='k',label='SMBO')
+#m_size = 100
+ax.scatter(-118.7051,33.9330,s=m_size,marker='*',facecolors='aqua',edgecolor='k',label='SMBO')
 
 # SPOT
 ax.scatter(-118.3996,33.5061,s=m_size,marker='P',facecolors='darkorchid',edgecolor='k',label='SPOT')
 
 # oc mooring
-m_size = 50
-ax.scatter(oc_lon,oc_lat,s=m_size,marker='o',facecolor='None',edgecolor='teal',linewidth=3,label='OC-T-1')
+#m_size = 50
+ax.scatter(oc_lon,oc_lat,s=m_size,marker='o',facecolor='None',edgecolor='teal',linewidth=3,label='OC-T-1 ADCP')
 
 # la mooring
-m_size = 50
-ax.scatter(la_lon,la_lat,s=m_size,marker='x',color='teal',linewidth=3,label='OC-T-1')
+#m_size = 50
+ax.scatter(la_lon,la_lat,s=m_size,marker='X',color='teal',edgecolor='k',label='LACSD A3 ADCP')
 
-#calcofi = m.scatter(x_coords[nan_ind[8]+1:nan_ind[9]],y_coords[nan_ind[8]+1:nan_ind[9]],s=m_size_small,marker='o',color=calcofi_c,label=data_sources[4])
+# calcofi
+# fake plot for legend
+ax.scatter([],[],marker=(6,2,0),s=80,color='blue',label='CalCOFI')
 
-ax.text(-120.3,34.24,'Santa Barbara',fontsize=axis_tick_size)
+# calcofi line 83.3 station 42
+star_font = 20
+ax.text(-119.51,34.18,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-119.57,34.12,'83.3',fontsize=14,color='blue')
+#ax.scatter(-119.51,34.18,marker='d',s=m_size,color='blue')
+
+# calcofi line 86.7
+cal_86_lon = [-118.49, -118.63, -118.98, -119.32, -119.66, -120.01, -120.35]
+cal_86_lat = [33.89, 33.82, 33.66, 33.49, 33.32, 33.16, 32.99]
+ax.plot(cal_86_lon,cal_86_lat,'blue')
+ax.text(-118.49,33.89,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-118.63,33.82,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-118.98,33.66,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-118.98,33.62,'    86.7',fontsize=14,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-119.32,33.49,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-119.66,33.32,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-120.01,33.16,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-120.35,32.99,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+
+# calcofi line 90
+cal_90_lon = [-117.77, -117.91, -118.25, -118.94, -119.48, -119.96]
+cal_90_lat = [33.49, 33.42, 33.25, 32.92, 32.65, 32.42]
+ax.plot(cal_90_lon,cal_90_lat,'blue')
+ax.text(-117.77,33.49,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-117.91,33.42,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-118.25,33.25,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-118.25,33.21,'    90',fontsize=14,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-118.94,32.92,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-119.48,32.65,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+ax.text(-119.96,32.42,'*',fontsize=star_font,color='blue',verticalalignment='center',horizontalalignment='center')
+
+ax.text(-120.45,34.24,'Santa Barbara Channel',fontsize=axis_tick_size)
 ax.text(-119.2,34.18,'Ventura',fontsize=axis_tick_size)
 ax.text(-118.7,34.11,'Santa Monica',fontsize=axis_tick_size)
 #ax.text(-118.4,33.51,'SP',fontsize=axis_tick_size)
 ax.text(-118.37,33.8,'San Pedro',fontsize=axis_tick_size)
 ax.text(-118.05,33.73,'Orange County',fontsize=axis_tick_size)
-ax.text(-117.9,32.88,'San Diego',fontsize=axis_tick_size)
+ax.text(-117.9,32.6,'San Diego',fontsize=axis_tick_size)
 
 ax.text(-0.07, 0.55, 'Latitude', va='bottom', ha='center',
         rotation='vertical', rotation_mode='anchor',
@@ -199,7 +256,8 @@ ax.text(0.5, -0.1, 'Longitude', va='bottom', ha='center',
         rotation='horizontal', rotation_mode='anchor',
         transform=ax.transAxes,fontsize=axis_tick_size+4)
 
-leg_size = 16
-ax.legend(loc='lower left',fontsize=leg_size,labelspacing=1)
+leg_size = 14
+ax.legend(loc='upper right',fontsize=leg_size,labelspacing=0.17)
+#ax.legend(loc='lower left',fontsize=leg_size,labelspacing=1)
 
 plt.savefig('figs/validation_updated_map_obs.png',bbox_inches='tight')

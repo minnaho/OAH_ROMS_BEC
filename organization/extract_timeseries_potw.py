@@ -48,8 +48,6 @@ for y_i in range(len(st_yr,en_yr+1)):
         e_m = 13
     for m_i in range(len(s_m,e_m)):
         print('month: ',m_i)
-    for m_i in range(len(s_m,e_m)):
-        print('month: ',m_i)
         if m_i in months_w_31_days:
             ndays = 31
         if m_i not in months_w_31_days:

@@ -270,7 +270,7 @@ moor_lw = 3
 #roms_lw = 2
 
 figw = 16
-figh = 12
+figh = 6
 
 axis_font = 16
 
@@ -312,7 +312,7 @@ roms_std_v_sum_la_high = roms_std_v_sum_la_high[la_ch][in_la_dep]
 plt.ion()
 
 # plot one la profile
-fig0,axes0 = plt.subplots(2,2,figsize=[figw,figh])
+fig0,axes0 = plt.subplots(1,4,figsize=[figw,figh])
 
 axes0.flat[0].plot(roms_avg_u_sum_la,roms_dep_sum_la,color=roms_c,label='ROMS')
 axes0.flat[0].plot(roms_std_u_sum_la_low,roms_dep_sum_la,color=roms_c,linestyle=std_l)
@@ -341,7 +341,7 @@ axes0.flat[2].plot(oc_std_u_sum_low,oc_dep_plt,color=moor_c,linewidth=moor_lw,li
 axes0.flat[2].plot(oc_std_u_sum_high,oc_dep_plt,color=moor_c,linewidth=moor_lw,linestyle=std_l)
 
 axes0.flat[2].set_xlabel('u (m s$^{-1}$)',fontsize=axis_font)
-axes0.flat[2].set_ylabel('Depth (m)',fontsize=axis_font)
+#axes0.flat[2].set_ylabel('Depth (m)',fontsize=axis_font)
 
 
 axes0.flat[3].plot(roms_avg_v_sum_oc,roms_dep_sum_oc,color=roms_c)
@@ -354,7 +354,7 @@ axes0.flat[3].plot(oc_std_v_sum_high,oc_dep_plt,color=moor_c,linewidth=moor_lw,l
 
 axes0.flat[3].set_xlabel('v (m s$^{-1}$)',fontsize=axis_font)
 
-axes0.flat[0].legend(loc='right',fontsize=axis_font,ncol=1,borderaxespad=0.,handlelength=1.5)
+axes0.flat[0].legend(loc='lower right',fontsize=axis_font,ncol=1,borderaxespad=0.,handlelength=1.5)
 #axes0.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=[0.3,1.02,0.33,.102],ncol=2,mode='expand',borderaxespad=0.,handlelength=1.5)
 #axes0.flat[1].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=[0.3,1.02,0.3,.102],ncol=2,mode='expand',borderaxespad=0.,handlelength=1.5)
 
@@ -363,10 +363,10 @@ for i in range(len(axes0.flat)):
 
 xkey = 0
 ykey = 1.02
-axes0.flat[0].text(xkey,ykey,'c)',transform=axes0.flat[0].transAxes,fontsize=axis_font)
-axes0.flat[1].text(xkey,ykey,'d)',transform=axes0.flat[1].transAxes,fontsize=axis_font)
-axes0.flat[2].text(xkey,ykey,'e)',transform=axes0.flat[2].transAxes,fontsize=axis_font)
-axes0.flat[3].text(xkey,ykey,'f)',transform=axes0.flat[3].transAxes,fontsize=axis_font)
+axes0.flat[0].text(xkey,ykey,'c) LACSD ADCP A3 (X)',transform=axes0.flat[0].transAxes,fontsize=axis_font)
+axes0.flat[1].text(xkey,ykey,'d) LACSD ADCP A3 (X)',transform=axes0.flat[1].transAxes,fontsize=axis_font)
+axes0.flat[2].text(xkey,ykey,'e) OC-T-1 (O)',transform=axes0.flat[2].transAxes,fontsize=axis_font)
+axes0.flat[3].text(xkey,ykey,'f) OC-T-1 (O)',transform=axes0.flat[3].transAxes,fontsize=axis_font)
 
 fig0.savefig(fig_path+'la_oc_vertical_allyear_his.png',bbox_inches='tight')
 

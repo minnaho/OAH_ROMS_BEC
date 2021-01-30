@@ -47,7 +47,7 @@ all_regions[all_regions==0] = np.nan
 
 
 # grid
-grid_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/roms_grd.nc'
+grid_path = '/data/project5/kesf/ROMS/L2_SCB/roms_grd.nc'
 grid_nc = Dataset(grid_path,'r')
 
 lat_nc = np.array(grid_nc.variables['lat_rho'])

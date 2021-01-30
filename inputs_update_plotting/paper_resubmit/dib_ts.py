@@ -11,6 +11,7 @@ import datetime as datetime
 import h5py
 import scipy.io
 import pandas as pd
+import PIL
 
 fig_path = './figs/'
 # data paths
@@ -24,7 +25,7 @@ log_set = True
 ############
 # load grid
 ############
-grid_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/roms_grd.nc'
+grid_path = '/data/project5/kesf/ROMS/L2_SCB/roms_grd.nc'
 grid_nc = Dataset(grid_path,'r')
 lat_nc = np.array(grid_nc.variables['lat_rho'])
 lon_nc = np.array(grid_nc.variables['lon_rho'])
@@ -470,7 +471,7 @@ ax6.text(datetime.datetime(1996,2,1),1.04E4,'f)',fontsize=axis_font)
 fig.subplots_adjust(hspace=0.3)
 
 ax1.legend(loc='best',fontsize=axis_font-1)
-fig.savefig('figs/dib_ts.pdf',bbox_inches='tight')
+fig.savefig('figs/dib_ts.png',bbox_inches='tight')
 
 
 # TN of just major POTWs

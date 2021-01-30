@@ -158,6 +158,8 @@ miniconda2/
 *.pdf
 *.jpg
 *.png
+*.tif
+*.eps
 *.mp4
 *.txt
 *.in
