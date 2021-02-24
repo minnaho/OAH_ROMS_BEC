@@ -7,8 +7,8 @@ bgc=1
 option1=1; % put 1 if you need to calculate omega using the CO2SYS program
 %% choose bottom depth, averages between DD0-DD1
 DD0= 100; 
-DD1 = 1150; 
-step = 20 % depth step to weight over
+DD1 = 200; 
+step = 10 % depth step to weight over
 
 %% create the netdcf empty files
 if option1==1
@@ -29,9 +29,9 @@ end
 
 
 %% find the modle outputs directories
-rep = '/data/project5/kesf/ROMS/USSW1/daily/' ;
+rep = '/data/project5/kesf/ROMS/L2_SCB/DAILY/' ;
 %% list the model outputs
-repavg = dir([rep,'/ussw1_avg.Y*.nc']) ;
+repavg = dir([rep,'/l2_scb_avg.Y*.nc']) ;
 %repavg = dir([rep,'/ussw1_avg.Y2001*.nc']) ;
 
 

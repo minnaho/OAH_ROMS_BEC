@@ -4,7 +4,7 @@ bgc=1;
 
 %% choose the option
 option1=0; % put 1 if you need to calculate omega using the CO2SYS program
-% set vertical s_rho level to take (60 is surface)
+% set rho (density) to slice
 DDfix = 1026.5;
 %% create the netdcf empty files
 if option1==1
