@@ -87,7 +87,7 @@ figh =8
 axis_tick_font = 14
 lw = 2
 
-#plt.ion()
+plt.ion()
 if freq == 'monthly':
     savename_allsum = fig_path+'river_ts_all_sum_1997_2017_monthly.pdf'
     labela = 368
