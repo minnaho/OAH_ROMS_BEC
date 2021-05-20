@@ -59,11 +59,11 @@ for data in csv_files:
         df_new.rename(index=str,columns={'CDOM(ug/L)':'CDOM'},inplace=True)
 
     if 'CDOM (ug/L) WET ' in df_new.keys():
-        df_new.rename(index=str,columns={'CDOM (ug/L) WET ':'CDOM_WET'},inplace=True)
+        df_new.rename(index=str,columns={'CDOM (ug/L) WET ':'CDOM'},inplace=True)
     if 'CDOM (ug/L) WET' in df_new.keys():
-        df_new.rename(index=str,columns={'CDOM (ug/L) WET':'CDOM_WET'},inplace=True)
+        df_new.rename(index=str,columns={'CDOM (ug/L) WET':'CDOM'},inplace=True)
     if 'CDOM(ug/L)WET' in df_new.keys():
-        df_new.rename(index=str,columns={'CDOM(ug/L)WET':'CDOM_WET'},inplace=True)
+        df_new.rename(index=str,columns={'CDOM(ug/L)WET':'CDOM'},inplace=True)
 
     if 'CDOM (ug/L) ECO' in df_new.keys():
         df_new.rename(index=str,columns={'CDOM (ug/L) ECO':'CDOM_ECO'},inplace=True)
@@ -108,9 +108,9 @@ for data in csv_files:
         df_new.rename(index=str,columns={'Chlorophyll-a ECO (µg/L)':'Chl-a_ECO'},inplace=True)
 
     if 'Chlorophyll-a (æg/L) WET' in df_new.keys(): 
-        df_new.rename(index=str,columns={'Chlorophyll-a (æg/L) WET':'Chl-a_WET'},inplace=True)
+        df_new.rename(index=str,columns={'Chlorophyll-a (æg/L) WET':'Chl-a'},inplace=True)
     if 'Chlorophyll-a WET (µg/L)' in df_new.keys(): 
-        df_new.rename(index=str,columns={'Chlorophyll-a WET (µg/L)':'Chl-a_WET'},inplace=True)
+        df_new.rename(index=str,columns={'Chlorophyll-a WET (µg/L)':'Chl-a'},inplace=True)
 
     # Chlorophyll-a Voltage (V) 
     if 'Chlorophyll-a Voltage (V) ECO' in df_new.keys():
@@ -122,7 +122,7 @@ for data in csv_files:
     if 'Chlorophyll-a Voltage WET (V)' in df_new.keys():
         df_new.rename(index=str,columns={'Chlorophyll-a Voltage WET (V)':'Chl-a_voltage_WET'},inplace=True)
     if 'Voltage-Chl-a' in df_new.keys():
-        df_new.rename(index=str,columns={'Voltage-Chl-a':'Chl-a_voltage_ECO'},inplace=True)
+        df_new.rename(index=str,columns={'Voltage-Chl-a':'Chl-a_voltage'},inplace=True)
     
     # conductivity (S/m)
     if 'Conductivity (S/m)' in df_new.keys():
@@ -144,9 +144,9 @@ for data in csv_files:
 
     # Discrete chl-a (ug/L)
     if 'Disacrete Chl-a (ug/L)' in df_new.keys():
-        df_new.rename(index=str,columns={'Disacrete Chl-a (ug/L)':'Chl-a_discrete'},inplace=True)
+        df_new.rename(index=str,columns={'Disacrete Chl-a (ug/L)':'Chl-a'},inplace=True)
     if 'Discrete Chlorophyll-a (µg/L)' in df_new.keys():
-        df_new.rename(index=str,columns={'Discrete Chlorophyll-a (µg/L)':'Chl-a_discrete'},inplace=True)
+        df_new.rename(index=str,columns={'Discrete Chlorophyll-a (µg/L)':'Chl-a'},inplace=True)
 
     # E. coli (MPN/100mL)
     if 'E.coli(MPN)' in df_new.keys():
@@ -405,9 +405,7 @@ ds = df.astype('float32')
 xrs = xr.Dataset(ds)
 #xrs.reset_index('dim_0',inplace=True)
 
-
-
-savename = 'central_bight_master_database_1998_2019_1D_sd.nc'
+savename = 'central_bight_master_database_1998_2019_1D_clean.nc'
 xrs.to_netcdf(savename)
 
 # add attributes
@@ -446,9 +444,3 @@ xrs = xr.Dataset.from_dataframe(df)
 xrs.to_netcdf('central_bight_master_database_1998_2017.nc')
 '''
 
-# variables to drop
-#xrs.drop[var_drop]
-var_drop = ['Chl-a_voltage_ECO','Chl-a_USC_UCLA','Chl-a_ECO','Chl-a_voltage_WET','Chl-a_WET','CDOM_WET','CDOM_voltage_WET','CDOM_ECO','CDOM_voltage_ECO','CDOM_Turner','CDOM_voltage_Turner']
-var_drop_str = 'Chl-a_voltage_ECO,Chl-a_USC_UCLA,Chl-a_ECO,Chl-a_voltage_WET,Chl-a_WET,CDOM_WET,CDOM_voltage_WET,CDOM_ECO,CDOM_voltage_ECO,CDOM_Turner,CDOM_voltage_Turner'
-savename_clean = 'central_bight_master_database_1998_2019_1D_clean.nc'
-subprocess.call('ncks -x -v '+var_drop_str+' '+savename+' '+savename_clean,shell=True)

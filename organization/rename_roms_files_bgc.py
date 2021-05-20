@@ -11,28 +11,28 @@ import glob as glob
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1999
-end_year = 2000
+start_year = 2015
+end_year = 2017
 
 # between 1 and 12
-start_month = 6
-end_month = 8 
+start_month = 4
+end_month = 12 
 
 ######################
 # PATHS
 ######################
 # model name
-model_name = 'l2_scb'
+model_name = 'ussw1'
 
 # model file types e.g. bgc_flux_avg
 #model_types = ['phys_flux','avg','bgc_flux_avg']
 model_types = ['bgc_flux_avg']
 
 # roms file path
-roms_path = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/'
+roms_path = '/data/project6/kesf/ROMS/USSW1/'
 
-# daily path
-day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/monthly/'
+# daily/monthly path
+day_path    = '/data/project6/kesf/ROMS/USSW1/monthly/'
 
 
 #########################

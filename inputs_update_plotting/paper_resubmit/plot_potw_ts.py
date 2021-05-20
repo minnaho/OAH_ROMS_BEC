@@ -123,7 +123,7 @@ plwtp_st = 170
 iend_major = major_time_dt.shape[0]
 savename_major = fig_path+'major_potw_ts.pdf'
 
-plt.ion()
+#plt.ion()
 
 fig,axes = plt.subplots(7,1,sharex=True,figsize=[figw,figh+2])
 for p_i in range(len(major_names)):

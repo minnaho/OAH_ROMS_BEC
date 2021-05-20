@@ -24,7 +24,7 @@ psrc_dt = num2date(psource_time_nc,'days since 1994-01-01',only_use_cftime_datet
 
 # psrc time starts at 1997-01-30
 # psrc_dt[30] is 1999-06-02 June
-# psrc_dt[45] is 2000-09-01 June
+# psrc_dt[45] is 2000-09-01 Sept
 p_st = 29
 p_en = 29+15
 

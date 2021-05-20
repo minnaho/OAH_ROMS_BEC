@@ -8,8 +8,8 @@ import numpy as np
 ############
 # WATER VOLUME FOR RECYCLING
 ############
-# total influent volume
-vol_st = 100
+# total influent volume, starting volume
+vol_st = 2.42
 
 # percent of influent going to recycling treatment plant
 #per_re = 0.75
@@ -34,15 +34,15 @@ vol_br = vol_in*(1-rec_eff)
 vol_re = vol_in*rec_eff
 
 # volume of effluent
-vol_ef = vol_br+(vol_st-(vol_st*per_re))
+vol_ef = vol_br+(vol_st-vol_in)
 
 #######################
 # CONSTITUENTS NITROGEN
 ######################
 
-# DIN removal
-nh4_rem = .85
-no3_rem = .95
+# DIN percent removal
+nh4_rem = .95
+no3_rem = .85
 #din_rem = .85
 #din_rem = .90
 #din_rem = .95
@@ -53,8 +53,8 @@ no3_rem = .95
 #no3_in = 34
 
 # partial NDN
-nh4_in = 7
-no3_in = 13
+nh4_in = 500.15
+no3_in = 928.85
 
 # full NDN
 #nh4_in = 1
@@ -72,3 +72,10 @@ no3_rj = (no3_in-no3_pm)/(1-rec_eff)
 
 din_pm = nh4_pm+no3_pm
 din_rj = nh4_rj+no3_rj
+
+###############
+# final effluent
+##############
+
+nh4_fi = ((nh4_rj*vol_br)+((vol_st-vol_in)*nh4_in))/vol_ef
+no3_fi = ((no3_rj*vol_br)+((vol_st-vol_in)*no3_in))/vol_ef

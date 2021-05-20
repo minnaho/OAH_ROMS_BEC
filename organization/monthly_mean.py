@@ -16,7 +16,7 @@ from netCDF4 import Dataset
 #########################################
 
 start_year = 1997
-end_year = 2001
+end_year = 2017
 
 # between 1 and 12
 start_month = 1
@@ -29,15 +29,16 @@ end_month = 12
 model_name = 'usw42'
 
 # model file types e.g. bgc_flux_avg
-model_types = ['phys_flux','avg','bgc_flux_avg','bdiags_avg']
+#model_types = ['phys_flux','avg','bgc_flux_avg','bdiags_avg']
+model_types = ['avg']
 
 # path with outputs
-roms_path    = '/data/project3/kesf/ROMS/USW4/ALL/'
+roms_path    = '/data/project6/kesf/ROMS/USW4/daily/'
 # path to save monthly averages
-monthly_path = '/data/project3/kesf/ROMS/USW4/M_ALL/'
+monthly_path = '/data/project6/kesf/ROMS/USW4/monthly/'
 
-# min, max, and standard deviation paths
-stats_path = '/data/project3/kesf/ROMS/USW4/STATS/'
+# exclude varibles
+exclude = '-x -v zlev_u_rho,zlev_rho '
 
 #########################
 # get list of model file names 
@@ -78,9 +79,9 @@ for y in range(start_year,end_year+1):
             # find monthly average using ncra
             ################################
             print('starting ncra on '+str(f))
-            subprocess.call('ncra -O '+roms_path+f+year_month+'D*.nc '+monthly_path+f+year_month+'.nc',shell=True) 
+            subprocess.call('ncra -O '+exclude+roms_path+f+year_month+'D*.nc '+monthly_path+f+year_month+'.nc',shell=True) 
 
-
+'''
             ###################################
             # find min and max for each day
             # ncra preserves dimensions when finding min/max
@@ -111,60 +112,4 @@ for y in range(start_year,end_year+1):
             subprocess.call('ncra -y max -O '+stats_path+'concat_max_'+f+year_month+'.nc '+stats_path+'max_'+f+year_month+'.nc',shell=True)
             print('min for year month '+year_month+' in min_'+f+year_month+'.nc')
             print('max for year month '+year_month+' in max_'+f+year_month+'.nc')
-
-'''
-            ################################################        
-            # find standard deviation through multiple steps
-            ################################################
-            print('finding standard deviation')
-            # first step: concatenate all days into one file 
-            subprocess.call('ncrcat -O '+roms_path+f+year_month+'D*.nc '+stats_path+'concat_'+f+year_month+'.nc',shell=True)
-            # second step: find temporal mean of all variables
-            subprocess.call('ncwa -O -a time '+stats_path+'concat_'+f+year_month+'.nc '+stats_path+'temp_mean_'+f+year_month+'.nc',shell=True)
-            # third step: find anomaly (deviation from the mean)
-            subprocess.call('ncbo -O '+stats_path+'concat_'+f+year_month+'.nc '+stats_path+'temp_mean_'+f+year_month+'.nc '+stats_path+'anom_'+f+year_month+'.nc',shell=True)
-            # last step: find root mean square of anomaly
-            subprocess.call('ncra -O -y rmssdn '+stats_path+'anom_'+f+year_month+'.nc '+stats_path+'std_'+f+year_month+'.nc',shell=True)
-
-'''
-
-'''
-variable = []
-f = file_types[0]
-for y in range(start_year,end_year+1):
-    print('year: '+str(y))
-    # if we are on the first year, starts at s_m
-    if y == start_year:
-        s_m = start_month 
-    else:
-        s_m = 1
-    # if we are on the last year, end at e_m
-    if y == end_year:
-        e_m = end_month+1
-    else: 
-        e_m = 13
-    for m in range(s_m,e_m): 
-        print('month: '+str(m))
-        if m in months_with_31_days:
-            ndays = 31
-        if m not in months_with_31_days:
-            ndays = 30
-            if m == 2 and y in leap_years:
-                ndays = 29
-            if m == 2 and y not in leap_years: 
-                ndays = 28
-        for d in range(1,ndays+1):
-            year_month_day = 'Y'+str(y)+'M'+'%02d'%m+'D'+'%02d'%d
-            print('assigning data for day: '+str(d)+' in month '+str(m))
-#            for f in file_types:
-            roms_file = roms_path+f+year_month_day+'.nc'
-            data_set = Dataset(roms_file,'r')
-            variable_list = data_set.variables 
-            # make dictionary with each variable as a key
-            variable_dict = dict((k,[]) for k in variable_list) 
-            variable_dict_avg = dict((k,[]) for k in variable_list) 
-            for v in variable_list:
-                variable_dict[v].append(np.array(data_set.variables[v]))
-#        for v in variable_list:
-#            np.nanmean(variable_dict[v],axis=0)
 '''
