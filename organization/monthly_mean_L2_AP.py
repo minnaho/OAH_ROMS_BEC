@@ -17,8 +17,8 @@ start_year = 2000
 end_year = 2000
 
 # between 1 and 12
-start_month = 1
-end_month = 9
+start_month = 10
+end_month = 10
 
 ######################
 # PATHS
@@ -31,9 +31,11 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # path with outputs
-roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/V3/daily/'
+roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/fresh/daily/'
+#roms_path    = '/data/project6/ROMS/L2SCB_AP/nutrients/daily/'
 # path to save monthly averages
-monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/V3/monthly/' 
+monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/fresh/monthly/' 
+#monthly_path = '/data/project6/ROMS/L2SCB_AP/nutrients/monthly/' 
 
 
 #########################

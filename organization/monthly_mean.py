@@ -15,18 +15,18 @@ from netCDF4 import Dataset
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1997
-end_year = 2017
+start_year = 1999
+end_year = 2000
 
 # between 1 and 12
-start_month = 1
-end_month = 12 
+start_month = 7
+end_month = 9 
 
 ######################
 # PATHS
 ######################
 # model name
-model_name = 'usw42'
+model_name = 'l2_scb'
 
 # model file types e.g. bgc_flux_avg
 #model_types = ['phys_flux','avg','bgc_flux_avg','bdiags_avg']

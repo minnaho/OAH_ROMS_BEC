@@ -3,7 +3,7 @@ from netCDF4 import Dataset,num2date
 import numpy as np
 import pandas as pd
 
-# edited nutrients files
+# scenario files
 data_path = '/data/project1/minnaho/potw_outfall_data/wastewater_scenarios/wn1_PNDN/'
 major_fi = 'partialNDN_norecycle_majors.xlsx'
 minor_fi = 'partialNDN_norecycle_minors.xlsx'

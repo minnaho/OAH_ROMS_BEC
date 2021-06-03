@@ -11,12 +11,12 @@ import glob as glob
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 2000
+start_year = 1999
 end_year = 2000
 
 # between 1 and 12
 start_month = 7
-end_month = 8 
+end_month = 10
 
 ######################
 # PATHS
@@ -30,10 +30,10 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # roms file path
-roms_path = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/'
+roms_path = '/data/project6/ROMS/L2SCB_AP/nutrients/'
 
 # daily path
-day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/freshw/daily/'
+day_path    = '/data/project6/ROMS/L2SCB_AP/nutrients/daily/'
 
 
 #########################

@@ -1,11 +1,12 @@
 import sys
 import os
 sys.path.append(os.path.abspath('/data/project3/minnaho/global/'))
-import l1grid
+import l0grid
 import matplotlib
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 import numpy as np
 from netCDF4 import Dataset
 import pandas as pd
@@ -14,31 +15,33 @@ import cartopy.crs as ccrs
 import cartopy.feature as cpf
 from cartopy.io import shapereader as shpreader
 import cartopy.io.img_tiles as cimgt
+from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
+#from cartopy.mpl.ticker import (LongitudeFormatter, LatitudeFormatter,
+#                                LatitudeLocator)
 
-plt.ion()
+#plt.ion()
 
 stamen_terrain = cimgt.Stamen('terrain-background')
 
-month = 8
+month = 6
 depth = '100m'
 
-savename = 'n2o_L1_std_'+depth+'_M'+'%02d'%month+'.png'
+savename = 'n2o_L0_avg_'+depth+'_M'+'%02d'%month+'.png'
 
 if month == 6:
-    titlestr = 'June St. Dev. '+depth+' 1997-2017'
+    titlestr = 'June Avg '+depth+' 1997-2017'
 if month == 7:
-    titlestr = 'July St. Dev. '+depth+' 1997-2017'
+    titlestr = 'July Avg '+depth+' 1997-2017'
 if month == 8:
-    titlestr = 'August St. Dev. '+depth+' 1997-2017'
+    titlestr = 'August Avg '+depth+' 1997-2017'
 
-file_nc = '/data/project4/minnaho/extract_roms/ussw1/std/ussw1_std.M'+'%02d'%month+'_1997_2017_'+depth+'.nc'
-#file_nc = '/data/project4/minnaho/extract_roms/ussw1/slices/ussw1_avg.M'+'%02d'%month+'_1997_2017_'+depth+'.nc'
+file_nc = '/data/project4/minnaho/extract_roms/usw4/slices/usw42_avg.M'+'%02d'%month+'_1997_2017_'+depth+'.nc'
 
 if depth == 'surf':
     v_max = 0.015 # surf
 if depth == '100m':
-    #v_max = 0.04 # 100m avg
-    v_max = 0.007 # 100m std
+    v_max = 0.04 # 100m avg
+#    v_max = 0.007 # 100m std
 if depth == '300m':
     v_max = 0.06 # 300m 
 
@@ -55,15 +58,15 @@ wcoa_lon = wcoa['Long']
 ###################################
 # load grid
 ###################################
-#grid_nc = l1grid.grid_nc
-lat_nc = l1grid.lat_nc
-lon_nc = l1grid.lon_nc
-h_nc = l1grid.h_nc
+#grid_nc = l0grid.grid_nc
+lat_nc = l0grid.lat_nc
+lon_nc = l0grid.lon_nc
+h_nc = l0grid.h_nc
 
 lat_min = 30
-lat_max = np.nanmax(lat_nc)
-lon_min = -116
-lon_max = -124
+lat_max = 51
+lon_min = -127
+lon_max = -116
 
 # plot
 axis_tick_size = 16
@@ -73,7 +76,7 @@ extent = [lon_min,lon_max,lat_min,lat_max]
 coast_10m = cpf.NaturalEarthFeature('physical','coastline','10m')
 #wsheds = shpreader.Reader('../paper_data_inputs/basin_arcgis/wribasin.shp')
 
-fig_w = 9
+fig_w = 10
 fig_h = 10
 
 c_map = cmocean.cm.thermal
@@ -111,5 +114,9 @@ cb.ax.tick_params(axis='both',which='major',labelsize=axis_tick_size)
 ax.set_title(titlestr,fontsize=axis_tick_size)
 ax.set_ylabel('Latitude',fontsize=axis_tick_size)
 ax.set_xlabel('Longitude',fontsize=axis_tick_size)
+
+gl.xlocator = mticker.FixedLocator(list(range(-127,-112,3)))
+gl.yformatter = LATITUDE_FORMATTER
+gl.xformatter = LONGITUDE_FORMATTER
 
 plt.savefig('./figs/'+savename,bbox_inches='tight')

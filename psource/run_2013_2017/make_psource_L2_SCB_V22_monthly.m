@@ -229,7 +229,6 @@ Qbar(:,37) = flow(:,2).*.65.*((1/6)/14) ; % HTP Small flow around the main diffu
 Qbar(:,43) = flow(:,2).*.65.*((1/6)/14) ; % HTP Small flow around the main diffusers
 Qbar(:,41) = flow(:,2).*.65.*((1/6)/14) ; % HTP Small flow around the main diffusers
 
-
 Qbar(:,52) = flow(:,2).*.175.*((1/2)/14) ; % HTP Small flow around the main diffusers
 Qbar(:,55) = flow(:,2).*.175.*((1/2)/14) ; % HTP Small flow around the main diffusers
 Qbar(:,48) = flow(:,2).*.175.*((1/2)/14) ; % HTP Small flow around the main diffusers

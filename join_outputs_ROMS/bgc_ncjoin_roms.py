@@ -19,21 +19,21 @@ import glob
 # Inputs
 ##############
 # model name
-model_name = 'ussw1'
+model_name = 'l2_scb'
 
 # model file types e.g. 'his','phys_flux','avg','bdiags_avg'
-model_types = ['phys_flux']
+model_types = ['avg','bdiags_avg','phys_flux','his','bgc_flux_avg']
 #model_types = ['phys_flux','avg']
 #model_types = ['avg']
 # path here
-out_path1 = '/data/project4/kesf/ROMS/USSW1/2005/'
+out_path1 = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/'
 
 # change year and month of folder that files are in
-start_year = 2005
-end_year = 2005
+start_year = 1999
+end_year = 2000
 
 # enter as digit month e.g. 1,2,3,...,12
-start_month = 9
+start_month = 10
 end_month = 9
 
 ##########################
@@ -78,6 +78,6 @@ for year in list(range(start_year,end_year+1)):
             # loop over each day specific to each file type
             for d in list(range(first_day,last_day+1)): 
                 print(str(d)+' nc join for '+out_file+' begins at '+time.ctime())
-                subprocess.call('ncjoin -d '+out_file+'.'+'%05d'%d+'.'+'???.nc',shell=True)       
+                subprocess.call('/data/project1/minnaho/join_outputs_ROMS/ncjoin -d '+out_file+'.'+'%05d'%d+'.'+'???.nc',shell=True)       
                 print(str(d)+' '+out_file+' ends at: '+time.ctime())
 
