@@ -20,7 +20,7 @@ end_year = 2000
 
 # between 1 and 12
 start_month = 7
-end_month = 9 
+end_month = 9
 
 ######################
 # PATHS
@@ -33,12 +33,13 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # path with outputs
-roms_path    = '/data/project6/kesf/ROMS/USW4/daily/'
+roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/daily/'
 # path to save monthly averages
-monthly_path = '/data/project6/kesf/ROMS/USW4/monthly/'
+monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/monthly/'
 
 # exclude varibles
-exclude = '-x -v zlev_u_rho,zlev_rho '
+#exclude = '-x -v zlev_u_rho,zlev_rho '
+exclude = ''
 
 #########################
 # get list of model file names 

@@ -304,7 +304,7 @@ sal_v = ncf.createVariable('salinity',np.float64,('time','location'))
 dfe_v = ncf.createVariable('dissolved_Fe',np.float64,('time','location'))
 
 tim_v.units = timeunit
-flo_v.units = 'mmol/m3'
+flo_v.units = 'm3/s'
 nh4_v.units = 'mmol/m3'
 no3_v.units = 'mmol/m3'
 no2_v.units = 'mmol/m3'

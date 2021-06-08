@@ -16,7 +16,7 @@ end_year = 2000
 
 # between 1 and 12
 start_month = 7
-end_month = 10
+end_month = 9
 
 ######################
 # PATHS
@@ -30,10 +30,10 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # roms file path
-roms_path = '/data/project6/ROMS/L2SCB_AP/nutrients/'
+roms_path = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/'
 
 # daily path
-day_path    = '/data/project6/ROMS/L2SCB_AP/nutrients/daily/'
+day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/daily/'
 
 
 #########################

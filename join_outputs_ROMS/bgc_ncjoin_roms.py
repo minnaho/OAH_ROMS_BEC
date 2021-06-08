@@ -22,18 +22,19 @@ import glob
 model_name = 'l2_scb'
 
 # model file types e.g. 'his','phys_flux','avg','bdiags_avg'
-model_types = ['avg','bdiags_avg','phys_flux','his','bgc_flux_avg']
-#model_types = ['phys_flux','avg']
+#model_types = ['avg','bdiags_avg','phys_flux','his','bgc_flux_avg']
+model_types = ['bgc_flux_avg','his','phys_flux']
 #model_types = ['avg']
 # path here
-out_path1 = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/'
+#out_path1 = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/'
+out_path1 = '/data/project6/ROMS/L2SCB_P/'
 
 # change year and month of folder that files are in
-start_year = 1999
-end_year = 2000
+start_year = 2013
+end_year = 2013
 
 # enter as digit month e.g. 1,2,3,...,12
-start_month = 10
+start_month = 9
 end_month = 9
 
 ##########################

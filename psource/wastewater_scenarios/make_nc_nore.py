@@ -1,6 +1,7 @@
 # make roms psource file for major and minor POTWs
 # for wastewater recycling scenarios
-# PNDN and FNDN only are in separate file
+# PNDN and FNDN only
+# Recycling scenarios only are in separate file
 from netCDF4 import Dataset,num2date
 import numpy as np
 import pandas as pd
