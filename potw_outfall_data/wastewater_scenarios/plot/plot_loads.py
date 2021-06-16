@@ -79,8 +79,9 @@ ocsd_path = [major_excel_pndnre,major_excel_fndnre,major_excel_pndn50,major_exce
 #  term
 term_path = [minor_excel_pndnre,minor_excel_fndnre,minor_excel_pndn50,minor_excel_pndn90,minor_excel_fndn50,minor_excel_fndn90]
 
-# just 2017 
-mnth = -12
+# start Aug 2016 
+mnth_st = -17
+mnth_en = -5
 
 axfont = 16
 
@@ -93,10 +94,10 @@ for s_i in range(len(sheetnames)):
 
         # current loads
         major_reg = pd.read_excel(major_excel_reg,sheet_name=s_i)
-        vol_ef_reg = major_reg['flow m3/s'][mnth:]
-        nh4_ef_reg = major_reg['NH4 mmol/m3'][mnth:]
-        no3_ef_reg = major_reg['NO3 mmol/m3'][mnth:]
-        no2_ef_reg = major_reg['NO2 mmol/m3'][mnth:]
+        vol_ef_reg = major_reg['flow m3/s'][mnth_st:mnth_en]
+        nh4_ef_reg = major_reg['NH4 mmol/m3'][mnth_st:mnth_en]
+        no3_ef_reg = major_reg['NO3 mmol/m3'][mnth_st:mnth_en]
+        no2_ef_reg = major_reg['NO2 mmol/m3'][mnth_st:mnth_en]
         nh4_ld_reg = vol_ef_reg*nh4_ef_reg*mmols_to_kgd
         no3_ld_reg = vol_ef_reg*no3_ef_reg*mmols_to_kgd
         no2_ld_reg = vol_ef_reg*no2_ef_reg*mmols_to_kgd
@@ -105,13 +106,13 @@ for s_i in range(len(sheetnames)):
         for f_i in range(len(major_path)):
             df = pd.read_excel(major_path[f_i],sheetnames[s_i])
             try:
-                vol_ef = df['flow m3/s'][mnth:]
+                vol_ef = df['flow m3/s'][mnth_st:mnth_en]
             except:
-                vol_ef = df['flow final effluent m3/s'][mnth:]
-            dt = df['date'][mnth:]
-            nh4_ef = df['NH4 mmol/m3'][mnth:]
-            no3_ef = df['NO3 mmol/m3'][mnth:]
-            no2_ef = df['NO2 mmol/m3'][mnth:]
+                vol_ef = df['flow final effluent m3/s'][mnth_st:mnth_en]
+            dt = df['date'][mnth_st:mnth_en]
+            nh4_ef = df['NH4 mmol/m3'][mnth_st:mnth_en]
+            no3_ef = df['NO3 mmol/m3'][mnth_st:mnth_en]
+            no2_ef = df['NO2 mmol/m3'][mnth_st:mnth_en]
             nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
             no3_ld = vol_ef*no3_ef*mmols_to_kgd
             no2_ld = vol_ef*no2_ef*mmols_to_kgd
@@ -144,10 +145,10 @@ s_i = 'ocsd'
 fig,ax = plt.subplots(2,1,figsize=[12,10])
 ax[0].set_title(s_i,fontsize=axfont)
 major_reg = pd.read_excel(major_excel_reg,sheet_name=s_i)
-vol_ef_reg = major_reg['flow m3/s'][mnth:]
-nh4_ef_reg = major_reg['NH4 mmol/m3'][mnth:]
-no3_ef_reg = major_reg['NO3 mmol/m3'][mnth:]
-no2_ef_reg = major_reg['NO2 mmol/m3'][mnth:]
+vol_ef_reg = major_reg['flow m3/s'][mnth_st:mnth_en]
+nh4_ef_reg = major_reg['NH4 mmol/m3'][mnth_st:mnth_en]
+no3_ef_reg = major_reg['NO3 mmol/m3'][mnth_st:mnth_en]
+no2_ef_reg = major_reg['NO2 mmol/m3'][mnth_st:mnth_en]
 nh4_ld_reg = vol_ef_reg*nh4_ef_reg*mmols_to_kgd
 no3_ld_reg = vol_ef_reg*no3_ef_reg*mmols_to_kgd
 no2_ld_reg = vol_ef_reg*no2_ef_reg*mmols_to_kgd
@@ -156,13 +157,13 @@ din_ld_reg = nh4_ld_reg+no3_ld_reg+no2_ld_reg
 for f_i in range(len(ocsd_path)):
     df = pd.read_excel(ocsd_path[f_i],sheet_name=s_i)
     try:
-        vol_ef = df['flow m3/s'][mnth:]
+        vol_ef = df['flow m3/s'][mnth_st:mnth_en]
     except:
-        vol_ef = df['flow final effluent m3/s'][mnth:]
-    dt = df['date'][mnth:]
-    nh4_ef = df['NH4 mmol/m3'][mnth:]
-    no3_ef = df['NO3 mmol/m3'][mnth:]
-    no2_ef = df['NO2 mmol/m3'][mnth:]
+        vol_ef = df['flow final effluent m3/s'][mnth_st:mnth_en]
+    dt = df['date'][mnth_st:mnth_en]
+    nh4_ef = df['NH4 mmol/m3'][mnth_st:mnth_en]
+    no3_ef = df['NO3 mmol/m3'][mnth_st:mnth_en]
+    no2_ef = df['NO2 mmol/m3'][mnth_st:mnth_en]
     nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
     no3_ld = vol_ef*no3_ef*mmols_to_kgd
     no2_ld = vol_ef*no2_ef*mmols_to_kgd
@@ -198,10 +199,10 @@ for s_i in range(len(sheetnames)):
 
         # current loads
         minor_reg = pd.read_excel(minor_excel_reg,sheet_name=s_i)
-        vol_ef_reg = minor_reg['flow m3/s'][mnth:]
-        nh4_ef_reg = minor_reg['NH4 mmol/m3'][mnth:]
-        no3_ef_reg = minor_reg['NO3 mmol/m3'][mnth:]
-        no2_ef_reg = minor_reg['NO2 mmol/m3'][mnth:]
+        vol_ef_reg = minor_reg['flow m3/s'][mnth_st:mnth_en]
+        nh4_ef_reg = minor_reg['NH4 mmol/m3'][mnth_st:mnth_en]
+        no3_ef_reg = minor_reg['NO3 mmol/m3'][mnth_st:mnth_en]
+        no2_ef_reg = minor_reg['NO2 mmol/m3'][mnth_st:mnth_en]
         nh4_ld_reg = vol_ef_reg*nh4_ef_reg*mmols_to_kgd
         no3_ld_reg = vol_ef_reg*no3_ef_reg*mmols_to_kgd
         no2_ld_reg = vol_ef_reg*no2_ef_reg*mmols_to_kgd
@@ -210,13 +211,13 @@ for s_i in range(len(sheetnames)):
         for f_i in range(len(minor_path)):
             df = pd.read_excel(minor_path[f_i],sheetnames[s_i])
             try:
-                vol_ef = df['flow m3/s'][mnth:]
+                vol_ef = df['flow m3/s'][mnth_st:mnth_en]
             except:
-                vol_ef = df['flow final effluent m3/s'][mnth:]
-            dt = df['date'][mnth:]
-            nh4_ef = df['NH4 mmol/m3'][mnth:]
-            no3_ef = df['NO3 mmol/m3'][mnth:]
-            no2_ef = df['NO2 mmol/m3'][mnth:]
+                vol_ef = df['flow final effluent m3/s'][mnth_st:mnth_en]
+            dt = df['date'][mnth_st:mnth_en]
+            nh4_ef = df['NH4 mmol/m3'][mnth_st:mnth_en]
+            no3_ef = df['NO3 mmol/m3'][mnth_st:mnth_en]
+            no2_ef = df['NO2 mmol/m3'][mnth_st:mnth_en]
             nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
             no3_ld = vol_ef*no3_ef*mmols_to_kgd
             no2_ld = vol_ef*no2_ef*mmols_to_kgd
@@ -249,10 +250,10 @@ s_i = 'TerminalIslandWaterReclamation'
 fig,ax = plt.subplots(2,1,figsize=[12,10])
 ax[0].set_title(s_i,fontsize=axfont)
 minor_reg = pd.read_excel(minor_excel_reg,sheet_name=s_i)
-vol_ef_reg = minor_reg['flow m3/s'][mnth:]
-nh4_ef_reg = minor_reg['NH4 mmol/m3'][mnth:]
-no3_ef_reg = minor_reg['NO3 mmol/m3'][mnth:]
-no2_ef_reg = minor_reg['NO2 mmol/m3'][mnth:]
+vol_ef_reg = minor_reg['flow m3/s'][mnth_st:mnth_en]
+nh4_ef_reg = minor_reg['NH4 mmol/m3'][mnth_st:mnth_en]
+no3_ef_reg = minor_reg['NO3 mmol/m3'][mnth_st:mnth_en]
+no2_ef_reg = minor_reg['NO2 mmol/m3'][mnth_st:mnth_en]
 nh4_ld_reg = vol_ef_reg*nh4_ef_reg*mmols_to_kgd
 no3_ld_reg = vol_ef_reg*no3_ef_reg*mmols_to_kgd
 no2_ld_reg = vol_ef_reg*no2_ef_reg*mmols_to_kgd
@@ -261,13 +262,13 @@ din_ld_reg = nh4_ld_reg+no3_ld_reg+no2_ld_reg
 for f_i in range(len(term_path)):
     df = pd.read_excel(term_path[f_i],sheet_name=s_i)
     try:
-        vol_ef = df['flow m3/s'][mnth:]
+        vol_ef = df['flow m3/s'][mnth_st:mnth_en]
     except:
-        vol_ef = df['flow final effluent m3/s'][mnth:]
-    dt = df['date'][mnth:]
-    nh4_ef = df['NH4 mmol/m3'][mnth:]
-    no3_ef = df['NO3 mmol/m3'][mnth:]
-    no2_ef = df['NO2 mmol/m3'][mnth:]
+        vol_ef = df['flow final effluent m3/s'][mnth_st:mnth_en]
+    dt = df['date'][mnth_st:mnth_en]
+    nh4_ef = df['NH4 mmol/m3'][mnth_st:mnth_en]
+    no3_ef = df['NO3 mmol/m3'][mnth_st:mnth_en]
+    no2_ef = df['NO2 mmol/m3'][mnth_st:mnth_en]
     nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
     no3_ld = vol_ef*no3_ef*mmols_to_kgd
     no2_ld = vol_ef*no2_ef*mmols_to_kgd

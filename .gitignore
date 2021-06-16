@@ -153,6 +153,7 @@ miniconda2/
 *.npy
 *.hbn
 *.pkl
+*.tar
 
 # image, pdf, text, etc
 *.pdf
@@ -164,6 +165,8 @@ miniconda2/
 *.txt
 *.in
 *.wmv
+*.gif
+*.avi
 
 # fortran
 *.o
