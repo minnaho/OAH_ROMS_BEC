@@ -79,33 +79,87 @@ disp(datestr(now));
 
 if option2==1   % depth-weighted avg
 
+% % KT200 is from surface to 200m depth
+% [dz, z, DepthWeight_KT200, idxKTDD, CumDepth, TotalDepth]=Fx_DepthWeight_KTDD_v05( ...
+	% DD1, h, zeta, theta_s, theta_b, hc, NZ, 'w', sc_type);
+
 % % KB5 is from bottom to 5m above bottom 
-% [DepthWeight_KB5, NumLayersTo_KB5, CumHeight, TotalDepth]=Fx_DepthWeightGivenDZ_KBDD_v03( ...
+% % [DepthWeight_KB5, NumLayersTo_KB5, CumHeight, TotalDepth]=Fx_DepthWeightGivenDZ_KBDD_v03( ...
 	% % DD3, dz, h, zeta);
 % [dz, z, DepthWeight_KB5, idxKBDD, CumHeight, TotalDepth]=Fx_DepthWeight_KBDD_v05( ...
 	% DD3, h, zeta, theta_s, theta_b, hc, NZ, 'w', sc_type);
 
-% function calculate bottom
-[dz, zKB, DepthWeight_KB5, idxKBDD, CumDepth, CumHeight, TotalDepth]=Fx_bottom( ...
-	DD3, h, zeta, theta_s, theta_b, hc, NZ, 'w', sc_type);
+% KT200 and KB5 at the same time
+[dz, zKT, zKB, DepthWeight_KT200, DepthWeight_KB5, idxKTDD, idxKBDD, CumDepth, CumHeight, TotalDepth]=Fx_DepthWeight_KT1KB1_v05( ...
+	DD1, DD3, h, zeta, theta_s, theta_b, hc, NZ, 'w', sc_type);
+
+elseif option2==0   % unweighted avg
+
+[dz, zKT, zKB]=Fx_MidpointDepthsAndHeights_v01( ...
+	h, zeta, theta_s, theta_b, hc, NZ, 'w', sc_type);
+	
+TotalDepth=h+zeta;	
+
+end   % if option2
+
+% Faycal's original code
+% [z_w,Cw1] = zlevs4(h, zeta, theta_s, theta_b, hc, NZ, 'w',sc_type);
+% dz = diff(z_w);
+% % find z = midpoint depths from the surface
+        % zbot = flipdim(cumsum(flipdim(dz,1)),1);
+        % ztop = [zbot(2:end,:,:);zeros(1,NY,NX)];
+	% z = (zbot+ztop)./2 ;
+
+%gp new code
+% % find zKB = midpoint heights from bottom
+        % zbotKB = cumsum(dz,1);
+        % % ztopKB = [zbotKB(2:end,:,:);zeros(1,NY,NX)];
+        % endKB=numel(zbotKB(:,1,1))-1;
+		% % ztopKB = [zbotKB(1:endKB,:,:);zeros(numel(zbotKB(:,1,1)),NY,NX)];
+        % % ztop = [zbot(end:2z,:,:);zeros(1,NY,NX)];
+        % ztopKB=zeros(size(zbotKB));
+        % ztopKB(2:end,:,:)=zbotKB(1:endKB,:,:);
+	% zKB = (zbotKB+ztopKB)./2 ;
+
 
 %% read the variables
    dataout  = ncread(file, 'rho') ;
    dataout = permute(dataout, [3 2 1]);
    dens = (squeeze(dataout(:,:,:)) + 1027.4) ;
+% if option2==1   % depth-weighted avg
+   % dens_KT200 = Fx_var_KTDD_v02(dens,DepthWeight_KT200);   %gp thickness-weighted average from 0-200m
+   % dens_KB5 = Fx_var_KBDD_v02(dens,DepthWeight_KB5);   %gp thickness-weighted average from 0-200m
+% elseif option2==0   % unweighted avg
+   % dens_KT200 = Fx_var_KTDD_unweighted_v02(dens, zKT, DD1, DD2);   %gp thickness-weighted average from 0-200m
+   % dens_KB5 = Fx_var_KBDD_unweighted_v02(dens, zKB, DD3);   %gp thickness-weighted average from 0-200m
+% end
 
    dataout  = ncread(file, 'temp') ;
    dataout = permute(dataout, [3 2 1]);
    temp = squeeze(dataout(:,:,:)) ;
    temp_dataout = temp;   %gp for later use in diagnostic output
 if option2==1   % depth-weighted avg
+%    temp_KT50 = Fx_var_KTDD_v02(temp,DepthWeight_KT50);   %gp thickness-weighted average from 0-50m
+   temp_KT200 = Fx_var_KTDD_v02(temp,DepthWeight_KT200);   %gp thickness-weighted average from 0-200m
    temp_KB5 = Fx_var_KBDD_v02(temp,DepthWeight_KB5);   %gp thickness-weighted average from 0-200m
 elseif option2==0   % unweighted avg
+   %gp temp(z>DD1 & z<DD2)=NaN; temp = squeeze(nanmean(temp,1)) ;
+   % temp(z>DD1)=NaN; temp(z<DD2)=NaN; temp = squeeze(nanmean(temp,1)) ;
+
+   % %KT200
+   % temp_KT200 = temp;
+   % temp_KT200(zKT>DD1)=NaN; temp_KT200(zKT<DD2)=NaN; temp_KT200 = squeeze(nanmean(temp_KT200,1)) ;
+   % %KB5
+   % temp_KB5 = temp;
+   % temp_KB5(zKB>DD3)=NaN; temp_KB5 = squeeze(nanmean(temp_KB5,1)) ;
+   % % for cases where the midpoint of the bottom layer is > DD3
+   % temp_KB = squeeze(temp(1,:,:));   % bottom layer conc of temp
+   % temp_KB5(isnan(temp_KB5))=temp_KB(isnan(temp_KB5));
+
+%    temp_KT50 = Fx_var_KTDD_unweighted_v02(temp, zKT, DD4, DD2);   
+   temp_KT200 = Fx_var_KTDD_unweighted_v02(temp, zKT, DD1, DD2); 
    temp_KB5 = Fx_var_KBDD_unweighted_v02(temp, zKB, DD3);  
-   temp_msk=temp; 
-   temp_msk(zKT>DD1)=NaN; 
-   temp_msk(zKT<DD2)=NaN; 
-   temp_std_KT200 = squeeze(nanstd2(temp_msk,1)) ;   % vertical std dev
+   temp_msk=temp; temp_msk(zKT>DD1)=NaN; temp_msk(zKT<DD2)=NaN; temp_std_KT200 = squeeze(nanstd2(temp_msk,1)) ;   % vertical std dev
 end
 %
 if option7==1

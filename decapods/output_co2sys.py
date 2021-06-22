@@ -57,6 +57,7 @@ for y_i in range(start_year,end_year+1):
             print(year_month)
             datanc = Dataset(outpath+model_name+year_month+'.nc','r')
             # get values from model
+            rhonc = np.squeeze(datanc.variables['rho'])+1027.4
             alknc = np.squeeze(datanc.variables['Alk'])
             dicnc = np.squeeze(datanc.variables['DIC'])
             salnc = np.squeeze(datanc.variables['salt'])
@@ -64,12 +65,19 @@ for y_i in range(start_year,end_year+1):
             silnc = np.squeeze(datanc.variables['SiO3'])
             po4nc = np.squeeze(datanc.variables['PO4'])
 
+            rhonc[rhonc>1E10] = np.nan
             alknc[alknc>1E10] = np.nan
             dicnc[dicnc>1E10] = np.nan
             salnc[salnc>1E10] = np.nan
             temnc[temnc>1E10] = np.nan
             silnc[silnc>1E10] = np.nan
             po4nc[po4nc>1E10] = np.nan
+
+            # convert from mmol/m3 to umol/kg
+            alknc = alknc/(rhonc*0.001)
+            dicnc = dicnc/(rhonc*0.001)
+            silnc = silnc/(rhonc*0.001)
+            po4nc = po4nc/(rhonc*0.001)
 
             # run co2sys
             co2dict = pyco2.sys(
@@ -85,6 +93,7 @@ for y_i in range(start_year,end_year+1):
                 opt_k_carbonic=k1k2c,
                 opt_k_bisulfate=kso4c,
                 opt_total_borate=kbors)
+
             # output
             pH = co2dict['pH_total']
             pco2 = co2dict['pCO2']
