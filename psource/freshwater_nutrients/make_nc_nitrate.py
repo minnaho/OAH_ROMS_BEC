@@ -6,10 +6,10 @@ import numpy as np
 #file_path = '/data/project3/minnaho/roms_psource_102020_R4.nc'
 # new name to distinguish
 file_path = '/data/project3/minnaho/roms_psource_jwpcperr.nc'
-file_path_out = '/data/project1/minnaho/psource/freshwater_nutrients/roms_psource_majors.nc'
+file_path_out = '/data/project1/minnaho/psource/freshwater_nutrients/roms_psource_nitrate.nc'
 file_nc = Dataset(file_path,'r')
 
-# end psources before rivers to exclude rivers
+# end psources before rivers and minor POTW to exclude them
 end_ind = 96
 
 # factor to divide flow by and multiply constituents by
@@ -113,12 +113,12 @@ PO4_var[:,:] = PO4_nc
 NO3_var = file_out.createVariable('NO3','float32',('Nsrc','psrc_time'))
 NO3_var.units = 'mmol N m-3'
 NO3_var.longname = 'averaged Nitrate'
-NO3_var[:,:] = NO3_nc
+NO3_var[:,:] = NO3_nc+NH4_nc
 
 NH4_var = file_out.createVariable('NH4','float32',('Nsrc','psrc_time'))
 NH4_var.units = 'mmol N m-3'
 NH4_var.longname = 'averaged Ammonium'
-NH4_var[:,:] = NH4_nc
+NH4_var[:,:] = np.ones((NH4_nc.shape[0],NH4_nc.shape[1]))*0.01
 
 Fe_var = file_out.createVariable('Fe','float32',('Nsrc','psrc_time'))
 Fe_var.units = 'mmol Fe m-3'
