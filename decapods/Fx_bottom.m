@@ -1,4 +1,4 @@
-function [dz, zKB, DepthWeight_KBDD, idxKBDD, CumDepth, CumHeight, TotalDepth] = Fx_bottom( ...
+function [dz, zKB, DepthWeight_KBDD, idxKBDD, TotalDepth] = Fx_bottom( ...
     DDkb, h, zeta, theta_s, theta_b, hc, NZ, wstr, sc_type)
 % function [DepthWeight_KBDD, NumLayersTo_KBDD, CumHeight, TotalDepth] = Fx_DepthWeightGivenDZ_KBDD_v01( ...
     % DD, dz)
@@ -86,7 +86,7 @@ for j = 1:size(dz,2)
 		if ztopKB(idxKBDD(j,k),j,k)<=DDkb && zbotKB(idxKBDD(j,k),j,k)>=DDkb
 			dz2KB(idxKBDD(j,k),j,k)=DDkb-ztop2KB(idxKBDD(j,k),j,k);   % adjusted dz in the deepest layer that contains DD
 		end
-		DepthWeight_KBDD(:,j,k)=dz2KB(:,j,k)./nansum2(dz2KB(:,j,k),1);   % depth weighting factors
+		DepthWeight_KBDD(:,j,k)=dz2KB(:,j,k)./nansum(dz2KB(:,j,k),1);   % depth weighting factors
 	end
 end
 TotalDepth = h + zeta; 

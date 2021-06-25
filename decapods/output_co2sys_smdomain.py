@@ -10,8 +10,8 @@ import PyCO2SYS as pyco2
 import seawater as sw
 
 # choose years and months
-start_year = 2017
-end_year = 2017
+start_year = 2016
+end_year = 2016
 
 start_month = 1
 end_month = 12
@@ -39,6 +39,8 @@ lat_sw = 35
 
 months_w_31_days = [1,3,5,7,8,10,12]
 leap_years = [1992,1996,2000,2004,2008,2012,2016,2020]
+
+gst = 350
 
 for y_i in range(start_year,end_year+1):
     # if we are on the first year, starts at s_m
@@ -71,14 +73,14 @@ for y_i in range(start_year,end_year+1):
             print(year_month)
             datanc = Dataset(outpath+model_name+year_month+'.nc','r')
             # get values from model
-            rhonc = np.squeeze(datanc.variables['rho'])+1027.4
-            alknc = np.squeeze(datanc.variables['Alk'])
-            dicnc = np.squeeze(datanc.variables['DIC'])
-            salnc = np.squeeze(datanc.variables['salt'])
-            temnc = np.squeeze(datanc.variables['temp'])
-            silnc = np.squeeze(datanc.variables['SiO3'])
-            po4nc = np.squeeze(datanc.variables['PO4'])
-            z_r = depths.get_zr_tind(datanc,grid_nc,0,[0,datanc.variables['temp'].shape[2],0,datanc.variables['temp'].shape[3]])
+            rhonc = np.squeeze(datanc.variables['rho'][:,:,:,gst:])+1027.4
+            alknc = np.squeeze(datanc.variables['Alk'][:,:,:,gst:])
+            dicnc = np.squeeze(datanc.variables['DIC'][:,:,:,gst:])
+            salnc = np.squeeze(datanc.variables['salt'][:,:,:,gst:])
+            temnc = np.squeeze(datanc.variables['temp'][:,:,:,gst:])
+            silnc = np.squeeze(datanc.variables['SiO3'][:,:,:,gst:])
+            po4nc = np.squeeze(datanc.variables['PO4'][:,:,:,gst:])
+            z_r = depths.get_zr_tind(datanc,grid_nc,0,[0,datanc.variables['temp'].shape[2],0,datanc.variables['temp'][:,:,:,gst:].shape[3]])
 
             rhonc[rhonc>1E10] = np.nan
             alknc[alknc>1E10] = np.nan
@@ -121,7 +123,7 @@ for y_i in range(start_year,end_year+1):
             del co2dict
             
             # write to nc file
-            ncfile = Dataset(savepath+model_name+year_month+'_co2sys_press.nc','w')
+            ncfile = Dataset(savepath+model_name+year_month+'_co2sys_smdomain.nc','w')
             ncfile.createDimension('s_rho',alknc.shape[0])
             ncfile.createDimension('eta_rho',alknc.shape[1])
             ncfile.createDimension('xi_rho',alknc.shape[2])

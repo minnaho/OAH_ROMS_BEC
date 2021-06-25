@@ -2,46 +2,42 @@
 load_grid_ussw1
 
 
+%%%%%%%%%%%%%%%%%%
 % begin user edits
-% --------------------------------
-% --------------------------------
-% --------------------------------
+%%%%%%%%%%%%%%%%%%
 
 % name and directory to be used for output nc files from the extract_2D script
-fname ='extract_2D_v28_L1_19972007';
-fdir = '/data/project4/gregp/tools_matlab/applications/pteropods/';
+fdir = '/data/project1/minnaho/decapods/extract_nc/';
 
 % edit the model outputs directories and select which years
-rep = '/data/project5/kesf/ROMS/USSW1/daily/' ;
-% repavg = dir([rep,'/ussw1_avg.Y2006*.nc']) ;   % to use year 2006 output files
-repavg = dir([rep,'/ussw1_avg.Y*.nc']) ;   % to use entire time period of model solution files
+rep = '/data/project6/ROMS/USSW1/daily/' ;
 
-% create a string of dates corresponding the model output files in repavg
-date = datenum(1997,2,1):datenum(2007,11,30);   % all dates in DAILY
-% date = datenum(2006,1,1):datenum(2006,12,31);   % all dates in DAILY
-% date = datenum(2006,1,1):datenum(2006,12,31);   % all dates in DAILY
-months = str2num(datestr(date,'mm')) ;
-years = str2num(datestr(date,'yyyy')) ;
+% repavg = dir([rep,'/ussw1_avg.Y2006*.nc']) ;   % to use year 2006 output files
+yr = '2010'
+repavg = dir([rep,'/ussw1_avg.Y',yr,'*.nc']) ;    
 
 % choose the option for CO2SYS 
 option1=1; % put 1 if you need to calculate omega using the CO2SYS program
 
 % choose the option for saving temp and chla and other chem
-option3=0; % put 0 for no saving of temp and chla and other chem variables, 1 for saving temp and chla and other chem
+% don't save = 0
+% save = 1
+option3=0; 
 
 % choose the option for saving Juranek omega
-option4=0; % put 0 for no saving Juranek omega, 1 for saving Juranek omega
-
-% save total depth
-option5=0;   % 0= do not save total depth, 1= save total depth
+% don't save = 0
+% save = 1
+option4=0; 
 
 % choose the depths for water column averaging
 DD3 = 5; % bottom height - set height above bottom for KBdd 
 
-% --------------------------------
-% --------------------------------
-% --------------------------------
+% name appended at the end of variable name
+fname = ['co2sys_bottom_',int2str(DD3),'m_',yr];
+
+%%%%%%%%%%%%%%%%%%
 % end user edits
+%%%%%%%%%%%%%%%%%%
 
 
 %% definitions used to create the netdcf empty files
@@ -51,11 +47,6 @@ ncvar_DICatm='var';
 shortname_DICatm='DICatm';
 longname_DICatm='DICatm at equilibrium with atmospheric CO2';
 unit_DICatm='umol kg-1';
-% DICexcess
-ncvar_DICexcess='var';
-shortname_DICexcess='DICexcess';
-longname_DICexcess='DICexcess above equilibrium with atmospheric CO2';
-unit_DICexcess='umol kg-1';
 % total depth
 ncvar_dep='var';
 shortname_dep='dep';
@@ -113,30 +104,30 @@ shortname_pH='pH';
 longname_pH='pH (total scale)';
 unit_pH='total scale';
 % pH (SWS)
-ncvar_pHsws='var';
-shortname_pHsws='pHsws';
-longname_pHsws='pH (seawater scale)';
-unit_pHsws='seawater scale';
+%ncvar_pHsws='var';
+%shortname_pHsws='pHsws';
+%longname_pHsws='pH (seawater scale)';
+%unit_pHsws='seawater scale';
 % pCO2 (uatm)
 ncvar_pCO2='var';
 shortname_pCO2='pCO2';
 longname_pCO2='pCO2';
 unit_pCO2='uatm';
 % xCO2 (ppm)
-ncvar_xCO2='var';
-shortname_xCO2='xCO2';
-longname_xCO2='xCO2';
-unit_xCO2='ppm';
+%ncvar_xCO2='var';
+%shortname_xCO2='xCO2';
+%longname_xCO2='xCO2';
+%unit_xCO2='ppm';
 % RF (Revelle Factor)
 ncvar_RF='var';
 shortname_RF='RF';
 longname_RF='Revelle Factor';
 unit_RF='dimensionless';
 % cal (omega calcite)
-ncvar_omcal='var';
-shortname_omcal='om_cal';
-longname_omcal='omega calcite saturation state';
-unit_omcal='dimensionless';
+%ncvar_omcal='var';
+%shortname_omcal='om_cal';
+%longname_omcal='omega calcite saturation state';
+%unit_omcal='dimensionless';
 % om (omega aragonite)
 ncvar_omara='var';
 shortname_omara='om_ara';
@@ -145,49 +136,37 @@ unit_omara='dimensionless';
 
 % create empty nc files for writing output
 
-% existing conditions (e.g. 1997-2007)
-fout1_DICexcess_KB5 =   [fdir,fname,'_DICexcess_KB5.nc'];  
-fout1_DICatm_KB5 =   [fdir,fname,'_DICatm_KB5.nc'];  
-create_netcdf3D_L1(fout1_DICexcess_KB5,ncvar_DICexcess,shortname_DICexcess,longname_DICexcess,unit_DICexcess);   
-create_netcdf3D_L1(fout1_DICatm_KB5,ncvar_DICatm,shortname_DICatm,longname_DICatm,unit_DICatm);   
-if option5==1
-fout1_dep =   [fdir,fname,'_TotalDepth.nc'];  
-fout1_zeta =   [fdir,fname,'_zeta.nc'];  
-create_netcdf3D_L1(fout1_dep,ncvar_dep,shortname_dep,longname_dep,unit_dep);   
-create_netcdf3D_L1(fout1_zeta,ncvar_zeta,shortname_zeta,longname_zeta,unit_zeta);   
-end
-
 % CO2SYS outputs
 % pHsws (pHsws)
-fout1_pHsws_KB5_co2sys =   [fdir,fname,'_pHsws_KB5dw.nc'];
+%fout1_pHsws_KB5_co2sys =   [fdir,fname,'_pHsws.nc'];
 % pH (pHtotal)
-fout1_pH_KB5_co2sys =   [fdir,fname,'_pH_KB5dw.nc'];
+fout1_pH_KB5_co2sys =   [fdir,'pH_',fname,'.nc'];
 % pCO2 (uatm)
-fout1_pCO2_KB5_co2sys =   [fdir,fname,'_pCO2_KB5dw.nc'];
+fout1_pCO2_KB5_co2sys =   [fdir,'pCO2_',fname,'.nc'];
 % xCO2 (ppm)
-fout1_xCO2_KB5_co2sys =   [fdir,fname,'_xCO2_KB5dw.nc'];
+%fout1_xCO2_KB5_co2sys =   [fdir,'xCO2_',fname,'.nc'];
 % RF (Revelle Factor)
-fout1_RF_KB5_co2sys =   [fdir,fname,'_RF_KB5dw.nc'];
+fout1_RF_KB5_co2sys =   [fdir,'RF_',fname,'.nc'];
 % cal (omega calcite)
-fout1_omcal_KB5_co2sys =   [fdir,fname,'_omcal_KB5dw.nc'];
+%fout1_omcal_KB5_co2sys =   [fdir,'omcal_',fname,'.nc'];
 % om (omega aragonite)
-fout1_omara_KB5_co2sys =   [fdir,fname,'_omara_KB5dw.nc'];
+fout1_omara_KB5_co2sys =   [fdir,'omega_ara_',fname,'.nc'];
 
-
+if option1==1
 %create_netcdf3D_L1(fout1);
 % CO2SYS w/ Lueker et al 2000 using dep-wt avg
 % pHsws (seawater scale)
-create_netcdf3D_L1(fout1_pHsws_KB5_co2sys,ncvar_pHsws,shortname_pHsws,longname_pHsws,unit_pHsws);   
+%create_netcdf3D_L1(fout1_pHsws_KB5_co2sys,ncvar_pHsws,shortname_pHsws,longname_pHsws,unit_pHsws);   
 % pH (total scale)
 create_netcdf3D_L1(fout1_pH_KB5_co2sys,ncvar_pH,shortname_pH,longname_pH,unit_pH);
 % pCO2 (pCO2)
 create_netcdf3D_L1(fout1_pCO2_KB5_co2sys,ncvar_pCO2,shortname_pCO2,longname_pCO2,unit_pCO2);   
 % xCO2 (xCO2)
-create_netcdf3D_L1(fout1_xCO2_KB5_co2sys,ncvar_xCO2,shortname_xCO2,longname_xCO2,unit_xCO2);   
+%create_netcdf3D_L1(fout1_xCO2_KB5_co2sys,ncvar_xCO2,shortname_xCO2,longname_xCO2,unit_xCO2);   
 % RF (Revelle Factor)
 create_netcdf3D_L1(fout1_RF_KB5_co2sys,ncvar_RF,shortname_RF,longname_RF,unit_RF);   
 % omcal (omega calcite)
-create_netcdf3D_L1(fout1_omcal_KB5_co2sys,ncvar_omcal,shortname_omcal,longname_omcal,unit_omcal);
+%create_netcdf3D_L1(fout1_omcal_KB5_co2sys,ncvar_omcal,shortname_omcal,longname_omcal,unit_omcal);
 % omara (omega aragonite)
 create_netcdf3D_L1(fout1_omara_KB5_co2sys,ncvar_omara,shortname_omara,longname_omara,unit_omara);
 
@@ -196,7 +175,6 @@ end   % if option1==1
 % Juranek outputs
 if option4 == 1
 fout2_KB5 =   [fdir,fname,'_om_juranek_KB5dw.nc'];
-end 
 create_netcdf3D_L1(fout2_KB5,ncvar_omara,shortname_omara,longname_omara,unit_omara);  % Juranek using depwt avg
 end    % if option4
 
