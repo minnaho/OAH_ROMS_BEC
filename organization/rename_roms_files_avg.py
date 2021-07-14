@@ -30,10 +30,10 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # roms file path
-roms_path = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/'
+roms_path = '/data/project6/ROMS/L2SCB_AP/nitrate/'
 
 # daily path
-day_path    = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/daily/'
+day_path    = '/data/project6/ROMS/L2SCB_AP/nitrate/daily/'
 
 
 #########################

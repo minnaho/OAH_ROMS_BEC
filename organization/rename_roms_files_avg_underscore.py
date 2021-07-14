@@ -1,6 +1,7 @@
 ##################################
-# rename model files e.g., l2_scb_avg.01328.nc to 
-# l2_scb_avg.Y????M??D??.nc
+# rename model files 
+# e.g., l2_scb_avg.Y????M??D??.nc to 
+# l2_scb_avg_Y????M??D??.nc
 # Minna Ho, SCCWRP, Nov 2020
 ##################################
 import subprocess
@@ -31,19 +32,20 @@ model_types = ['avg']
 #model_types = ['his']
 
 # roms file path
-#roms_path = '/data/project6/kesf/ROMS/L2SCB_AP/'
+roms_path = '/data/project6/kesf/ROMS/L2SCB_AP/'
 #roms_path = '/data/project5/kesf/ROMS/L2_SCB/'
 #roms_path = '/data/project6/ROMS/L2SCB_AP/fresh/'
 #roms_path = '/data/project6/ROMS/L2SCB_AP/nutrients/'
 #roms_path = '/data/project6/ROMS/L2SCB_P_1999_2000/'
-roms_path = '/data/project6/ROMS/L2SCB_1997_2000/'
+#roms_path = '/data/project6/ROMS/L2SCB_1997_2000/'
 
 # daily path
 #day_path    = '/data/project1/minnaho/validation/hydrodynamics/roms_slices/roms_output_his/'
 #day_path    = '/data/project3/minnaho/freshwater/postprocessing/roms_files_extract/freshw/'
 #day_path    = '/data/project3/minnaho/freshwater/postprocessing/roms_files_extract/nutri/'
 #day_path    = '/data/project3/minnaho/freshwater/postprocessing/roms_files_extract/pipes/'
-day_path    = '/data/project3/minnaho/freshwater/postprocessing/roms_files_extract/control/'
+#day_path    = '/data/project3/minnaho/freshwater/postprocessing/roms_files_extract/control/'
+day_path = '/data/project3/minnaho/freshwater/postprocessing/roms_files_extract/fulll/'
 
 
 #########################

@@ -12,9 +12,11 @@ fdir = '/data/project1/minnaho/decapods/extract_nc/';
 % edit the model outputs directories and select which years
 rep = '/data/project6/ROMS/USSW1/daily/' ;
 
-% repavg = dir([rep,'/ussw1_avg.Y2006*.nc']) ;   % to use year 2006 output files
-yr = '2010'
+% extract by year
+yr = '2017'
 repavg = dir([rep,'/ussw1_avg.Y',yr,'*.nc']) ;    
+% extract all 
+%repavg = dir([rep,'/ussw1_avg.Y*.nc']) ;    
 
 % choose the option for CO2SYS 
 option1=1; % put 1 if you need to calculate omega using the CO2SYS program

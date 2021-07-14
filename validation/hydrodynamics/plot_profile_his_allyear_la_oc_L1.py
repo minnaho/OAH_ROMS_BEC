@@ -2,6 +2,9 @@
 # map of surface currents
 # vs model
 ###########################
+import sys
+sys.path.append('/data/project3/minnaho/global/')
+import l1grid
 import numpy as np
 from netCDF4 import Dataset,num2date
 import glob as glob
@@ -46,13 +49,12 @@ la_dep = pickle.load(open('./moor_npy/la_dep_prof.pkl','rb'))
 #######################
 # get 06-1999 - 06-2000 monthly average u/v
 #out_path = '/data/project6/kesf/ROMS/L2SCB_AP/monthly/l2_scb_avg.'
-out_path = '/data/project6/kesf/ROMS/L2SCB_AP/AVG_'
-grid_path = '/data/project5/kesf/ROMS/L2_SCB/roms_grd.nc'
-grid_nc = Dataset(grid_path)
-lat_nc = np.array(grid_nc.variables['lat_rho'])
-lon_nc = np.array(grid_nc.variables['lon_rho'])
-h_nc = np.array(grid_nc.variables['h'])
-angle_nc = np.array(grid_nc.variables['angle'])
+out_path = '/data/project6/ROMS/USSW1/AVG_'
+grid_nc = l1grid.grid_nc
+lat_nc = l1grid.lat_nc
+lon_nc = l1grid.lon_nc
+h_nc = l1grid.h_nc
+angle_nc = l1grid.angle_nc
 [Ly_all,Lx_all] = grid_nc.variables['pm'].shape
 
 # oc find i,j values 
@@ -70,7 +72,8 @@ la_coord_j = np.arange((la_lat.shape[0]))
 for l_i in range(len(la_lat)):
     lat_you_want = la_lat[l_i]
     lon_you_want = la_lon[l_i]
-    # find difference and square, then absolute value to find closest lat/lon in lat_nc and lon_nc
+    # find difference and square, then absolute value 
+    # to find closest lat/lon in lat_nc and lon_nc
     temp = np.abs( (lat_nc - lat_you_want)**2 + (lon_nc - lon_you_want)**2)
     eta_coord,xi_coord = np.unravel_index(temp.argmin(),temp.shape)
     la_coord_i[l_i] = int(xi_coord)
@@ -159,7 +162,7 @@ for y_i in range(st_yr,en_yr+1):
     for m_i in range(s_m,e_m):
         print('month: ',m_i)
         fi_dt = 'Y'+str(y_i)+'M'+'%02d'%m_i
-        fi_name = glob.glob(out_path+fi_dt+'/'+'l2_scb_his.*.nc')
+        fi_name = glob.glob(out_path+fi_dt+'/'+'ussw1_his.*.nc')
         out_nc = Dataset(fi_name[0],'r')
         u_nc = np.array(out_nc.variables['u'])
         v_nc = np.array(out_nc.variables['v'])
@@ -188,24 +191,24 @@ for y_i in range(st_yr,en_yr+1):
         s_i += 1
 
 # save roms u/v/z arrays
-np.save('./moor_npy/roms_u_oc.npy',roms_u_sum_oc)
-np.save('./moor_npy/roms_v_oc.npy',roms_v_sum_oc)
-np.save('./moor_npy/z_r_oc.npy',z_r_sum_oc)
+np.save('./moor_npy/roms_u_oc_L1.npy',roms_u_sum_oc)
+np.save('./moor_npy/roms_v_oc_L1.npy',roms_v_sum_oc)
+np.save('./moor_npy/z_r_oc_L1.npy',z_r_sum_oc)
 
-np.save('./moor_npy/roms_u_la.npy',roms_u_sum_la)
-np.save('./moor_npy/roms_v_la.npy',roms_v_sum_la)
-np.save('./moor_npy/z_r_la.npy',z_r_sum_la)
+np.save('./moor_npy/roms_u_la_L1.npy',roms_u_sum_la)
+np.save('./moor_npy/roms_v_la_L1.npy',roms_v_sum_la)
+np.save('./moor_npy/z_r_la_L1.npy',z_r_sum_la)
 '''
 
 # load roms u/v/z arrays
 
-roms_u_sum_oc = np.load('./moor_npy/roms_u_oc.npy')
-roms_v_sum_oc = np.load('./moor_npy/roms_v_oc.npy')
-z_r_sum_oc    = np.load('./moor_npy/z_r_oc.npy')   
+roms_u_sum_oc = np.load('./moor_npy/roms_u_oc_L1.npy')
+roms_v_sum_oc = np.load('./moor_npy/roms_v_oc_L1.npy')
+z_r_sum_oc    = np.load('./moor_npy/z_r_oc_L1.npy')   
                 
-roms_u_sum_la = np.load('./moor_npy/roms_u_la.npy')
-roms_v_sum_la = np.load('./moor_npy/roms_v_la.npy')
-z_r_sum_la    = np.load('./moor_npy/z_r_la.npy')   
+roms_u_sum_la = np.load('./moor_npy/roms_u_la_L1.npy')
+roms_v_sum_la = np.load('./moor_npy/roms_v_la_L1.npy')
+z_r_sum_la    = np.load('./moor_npy/z_r_la_L1.npy')   
 
     
 # plot oc
@@ -297,33 +300,33 @@ la_ch = 5
 roms_dep_sum_la = np.nanmean(z_r_sum_la,axis=0)
 in_la_dep = np.where((roms_dep_sum_la[la_ch]>la_dep_plt[-1])&(roms_dep_sum_la[la_ch]<la_dep_plt[0]))
 
-roms_dep_sum_la = np.squeeze(roms_dep_sum_la[la_ch,in_la_dep])
+roms_dep_sum_la_plt = np.squeeze(roms_dep_sum_la[la_ch,in_la_dep])
 
-roms_avg_u_sum_la = roms_avg_u_sum_la[la_ch][in_la_dep]
-roms_avg_v_sum_la = roms_avg_v_sum_la[la_ch][in_la_dep]
+roms_avg_u_sum_la_plt = roms_avg_u_sum_la[la_ch][in_la_dep]
+roms_avg_v_sum_la_plt = roms_avg_v_sum_la[la_ch][in_la_dep]
 
-roms_std_u_sum_la_low  = roms_std_u_sum_la_low[la_ch][in_la_dep]  
-roms_std_v_sum_la_low  = roms_std_v_sum_la_low[la_ch][in_la_dep]  
+roms_std_u_sum_la_low_plt  = roms_std_u_sum_la_low[la_ch][in_la_dep]  
+roms_std_v_sum_la_low_plt  = roms_std_v_sum_la_low[la_ch][in_la_dep]  
                          
-roms_std_u_sum_la_high = roms_std_u_sum_la_high[la_ch][in_la_dep] 
-roms_std_v_sum_la_high = roms_std_v_sum_la_high[la_ch][in_la_dep] 
+roms_std_u_sum_la_high_plt = roms_std_u_sum_la_high[la_ch][in_la_dep] 
+roms_std_v_sum_la_high_plt = roms_std_v_sum_la_high[la_ch][in_la_dep] 
 
 # plot oc u
-plt.ion()
+#plt.ion()
 
 # plot one la profile
 fig0,axes0 = plt.subplots(1,4,figsize=[figw,figh])
 
-axes0.flat[0].plot(roms_avg_u_sum_la,roms_dep_sum_la,color=roms_c,label='ROMS')
-axes0.flat[0].plot(roms_std_u_sum_la_low,roms_dep_sum_la,color=roms_c,linestyle=std_l)
-axes0.flat[0].plot(roms_std_u_sum_la_high,roms_dep_sum_la,color=roms_c,linestyle=std_l)
+axes0.flat[0].plot(roms_avg_u_sum_la_plt,roms_dep_sum_la_plt,color=roms_c,label='ROMS')
+axes0.flat[0].plot(roms_std_u_sum_la_low_plt,roms_dep_sum_la_plt,color=roms_c,linestyle=std_l)
+axes0.flat[0].plot(roms_std_u_sum_la_high_plt,roms_dep_sum_la_plt,color=roms_c,linestyle=std_l)
 axes0.flat[0].plot(la_u_avg[la_ch],la_dep_plt,color=moor_c,linewidth=moor_lw,label='ADCP')
 axes0.flat[0].plot(la_u_std_low[la_ch],la_dep_plt,color=moor_c,linewidth=moor_lw,linestyle=std_l)
 axes0.flat[0].plot(la_u_std_high[la_ch],la_dep_plt,color=moor_c,linewidth=moor_lw,linestyle=std_l)
     
-axes0.flat[1].plot(roms_avg_v_sum_la,roms_dep_sum_la,color=roms_c)
-axes0.flat[1].plot(roms_std_v_sum_la_low,roms_dep_sum_la,color=roms_c,linestyle=std_l)
-axes0.flat[1].plot(roms_std_v_sum_la_high,roms_dep_sum_la,color=roms_c,linestyle=std_l)
+axes0.flat[1].plot(roms_avg_v_sum_la_plt,roms_dep_sum_la_plt,color=roms_c)
+axes0.flat[1].plot(roms_std_v_sum_la_low_plt,roms_dep_sum_la_plt,color=roms_c,linestyle=std_l)
+axes0.flat[1].plot(roms_std_v_sum_la_high_plt,roms_dep_sum_la_plt,color=roms_c,linestyle=std_l)
 axes0.flat[1].plot(la_v_avg[la_ch],la_dep_plt,color=moor_c,linewidth=moor_lw,label='ADCP')
 axes0.flat[1].plot(la_v_std_low[la_ch],la_dep_plt,color=moor_c,linewidth=moor_lw,linestyle=std_l)
 axes0.flat[1].plot(la_v_std_high[la_ch],la_dep_plt,color=moor_c,linewidth=moor_lw,linestyle=std_l)
@@ -363,19 +366,18 @@ for i in range(len(axes0.flat)):
 
 xkey = 0
 ykey = 1.02
-#axes0.flat[0].text(xkey,ykey,'c) LACSD ADCP A3 (X)',transform=axes0.flat[0].transAxes,fontsize=axis_font)
-#axes0.flat[1].text(xkey,ykey,'d) LACSD ADCP A3 (X)',transform=axes0.flat[1].transAxes,fontsize=axis_font)
 axes0.flat[0].text(xkey,ykey,'c) LACSD ADCP A'+str(la_ch+1)+' (X)',transform=axes0.flat[0].transAxes,fontsize=axis_font)
 axes0.flat[1].text(xkey,ykey,'d) LACSD ADCP A'+str(la_ch+1)+' (X)',transform=axes0.flat[1].transAxes,fontsize=axis_font)
 axes0.flat[2].text(xkey,ykey,'e) OC-T-1 (O)',transform=axes0.flat[2].transAxes,fontsize=axis_font)
 axes0.flat[3].text(xkey,ykey,'f) OC-T-1 (O)',transform=axes0.flat[3].transAxes,fontsize=axis_font)
 
-fig0.savefig(fig_path+'la_oc_vertical_allyear_his_checkA'+str(la_ch+1)+'.png',bbox_inches='tight')
+fig0.savefig(fig_path+'la_oc_vertical_allyear_his_L1_A'+str(la_ch+1)+'.png',bbox_inches='tight')
 
 
 
 # plot all la profiles to see 
-'''
+figw = 10
+figh = 18
 fig0,axes0 = plt.subplots(3,2,figsize=[figw,figh])
 
 a_p = 0
@@ -409,7 +411,7 @@ axes0.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=[0.6,1.0
 for i in range(len(axes0.flat)):
     axes0.flat[i].tick_params(axis='both',which='major',labelsize=axis_font)
 
-fig0.savefig(fig_path+'la_vertical_allyear_his_0-2.png',bbox_inches='tight')
+fig0.savefig(fig_path+'la_vertical_allyear_his_L1_0-2.png',bbox_inches='tight')
 
 
 fig0,axes0 = plt.subplots(3,2,figsize=[figw,figh])
@@ -420,18 +422,28 @@ for a_i in range(0,len(axes0.flat),2):
     axes0.flat[a_i].plot(roms_avg_u_sum_la[a_p],roms_dep_sum_la[a_p],color=roms_c,label='ROMS')
     axes0.flat[a_i].plot(roms_std_u_sum_la_low[a_p],roms_dep_sum_la[a_p],color=roms_c,linestyle=std_l)
     axes0.flat[a_i].plot(roms_std_u_sum_la_high[a_p],roms_dep_sum_la[a_p],color=roms_c,linestyle=std_l)
-    axes0.flat[a_i].plot(la_u_avg[a_p],la_dep_plt,color=moor_c,label='ADCP')
-    axes0.flat[a_i].plot(la_u_std_low[a_p],la_dep_plt,color=moor_c,linestyle=std_l)
-    axes0.flat[a_i].plot(la_u_std_high[a_p],la_dep_plt,color=moor_c,linestyle=std_l)
+    if a_p == 4:
+        axes0.flat[a_i].plot(np.array(pd.Series(la_u_avg[a_p]).interpolate().tolist()),la_dep_plt,color=moor_c,label='ADCP')
+        axes0.flat[a_i].plot(np.array(pd.Series(la_u_std_low[a_p]).interpolate().tolist()),la_dep_plt,color=moor_c,linestyle=std_l)
+        axes0.flat[a_i].plot(np.array(pd.Series(la_u_std_high[a_p]).interpolate().tolist()),la_dep_plt,color=moor_c,linestyle=std_l)
+    else:
+        axes0.flat[a_i].plot(la_u_avg[a_p],la_dep_plt,color=moor_c,label='ADCP')
+        axes0.flat[a_i].plot(la_u_std_low[a_p],la_dep_plt,color=moor_c,linestyle=std_l)
+        axes0.flat[a_i].plot(la_u_std_high[a_p],la_dep_plt,color=moor_c,linestyle=std_l)
     a_p += 1
     
 for b_i in range(1,len(axes0.flat),2):
     axes0.flat[b_i].plot(roms_avg_v_sum_la[b_p],roms_dep_sum_la[b_p],color=roms_c)
     axes0.flat[b_i].plot(roms_std_v_sum_la_low[b_p],roms_dep_sum_la[b_p],color=roms_c,linestyle=std_l)
     axes0.flat[b_i].plot(roms_std_v_sum_la_high[b_p],roms_dep_sum_la[b_p],color=roms_c,linestyle=std_l)
-    axes0.flat[b_i].plot(la_v_avg[b_p],la_dep_plt,color=moor_c)
-    axes0.flat[b_i].plot(la_v_std_low[b_p],la_dep_plt,color=moor_c,linestyle=std_l)
-    axes0.flat[b_i].plot(la_v_std_high[b_p],la_dep_plt,color=moor_c,linestyle=std_l)
+    if b_p == 4:
+        axes0.flat[b_i].plot(np.array(pd.Series(la_v_avg[a_p]).interpolate().tolist()),la_dep_plt,color=moor_c,label='ADCP')
+        axes0.flat[b_i].plot(np.array(pd.Series(la_v_std_low[a_p]).interpolate().tolist()),la_dep_plt,color=moor_c,linestyle=std_l)
+        axes0.flat[b_i].plot(np.array(pd.Series(la_v_std_high[a_p]).interpolate().tolist()),la_dep_plt,color=moor_c,linestyle=std_l)
+    else:
+        axes0.flat[b_i].plot(la_v_avg[b_p],la_dep_plt,color=moor_c)
+        axes0.flat[b_i].plot(la_v_std_low[b_p],la_dep_plt,color=moor_c,linestyle=std_l)
+        axes0.flat[b_i].plot(la_v_std_high[b_p],la_dep_plt,color=moor_c,linestyle=std_l)
     b_p += 1
 
 axes0.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=[0.6,1.02,1.1,.102],ncol=2,mode='expand',borderaxespad=0.,handlelength=3)
@@ -439,7 +451,7 @@ axes0.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=[0.6,1.0
 for i in range(len(axes0.flat)):
     axes0.flat[i].tick_params(axis='both',which='major',labelsize=axis_font)
 
-fig0.savefig(fig_path+'la_vertical_allyear_his_3-5.png',bbox_inches='tight')
+fig0.savefig(fig_path+'la_vertical_allyear_his_L1_3-5.png',bbox_inches='tight')
 
 fig0,axes0 = plt.subplots(3,2,figsize=[figw,figh])
 
@@ -468,5 +480,4 @@ axes0.flat[0].legend(loc='lower left',fontsize=axis_font,bbox_to_anchor=[0.6,1.0
 for i in range(len(axes0.flat)):
     axes0.flat[i].tick_params(axis='both',which='major',labelsize=axis_font)
 
-fig0.savefig(fig_path+'la_vertical_allyear_his_6-8.png',bbox_inches='tight')
-'''
+fig0.savefig(fig_path+'la_vertical_allyear_his_L1_6-8.png',bbox_inches='tight')

@@ -10,20 +10,25 @@ import PyCO2SYS as pyco2
 import seawater as sw
 
 # choose years and months
-start_year = 2016
-end_year = 2016
+start_year = 2004
+end_year = 2004
 
 start_month = 1
 end_month = 12
 
 dtunit = 'days since '+str(start_year)+'-'+'%02d'%start_month+'-01'
 
+# where to start the grid in xi coords
+gst = 350
+
 grid_nc = l1grid.grid_nc
+lat_nc = l1grid.lat_nc
+lat_nc = np.repeat([lat_nc],60,axis=0)[:,:,gst:] # make same shape as z_r 
 
 # read in model output
 outpath = '/data/project6/ROMS/USSW1/daily/'
 # path to save co2sys output
-savepath = '/data/project1/minnaho/decapods/co2sys_output/'
+savepath = '/data/project6/minnaho/bio_interp/co2sys_output_L1_sm/'
 
 model_name = 'ussw1_avg.'
 
@@ -40,7 +45,12 @@ lat_sw = 35
 months_w_31_days = [1,3,5,7,8,10,12]
 leap_years = [1992,1996,2000,2004,2008,2012,2016,2020]
 
-gst = 350
+
+# define these so don't have to calculate
+# full shape of domain
+shpeta = 1410
+shpxi = 770
+
 
 for y_i in range(start_year,end_year+1):
     # if we are on the first year, starts at s_m
@@ -80,7 +90,7 @@ for y_i in range(start_year,end_year+1):
             temnc = np.squeeze(datanc.variables['temp'][:,:,:,gst:])
             silnc = np.squeeze(datanc.variables['SiO3'][:,:,:,gst:])
             po4nc = np.squeeze(datanc.variables['PO4'][:,:,:,gst:])
-            z_r = depths.get_zr_tind(datanc,grid_nc,0,[0,datanc.variables['temp'].shape[2],0,datanc.variables['temp'][:,:,:,gst:].shape[3]])
+            z_r = depths.get_zr_tind(datanc,grid_nc,0,[0,shpeta,gst,shpxi])
 
             rhonc[rhonc>1E10] = np.nan
             alknc[alknc>1E10] = np.nan
@@ -106,7 +116,7 @@ for y_i in range(start_year,end_year+1):
                 par2_type=par2type,
                 salinity=salnc,
                 temperature=temnc,
-                pressure=sw.pres(z_r*-1,lat_sw), # make depth value positive
+                pressure=sw.pres(z_r*-1,lat_nc), # make depth value positive
                 total_silicate=silnc,
                 total_phosphate=po4nc,
                 opt_pH_scale=pHscale,

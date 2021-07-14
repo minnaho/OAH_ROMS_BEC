@@ -19,11 +19,12 @@ end_month = 12
 dtunit = 'days since '+str(start_year)+'-'+'%02d'%start_month+'-01'
 
 grid_nc = l1grid.grid_nc
+lat_nc = l1grid.lat_nc
 
 # read in model output
 outpath = '/data/project6/ROMS/USSW1/daily/'
 # path to save co2sys output
-savepath = '/data/project1/minnaho/decapods/co2sys_output/'
+savepath = '/data/project6/minnaho/bio_interp/co2sys_output_L1_full/'
 
 model_name = 'ussw1_avg.'
 

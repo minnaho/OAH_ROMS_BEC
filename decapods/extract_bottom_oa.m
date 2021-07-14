@@ -23,7 +23,7 @@ addpath(genpath('/data/project3/kesf/tools_matlab/matlab_paths/'))
 % begin user edits
 
 % name of param.m file to control this extract_2D.m
-param_bottom
+param_bottom_oa
 
 % end user edits
 
