@@ -11,12 +11,12 @@ import glob as glob
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1999
-end_year = 2000
+start_year = 1997
+end_year = 1997
 
 # between 1 and 12
-start_month = 7
-end_month = 9
+start_month = 8
+end_month = 12
 
 ######################
 # PATHS
@@ -30,10 +30,10 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # roms file path
-roms_path = '/data/project6/ROMS/L2SCB_AP/nitrate/'
+roms_path = '/data/project6/ROMS/L2SCB_OPC/loads1617/'
 
 # daily path
-day_path    = '/data/project6/ROMS/L2SCB_AP/nitrate/daily/'
+day_path    = '/data/project6/ROMS/L2SCB_OPC/loads1617/daily/'
 
 
 #########################

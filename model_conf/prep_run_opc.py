@@ -1,6 +1,6 @@
 ##################################
 # Prepare roms_YyyyyMmm.in
-# for usw42 biogeochemical model
+# for OPC wastewater runs
 # Minna Ho, UCLA, Feb 2018 
 ##################################
 
@@ -11,15 +11,15 @@
 #########################################
 model = 'L2_SCB'
 model_file = 'l2_scb'
-start_year = 1997
+start_year = 1998
 end_year = 1998
 
 # between 1 and 12
-start_month = 8
-end_month = 11
+start_month = 1
+end_month = 1
 
 # model time step (seconds)
-dt = 50
+dt = 30
 NDTFAST= 50
 NINFO = 1
 
@@ -33,7 +33,7 @@ scratch_path_local = '/data/project1/minnaho/model_conf/'
 scratch_path = '/data/project1/minnaho/model_conf/'
 '''
 
-model_scenario = 'fndn90'
+model_scenario = 'PNDN_only'
 
 savepath = './wastewater_scenarios/'+model_scenario+'/'
 
@@ -70,6 +70,7 @@ atm_prec = model+'_prec_'
 frc      = 'roms_frc.nc'
 atmdep   = 'roms_atmdep.nc'
 anthpco2 = 'roms_anthpco2.nc'
+#anthpco2 = 'roms_anthpco2_end.nc' # test for Expanse, didn't work
 #dust     = 'roms_dust.nc'
 
 # OUTFILES

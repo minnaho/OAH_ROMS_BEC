@@ -21,21 +21,20 @@ import glob
 # model name
 model_name = 'l2_scb'
 
-# model file types e.g. 'his','phys_flux','avg','bdiags_avg'
-model_types = ['avg','bdiags_avg','phys_flux','his','bgc_flux_avg']
-#model_types = ['bgc_flux_avg','his','phys_flux']
-#model_types = ['avg']
+# model file types e.g. 'his','phys_flux','avg','bdiags_avg',
+# 'bgc_flux_avg'
+model_types = ['avg','bdiags_avg','phys_flux','bgc_flux_avg','his',]
+
 # path here
-#out_path1 = '/data/project5/kesf/ROMS/L2SCB_AP/pipes/'
-out_path1 = '/data/project6/ROMS/L2SCB_AP/nitrate/'
+out_path1 = '/data/project6/ROMS/L2SCB_OPC/loads1617/'
 
 # change year and month of folder that files are in
-start_year = 2000
-end_year = 2000
+start_year = 1997
+end_year = 1997
 
 # enter as digit month e.g. 1,2,3,...,12
-start_month = 4
-end_month = 4
+start_month = 12
+end_month = 12
 
 ##########################
 # get list of model file names 

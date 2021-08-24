@@ -10,8 +10,8 @@ import PyCO2SYS as pyco2
 import seawater as sw
 
 # choose years and months
-start_year = 2004
-end_year = 2004
+start_year = 2002
+end_year = 2002
 
 start_month = 1
 end_month = 12

@@ -5,7 +5,7 @@
 # LAST REVISION: 2-March-2017 (Faycal Kessouri kesf@ucla.edu)
 #======================================================#
 ns=0;
-ne=767;
+ne=383;
 
 T1=$(date +%s)
 

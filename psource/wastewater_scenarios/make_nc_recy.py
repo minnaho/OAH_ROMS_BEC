@@ -10,7 +10,7 @@ import datetime as datetime
 # scenario files
 data_path = '/data/project1/minnaho/potw_outfall_data/wastewater_scenarios/'
 
-treat = 'fndn'
+treat = 'pndn'
 recy = '90'
 
 fol = 'excel_'+treat+recy+'/'
@@ -390,10 +390,13 @@ for p_i in range(len(minor_names)):
     DOP_nc[plw_en+p_i:]  = minor_mon['OP mmol/m3'][p_st:p_en]
     SiO3_nc[plw_en+p_i:] = minor_mon['SiO4 mmol/m3'][p_st:p_en]
 
+    # no pH values, so use 7.5 (consistent with Faycal's method)
+    phh = 7.5 
+
     for t_i in range(Alk_nc.shape[1]):
         CO2dict = CO2SYS(
             Alk_nc[plw_en+p_i,t_i],
-            pH_nc[plw_en+p_i,t_i],
+            phh,
             par1type,
             par2type,
             saltt,
@@ -418,29 +421,38 @@ s_rho_dim = file_out.createDimension('s_rho',Qshape_nc.shape[0])
 
 # loop over this time for Aug 1 1997 to Nov 31 1999 
 # start Aug 1 2016, last time step is Nov 1 1999
+
 # add 2 to time values because the times are at end of months 
 # so simulation will start at beginning of month
 # Jul 30 --> Aug 1
-psrc_final = psource_time_nc[6:27+7]+2 
+#psrc_final = psource_time_nc[6:27+7]+2 
+# no need to change start time because ROMS interpolates
+
+# 6 is Jul 30 1997 and ends in Nov 29 1999
+psrc_final = psource_time_nc[6:27+8]
 
 psrc_time_dim = file_out.createDimension('psrc_time',psrc_final.shape[0])
 
 psrc_time_var = file_out.createVariable('psrc_time','float64',('psrc_time'))
-psrc_time_var.units = 'days since 1994-01-01'
+psrc_time_var.units = 'days'
 psrc_time_var.longname = 'point source time from 1994-1-1'
 # psource loads for Aug 1 2016 to Jul 31 2017
 #psrc_time_var[:] = psource_time_nc[p_st:p_en]
 # loop over this time for Aug 1 1997 to Nov 31 1999 
 # start Aug 1 2016, last time step is Nov 1 1999
+#psrc_time_var[:] = psource_time_nc
 psrc_time_var[:] = psrc_final
 
+# time steps to add to loop the time
+lp = 5
+
 # put variables in new netcdf
-# append same time series + last 4 times againt to get 28 months
+# append same time series + last 5 times again to get 28 months
 Qbar_var = file_out.createVariable('Qbar','float32',('Nsrc','psrc_time'))
 Qbar_var.units = 'meter3 second-1'
 Qbar_var.longname = 'vertically integrated mass transport of point'
 #Qbar_var[:,:] = Qbar_nc
-Qbar_var[:,:] = np.append(np.append(Qbar_nc,Qbar_nc,axis=1),Qbar_nc[:,:4],axis=1)
+Qbar_var[:,:] = np.append(np.append(Qbar_nc,Qbar_nc,axis=1),Qbar_nc[:,:lp],axis=1)
 
 Qshape_var = file_out.createVariable('Qshape','float32',('s_rho','Nsrc'))
 Qshape_var.units = 'no units'
@@ -471,84 +483,90 @@ temp_var = file_out.createVariable('temp','float32',('Nsrc','psrc_time'))
 temp_var.units = 'Degrees Celsius'
 temp_var.longname = 'Temperature at point source'
 #temp_var[:,:] = temp_nc
-temp_var[:,:] = np.append(np.append(temp_nc,temp_nc,axis=1),temp_nc[:,:4],axis=1)
+temp_var[:,:] = np.append(np.append(temp_nc,temp_nc,axis=1),temp_nc[:,:lp],axis=1)
 
 salt_var = file_out.createVariable('salt','float32',('Nsrc','psrc_time'))
 salt_var.units = 'psu'
 salt_var.longname = 'Salinity at point source'
 #salt_var[:,:] = salt_nc
-salt_var[:,:] = np.append(np.append(salt_nc,salt_nc,axis=1),salt_nc[:,:4],axis=1)
+salt_var[:,:] = np.append(np.append(salt_nc,salt_nc,axis=1),salt_nc[:,:lp],axis=1)
 
 PO4_var = file_out.createVariable('PO4','float32',('Nsrc','psrc_time'))
 PO4_var.units = 'mmol P m-3'
 PO4_var.longname = 'averaged Phosphate'
 #PO4_var[:,:] = PO4_nc
-PO4_var[:,:] = np.append(np.append(PO4_nc,PO4_nc,axis=1),PO4_nc[:,:4],axis=1)
+PO4_var[:,:] = np.append(np.append(PO4_nc,PO4_nc,axis=1),PO4_nc[:,:lp],axis=1)
 
 NO3_var = file_out.createVariable('NO3','float32',('Nsrc','psrc_time'))
 NO3_var.units = 'mmol N m-3'
 NO3_var.longname = 'averaged Nitrate'
 #NO3_var[:,:] = NO3_nc
-NO3_var[:,:] = np.append(np.append(NO3_nc,NO3_nc,axis=1),NO3_nc[:,:4],axis=1)
+NO3_var[:,:] = np.append(np.append(NO3_nc,NO3_nc,axis=1),NO3_nc[:,:lp],axis=1)
 
 NH4_var = file_out.createVariable('NH4','float32',('Nsrc','psrc_time'))
 NH4_var.units = 'mmol N m-3'
 NH4_var.longname = 'averaged Ammonium'
 #NH4_var[:,:] = NH4_nc
-NH4_var[:,:] = np.append(np.append(NH4_nc,NH4_nc,axis=1),NH4_nc[:,:4],axis=1)
+NH4_var[:,:] = np.append(np.append(NH4_nc,NH4_nc,axis=1),NH4_nc[:,:lp],axis=1)
 
 Fe_var = file_out.createVariable('Fe','float32',('Nsrc','psrc_time'))
 Fe_var.units = 'mmol Fe m-3'
 Fe_var.longname = 'averaged Iron'
 #Fe_var[:,:] = Fe_nc
-Fe_var[:,:] = np.append(np.append(Fe_nc,Fe_nc,axis=1),Fe_nc[:,:4],axis=1)
+Fe_var[:,:] = np.append(np.append(Fe_nc,Fe_nc,axis=1),Fe_nc[:,:lp],axis=1)
 
 O2_var = file_out.createVariable('O2','float32',('Nsrc','psrc_time'))
 O2_var.units = 'mmol O2 m-3'
 O2_var.longname = 'averaged Oxygen'
 #O2_var[:,:] = O2_nc
-O2_var[:,:] = np.append(np.append(O2_nc,O2_nc,axis=1),O2_nc[:,:4],axis=1)
+O2_var[:,:] = np.append(np.append(O2_nc,O2_nc,axis=1),O2_nc[:,:lp],axis=1)
 
 DIC_var = file_out.createVariable('DIC','float32',('Nsrc','psrc_time'))
 DIC_var.units = 'mmol C m-3'
 DIC_var.longname = 'averaged Dissolved inorganic carbon'
 #DIC_var[:,:] = DIC_nc
-DIC_var[:,:] = np.append(np.append(DIC_nc,DIC_nc,axis=1),DIC_nc[:,:4],axis=1)
+DIC_var[:,:] = np.append(np.append(DIC_nc,DIC_nc,axis=1),DIC_nc[:,:lp],axis=1)
 
 Alk_var = file_out.createVariable('Alk','float32',('Nsrc','psrc_time'))
 Alk_var.units = 'mmol m-3'
 Alk_var.longname = 'averaged alkalinity'
 #Alk_var[:,:] = Alk_nc
-Alk_var[:,:] = np.append(np.append(Alk_nc,Alk_nc,axis=1),Alk_nc[:,:4],axis=1)
+Alk_var[:,:] = np.append(np.append(Alk_nc,Alk_nc,axis=1),Alk_nc[:,:lp],axis=1)
 
 DOC_var = file_out.createVariable('DOC','float32',('Nsrc','psrc_time'))
 DOC_var.units = 'mmol C m-3'
 DOC_var.longname = 'averaged Dissolved organic carbon'
 #DOC_var[:,:] = DOC_nc
-DOC_var[:,:] = np.append(np.append(DOC_nc,DOC_nc,axis=1),DOC_nc[:,:4],axis=1)
+DOC_var[:,:] = np.append(np.append(DOC_nc,DOC_nc,axis=1),DOC_nc[:,:lp],axis=1)
 
 DON_var = file_out.createVariable('DON','float32',('Nsrc','psrc_time'))
 DON_var.units = 'mmol N m-3'
 DON_var.longname = 'averaged Dissolved organic nitrogen'
 #DON_var[:,:] = DON_nc
-DON_var[:,:] = np.append(np.append(DON_nc,DON_nc,axis=1),DON_nc[:,:4],axis=1)
+DON_var[:,:] = np.append(np.append(DON_nc,DON_nc,axis=1),DON_nc[:,:lp],axis=1)
 
 DOP_var = file_out.createVariable('DOP','float32',('Nsrc','psrc_time'))
 DOP_var.units = 'mmol P m-3'
 DOP_var.longname = 'averaged Dissolved organic phosphorus'
 #DOP_var[:,:] = DOP_nc
-DOP_var[:,:] = np.append(np.append(DOP_nc,DOP_nc,axis=1),DOP_nc[:,:4],axis=1)
+DOP_var[:,:] = np.append(np.append(DOP_nc,DOP_nc,axis=1),DOP_nc[:,:lp],axis=1)
 
 NO2_var = file_out.createVariable('NO2','float32',('Nsrc','psrc_time'))
 NO2_var.units = 'mmol N m-3'
 NO2_var.longname = 'averaged Nitrite'
 #NO2_var[:,:] = NO2_nc
-NO2_var[:,:] = np.append(np.append(NO2_nc,NO2_nc,axis=1),NO2_nc[:,:4],axis=1)
+NO2_var[:,:] = np.append(np.append(NO2_nc,NO2_nc,axis=1),NO2_nc[:,:lp],axis=1)
+
+SO3_var = file_out.createVariable('SiO3','float32',('Nsrc','psrc_time'))
+SO3_var.units = 'mmol N m-3'
+SO3_var.longname = 'averaged Silicate'
+#SO3_var[:,:] = NO2_nc
+SO3_var[:,:] = np.append(np.append(SiO3_nc,SiO3_nc,axis=1),SiO3_nc[:,:lp],axis=1)
 
 pH_var = file_out.createVariable('pH','float32',('Nsrc','psrc_time'))
 pH_var.units = 'pH units'
 pH_var.longname = 'averaged pH'
 #pH_var[:,:] = pH_nc
-pH_var[:,:] = np.append(np.append(pH_nc,pH_nc,axis=1),pH_nc[:,:4],axis=1)
+pH_var[:,:] = np.append(np.append(pH_nc,pH_nc,axis=1),pH_nc[:,:lp],axis=1)
 
 file_out.close()

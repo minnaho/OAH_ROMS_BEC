@@ -13,8 +13,9 @@ fdir = '/data/project1/minnaho/decapods/extract_nc/';
 rep = '/data/project6/ROMS/USSW1/daily/' ;
 
 % extract by year
-yr = '2017'
+yr = '2007'
 repavg = dir([rep,'/ussw1_avg.Y',yr,'*.nc']) ;    
+
 % extract all 
 %repavg = dir([rep,'/ussw1_avg.Y*.nc']) ;    
 
@@ -36,6 +37,7 @@ DD3 = 5; % bottom height - set height above bottom for KBdd
 
 % name appended at the end of variable name
 fname = ['co2sys_bottom_',int2str(DD3),'m_',yr];
+%fname = ['co2sys_bottom_',int2str(DD3),'m','_1997_2017'];
 
 %%%%%%%%%%%%%%%%%%
 % end user edits
