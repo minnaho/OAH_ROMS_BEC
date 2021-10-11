@@ -10,13 +10,14 @@
 # CONTENTS OF .in FILE 
 #########################################
 model = 'L2_SCB'
+model_atm = 'l2_scb'
 model_file = 'l2_scb'
-start_year = 1998
-end_year = 1998
+start_year = 1999
+end_year = 1999
 
 # between 1 and 12
 start_month = 1
-end_month = 1
+end_month = 11
 
 # model time step (seconds)
 dt = 30
@@ -33,7 +34,7 @@ scratch_path_local = '/data/project1/minnaho/model_conf/'
 scratch_path = '/data/project1/minnaho/model_conf/'
 '''
 
-model_scenario = 'PNDN_only'
+model_scenario = 'ww1'
 
 savepath = './wastewater_scenarios/'+model_scenario+'/'
 
@@ -63,14 +64,14 @@ surfname = 'SURFNAME'
 
 # bulk_forcing
 tide     = 'roms_tide.nc'
-atm_wind = model+'_wnd_'
-atm_tra  = model+'_tra_'
-atm_rad  = model+'_rad_'
-atm_prec = model+'_prec_'
+atm_wind = model_atm+'_wnd_'
+atm_tra  = model_atm+'_tra_'
+atm_rad  = model_atm+'_rad_'
+atm_prec = model_atm+'_prec_'
 frc      = 'roms_frc.nc'
 atmdep   = 'roms_atmdep.nc'
 anthpco2 = 'roms_anthpco2.nc'
-#anthpco2 = 'roms_anthpco2_end.nc' # test for Expanse, didn't work
+#anthpco2 = 'roms_anthpco2_end.nc' # test for Expanse
 #dust     = 'roms_dust.nc'
 
 # OUTFILES

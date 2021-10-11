@@ -1,10 +1,12 @@
 %% ============================================================ 
 %% program to extract a 3D file var(x,y,t), 			
-%% 2D maps of the seafloor in ROMS of metabolic index parameteres
+%% 2D maps of the seafloor in ROMS of 
+%% metabolic index parameters
 %% 						                
 %% Program by Greg Pelletier and Minna Ho - SCCWRP                     
 %% 07/2021              				        
 %% to include options for water column averaging 
+%% contact: minnah@sccwrp.org
 %% ============================================================ 
 
 close all

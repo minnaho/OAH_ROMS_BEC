@@ -3,7 +3,7 @@ import glob
 import subprocess
 
 #folder_path = '/data/project1/minnaho/validation/ocsd_george_robertson/SAIC_moored_data_1986_2008_veloc_temp_salt/*/'
-folder_path = '/data/project1/minnaho/validation/ocsd_george_robertson/SAIC_moored_data_1986_2008_veloc_temp_salt/mooring_P/'
+folder_path = '/data/project1/minnaho/validation/ocsd_george_robertson/SAIC_moored_data_1986_2008_veloc_temp_salt/mooring_WA/'
 
 
 # get folder names and remove the docs folder
