@@ -5,14 +5,19 @@ import pandas as pd
 
 # roms psource file to copy and remake
 file_path = '/data/project1/minnaho/psource/run_fixjwpcp/roms_psource_102020_full.767.nc'
-file_path_out = '/data/project1/minnaho/psource/wastewater_scenarios/roms_psource_ww1.nc'
+file_path_out = '/data/project1/minnaho/psource/river/roms_psource_inlandpotw.nc'
 file_nc = Dataset(file_path,'r')
 
 
 Qbar_nc   = np.array(file_nc.variables['Qbar'][:,:])
 # end psources before rivers to exclude rivers
-#end_ind = 96
-end_ind = Qbar_nc.shape[0]
+end_ind = 115 # end of all POTWs, start of rivers
+#end_ind = Qbar_nc.shape[0]
+
+# LA river, San Gabriel, Calleguas, Malibu creek, San Diego Creek,
+# San Diego River, Santa clara river, ventura river
+# see /data/project1/minnaho/find_inputs_coords/river_points.py
+nsrc_list = list(range(end_ind))+ [end_ind+32,190,191,192,end_ind+51,193,194,195, 196,end_ind+12,end_ind+34,end_ind+48, end_ind+49,end_ind+61,end_ind+72]
 
 # psource time is actually days since 1994-01-01
 psource_time_nc   = np.array(file_nc.variables['psrc_time'][:])
@@ -23,30 +28,95 @@ psrc_dt = num2date(psource_time_nc,'days since 1994-01-01',only_use_cftime_datet
 p_st = -17
 p_en = -5
 
-Qbar_nc   = np.array(file_nc.variables['Qbar'][:end_ind,p_st:p_en])
+Qbar_nc   = np.array(file_nc.variables['Qbar'][nsrc_list,p_st:p_en])
 
-Qshape_nc = np.array(file_nc.variables['Qshape'][:,:end_ind])
+Qshape_nc = np.array(file_nc.variables['Qshape'][:,nsrc_list])
                                                    
-Isrc_nc   = np.array(file_nc.variables['Isrc'][:end_ind])
-Jsrc_nc   = np.array(file_nc.variables['Jsrc'][:end_ind])
-Dsrc_nc   = np.array(file_nc.variables['Dsrc'][:end_ind])
-Lsrc_nc   = np.array(file_nc.variables['Lsrc'][:,:end_ind])
+Isrc_nc   = np.array(file_nc.variables['Isrc'][nsrc_list])
+Jsrc_nc   = np.array(file_nc.variables['Jsrc'][nsrc_list])
+Dsrc_nc   = np.array(file_nc.variables['Dsrc'][nsrc_list])
+Lsrc_nc   = np.array(file_nc.variables['Lsrc'][:,nsrc_list])
 
 # read in input file 
-temp_nc = np.array(file_nc.variables['temp'][:end_ind,p_st:p_en])
-salt_nc = np.array(file_nc.variables['salt'][:end_ind,p_st:p_en])
-PO4_nc = np.array(file_nc.variables['PO4'][:end_ind,p_st:p_en])
-NO3_nc = np.array(file_nc.variables['NO3'][:end_ind,p_st:p_en])
-NH4_nc = np.array(file_nc.variables['NH4'][:end_ind,p_st:p_en])
-Fe_nc  = np.array(file_nc.variables['Fe'][:end_ind,p_st:p_en])
-O2_nc  = np.array(file_nc.variables['O2'][:end_ind,p_st:p_en])
-DIC_nc = np.array(file_nc.variables['DIC'][:end_ind,p_st:p_en])
-Alk_nc = np.array(file_nc.variables['Alk'][:end_ind,p_st:p_en])
-DOC_nc = np.array(file_nc.variables['DOC'][:end_ind,p_st:p_en])
-DON_nc = np.array(file_nc.variables['DON'][:end_ind,p_st:p_en])
-DOP_nc = np.array(file_nc.variables['DOP'][:end_ind,p_st:p_en])
-NO2_nc = np.array(file_nc.variables['NO2'][:end_ind,p_st:p_en])
-SiO3_nc = np.array(file_nc.variables['SiO3'][:end_ind,p_st:p_en])
+temp_nc = np.array(file_nc.variables['temp'][nsrc_list,p_st:p_en])
+salt_nc = np.array(file_nc.variables['salt'][nsrc_list,p_st:p_en])
+PO4_nc = np.array(file_nc.variables['PO4'][nsrc_list,p_st:p_en])
+NO3_nc = np.array(file_nc.variables['NO3'][nsrc_list,p_st:p_en])
+NH4_nc = np.array(file_nc.variables['NH4'][nsrc_list,p_st:p_en])
+Fe_nc  = np.array(file_nc.variables['Fe'][nsrc_list,p_st:p_en])
+O2_nc  = np.array(file_nc.variables['O2'][nsrc_list,p_st:p_en])
+DIC_nc = np.array(file_nc.variables['DIC'][nsrc_list,p_st:p_en])
+Alk_nc = np.array(file_nc.variables['Alk'][nsrc_list,p_st:p_en])
+DOC_nc = np.array(file_nc.variables['DOC'][nsrc_list,p_st:p_en])
+DON_nc = np.array(file_nc.variables['DON'][nsrc_list,p_st:p_en])
+DOP_nc = np.array(file_nc.variables['DOP'][nsrc_list,p_st:p_en])
+NO2_nc = np.array(file_nc.variables['NO2'][nsrc_list,p_st:p_en])
+SiO3_nc = np.array(file_nc.variables['SiO3'][nsrc_list,p_st:p_en])
+
+# assign inland POTW values 
+kgy_to_mmols = (1000*1000)/(365*86400*14)
+mgL_to_mmolm3 = 1000./14
+
+# LA river
+# divide over number of cells spreading (4 cells)
+Qbar_nc[end_ind:end_ind+4,:] = (1.05+0.39+0.19)/4 
+NO3_nc[end_ind:end_ind+4,:]  = ((398.27*1.05)+(307.17*.39)+(467.7*.19))*(1/(1.05+.39+.19))
+NH4_nc[end_ind:end_ind+4,:]  = ((96.84*1.05)+(101.43*.39)+(79.29*.19))*(1/(1.05+.39+.19))
+DON_nc[end_ind:end_ind+4,:]  = ((106.53*1.05)+(84.97*.39)+(65.26*.19))*(1/(1.05+.39+.19))
+
+
+# SG river
+# divide over number of cells spreading (5 cells)
+Qbar_nc[end_ind+4:end_ind+9,:] = (0.74+0.25+0.18+0.12)/5
+# add flow to just Jan-Mar for one of the plants that has 
+# intermittent discharge
+Qbar_nc[end_ind+4:end_ind+9,6:9] = Qbar_nc[end_ind+4:end_ind+9,6:9]+(0.35/5)
+NO3_nc[end_ind+4:end_ind+9,:]  = ((348.48*0.74)+(469.40*0.25)+(489.80*0.18)+(478.04*.12))*(1/(0.74+0.25+0.18+0.12))
+NO3_nc[end_ind+4:end_ind+9,6:9]  = ((474.43*0.35)+(348.48*0.74)+(469.40*0.25)+(489.80*0.18)+(478.04*.12))*(1/(0.35+0.74+0.25+0.18+0.12))
+NH4_nc[end_ind+4:end_ind+9,:]  = ((122.20*0.74)+(90.95*0.25)+(31.68*0.18)+(115.95*.12))*(1/(0.74+0.25+0.18+0.12))
+NH4_nc[end_ind+4:end_ind+9,6:9]  = ((98.57*0.35)+(122.20*0.74)+(90.95*0.25)+(31.68*0.18)+(115.95*.12))*(1/(0.35+0.74+0.25+0.18+0.12))
+DON_nc[end_ind+4:end_ind+9,:]  = ((98.63*0.74)+(139.38*0.25)+(47.52*0.18)+(98.25*.12))*(1/(0.74+0.25+0.18+0.12))
+DON_nc[end_ind+4:end_ind+9,6:9]  = ((90.77*0.35)+(98.63*0.74)+(139.38*0.25)+(47.52*0.18)+(98.25*.12))*(1/(0.35+0.74+0.25+0.18+0.12))
+
+# Calleguas creek
+Qbar_nc[end_ind+9,:] = 0.34+0.36+0.15
+NO3_nc[end_ind+9,:]  = ((521.13*0.34)+(601.19*.36)+(447.11*.15))*(1/(0.34+0.36+0.15))
+NH4_nc[end_ind+9,:]  = ((84.82*0.34)+(112.2*.36)+(72.14*.15))*(1/(0.34+0.36+0.15))
+DON_nc[end_ind+9,:]  = ((94.05*0.34)+(45.8*.36)+(60.75*.15))*(1/(0.34+0.36+0.15))
+
+# Malibu creek
+Qbar_nc[end_ind+10,:] = .12
+NO3_nc[end_ind+10,:]  = 462.18
+NH4_nc[end_ind+10,:]  = 76.05
+DON_nc[end_ind+10,:]  = 74.79
+
+# San Diego Creek
+Qbar_nc[end_ind+11,:] = 0
+# November to March only
+Qbar_nc[end_ind+11,4:9] = 0.07
+NO3_nc[end_ind+11,:]  = 1097.07
+NH4_nc[end_ind+11,:]  = 4.97
+DON_nc[end_ind+11,:]  = 0
+
+# San Diego River
+Qbar_nc[end_ind+12,:] = 0.63
+NO3_nc[end_ind+12,:]  = 0
+NH4_nc[end_ind+12,:]  = 0
+DON_nc[end_ind+12,:]  = 118.06
+
+# Santa Clara River
+Qbar_nc[end_ind+13,:] = 0.22+0.56+0.32
+NO3_nc[end_ind+13,:]  = ((345.54*.22)+(153.27*.56)+(584.82*.32))*(1/(0.22+0.56+0.32))
+NH4_nc[end_ind+13,:]  = ((63.88*.22)+(64.37*.56)+(39.8*.32))*(1/(0.22+0.56+0.32))
+DON_nc[end_ind+13,:]  = ((83.84*.22)+(93.02*.56)+(50.97*.32))*(1/(0.22+0.56+0.32))
+
+# Ventura River
+Qbar_nc[end_ind+14,:] = 0.07
+NO3_nc[end_ind+14,:]  = 295.83
+NH4_nc[end_ind+14,:]  = 12.38
+DON_nc[end_ind+14,:]  = 117.79
+
+
 
 # make new netcdf
 
@@ -65,7 +135,7 @@ s_rho_dim = file_out.createDimension('s_rho',Qshape_nc.shape[0])
 # no need to change start time because ROMS interpolates
 
 # 6 is Jul 30 1997 and ends in Nov 29 1999
-psrc_final = psource_time_nc[6:27+9]
+psrc_final = psource_time_nc[6:27+8]
 
 psrc_time_dim = file_out.createDimension('psrc_time',psrc_final.shape[0])
 
@@ -80,7 +150,7 @@ psrc_time_var.longname = 'point source time from 1994-1-1'
 psrc_time_var[:] = psrc_final
 
 # time steps to add to loop the time
-lp = 6
+lp = 5
 
 # put variables in new netcdf
 # append same time series + last 5 (lp) times again to get 28 months

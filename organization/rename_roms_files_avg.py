@@ -15,8 +15,8 @@ start_year = 1998
 end_year = 1998
 
 # between 1 and 12
-start_month = 1
-end_month = 2
+start_month = 7
+end_month = 11
 
 ######################
 # PATHS
@@ -29,7 +29,7 @@ model_name = 'l2_scb'
 #model_types = ['avg']
 model_types = ['avg']
 
-model_sce = 'fndn50'
+model_sce = 'pndn50'
 
 # roms file path
 roms_path = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/'

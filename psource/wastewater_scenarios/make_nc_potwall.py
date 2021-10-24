@@ -5,14 +5,14 @@ import pandas as pd
 
 # roms psource file to copy and remake
 file_path = '/data/project1/minnaho/psource/run_fixjwpcp/roms_psource_102020_full.767.nc'
-file_path_out = '/data/project1/minnaho/psource/wastewater_scenarios/roms_psource_ww1.nc'
+file_path_out = '/data/project1/minnaho/psource/wastewater_scenarios/roms_psource_potwall.nc'
 file_nc = Dataset(file_path,'r')
 
 
 Qbar_nc   = np.array(file_nc.variables['Qbar'][:,:])
 # end psources before rivers to exclude rivers
-#end_ind = 96
-end_ind = Qbar_nc.shape[0]
+end_ind = 115
+#end_ind = Qbar_nc.shape[0]
 
 # psource time is actually days since 1994-01-01
 psource_time_nc   = np.array(file_nc.variables['psrc_time'][:])
@@ -65,7 +65,7 @@ s_rho_dim = file_out.createDimension('s_rho',Qshape_nc.shape[0])
 # no need to change start time because ROMS interpolates
 
 # 6 is Jul 30 1997 and ends in Nov 29 1999
-psrc_final = psource_time_nc[6:27+9]
+psrc_final = psource_time_nc[6:27+8]
 
 psrc_time_dim = file_out.createDimension('psrc_time',psrc_final.shape[0])
 
@@ -80,7 +80,7 @@ psrc_time_var.longname = 'point source time from 1994-1-1'
 psrc_time_var[:] = psrc_final
 
 # time steps to add to loop the time
-lp = 6
+lp = 5
 
 # put variables in new netcdf
 # append same time series + last 5 (lp) times again to get 28 months

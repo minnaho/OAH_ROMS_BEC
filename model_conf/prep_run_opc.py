@@ -10,6 +10,7 @@
 # CONTENTS OF .in FILE 
 #########################################
 model = 'L2_SCB'
+#model_atm = 'L2_SCB'
 model_atm = 'l2_scb'
 model_file = 'l2_scb'
 start_year = 1999
@@ -34,7 +35,7 @@ scratch_path_local = '/data/project1/minnaho/model_conf/'
 scratch_path = '/data/project1/minnaho/model_conf/'
 '''
 
-model_scenario = 'ww1'
+model_scenario = 'ww1_inlandpotw'
 
 savepath = './wastewater_scenarios/'+model_scenario+'/'
 
