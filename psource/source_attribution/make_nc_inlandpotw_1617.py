@@ -53,9 +53,11 @@ DOP_nc = np.array(file_nc.variables['DOP'][nsrc_list,p_st:p_en])
 NO2_nc = np.array(file_nc.variables['NO2'][nsrc_list,p_st:p_en])
 SiO3_nc = np.array(file_nc.variables['SiO3'][nsrc_list,p_st:p_en])
 
-# assign inland POTW values 
 kgy_to_mmols = (1000*1000)/(365*86400*14)
 mgL_to_mmolm3 = 1000./14
+
+# assign inland POTW values 
+# from file inland_POTW_2016_2017.xlsx on sharepoint
 
 # LA river
 # divide over number of cells spreading (4 cells)

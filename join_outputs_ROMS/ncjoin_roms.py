@@ -26,15 +26,15 @@ model_name = 'l2_scb'
 model_types = ['avg','bdiags_avg','phys_flux','bgc_flux_avg','his',]
 
 # path here
-out_path1 = '/data/project6/ROMS/L2SCB_OPC/fndn50/'
+out_path1 = '/data/project6/ROMS/L2SCB_OPC/PNDN_only/'
 
 # change year and month of folder that files are in
-start_year = 1998
-end_year = 1998
+start_year = 1999
+end_year = 1999
 
 # enter as digit month e.g. 1,2,3,...,12
-start_month = 3
-end_month = 6
+start_month = 11
+end_month = 11
 
 ##########################
 # get list of model file names 

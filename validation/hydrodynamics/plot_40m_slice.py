@@ -263,7 +263,10 @@ h_plt0 = axes.flat[0].contour(lon_nc,lat_nc,h_nc,h_c,colors='k',extent=plt_exten
 h_plt1 = axes.flat[1].contour(lon_nc,lat_nc,h_nc,h_c,colors='k',extent=plt_extent,alpha=0.7,linewidths=1)
 
 axes.flat[0].clabel(h_plt0,h_c,fontsize=9,inline=True,fmt='%d',manual=True)
-#axes.flat[1].clabel(h_plt1,h_c,fontsize=9,inline=True,fmt='%d',manual=True)
+# if manual contours don't work, comment below out
+# then copy and paste after image is done processing first axis
+# then manually click and save
+axes.flat[1].clabel(h_plt1,h_c,fontsize=9,inline=True,fmt='%d',manual=True)
 
 # plot bathymetry contours
 #h_plt0 = axes.flat[0].contour(lon_nc,lat_nc,h_nc,h_c,colors='navy',extent=plt_extent)
@@ -287,8 +290,8 @@ cb_im.ax.tick_params(axis='both',which='minor',direction='in',labelsize=axis_fon
 
 xkey = 0
 ykey = 1.02
-axes.flat[0].text(xkey,ykey,'a)',transform=axes.flat[0].transAxes,fontsize=axis_font)
-axes.flat[1].text(xkey,ykey,'b)',transform=axes.flat[1].transAxes,fontsize=axis_font)
+axes.flat[0].text(xkey,ykey,'g)',transform=axes.flat[0].transAxes,fontsize=axis_font)
+axes.flat[1].text(xkey,ykey,'h)',transform=axes.flat[1].transAxes,fontsize=axis_font)
 
 
-#fig.savefig(fig_path+'roms_40m_map_season.png',bbox_inches='tight')
+fig.savefig(fig_path+'roms_40m_map_season.png',bbox_inches='tight')

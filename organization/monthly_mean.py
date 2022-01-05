@@ -81,36 +81,3 @@ for y in range(start_year,end_year+1):
             ################################
             print('starting ncra on '+str(f))
             subprocess.call('ncra -O '+exclude+roms_path+f+year_month+'D*.nc '+monthly_path+f+year_month+'.nc',shell=True) 
-
-'''
-            ###################################
-            # find min and max for each day
-            # ncra preserves dimensions when finding min/max
-            ###################################
-            # find out how many days to loop over for each month
-            if m in months_w_31_days:
-                ndays = 31
-            if m not in months_w_31_days:
-                ndays = 30
-                if m == 2 and y in leap_years:
-                    ndays = 29
-                if m == 2 and y not in leap_years:
-                    ndays = 28 
-            for d in list(range(1,ndays+1)):
-                print('finding min and max of '+f+year_month+'D'+str('%02d'%d))
-                subprocess.call('ncra -y min -O '+roms_path+f+year_month+'D'+'%02d'%d+'.nc '+stats_path+'min_'+f+year_month+'D'+'%02d'%d+'.nc',shell=True) 
-                subprocess.call('ncra -y max -O '+roms_path+f+year_month+'D'+'%02d'%d+'.nc '+stats_path+'max_'+f+year_month+'D'+'%02d'%d+'.nc',shell=True)
-
-            # concatenate to find min/max
-            print('concatenating min_'+f+year_month+'D*.nc')
-            subprocess.call('ncrcat -x -v spherical,h,f,pm,pn,lon_rho,lat_rho,angle,mask_rho -O '+stats_path+'min_'+f+year_month+'D*.nc '+stats_path+'concat_min_'+f+year_month+'.nc',shell=True)
-            print('concatenating max_'+f+year_month+'D*.nc')
-            subprocess.call('ncrcat -x -v spherical,h,f,pm,pn,lon_rho,lat_rho,angle,mask_rho -O '+stats_path+'max_'+f+year_month+'D*.nc '+stats_path+'concat_max_'+f+year_month+'.nc',shell=True) 
-
-            # find min/max over each concatenated min/max month data
-            print('finding min/max of concat_min_'+f+year_month+'.nc')
-            subprocess.call('ncra -y min -O '+stats_path+'concat_min_'+f+year_month+'.nc '+stats_path+'min_'+f+year_month+'.nc',shell=True)
-            subprocess.call('ncra -y max -O '+stats_path+'concat_max_'+f+year_month+'.nc '+stats_path+'max_'+f+year_month+'.nc',shell=True)
-            print('min for year month '+year_month+' in min_'+f+year_month+'.nc')
-            print('max for year month '+year_month+' in max_'+f+year_month+'.nc')
-'''

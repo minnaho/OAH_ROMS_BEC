@@ -9,39 +9,33 @@
 # CHANGE THESE INPUTS TO CHANGE NAME AND
 # CONTENTS OF .in FILE 
 #########################################
-model = 'L2_SCB'
-#model_atm = 'L2_SCB' # before 1999 
-model_atm = 'l2_scb' # during and after 1999
-model_file = 'l2_scb'
-start_year = 1999
-end_year = 1999
+model = 'USW4'
+model_file = 'usw42'
+
+start_year = 2011
+end_year = 2011
 
 # between 1 and 12
-start_month = 4
-end_month = 4
+start_month = 1
+end_month = 12
 
 # model time step (seconds)
-dt = 25
-NDTFAST= 50
+dt = 400
+NDTFAST= 77
 NINFO = 1
 
 ######################
 # PATHS
 ######################
 
-model_scenario = 'pndn50'
-
-savepath = './wastewater_scenarios/'+model_scenario+'/'
+savepath = './usw4_infiles/'
 
 # paths written in .in file
 other_files = 'Other_files/'
-RST_path = 'RST_'+model_scenario+'/'
+RST_path = 'RST/'
 Atm_forcing_path = 'Atm_forcing/'
 INPUTS = 'INPUTS/'
-ocean_files = 'Ocean_files9799/'
-
-# psource
-psource = 'roms_psource_'+model_scenario+'.nc'
+ocean_files = 'Ocean_files/'
 
 ########################
 # netcdf files called in
@@ -49,7 +43,7 @@ psource = 'roms_psource_'+model_scenario+'.nc'
 ########################
 BRYFILE  = 'roms_bry'
 RSTFILE  = 'roms_rst'
-pCO2_atm = 'pco2_1994-2011.nc'
+pCO2_atm = 'pco2_1994-2019.nc'
 
 grid_file = 'roms_grd.nc'
 
@@ -58,16 +52,13 @@ strname = 'STRNAME'
 surfname = 'SURFNAME'
 
 # bulk_forcing
-tide     = 'roms_tide.nc'
-atm_wind = model_atm+'_wnd_'
-atm_tra  = model_atm+'_tra_'
-atm_rad  = model_atm+'_rad_'
-atm_prec = model_atm+'_prec_'
-frc      = 'roms_frc.nc'
-atmdep   = 'roms_atmdep.nc'
-anthpco2 = 'roms_anthpco2.nc'
-#anthpco2 = 'roms_anthpco2_end.nc' # test for Expanse
-#dust     = 'roms_dust.nc'
+#tide     = 'roms_tide.nc'
+atm_wind = model_file+'_wnd_'
+atm_tra  = model_file+'_tra_'
+atm_rad  = model_file+'_rad_'
+atm_prec = model_file+'_prec_'
+frc      = model_file+'_frc.nc'
+dust     = model_file+'_dust.nc'
 
 # OUTFILES
 HISFILE     = model_file+'_his.nc'
@@ -183,8 +174,8 @@ for y in range(start_year,end_year+1):
                 ndays = 29
             if m == 2 and y not in leap_years: 
                 ndays = 28
-        ntimes = int((86400./dt)*ndays)
-        daytimes = int(86400./dt)
+        ntimes = int((86400./dt)*ndays) # number of time steps in month
+        daytimes = int(86400./dt)  
 
         # if month is 1, old file is month 12 and year y-1
         if m == 1: 
@@ -216,14 +207,13 @@ for y in range(start_year,end_year+1):
         f.write('             '+RST_path+RSTFILE+'_'+year_month_old+'.nc\n\n')
 
         f.write('bulk_forcing: filename\n')
-        f.write('              '+other_files+tide+'\n')
+        #f.write('              '+other_files+tide+'\n')
         f.write('              '+Atm_forcing_path+atm_wind+year_month+'.nc\n')
         f.write('              '+Atm_forcing_path+atm_tra+year_month+'.nc\n')
         f.write('              '+Atm_forcing_path+atm_rad+year_month+'.nc\n')
         f.write('              '+Atm_forcing_path+atm_prec+year_month+'.nc\n') 
         f.write('              '+other_files+frc+'\n')
-        f.write('              '+other_files+atmdep+'\n')
-        f.write('              '+other_files+anthpco2+'\n')
+        f.write('              '+other_files+dust+'\n')
 
         f.write('forcing: filename\n')
         f.write('              '+INPUTS+strname+'\n') 
@@ -241,7 +231,7 @@ for y in range(start_year,end_year+1):
         f.write('              '+'AVG_'+year_month+'/'+HISFILE+'\n\n')
 
         f.write('averages: NTSAVG, NAVG, NRPFAVG / filename\n')
-        f.write('            '+NTSAVG+'   '+str(daytimes)+'    '+NRPFAVG+'\n')
+        f.write('            '+NTSAVG+'   '+str(ntimes)+'    '+NRPFAVG+'\n')
         f.write('              '+'AVG_'+year_month+'/'+AVGFILE+'\n\n')
 
         # unsure where these values come from, hard coded
@@ -259,7 +249,7 @@ for y in range(start_year,end_year+1):
         f.write('                     '+rho_a+'    '+Omega_a+'   '+W_a+'   '+Akv_a+'   '+Akt_a+'   '+Aks_a+'    '+HBL_a+'   '+HBBL_a+'\n\n')
 
         f.write('averages_bio: NTSAVG, NAVG, NRPFAVG / filename\n')
-        f.write('           '+NTSAVG+'     '+str(daytimes)+'     '+NRPFAVG+'\n')
+        f.write('           '+NTSAVG+'     '+str(ntimes)+'     '+NRPFAVG+'\n')
         f.write('                  AVG_'+year_month+'/'+AVGBIOFILE+'\n\n')
 
         f.write('bgc_flux_histories: newfile, nwrt, nrpfhis / filename\n')
@@ -314,18 +304,15 @@ for y in range(start_year,end_year+1):
         f.write('                   '+twenty_T+'\n\n')
 
         f.write('bulk_diags_averages: newfile, ntsavg, navg,nrpfavg / filename\n')
-        f.write('                       '+newfile_bda+'    '+ntsavg_bda+'       '+str(daytimes)+'   '+nrpfavg_bda+'\n')
+        f.write('                       '+newfile_bda+'    '+ntsavg_bda+'       '+str(ntimes)+'   '+nrpfavg_bda+'\n')
         f.write('                   AVG_'+year_month+'/'+BULKAVGNAME+'\n')
         f.write('                    '+twenty_T+'\n\n')
 
         f.write('pCO2_atm_file:\n')
         f.write('         '+other_files+pCO2_atm+'\n')
 
-        f.write('point_source:\n')
-        f.write('         '+other_files+psource+'\n')
-
         f.close()
-        print(model_scenario+' Input file formed: '+file_name)
+        print('Input file formed: '+file_name)
 
 
 

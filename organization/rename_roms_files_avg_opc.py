@@ -16,7 +16,7 @@ end_year = 1999
 
 # between 1 and 12
 start_month = 12
-end_month = 6
+end_month = 11
 
 ######################
 # PATHS
@@ -29,12 +29,13 @@ model_name = 'l2_scb'
 #model_types = ['avg']
 model_types = ['avg']
 
+model_sce = 'fndn50'
 
 # roms file path
-roms_path = '/data/project6/ROMS/L2SCB_AP/'
+roms_path = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/'
 
 # daily path
-day_path  = '/data/project6/ROMS/L2SCB_AP/daily/'
+day_path  = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/daily/'
 
 
 #########################

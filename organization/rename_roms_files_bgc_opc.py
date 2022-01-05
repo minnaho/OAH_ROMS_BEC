@@ -11,12 +11,12 @@ import glob as glob
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1998
+start_year = 1999
 end_year = 1999
 
 # between 1 and 12
-start_month = 12
-end_month = 6
+start_month = 8
+end_month = 11
 
 ######################
 # PATHS
@@ -26,15 +26,16 @@ model_name = 'l2_scb'
 
 # model file types e.g. bgc_flux_avg
 #model_types = ['phys_flux','avg','bgc_flux_avg']
-#model_types = ['avg']
-model_types = ['avg']
+model_types = ['bgc_flux_avg','phys_flux']
 
+model_sce = 'FNDN_only'
 
 # roms file path
-roms_path = '/data/project6/ROMS/L2SCB_AP/'
+roms_path = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/'
 
-# daily path
-day_path  = '/data/project6/ROMS/L2SCB_AP/daily/'
+# monthly/daily path
+day_path  = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/monthly/'
+
 
 
 #########################
@@ -64,10 +65,10 @@ for y in range(start_year,end_year+1):
     else: 
         e_m = 13
     for m in range(s_m,e_m): 
-        print('month: '+str(m))
-        year_month = 'Y'+str(y)+'M'+'%02d'%m
-        # use glob to find number of avg files
-        roms_fi = sorted(glob.glob(roms_path+'AVG_'+year_month+'/'+file_types[0]+'*'))
-        for r_i in range(len(roms_fi)):
-            subprocess.call('ln -fs '+roms_fi[r_i]+' '+day_path+file_types[0]+year_month+'D'+'%02d'%(r_i+1)+'.nc',shell=True)
+        for f in range(len(file_types)):
+            print('month: '+str(m))
+            year_month = 'Y'+str(y)+'M'+'%02d'%m
+            # use glob to find number of avg files
+            roms_fi = sorted(glob.glob(roms_path+'AVG_'+year_month+'/'+file_types[f]+'*'))
+            subprocess.call('ln -fs '+roms_fi[0]+' '+day_path+file_types[f]+year_month+'.nc',shell=True)
 

@@ -1,5 +1,5 @@
 #############################################
-# interpolate 12km by 12km grid to L2_SCB grid 
+# interpolate 12km by 12km grid to ROMS grid 
 # atmos_deposition_CMAQ_2002_2012.nc 
 #####################################################
 import numpy as np
@@ -8,7 +8,15 @@ from scipy import interpolate
 from matplotlib import pyplot as plt
 plt.ion()
 
-grid_path = '/data/project4/kesf/ROMS/L2_SCB/grid_3/roms_grd.nc'
+#savename = 'L2SCB'
+savename = 'USW4'
+
+#L0 grid USW4
+grid_path = '/data/project6/ROMS/USW4/organization/roms_grd.nc'
+
+#L2 grid SCB
+#grid_path = '/data/project4/kesf/ROMS/L2_SCB/grid_3/roms_grd.nc'
+
 grid_nc = Dataset(grid_path,'r')
 lat_nc = grid_nc.variables['lat_rho'][:,:]
 lon_nc = grid_nc.variables['lon_rho'][:,:]
@@ -50,7 +58,7 @@ redn_interp_list = []
 alk_interp_list = []
 fe_interp_list = []
 
-# interpolate to L2 grid
+# interpolate to grid
 for m_i in range(12):
     oxn_int_m = interpolate.griddata((lats_a_plt.ravel(),lons_a_plt.ravel()),oxn_arr[m_i,:,:].ravel(),(lat_nc,lon_nc),method='linear')
     redn_int_m = interpolate.griddata((lats_a_plt.ravel(),lons_a_plt.ravel()),redn_arr[m_i,:,:].ravel(),(lat_nc,lon_nc),method='linear')
@@ -76,8 +84,8 @@ fe_interp_arr = np.array(fe_interp_list)
 eta_rho = lat_nc.shape[0]
 xi_rho = lat_nc.shape[1]
 
-data_interp = Dataset('L2_SCB_atmos_deposition.nc','w')
-data_interp.title = 'Atmospheric Deposition Monthly Climatologies from Reduced Nitrogen, Oxidized Nitrogen, Alkalinity, and Iron linearly interpolated to L2 grid (300 m) Southern California Bight'
+data_interp = Dataset(savename+'_atmos_deposition.nc','w')
+data_interp.title = 'Atmospheric Deposition Monthly Climatologies from Reduced Nitrogen, Oxidized Nitrogen, Alkalinity, and Iron linearly interpolated to '+savename
 data_interp.source = 'EPA Community Multiscale Air Quality modeling system (CMAQ) V5.0.2 monthly total deposition files 2002-2012 with adjusted wet deposition for continental US using 12km grids'
 data_interp.description = '12 time steps, 1 for each month, January, February, March, etc'
 
@@ -87,8 +95,8 @@ xi_d = data_interp.createDimension('xi_rho',xi_rho)
 
 oxn_nc = data_interp.createVariable('NO3',np.float32,('time','eta_rho','xi_rho')) 
 redn_nc = data_interp.createVariable('NH4',np.float32,('time','eta_rho','xi_rho'))
-alk_nc = data_interp.createVariable('alk',np.float32,('time','eta_rho','xi_rho'))
-fe_nc = data_interp.createVariable('fe',np.float32,('time','eta_rho','xi_rho'))
+alk_nc = data_interp.createVariable('Alk',np.float32,('time','eta_rho','xi_rho'))
+fe_nc = data_interp.createVariable('Fe',np.float32,('time','eta_rho','xi_rho'))
 
 oxn_nc[:,:,:] = oxn_interp_arr
 redn_nc[:,:,:] = redn_interp_arr

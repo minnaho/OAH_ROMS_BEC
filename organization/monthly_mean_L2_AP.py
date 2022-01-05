@@ -1,7 +1,6 @@
 ##################################
 # Take monthly averages
-# of biogeochemical model outputs
-# and find min/max and standard deviation 
+# of model outputs
 # ROMS output file names must conform to
 # model_name_file_type.Y????M??D??.nc
 # Minna Ho, UCLA, March 2018 
@@ -13,12 +12,12 @@ import subprocess
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 2000
-end_year = 2000
+start_year = 2007
+end_year = 2008
 
 # between 1 and 12
-start_month = 10
-end_month = 10
+start_month = 1
+end_month = 11
 
 ######################
 # PATHS
@@ -31,11 +30,10 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # path with outputs
-roms_path    = '/data/project5/kesf/ROMS/L2SCB_AP/fresh/daily/'
-#roms_path    = '/data/project6/ROMS/L2SCB_AP/nutrients/daily/'
+roms_path    = '/data/project6/ROMS/L2SCB_AP/daily/'
+
 # path to save monthly averages
-monthly_path = '/data/project5/kesf/ROMS/L2SCB_AP/fresh/monthly/' 
-#monthly_path = '/data/project6/ROMS/L2SCB_AP/nutrients/monthly/' 
+monthly_path = '/data/project6/ROMS/L2SCB_AP/monthly/' 
 
 
 #########################
