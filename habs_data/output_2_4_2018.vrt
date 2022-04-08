@@ -1,0 +1,3289 @@
+<VRTDataset rasterXSize="2000" rasterYSize="2000">
+  <SRS>PROJCS["unnamed",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS 1980",6378137,298.2572221010042,AUTHORITY["EPSG","7019"]],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4269"]],PROJECTION["Albers_Conic_Equal_Area"],PARAMETER["standard_parallel_1",29.5],PARAMETER["standard_parallel_2",45.5],PARAMETER["latitude_of_center",23],PARAMETER["longitude_of_center",-96],PARAMETER["false_easting",0],PARAMETER["false_northing",0],UNIT["metre",1,AUTHORITY["EPSG","9001"]]]</SRS>
+  <GeoTransform> -1.9655970466898801e+06,  3.0000000000000000e+02,  0.0000000000000000e+00,  1.5148262670775685e+06,  0.0000000000000000e+00, -3.0000000000000000e+02</GeoTransform>
+  <VRTRasterBand dataType="Byte" band="1">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018001.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="2">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018002.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="3">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018003.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="4">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018004.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="5">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018005.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="6">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018006.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="7">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018007.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="8">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018008.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="9">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018009.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="10">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018010.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="11">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018011.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="12">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018012.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="13">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018013.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="14">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018014.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="15">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018015.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="16">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018016.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="17">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018017.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="18">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018018.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="19">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018019.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="20">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018020.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="21">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018021.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="22">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018022.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="23">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018023.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="24">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018024.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="25">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018025.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="26">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018026.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="27">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018027.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="28">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018028.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="29">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018029.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="30">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018030.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="31">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018031.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="32">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018032.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="33">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018033.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="34">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018034.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="35">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018035.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="36">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018036.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="37">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018037.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="38">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018038.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="39">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018039.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="40">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018040.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="41">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018041.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="42">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018042.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="43">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018043.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="44">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018044.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="45">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018045.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="46">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018046.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="47">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018047.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="48">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018048.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="49">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018049.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="50">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018050.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="51">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018051.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="52">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018052.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="53">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018053.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="54">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018054.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="55">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018055.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="56">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018056.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="57">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018057.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="58">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018058.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="59">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018059.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="60">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018060.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="61">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018061.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="62">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018062.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="63">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018063.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="64">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018064.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="65">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018065.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="66">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018066.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="67">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018067.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="68">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018068.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="69">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018069.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="70">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018070.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="71">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018071.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="72">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018072.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="73">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018073.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="74">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018074.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="75">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018075.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="76">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018076.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="77">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018077.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="78">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018078.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="79">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018079.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="80">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018080.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="81">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018081.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="82">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018082.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="83">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018083.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="84">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018084.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="85">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018085.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="86">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018086.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="87">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018087.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="88">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018088.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="89">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018089.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="90">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018090.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="91">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018091.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="92">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018092.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="93">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018093.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="94">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018094.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="95">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018095.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="96">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018096.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="97">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018097.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="98">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018098.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="99">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018099.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="100">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018100.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="101">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018101.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="102">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018102.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="103">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018103.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="104">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018104.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="105">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018105.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="106">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018106.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="107">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018107.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="108">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018108.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="109">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018109.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="110">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018110.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="111">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018111.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="112">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018112.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="113">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018113.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="114">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018114.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="115">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018115.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="116">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018116.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="117">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018117.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="118">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018118.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="119">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018119.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="120">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018120.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="121">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018121.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="122">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018122.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="123">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018123.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="124">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018124.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="125">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018125.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="126">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018126.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="127">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018127.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="128">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018128.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="129">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018129.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="130">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018130.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="131">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018131.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="132">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018132.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="133">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018133.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="134">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018134.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="135">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018135.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="136">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018136.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="137">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018137.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="138">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018138.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="139">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018139.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="140">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018140.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="141">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018141.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="142">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018142.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="143">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018143.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="144">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018144.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="145">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018145.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="146">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018146.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="147">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018147.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="148">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018148.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="149">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018149.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="150">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018150.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="151">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018151.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="152">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018152.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="153">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018153.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="154">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018154.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="155">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018155.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="156">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018156.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="157">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018157.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="158">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018158.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="159">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018159.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="160">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018160.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="161">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018161.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="162">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018162.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="163">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018163.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="164">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018164.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="165">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018165.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="166">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018166.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="167">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018167.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="168">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018168.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="169">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018169.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="170">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018170.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="171">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018171.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="172">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018172.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="173">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018173.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="174">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018174.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="175">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018175.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="176">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018176.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="177">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018177.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="178">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018178.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="179">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018179.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="180">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018180.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="181">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018181.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="182">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018182.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="183">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018183.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="184">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018184.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="185">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018185.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="186">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018186.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="187">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018187.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="188">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018188.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="189">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018189.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="190">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018190.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="191">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018191.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="192">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018192.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="193">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018193.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="194">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018194.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="195">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018195.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="196">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018196.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="197">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018197.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="198">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018198.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="199">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018199.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="200">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018200.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="201">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018201.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="202">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018202.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="203">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018203.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="204">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018204.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="205">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018205.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="206">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018206.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="207">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018207.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="208">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018208.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="209">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018209.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="210">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018210.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="211">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018211.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="212">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018212.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="213">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018213.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="214">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018214.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="215">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018215.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="216">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018216.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="217">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018217.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="218">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018218.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="219">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018219.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="220">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018220.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="221">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018221.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="222">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018222.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="223">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018223.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="224">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018224.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="225">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018225.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="226">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018226.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="227">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018227.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="228">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018228.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="229">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018229.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="230">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018230.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="231">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018231.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="232">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018232.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="233">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018233.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="234">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018234.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="235">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018235.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="236">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018236.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="237">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018237.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="238">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018238.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="239">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018239.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="240">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018240.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="241">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018241.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="242">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018242.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="243">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018243.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="244">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018244.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="245">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018245.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="246">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018246.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="247">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018247.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="248">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018248.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="249">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018249.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="250">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018250.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="251">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018251.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="252">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018252.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="253">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018253.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="254">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018254.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="255">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018255.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="256">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018256.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="257">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018257.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="258">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018258.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="259">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018259.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="260">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018260.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="261">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018261.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="262">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018262.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="263">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018263.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="264">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018264.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="265">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018265.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="266">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018266.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="267">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018267.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="268">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018268.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="269">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018269.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="270">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018270.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="271">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018271.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="272">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018272.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="273">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018273.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="274">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018274.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="275">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018275.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="276">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018276.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="277">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018277.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="278">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018278.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="279">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018279.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="280">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018280.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="281">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018281.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="282">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018282.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="283">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018283.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="284">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018284.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="285">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018285.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="286">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018286.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="287">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018287.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="288">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018288.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="289">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018289.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="290">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018290.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="291">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018291.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="292">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018292.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="293">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018293.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="294">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018294.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="295">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018295.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="296">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018296.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="297">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018297.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="298">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018298.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="299">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018299.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="300">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018300.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="301">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018301.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="302">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018302.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="303">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018303.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="304">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018304.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="305">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018305.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="306">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018306.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="307">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018307.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="308">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018308.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="309">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018309.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="310">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018310.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="311">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018311.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="312">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018312.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="313">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018313.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="314">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018314.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="315">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018315.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="316">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018316.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="317">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018317.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="318">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018318.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="319">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018319.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="320">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018320.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="321">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018321.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="322">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018322.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="323">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018323.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="324">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018324.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="325">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018325.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="326">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018326.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="327">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018327.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="328">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018328.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="329">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018329.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="330">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018330.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="331">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018331.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="332">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018332.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="333">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018333.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="334">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018334.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="335">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018335.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="336">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018336.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="337">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018337.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="338">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018338.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="339">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018339.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="340">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018340.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="341">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018341.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="342">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018342.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="343">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018343.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="344">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018344.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="345">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018345.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="346">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018346.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="347">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018347.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="348">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018348.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="349">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018349.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="350">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018350.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="351">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018351.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="352">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018352.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="353">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018353.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="354">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018354.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="355">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018355.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="356">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018356.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="357">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018357.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="358">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018358.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="359">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018359.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="360">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018360.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="361">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018361.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="362">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018362.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="363">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018363.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="364">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018364.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+  <VRTRasterBand dataType="Byte" band="365">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">./data/L2018365.L3m_DAY_CYAN_CI_cyano_CYAN_CONUS_300m_2_4.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="2000" RasterYSize="2000" DataType="Byte" BlockXSize="2000" BlockYSize="4" />
+      <SrcRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+      <DstRect xOff="0" yOff="0" xSize="2000" ySize="2000" />
+    </SimpleSource>
+  </VRTRasterBand>
+</VRTDataset>
