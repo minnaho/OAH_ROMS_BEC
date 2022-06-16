@@ -12,10 +12,10 @@ import glob as glob
 #########################################
 
 start_year = 1997
-end_year = 1999
+end_year = 1997
 
 # between 1 and 12
-start_month = 8
+start_month = 9
 end_month = 10
 
 ######################
@@ -25,10 +25,11 @@ end_month = 10
 model_name = 'l2_scb'
 
 # model file types e.g. bgc_flux_avg
+#model_types = ['phys_flux','his','bgc_flux_avg']
 model_types = ['phys_flux','his','bgc_flux_avg']
 #model_types = ['his']
 
-model_sce = 'src_attr_loads1617'
+model_sce = 'pndn50'
 
 # roms file path
 roms_path = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/'

@@ -580,6 +580,7 @@ SO3_var.longname = 'averaged Silicate'
 #SO3_var[:,:] = NO2_nc
 SO3_var[:,:] = np.append(np.append(SiO3_nc,SiO3_nc,axis=1),SiO3_nc[:,:lp],axis=1)
 
+# pH doesn't matter because not input into model
 pH_var = file_out.createVariable('pH','float32',('Nsrc','psrc_time'))
 pH_var.units = 'pH units'
 pH_var.longname = 'averaged pH'

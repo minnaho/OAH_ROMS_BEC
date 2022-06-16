@@ -11,12 +11,12 @@ import glob as glob
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1997
-end_year = 1999
+start_year = 2015
+end_year = 2017
 
 # between 1 and 12
-start_month = 11
-end_month = 11
+start_month = 8
+end_month = 6
 
 ######################
 # PATHS
@@ -25,11 +25,9 @@ end_month = 11
 model_name = 'l2_scb'
 
 # model file types e.g. bgc_flux_avg
-#model_types = ['phys_flux','avg','bgc_flux_avg']
-#model_types = ['avg']
 model_types = ['avg']
 
-model_sce = 'src_attr_loads1617'
+model_sce = 'FNDN_only_realistic'
 
 # roms file path
 roms_path = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/'

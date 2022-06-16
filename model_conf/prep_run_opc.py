@@ -10,18 +10,18 @@
 # CONTENTS OF .in FILE 
 #########################################
 model = 'L2_SCB'
-#model_atm = 'L2_SCB' # before 1999 
-model_atm = 'l2_scb' # during and after 1999
+model_atm = 'L2_SCB' # before 1999 and 2015-2017
+#model_atm = 'l2_scb' # during and after 1999
 model_file = 'l2_scb'
-start_year = 1999
-end_year = 1999
+start_year = 2015
+end_year = 2015
 
 # between 1 and 12
-start_month = 4
-end_month = 4
+start_month = 10
+end_month = 10
 
 # model time step (seconds)
-dt = 25
+dt = 25 # make sure 86400 is divisible by this
 NDTFAST= 50
 NINFO = 1
 
@@ -29,7 +29,7 @@ NINFO = 1
 # PATHS
 ######################
 
-model_scenario = 'pndn50'
+model_scenario = 'pndn50_realistic'
 
 savepath = './wastewater_scenarios/'+model_scenario+'/'
 
@@ -38,7 +38,7 @@ other_files = 'Other_files/'
 RST_path = 'RST_'+model_scenario+'/'
 Atm_forcing_path = 'Atm_forcing/'
 INPUTS = 'INPUTS/'
-ocean_files = 'Ocean_files9799/'
+ocean_files = 'Ocean_files/'
 
 # psource
 psource = 'roms_psource_'+model_scenario+'.nc'
@@ -49,7 +49,7 @@ psource = 'roms_psource_'+model_scenario+'.nc'
 ########################
 BRYFILE  = 'roms_bry'
 RSTFILE  = 'roms_rst'
-pCO2_atm = 'pco2_1994-2011.nc'
+pCO2_atm = 'pco2_1994-2019.nc'
 
 grid_file = 'roms_grd.nc'
 

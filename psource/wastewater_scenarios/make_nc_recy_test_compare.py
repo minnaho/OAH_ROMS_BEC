@@ -10,14 +10,14 @@ import datetime as datetime
 # scenario files
 data_path = '/data/project1/minnaho/potw_outfall_data/wastewater_scenarios/'
 
-treat = 'pndn'
+treat = 'fndn'
 recy = '90'
 
 fol = 'excel_'+treat+recy+'/'
 major_fi = 'major_all_'+treat+recy+'.xlsx'
 minor_fi = 'minor_all_'+treat+recy+'.xlsx'
 
-ncout = 'roms_psource_'+treat+recy+'.nc'
+ncout = 'roms_psource_'+treat+recy+'_test.nc'
 
 
 # read in data, name of each sheet as a key
@@ -429,7 +429,7 @@ s_rho_dim = file_out.createDimension('s_rho',Qshape_nc.shape[0])
 # no need to change start time because ROMS interpolates
 
 # 6 is Jul 30 1997 and ends in Nov 29 1999
-psrc_final = psource_time_nc[6:27+8]
+psrc_final = psource_time_nc[6:27+9]
 
 psrc_time_dim = file_out.createDimension('psrc_time',psrc_final.shape[0])
 
@@ -444,7 +444,7 @@ psrc_time_var.longname = 'point source time from 1994-1-1'
 psrc_time_var[:] = psrc_final
 
 # time steps to add to loop the time
-lp = 5
+lp = 6
 
 # put variables in new netcdf
 # append same time series + last 5 times again to get 28 months
@@ -563,7 +563,6 @@ SO3_var.longname = 'averaged Silicate'
 #SO3_var[:,:] = NO2_nc
 SO3_var[:,:] = np.append(np.append(SiO3_nc,SiO3_nc,axis=1),SiO3_nc[:,:lp],axis=1)
 
-# pH doesn't matter because not input into model
 pH_var = file_out.createVariable('pH','float32',('Nsrc','psrc_time'))
 pH_var.units = 'pH units'
 pH_var.longname = 'averaged pH'

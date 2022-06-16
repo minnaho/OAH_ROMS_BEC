@@ -15,12 +15,12 @@ from netCDF4 import Dataset
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1999
-end_year = 2000
+start_year = 2017
+end_year = 2017
 
 # between 1 and 12
-start_month = 6
-end_month = 8
+start_month = 11
+end_month = 11
 
 ######################
 # PATHS
@@ -33,10 +33,10 @@ model_name = 'l2_scb'
 model_types = ['avg']
 
 # path with outputs
-roms_path    = '/data/project5/kesf/ROMS/L2_SCB/DAILY/'
+roms_path    = '/data/project6/ROMS/L2SCB/daily_2012_2017/'
+
 # path to save monthly averages
-#monthly_path = '/data/project5/kesf/ROMS/L2_SCB/monthly/' 
-monthly_path = '/data/project3/minnaho/freshwater/postprocessing/monthly_avg_all/control/' 
+monthly_path = '/data/project6/ROMS/L2SCB/monthly_2012_2017/' 
 
 
 #########################

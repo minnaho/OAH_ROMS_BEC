@@ -1,6 +1,8 @@
 # make roms psource file for major and minor POTWs
 # for wastewater recycling scenarios
 # PNDN and FNDN only are in separate file
+# for current day run with current day loads
+# at p and fndn90
 from netCDF4 import Dataset,num2date
 import numpy as np
 import pandas as pd
@@ -10,14 +12,14 @@ import datetime as datetime
 # scenario files
 data_path = '/data/project1/minnaho/potw_outfall_data/wastewater_scenarios/'
 
-treat = 'pndn'
+treat = 'fndn'
 recy = '90'
 
 fol = 'excel_'+treat+recy+'/'
 major_fi = 'major_all_'+treat+recy+'.xlsx'
 minor_fi = 'minor_all_'+treat+recy+'.xlsx'
 
-ncout = 'roms_psource_'+treat+recy+'.nc'
+ncout = 'roms_psource_'+treat+recy+'_current.nc'
 
 
 # read in data, name of each sheet as a key
@@ -46,7 +48,7 @@ psource_time_nc   = np.array(file_nc.variables['psrc_time'][:])
 psrc_dt = num2date(psource_time_nc,'days since 1994-01-01',only_use_cftime_datetimes=False)
 
 # psrc time starts at 1997-01-30
-# only choose Aug 2016 - Jul 2017
+# only choose Aug 2016 - Jul 2017 (same inputs as other runs)
 p_st = -17
 p_en = -5
 #p_en = 204
@@ -429,7 +431,9 @@ s_rho_dim = file_out.createDimension('s_rho',Qshape_nc.shape[0])
 # no need to change start time because ROMS interpolates
 
 # 6 is Jul 30 1997 and ends in Nov 29 1999
-psrc_final = psource_time_nc[6:27+8]
+# psrc_final = psource_time_nc[6:27+8]
+# 222 is Jul 30 2015 and ends in Dec 30 2017
+psrc_final = psource_time_nc[222:]
 
 psrc_time_dim = file_out.createDimension('psrc_time',psrc_final.shape[0])
 
@@ -444,7 +448,7 @@ psrc_time_var.longname = 'point source time from 1994-1-1'
 psrc_time_var[:] = psrc_final
 
 # time steps to add to loop the time
-lp = 5
+lp = 6
 
 # put variables in new netcdf
 # append same time series + last 5 times again to get 28 months
@@ -560,10 +564,8 @@ NO2_var[:,:] = np.append(np.append(NO2_nc,NO2_nc,axis=1),NO2_nc[:,:lp],axis=1)
 SO3_var = file_out.createVariable('SiO3','float32',('Nsrc','psrc_time'))
 SO3_var.units = 'mmol N m-3'
 SO3_var.longname = 'averaged Silicate'
-#SO3_var[:,:] = NO2_nc
 SO3_var[:,:] = np.append(np.append(SiO3_nc,SiO3_nc,axis=1),SiO3_nc[:,:lp],axis=1)
 
-# pH doesn't matter because not input into model
 pH_var = file_out.createVariable('pH','float32',('Nsrc','psrc_time'))
 pH_var.units = 'pH units'
 pH_var.longname = 'averaged pH'

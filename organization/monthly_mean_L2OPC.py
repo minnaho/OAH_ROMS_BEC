@@ -12,19 +12,19 @@ import subprocess
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1998
-end_year = 1999
+start_year = 2015
+end_year = 2017
 
 # between 1 and 12
-start_month = 10
-end_month = 11
+start_month = 8
+end_month = 6
 
 ######################
 # PATHS
 ######################
 # model name
 model_name = 'l2_scb'
-scenario = 'fndn90'
+scenario = 'FNDN_only_realistic'
 
 # model file types e.g. bgc_flux_avg
 #model_types = ['phys_flux','avg','bgc_flux_avg']

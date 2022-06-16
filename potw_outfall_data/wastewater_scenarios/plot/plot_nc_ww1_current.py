@@ -22,16 +22,15 @@ ficurren = 'roms_psource_ww1.nc'
 fipndnon = 'roms_psource_PNDN_only.nc'
 fifndnon = 'roms_psource_FNDN_only.nc'
 
-fipndn50 = 'roms_psource_pndn50.nc'
+fipndn50 = 'roms_psource_pndn90.nc'
 #fipndn90 = 'roms_psource_pndn90.nc'
 fipndn90 = 'roms_psource_pndn90_current.nc'
-fifndn50 = 'roms_psource_fndn50.nc'
+fifndn50 = 'roms_psource_fndn90.nc'
 #fifndn90 = 'roms_psource_fndn90.nc'
 fifndn90 = 'roms_psource_fndn90_current.nc'
 #fifndn90 = '/data/project3/minnaho/roms_psource_102020_full.767.nc'
 
 mmols_to_kgd = (86400*14)/(1000*1000)
-mmolm3_to_mgl = 14./1000
 
 #excel_path = '/data/project1/minnaho/potw_outfall_data/wastewater_scenarios/'
 
@@ -49,7 +48,7 @@ fndn90_nc = Dataset(ncpath+fifndn90,'r')
 
 ncfiles = [curren_nc,pndnon_nc,fndnon_nc,pndn50_nc,pndn90_nc,fndn50_nc,fndn90_nc]
 
-expnames = ['current','pndn','fndn','pndn50','pndn90','fndn50','fndn90']
+expnames = ['current','pndn','fndn','pndn90','pndn90 current','fndn90','fndn90 current']
 #expnames = ['pndn','fndn','pndn50','pndn90','fndn50','kesfpsource']
 
 ################
@@ -105,12 +104,10 @@ for s_i in range(len(major_names)):
         nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[stp]
         no3_ef = np.array(ncfiles[f_i].variables['NO3'])[stp]
         no2_ef = np.array(ncfiles[f_i].variables['NO2'])[stp]
-        print(major_names[s_i]+' '+expnames[f_i]+' DIN conc = ',str(np.nanmean((nh4_ef+no3_ef+no2_ef)*mmolm3_to_mgl))+' mg/L')
         nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
         no3_ld = vol_ef*no3_ef*mmols_to_kgd
         no2_ld = vol_ef*no2_ef*mmols_to_kgd
         din_ld = nh4_ld+no3_ld+no2_ld
-        print(major_names[s_i]+' '+expnames[f_i]+' DIN load = ',str(np.nanmean((din_ld)))+'kg/day')
         if expnames[f_i] == 'kesfpsource':
             vol_ef = vol_ef[mnth_st:mnth_en]
             din_ld = din_ld[mnth_st:mnth_en]
@@ -152,12 +149,10 @@ for s_i in range(len(minor_names)):
         nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[plw_en+s_i]
         no3_ef = np.array(ncfiles[f_i].variables['NO3'])[plw_en+s_i]
         no2_ef = np.array(ncfiles[f_i].variables['NO2'])[plw_en+s_i]
-        print(minor_names[s_i]+' '+expnames[f_i]+' DIN conc = ',str(np.nanmean((nh4_ef+no3_ef+no2_ef)*mmolm3_to_mgl))+' mg/L')
         nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
         no3_ld = vol_ef*no3_ef*mmols_to_kgd
         no2_ld = vol_ef*no2_ef*mmols_to_kgd
         din_ld = nh4_ld+no3_ld+no2_ld
-        print(minor_names[s_i]+' '+expnames[f_i]+' DIN load = ',str(np.nanmean((din_ld)))+'kg/day')
 
         if expnames[f_i] == 'kesfpsource':
             vol_ef = vol_ef[mnth_st:mnth_en]

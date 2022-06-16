@@ -1,3 +1,7 @@
+import os
+import sys
+sys.path.append('/data/project3/minnaho/global/')
+import l2grid as l2grid
 from netCDF4 import Dataset
 import numpy as np
 from netCDF4 import num2date, date2num
@@ -10,12 +14,10 @@ plt.ion()
 grid_path = '/data/project4/kesf/ROMS/L2_SCB/grid/'
 grid_name = 'roms_grd.nc'
 
-data = Dataset(grid_path+grid_name,'r')
-mask = data.variables['mask_rho']
-mask_copy = np.copy(mask)
+mask_copy = l2grid.mask_nc
 
-lat_nc = data.variables['lat_rho']
-lon_nc = data.variables['lon_rho']
+lat_nc = l2grid.lat_nc
+lon_nc = l2grid.lon_nc
 
 
 #############################
