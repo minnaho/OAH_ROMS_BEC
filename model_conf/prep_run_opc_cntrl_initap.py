@@ -10,8 +10,8 @@
 # CONTENTS OF .in FILE 
 #########################################
 model = 'L2_SCB'
-model_atm = 'L2_SCB' # before 1999 and 2015-2017
-#model_atm = 'l2_scb' # during and after 1999
+#model_atm = 'L2_SCB' # before 1999 and 2015-2017
+model_atm = 'l2_scb' # during and after 1999
 model_file = 'l2_scb'
 start_year = 1999
 end_year = 1999
@@ -41,7 +41,8 @@ INPUTS = 'INPUTS/'
 ocean_files = 'Ocean_files/'
 
 # psource
-psource = 'roms_psource_'+model_scenario+'.nc'
+#psource = 'roms_psource_'+model_scenario+'.nc'
+psource = ''
 
 ########################
 # netcdf files called in
@@ -321,8 +322,8 @@ for y in range(start_year,end_year+1):
         f.write('pCO2_atm_file:\n')
         f.write('         '+other_files+pCO2_atm+'\n')
 
-        f.write('point_source:\n')
-        f.write('         '+other_files+psource+'\n')
+        #f.write('point_source:\n')
+        #f.write('         '+other_files+psource+'\n')
 
         f.close()
         print(model_scenario+' Input file formed: '+file_name)
