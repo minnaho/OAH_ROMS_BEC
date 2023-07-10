@@ -13,15 +13,15 @@ model = 'L2_SCB'
 model_atm = 'L2_SCB' # before 1999 and 2015-2017
 #model_atm = 'l2_scb' # during and after 1999
 model_file = 'l2_scb'
-start_year = 2015
-end_year = 2017
+start_year = 2016
+end_year = 2016
 
 # between 1 and 12
-start_month = 8
+start_month = 11
 end_month = 11
 
 # model time step (seconds)
-dt = 30 # make sure 86400 is divisible by this
+dt = 20 # make sure 86400 is divisible by this
 NDTFAST= 50
 NINFO = 1
 
@@ -29,7 +29,7 @@ NINFO = 1
 # PATHS
 ######################
 
-model_scenario = 'cntrl_initap_realistic'
+model_scenario = 'fndn50_fixriver'
 
 savepath = './wastewater_scenarios/'+model_scenario+'/'
 
@@ -41,8 +41,7 @@ INPUTS = 'INPUTS/'
 ocean_files = 'Ocean_files/'
 
 # psource
-#psource = 'roms_psource_'+model_scenario+'.nc'
-psource = ''
+psource = 'roms_psource_'+model_scenario+'.nc'
 
 ########################
 # netcdf files called in
@@ -322,15 +321,9 @@ for y in range(start_year,end_year+1):
         f.write('pCO2_atm_file:\n')
         f.write('         '+other_files+pCO2_atm+'\n')
 
-        #f.write('point_source:\n')
-        #f.write('         '+other_files+psource+'\n')
+        f.write('point_source:\n')
+        f.write('         '+other_files+psource+'\n')
 
         f.close()
         print(model_scenario+' Input file formed: '+file_name)
-
-
-
-
-
-
 

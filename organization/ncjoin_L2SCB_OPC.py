@@ -1,14 +1,9 @@
 #######################
 # run ncjoin on all files
-# except bgc files
-# (bgc ncks and ncjoin in 
-# bgc_ncks_ncjoin_roms.py)
 # By Minna Ho, UCLA, Mar 2018
 # contact: minnaho@ucla.edu
 # Adapted for roms-bec 
 # version CCS-2018, Comet/xsede
-# contact: Faycal Kessouri
-# kesf@ucla.edu
 ########################
 import os
 import time
@@ -26,14 +21,15 @@ model_types = ['his','phys_flux','avg','bdiags_avg','bgc_flux_avg']
 
 # path here
 out_path1 = '/data/project6/ROMS/L2SCB_OPC/'
+scenario = 'pndn90_fixriver'
 
 # change year and month of folder that files are in
-start_year = 1997
-end_year = 1997
+start_year = 2017
+end_year = 2017
 
 # enter as digit month e.g. 1,2,3,...,12
-start_month = 8
-end_month = 8
+start_month = 2
+end_month = 4
 
 ##########################
 # get list of model file names 
@@ -60,7 +56,7 @@ for year in list(range(start_year,end_year+1)):
     else:
         e_m = 13
     for month in list(range(s_m,e_m)): 
-        out_path = out_path1+'AVG_Y'+str(year)+'M'+'%02d'%month+'/'
+        out_path = out_path1+scenario+'/AVG_Y'+str(year)+'M'+'%02d'%month+'/'
         os.chdir(out_path)
 
         for f in file_prefix:

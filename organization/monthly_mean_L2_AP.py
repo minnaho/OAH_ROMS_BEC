@@ -12,12 +12,12 @@ import subprocess
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 2007
-end_year = 2008
+start_year = 2012
+end_year = 2012
 
 # between 1 and 12
 start_month = 1
-end_month = 11
+end_month = 8
 
 ######################
 # PATHS

@@ -137,7 +137,9 @@ min_potw_plt = ax.scatter(lons_minor_potw,lats_minor_potw,s=m_size,marker='s',fa
 
 leg_size = 16
 ax.legend(loc='lower left',fontsize=leg_size,labelspacing=1)
+ax.set_xlabel('Latitude',fontsize=axis_tick_size)
+ax.set_ylabel('Longitude',fontsize=axis_tick_size)
 #leg_ax = ax.legend(h2,l2,loc='lower left',fontsize=leg_size,labelspacing=1)
 #leg_ax.get_patches()
 
-plt.savefig('figs/inputs_updated_map_noregions.png',bbox_inches='tight')
+#plt.savefig('figs/inputs_updated_map_noregions.png',bbox_inches='tight')

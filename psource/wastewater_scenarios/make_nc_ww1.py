@@ -196,7 +196,7 @@ NO2_var[:,:] = np.append(np.append(NO2_nc,NO2_nc,axis=1),NO2_nc[:,:lp],axis=1)
 SO3_var = file_out.createVariable('SiO3','float32',('Nsrc','psrc_time'))
 SO3_var.units = 'mmol N m-3'
 SO3_var.longname = 'averaged Silicate'
-#SO3_var[:,:] = NO2_nc
+#SO3_var[:,:] = SO3_nc
 SO3_var[:,:] = np.append(np.append(SiO3_nc,SiO3_nc,axis=1),SiO3_nc[:,:lp],axis=1)
 
 file_out.close()

@@ -13,12 +13,12 @@ model = 'L2_SCB'
 model_atm = 'L2_SCB' # before 1999 and 2015-2017
 #model_atm = 'l2_scb' # during and after 1999
 model_file = 'l2_scb'
-start_year = 1999
-end_year = 1999
+start_year = 2015
+end_year = 2017
 
 # between 1 and 12
-start_month = 1
-end_month = 11
+start_month = 8
+end_month = 10
 
 # model time step (seconds)
 dt = 30 # make sure 86400 is divisible by this
@@ -29,7 +29,7 @@ NINFO = 1
 # PATHS
 ######################
 
-model_scenario = 'cntrl_initap'
+model_scenario = 'fndn90_realistic'
 
 savepath = './wastewater_scenarios/'+model_scenario+'/'
 

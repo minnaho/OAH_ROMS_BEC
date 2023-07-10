@@ -11,12 +11,12 @@ import glob as glob
 # AND MONTHS TO DO CALUCULATION ON
 #########################################
 
-start_year = 1997
-end_year = 1998
+start_year = 2017
+end_year = 2017
 
 # between 1 and 12
 start_month = 8
-end_month = 1
+end_month = 10
 
 ######################
 # PATHS
@@ -27,7 +27,7 @@ model_name = 'l2_scb'
 # model file types e.g. bgc_flux_avg
 model_types = ['avg']
 
-model_sce = 'cntrl_initap'
+model_sce = 'pndn50_fixriver'
 
 # roms file path
 roms_path = '/data/project6/ROMS/L2SCB_OPC/'+model_sce+'/'
@@ -63,8 +63,8 @@ for y in range(start_year,end_year+1):
     else: 
         e_m = 13
     for m in range(s_m,e_m): 
-        print('month: '+str(m))
         year_month = 'Y'+str(y)+'M'+'%02d'%m
+        print(model_sce+' '+year_month)
         # use glob to find number of avg files
         roms_fi = sorted(glob.glob(roms_path+'AVG_'+year_month+'/'+file_types[0]+'*'))
         for r_i in range(len(roms_fi)):

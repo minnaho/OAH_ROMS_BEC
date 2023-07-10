@@ -17,7 +17,7 @@ fol = 'excel_'+treat+recy+'/'
 major_fi = 'major_all_'+treat+recy+'.xlsx'
 minor_fi = 'minor_all_'+treat+recy+'.xlsx'
 
-ncout = 'roms_psource_'+treat+recy+'_testriver.nc'
+ncout = 'roms_psource_'+treat+recy+'_fixriver.nc'
 
 
 # read in data, name of each sheet as a key
@@ -375,20 +375,20 @@ for t_i in range(Alk_nc.shape[1]):
 minor_names = list(minor_data.keys())
 for p_i in range(len(minor_names)):
     minor_mon = minor_data[minor_names[p_i]]
-    Qbar_nc[plw_en+p_i:] = minor_mon['flow final effluent m3/s'][p_st:p_en]
-    temp_nc[plw_en+p_i:] = minor_mon['temperature C'][p_st:p_en]
-    salt_nc[plw_en+p_i:] = minor_mon['salinity PSU'][p_st:p_en]
-    NO3_nc[plw_en+p_i:]  = minor_mon['NO3 mmol/m3'][p_st:p_en]
-    NH4_nc[plw_en+p_i:]  = minor_mon['NH4 mmol/m3'][p_st:p_en]
-    NO2_nc[plw_en+p_i:]  = minor_mon['NO2 mmol/m3'][p_st:p_en]
-    PO4_nc[plw_en+p_i:]  = minor_mon['PO4 mmol/m3'][p_st:p_en]
-    Fe_nc[plw_en+p_i:]   = minor_mon['dissolved Fe mmol/m3'][p_st:p_en]
-    O2_nc[plw_en+p_i:]   = minor_mon['DO mmol/m3'][p_st:p_en]
-    Alk_nc[plw_en+p_i:]  = minor_mon['Alk mmol/m3'][p_st:p_en]
-    DOC_nc[plw_en+p_i:]  = minor_mon['TOC mmol/m3'][p_st:p_en]
-    DON_nc[plw_en+p_i:]  = minor_mon['ON mmol/m3'][p_st:p_en]
-    DOP_nc[plw_en+p_i:]  = minor_mon['OP mmol/m3'][p_st:p_en]
-    SiO3_nc[plw_en+p_i:] = minor_mon['SiO4 mmol/m3'][p_st:p_en]
+    Qbar_nc[plw_en+p_i,:] = minor_mon['flow final effluent m3/s'][p_st:p_en]
+    temp_nc[plw_en+p_i,:] = minor_mon['temperature C'][p_st:p_en]
+    salt_nc[plw_en+p_i,:] = minor_mon['salinity PSU'][p_st:p_en]
+    NO3_nc[plw_en+p_i,:]  = minor_mon['NO3 mmol/m3'][p_st:p_en]
+    NH4_nc[plw_en+p_i,:]  = minor_mon['NH4 mmol/m3'][p_st:p_en]
+    NO2_nc[plw_en+p_i,:]  = minor_mon['NO2 mmol/m3'][p_st:p_en]
+    PO4_nc[plw_en+p_i,:]  = minor_mon['PO4 mmol/m3'][p_st:p_en]
+    Fe_nc[plw_en+p_i,:]   = minor_mon['dissolved Fe mmol/m3'][p_st:p_en]
+    O2_nc[plw_en+p_i,:]   = minor_mon['DO mmol/m3'][p_st:p_en]
+    Alk_nc[plw_en+p_i,:]  = minor_mon['Alk mmol/m3'][p_st:p_en]
+    DOC_nc[plw_en+p_i,:]  = minor_mon['TOC mmol/m3'][p_st:p_en]
+    DON_nc[plw_en+p_i,:]  = minor_mon['ON mmol/m3'][p_st:p_en]
+    DOP_nc[plw_en+p_i,:]  = minor_mon['OP mmol/m3'][p_st:p_en]
+    SiO3_nc[plw_en+p_i,:] = minor_mon['SiO4 mmol/m3'][p_st:p_en]
 
     # no pH values, so use 7.5 (consistent with Faycal's method)
     phh = 7.5 
