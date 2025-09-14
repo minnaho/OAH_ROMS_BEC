@@ -11,8 +11,9 @@ obs_depth = np.squeeze(obsdata['depth'])
 obs_regions = ['carlsbad','ocsd','plwptp','hyperion','jwpcp','ventura']
 
 # variables
-obs_var = ['ammonia','dissolved_oxygen','irradiance','salinity','temperature']
-model_var = ['NH4','O2','PAR','salt','temp']
+obs_var = ['ammonia','dissolved_oxygen','salinity','temperature','irradiance']
+#model_var = ['NH4','O2','PAR','salt','temp']
+model_var = ['NH4','O2','salt','temp','PAR']
 
 # years 'yy1998' - 'yy2017'
 years = range(2013,2018)

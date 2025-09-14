@@ -14,7 +14,7 @@ Cp = 4E3
 
 # part a
 h0_a = 75
-t_var = np.linspace(0,t0,t0+1)
+t_var = np.linspace(0,int(t0),int(t0+1))
 #T_t = ((Q0*t0)/(2*math.pi*p0*Cp))*(math.sin(2*math.pi*((t_var-tQ)/t0))/h0)
 
 temp_a = np.empty((int(t0)))

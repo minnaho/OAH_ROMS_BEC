@@ -43,12 +43,12 @@ pndn90_nc_real = Dataset(ncpath+fipndn90_real,'r')
 fndn50_nc_real = Dataset(ncpath+fifndn50_real,'r')
 fndn90_nc_real = Dataset(ncpath+fifndn90_real,'r')
 
-pndnon_nc = Dataset(ncpath+fipndnon,'r')
-fndnon_nc = Dataset(ncpath+fifndnon,'r')
-pndn50_nc = Dataset(ncpath+fipndn50,'r')
-pndn90_nc = Dataset(ncpath+fipndn90,'r')
-fndn50_nc = Dataset(ncpath+fifndn50,'r')
-fndn90_nc = Dataset(ncpath+fifndn90,'r')
+#pndnon_nc = Dataset(ncpath+fipndnon,'r')
+#fndnon_nc = Dataset(ncpath+fifndnon,'r')
+#pndn50_nc = Dataset(ncpath+fipndn50,'r')
+#pndn90_nc = Dataset(ncpath+fipndn90,'r')
+#fndn50_nc = Dataset(ncpath+fifndn50,'r')
+#fndn90_nc = Dataset(ncpath+fifndn90,'r')
 #fndn90_nc = Dataset(fifndn90,'r')
 
 expnames = ['Current','50% N Red.','85% N Red.','50% N Red. 50% Recy','50% N Red. 90% Recy','85% N Red. 50% Recy','85% N Red. 90% Recy']
@@ -62,6 +62,7 @@ avg_nh4_ld_sum = np.ones((7))*0
 avg_no3_ld_sum = np.ones((7))*0
 avg_no2_ld_sum = np.ones((7))*0
 avg_sal_ld_sum = np.ones((7))*0
+avg_din_ld_sum = np.ones((7))*0
 avgvol_sum = np.ones((7))*0
 
 ################
@@ -86,20 +87,20 @@ ocs_en = 70
 plw_st = 70
 plw_en = 96
 
-#dateunit = pndn50_nc.variables['psrc_time'].units
 dateunit = 'days since 1994-01-01'
-psrc_time = np.array(pndn50_nc.variables['psrc_time'])
-dt = num2date(psrc_time,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
+psrc_time = np.array(pndnon_nc_real.variables['psrc_time'])
+dt_scen = num2date(psrc_time,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
 
 # for double checking current day run loading
-psrc_time_current = np.array(pndn90_nc.variables['psrc_time'])
+psrc_time_current = np.array(curren_nc.variables['psrc_time'])
 dt_current = num2date(psrc_time_current,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
+curren_ind = np.where(np.isin(dt_current,dt_scen)==True)[0]
+
 
 # plot majors
 for s_i in range(len(major_names)):
     fig,ax = plt.subplots(2,1,figsize=[12,10])
     ax[0].set_title(major_names[s_i],fontsize=axfont)
-
     for f_i in range(len(ncfiles)):
         if s_i == 0:
             stp = htp_st
@@ -113,11 +114,22 @@ for s_i in range(len(major_names)):
         if s_i == 3:
             stp = plw_st
             enp = plw_en
-        vol_ef = np.nansum(np.array(ncfiles[f_i].variables['Qbar'])[stp:enp,:],axis=0)
-        nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[stp]
-        no3_ef = np.array(ncfiles[f_i].variables['NO3'])[stp]
-        no2_ef = np.array(ncfiles[f_i].variables['NO2'])[stp]
-        sal_ef = np.array(ncfiles[f_i].variables['salt'])[stp]
+
+        if expnames[f_i] == 'Current':
+            # summing across the diluted flow
+            vol_ef = np.nansum(np.array(ncfiles[f_i].variables['Qbar'])[stp:enp,curren_ind],axis=0)
+            nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[stp,curren_ind]
+            no3_ef = np.array(ncfiles[f_i].variables['NO3'])[stp,curren_ind]
+            no2_ef = np.array(ncfiles[f_i].variables['NO2'])[stp,curren_ind]
+            sal_ef = np.array(ncfiles[f_i].variables['salt'])[stp,curren_ind]
+        else:
+            # summing across the diluted flow
+            vol_ef = np.nansum(np.array(ncfiles[f_i].variables['Qbar'])[stp:enp,:],axis=0)
+            nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[stp]
+            no3_ef = np.array(ncfiles[f_i].variables['NO3'])[stp]
+            no2_ef = np.array(ncfiles[f_i].variables['NO2'])[stp]
+            sal_ef = np.array(ncfiles[f_i].variables['salt'])[stp]
+
         nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
         no3_ld = vol_ef*no3_ef*mmols_to_kgd
         no2_ld = vol_ef*no2_ef*mmols_to_kgd
@@ -128,26 +140,36 @@ for s_i in range(len(major_names)):
         avg_no3_ld = np.nanmean(vol_ef*no3_ef)
         avg_no2_ld = np.nanmean(vol_ef*no2_ef)
         avg_salt = np.nanmean(vol_ef*sal_ef)
+        avg_din_ld = np.nanmean(din_ld)
 
         avgvol_sum[f_i] += avgvol
         avg_nh4_ld_sum[f_i] += avg_nh4_ld
         avg_no3_ld_sum[f_i] += avg_no3_ld
         avg_no2_ld_sum[f_i] += avg_no2_ld
         avg_sal_ld_sum[f_i] += avg_salt
+        avg_din_ld_sum[f_i] += avg_din_ld
 
         avg_nh4_mgL = round((avg_nh4_ld/avgvol)*mmolm3_to_mgL_N,1)
         avg_no3_mgL = round((avg_no3_ld/avgvol)*mmolm3_to_mgL_N,1)
         avg_no2_mgL = round((avg_no2_ld/avgvol)*mmolm3_to_mgL_N,1)
         avg_sal_psu = round((avg_salt/avgvol),1)
 
-        print(major_names[s_i],expnames[f_i],'avg nh4 mg/L',str(avg_nh4_mgL))
-        print(major_names[s_i],expnames[f_i],'avg no3+no2 mg/L',str(avg_no3_mgL+avg_no2_mgL))
-        print(major_names[s_i],expnames[f_i],'avg sal PSU',str(avg_sal_psu))
+        #print(major_names[s_i],expnames[f_i],'avg nh4 mg/L',str(avg_nh4_mgL))
+        #print(major_names[s_i],expnames[f_i],'avg no3+no2 mg/L',str(avg_no3_mgL+avg_no2_mgL))
+        #print(major_names[s_i],expnames[f_i],'avg DIN mg/L',str(avg_no3_mgL+avg_no2_mgL+avg_nh4_mgL))
+        #print(major_names[s_i],expnames[f_i],'avg sal PSU',str(avg_sal_psu))
+        print(major_names[s_i],expnames[f_i],'avg DIN load kg/d',str(avg_din_ld))
+        #print(major_names[s_i],expnames[f_i],'avg volume m3/s',str(avgvol))
+        #print(major_names[s_i],expnames[f_i],'avg volume MGD',str(avgvol*264.17205236*86400/1E6))
+        
 
         # datetime
         dateunit = 'days since 1994-01-01'
         psrc_time = np.array(ncfiles[f_i].variables['psrc_time'])
-        dt = num2date(psrc_time,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
+        if expnames[f_i] == 'Current':
+            dt = num2date(psrc_time[curren_ind],dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
+        else:
+            dt = num2date(psrc_time,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
 
 
         # plot
@@ -171,41 +193,61 @@ for s_i in range(len(minor_names)):
     ax[0].set_title(minor_names[s_i],fontsize=axfont)
 
     for f_i in range(len(ncfiles)):
-        vol_ef = np.array(ncfiles[f_i].variables['Qbar'])[plw_en+s_i,:]
-        nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[plw_en+s_i]
-        no3_ef = np.array(ncfiles[f_i].variables['NO3'])[plw_en+s_i]
-        no2_ef = np.array(ncfiles[f_i].variables['NO2'])[plw_en+s_i]
-        sal_ef = np.array(ncfiles[f_i].variables['salt'])[plw_en+s_i]
-        nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
-        no3_ld = vol_ef*no3_ef*mmols_to_kgd
-        no2_ld = vol_ef*no2_ef*mmols_to_kgd
-        din_ld = nh4_ld+no3_ld+no2_ld
+        if expnames[f_i] == 'Current':
+            vol_ef = np.array(ncfiles[f_i].variables['Qbar'])[plw_en+s_i,curren_ind]
+            nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[plw_en+s_i,curren_ind]
+            no3_ef = np.array(ncfiles[f_i].variables['NO3'])[plw_en+s_i,curren_ind]
+            no2_ef = np.array(ncfiles[f_i].variables['NO2'])[plw_en+s_i,curren_ind]
+            sal_ef = np.array(ncfiles[f_i].variables['salt'])[plw_en+s_i,curren_ind]
+            nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
+            no3_ld = vol_ef*no3_ef*mmols_to_kgd
+            no2_ld = vol_ef*no2_ef*mmols_to_kgd
+            din_ld = nh4_ld+no3_ld+no2_ld
+        else:
+            vol_ef = np.array(ncfiles[f_i].variables['Qbar'])[plw_en+s_i,:]
+            nh4_ef = np.array(ncfiles[f_i].variables['NH4'])[plw_en+s_i]
+            no3_ef = np.array(ncfiles[f_i].variables['NO3'])[plw_en+s_i]
+            no2_ef = np.array(ncfiles[f_i].variables['NO2'])[plw_en+s_i]
+            sal_ef = np.array(ncfiles[f_i].variables['salt'])[plw_en+s_i]
+            nh4_ld = vol_ef*nh4_ef*mmols_to_kgd
+            no3_ld = vol_ef*no3_ef*mmols_to_kgd
+            no2_ld = vol_ef*no2_ef*mmols_to_kgd
+            din_ld = nh4_ld+no3_ld+no2_ld
 
         avgvol = np.nanmean(vol_ef)
         avg_nh4_ld = np.nanmean(vol_ef*nh4_ef)
         avg_no3_ld = np.nanmean(vol_ef*no3_ef)
         avg_no2_ld = np.nanmean(vol_ef*no2_ef)
         avg_salt = np.nanmean(vol_ef*sal_ef)
+        avg_din_ld = np.nanmean(din_ld)
 
         avgvol_sum[f_i] += avgvol
         avg_nh4_ld_sum[f_i] += avg_nh4_ld
         avg_no3_ld_sum[f_i] += avg_no3_ld
         avg_no2_ld_sum[f_i] += avg_no2_ld
         avg_sal_ld_sum[f_i] += avg_salt
+        avg_din_ld_sum[f_i] += avg_din_ld
 
         avg_nh4_mgL = round((avg_nh4_ld/avgvol)*mmolm3_to_mgL_N,1)
         avg_no3_mgL = round((avg_no3_ld/avgvol)*mmolm3_to_mgL_N,1)
         avg_no2_mgL = round((avg_no2_ld/avgvol)*mmolm3_to_mgL_N,1)
         avg_sal_psu = round((avg_salt/avgvol),1)
 
-        print(minor_names[s_i],expnames[f_i],'avg nh4 mg/L',str(avg_nh4_mgL))
-        print(minor_names[s_i],expnames[f_i],'avg no3+no2 mg/L',str(avg_no3_mgL+avg_no2_mgL))
-        print(minor_names[s_i],expnames[f_i],'avg sal PSU',str(avg_sal_psu))
+        #print(minor_names[s_i],expnames[f_i],'avg nh4 mg/L',str(avg_nh4_mgL))
+        #print(minor_names[s_i],expnames[f_i],'avg no3+no2 mg/L',str(avg_no3_mgL+avg_no2_mgL))
+        #print(minor_names[s_i],expnames[f_i],'avg DIN mg/L',str(avg_no3_mgL+avg_no2_mgL+avg_nh4_mgL))
+        #print(minor_names[s_i],expnames[f_i],'avg sal PSU',str(avg_sal_psu))
+        print(minor_names[s_i],expnames[f_i],'avg DIN load kg/d',str(avg_din_ld))
+        #print(minor_names[s_i],expnames[f_i],'avg volume m3/s',str(avgvol))
+        #print(minor_names[s_i],expnames[f_i],'avg volume MGD',str(avgvol*264.17205236*86400/1E6))
 
         # datetime
         dateunit = 'days since 1994-01-01'
         psrc_time = np.array(ncfiles[f_i].variables['psrc_time'])
-        dt = num2date(psrc_time,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
+        if expnames[f_i] == 'Current':
+            dt = num2date(psrc_time[curren_ind],dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
+        else:
+            dt = num2date(psrc_time,dateunit,only_use_cftime_datetimes=False,only_use_python_datetimes=True)
 
 
         # plot
@@ -228,3 +270,6 @@ for e_i in range(len(expnames)):
     print(expnames[e_i],'no3+no2 mg/L',str(round(((avg_no3_ld_sum[e_i]+avg_no2_ld_sum[e_i])/avgvol_sum[e_i])*mmolm3_to_mgL_N,1)))
     print(expnames[e_i],'DIN mg/L',str(round(((avg_no3_ld_sum[e_i]+avg_no2_ld_sum[e_i])/avgvol_sum[e_i])*mmolm3_to_mgL_N,1)+round((avg_nh4_ld_sum[e_i]/avgvol_sum[e_i])*mmolm3_to_mgL_N,1)))
     print(expnames[e_i],'salinity',str(round((avg_sal_ld_sum[e_i]/avgvol_sum[e_i]),1)))
+    # divide by 23 POTW to get average DIN kg/d
+    #print(expnames[e_i],'DIN kg/d',str(round((avg_no3_ld_sum[e_i]+avg_no2_ld_sum[e_i]+avg_nh4_ld_sum[e_i])/23,1)))
+    print(expnames[e_i],'DIN kg/d',str(round((avg_din_ld_sum[e_i])/23,1)))

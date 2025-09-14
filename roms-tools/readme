@@ -1,0 +1,5 @@
+tools from Pierre from 
+/data/project3/pdamien/ROMS_pdamien/Roms_tools_MF/Preprocessing_tools_New
+
+add this to the top of the script if missing functions:
+addpath(genpath('/data/project3/pdamien/tools_matlab'))

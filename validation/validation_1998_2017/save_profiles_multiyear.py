@@ -12,6 +12,18 @@ import glob
 
 roms_monthly = '/data/project6/ROMS/L2SCB_AP/monthly/l2_scb_avg.Y'
 
+# choose specific months
+#list_jfm = find(month==2) ;
+#list_amj = find(month==5) ;
+#list_jas = find(month==8) ;
+#list_ond = find(month==10) ;
+
+# choose same location of profiles in observations as in model
+
+# try taking same period of daily model output as observations
+
+# run other years when this is done
+
 #######################
 # observational data
 #######################
@@ -41,8 +53,8 @@ seasons = ['all']
 #obs_var = list(obsdata['mean']['hyperion']['yy2017']['all'].keys())
 #obs_var = ['ammonia','dissolved_oxygen','irradiance','salinity','temperature','Chl']
 #model_var = ['NH4','O2','PAR','salt','temp','Chl']
-obs_var = ['Chl']
-model_var = ['Chl']
+#obs_var = ['Chl']
+#model_var = ['Chl']
 
 obs_mean = obsdata['mean']
 obs_pct95 = obsdata['pct95']

@@ -24,10 +24,10 @@ lat_lon_csv = pd.read_csv('Stn_coords.csv',sep=',')
 #df = pd.read_csv(csv_files[0],sep=',',parse_dates=True,encoding='ISO-8859-1')
 df = pd.DataFrame()
 # append rest of data to first file
-for data in csv_files:    
+for d_i in range(len(csv_files)):    
     # load in new data
-    print('loading '+data)
-    df_new = pd.read_csv(data,sep=',',parse_dates=True,encoding='ISO-8859-1',low_memory=False)
+    print('loading '+csv_files[d_i])
+    df_new = pd.read_csv(csv_files[d_i],sep=',',parse_dates=True,encoding='ISO-8859-1',low_memory=False)
 
     ##########################################################
     # RENAME ALL DIFFERENT VARIABLE NAMES TO BE ONE VARIABLE 
@@ -327,7 +327,6 @@ df['Date'] = pd.to_datetime(df['Date'],format='%m/%d/%Y')
 ###############################
 # find lat/lon for each station 
 ###############################
-'''
 lats_array = np.empty(len(df['latitude']))
 lons_array = np.empty(len(df['longitude']))
 for i,loc in enumerate(df['station_ID']):
@@ -340,9 +339,9 @@ for i,loc in enumerate(df['station_ID']):
 
 np.save('latitude.npy',lats_array)
 np.save('longitude.npy',lons_array)
-'''
-lats_array = np.load('latitude.npy')
-lons_array = np.load('longitude.npy')
+
+#lats_array = np.load('latitude.npy')
+#lons_array = np.load('longitude.npy')
 
 
 # assign df['latitude'] and df['longitude'] 
@@ -598,7 +597,6 @@ xrs = xr.Dataset(ds)
 #xrs.reset_index('dim_0',inplace=True)
 
 
-
 savename = 'central_bight_master_database_1998_2019_1D_validation_2023.nc'
 xrs.to_netcdf(savename)
 
@@ -633,10 +631,6 @@ subprocess.call('ncatted -h -a long_name,\'surface_irradiance\',c,c,\'uE/cm2/s\'
 subprocess.call('ncatted -h -a long_name,\'total_coliforms\',c,c,\'MPN/100mL\' '+savename,shell=True)
 subprocess.call('ncatted -h -a long_name,\'transmissivity\',c,c,\'%\' '+savename,shell=True)
 
-'''
-xrs = xr.Dataset.from_dataframe(df)
-xrs.to_netcdf('central_bight_master_database_1998_2017.nc')
-'''
 
 # variables to drop
 #xrs.drop[var_drop]
