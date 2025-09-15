@@ -18,14 +18,14 @@ disp(' ')
 %
 %   Parent...
 %
-     parscd.file    = '/data/project9/minnaho/swel/smode_frc_ww3_apr_2019_gp73.nc';
-     pargrd = '/data/project9/minnaho/swel/smode200_grd.nc'
+    parscd.file = '/data/project9/minnaho/swel/smode_frc_ww3_20190415.nc';
+    pargrd = '/data/project9/minnaho/swel/smode200_grd.nc'
 %
 %   child
 %
     romsdir    = '/data/project9/minnaho/swel/';
     chdgrd    = [romsdir 'mc60_grd.nc'];
-    chdini    = [romsdir 'mc60_wec.201904.nc'];
+    chdini    = [romsdir 'mc60_wec.20190415.nc'];
 %    
 %---------------------------------------------------------------------------------------
 % USER-DEFINED VARIABLES & OPTIONS END HERE
@@ -37,5 +37,6 @@ disp(' ')
       r2r_create_wec(chdini,chdgrd,parscd.file)
     end
 
+    disp('begin interpolating and writing to file')
     r2r_make_wec(pargrd, parscd.file, chdgrd, chdini)
     

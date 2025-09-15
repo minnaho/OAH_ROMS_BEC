@@ -1,4 +1,4 @@
-function r2r_make_wec(par_grd,par_data,chd_grd, chd_data);
+function r2r_make_wec(par_grd,par_data,chd_grd,chd_data);
 %--------------------------------------------------------------
 %
 %  Make a roms 2d file for use as WEC forcing using data
@@ -17,16 +17,14 @@ function r2r_make_wec(par_grd,par_data,chd_grd, chd_data);
 %--------------------------------------------------------------
 %
 %
-% Set correct time in ini file
-% np = netcdf(par_data, 'nowrite');
-% ni = netcdf(chd_data, 'write');
+% Get time in parent file
   par_data
   chd_data
-%   ncread(par_data,'time',tind,1)/(24*3600)
-   ptime = ncread(par_data,'wwv_time');
-% % ni{'ocean_time'}(:) = np{'ocean_time'}(tind) + 100;  %% Adding 100 seconds to fix rounding problems in bry_time.
-   ncwrite(chd_data,'wwv_time',ptime);
-%  ncwrite(chd_data,'ocean_time',0);
+
+  ptime = ncread(par_data,'wwv_time');
+
+% write time in child file
+  ncwrite(chd_data,'wwv_time',ptime);
 
 % Get full parent grid and do triangulation
   lonp  = double(ncread(par_grd,'lon_rho')');%/10000;
@@ -36,7 +34,7 @@ function r2r_make_wec(par_grd,par_data,chd_grd, chd_data);
   lonp(lonp<0) = lonp(lonp<0) + 360;
 
   display('going delaunay');
- tri_fullpar = delaunay(lonp,latp);
+  tri_fullpar = delaunayTriangulation(lonp,latp);
 %  tri_fullpar = DelaunayTri([reshape(lonp,Mpp*Lpp,1),reshape(latp,Mpp*Lpp,1)]);
   display('return delaunay');
 
@@ -56,7 +54,7 @@ function r2r_make_wec(par_grd,par_data,chd_grd, chd_data);
   icmax(end) = Lp;
   jcmax(end) = Mp;
 
-% time loop
+% time loop for writing
 for tind = 1:size(ptime)
   disp(['time: ',num2str(tind),' of ',num2str(size(ptime))])
 % Do the interpolation for all child chunks
@@ -70,36 +68,15 @@ for tind = 1:size(ptime)
       jce = jcmax(domy);
 
     % Get topography data from childgrid
-%     hc1 = ncread(chd_grd,'h')'; hc1 = hc1(jcb:jce,icb:ice);
-      hc    = ncread(chd_grd,'h'       ,[icb jcb],[ice-icb+1 jce-jcb+1])';
       maskc = ncread(chd_grd,'mask_rho',[icb jcb],[ice-icb+1 jce-jcb+1])';
-      angc  = ncread(chd_grd,'angle'   ,[icb jcb],[ice-icb+1 jce-jcb+1])';
-%     lonc  = ncread(chd_grd,'lon_rho' ,[icb jcb],[ice-icb+1 jce-jcb+1])'/10000;
-%     latc  = ncread(chd_grd,'lat_rho' ,[icb jcb],[ice-icb+1 jce-jcb+1])'/10000;
       lonc  = double(ncread(chd_grd,'lon_rho' ,[icb jcb],[ice-icb+1 jce-jcb+1])');
       latc  = double(ncread(chd_grd,'lat_rho' ,[icb jcb],[ice-icb+1 jce-jcb+1])');
-      umask = maskc(:,1:end-1).*maskc(:,2:end);
-      vmask = maskc(1:end-1,:).*maskc(2:end,:);
-      cosc  = cos(angc);
-      sinc  = sin(angc);
       lonc(lonc<0) = lonc(lonc<0) + 360;
-%     figure
-%     plot(lonp,latp,'.k');
-%     hold on
-%     plot(lonc(1,:),latc(1,:),'.r');
-%     plot(lonc(:,end),latc(:,end),'.r');
-%     plot(lonc(end,:),latc(end,:),'.r');
-%     plot(lonc(:,1),latc(:,1),'.r');
-%     hold off
-%     error 'testing'
 
-    % Compute minimal subgrid extracted from full parent grid
-    t = squeeze(tsearch(lonp,latp,tri_fullpar,lonc,latc));
-%       [nyc,nxc] = size(lonc);
-%       t   = squeeze(pointLocation(tri_fullpar,reshape(lonc,nxc*nyc,1),reshape(latc,nxc*nyc,1)));
-%       sum(isnan(t))
+      % Compute minimal subgrid extracted from full parent grid
+      t = squeeze(tsearch(lonp,latp,tri_fullpar,lonc,latc));
 
-    % Deal with child points that are outside parent grid (those points should be masked!)
+      % Deal with child points that are outside parent grid (those points should be masked!)
       if (length(t(~isfinite(t)))>0);
        disp('Warning in new_bry_subgrid: outside point(s) detected.');
        [lonc,latc] = fix_outside_child(lonc,latc,t);
@@ -120,52 +97,25 @@ for tind = 1:size(ptime)
       masks = ncread(par_grd,'mask_rho',[imin jmin],[imax-imin+1,jmax-jmin+1])';
       lons  = ncread(par_grd,'lon_rho' ,[imin jmin],[imax-imin+1,jmax-jmin+1])'; %lons = double(lons)/1e4;
       lats  = ncread(par_grd,'lat_rho' ,[imin jmin],[imax-imin+1,jmax-jmin+1])'; %lats = double(lats)/1e4;
-      angs  = ncread(par_grd,'angle'   ,[imin jmin],[imax-imin+1,jmax-jmin+1])';
-      hs    = ncread(par_grd,'h'       ,[imin jmin],[imax-imin+1,jmax-jmin+1])';
       lons(lons<0) = lons(lons<0) + 360;
-      coss = cos(angs); sins = sin(angs);
       if sum(isnan(masks))>0
         disp('Setting NaNs in masks to zero')
         error
         masks(isnan(masks))=0;
         disp('You probably have land masking defined in cppdefs.h...')
       end
-% 
-%       figure
-%       plot(lons,lats,'.k')
-%       hold on
-%       plot(lonc,latc,'.r')
-%       hold off
-%       return
-%     size(hs)
-    % Z-coordinate (3D) on minimal subgrid and child grid
-%      zs = zlevs4(hs, hs*0, theta_s_p, theta_b_p, hc_p, N_p, 'r', scoord_switch_p);
-%      zc = zlevs4(hc, hc*0, theta_s_c, theta_b_c, hc_c, N_c, 'r', scoord_switch_c);
-%      zw = zlevs4(hc, hc*0, theta_s_c, theta_b_c, hc_c, N_c, 'w', scoord_switch_c);
-
-%      [Np Mp Lp] = size(zs);
-%      [Nc Mc Lc] = size(zc);
 
       disp('Computing interpolation coefficients');
-%     lonc(lonc<0) = lonc(lonc<0) + 360;
-%     plot(lons,lats,'.k');
-%     hold on
-%     plot(lonc(1,1),latc(1,1),'.r');
-%       plot(lonc(1,end),latc(1,end),'.r');
-%       plot(lonc(end,1),latc(end,1),'.r');
-%       plot(lonc(end,end),latc(end,end),'.r');
-%     hold off
-%     error 'testing'
 
       [elem2d,coef2d,nnel] = get_tri_coef(lons,lats,lonc,latc,masks);
-%      A = get_hv_coef(zs, zc, coef2d, elem2d, lons, lats, lonc, latc);
 
     % Open parent data file
-
 
       disp('--- Awave')
       Awaves = ncread(par_data,'Awave'  ,[imin jmin tind],[imax-imin+1,jmax-jmin+1 1])';
       Awaves = fillmask(Awaves, 1, masks, nnel);
+
+    % interpolate to child file
       Awavec = sum(coef2d.*Awaves(elem2d), 3);
       Awavec     = Awavec.*maskc;
 

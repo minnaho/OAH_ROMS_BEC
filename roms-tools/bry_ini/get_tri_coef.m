@@ -43,10 +43,15 @@ function [elem,coef,nnel] = get_tri_coef(lonp,latp,lonc,latc,maskp)
     xc = lonc; yc = latc;
    end
 
+  disp('reshaping Xp and Xc')
   Xp    = [reshape(xp,Mp*Lp,1) reshape(yp,Mp*Lp,1) ];
   Xc    = [reshape(xc,Mc*Lc,1) reshape(yc,Mc*Lc,1) ];
 
-  tri     = delaunay(xp(:),yp(:));
+  disp('calculating tri')
+
+  dt = delaunayTriangulation(xp(:),yp(:));
+  tri = dt.ConnectivityList;
+%  tri     = delaunay(xp(:),yp(:));
   [tn,pn] = tsearchn(Xp,tri,Xc);
 
 % Fix to deal with child points that are outside parent grid (those points should be masked!)
@@ -57,7 +62,9 @@ function [elem,coef,nnel] = get_tri_coef(lonp,latp,lonc,latc,maskp)
     [tn,pn] = tsearchn(Xp,tri,Xc);
   end;
 
+  disp('Calculating elem')
   elem = reshape(tri(tn,:),Mc,Lc,3);
+  disp('Calculating coef')
   coef = reshape(       pn,Mc,Lc,3);
 
   xpm = xp;
@@ -74,8 +81,9 @@ function [elem,coef,nnel] = get_tri_coef(lonp,latp,lonc,latc,maskp)
   end
 
   %%  We need a re-triangulation here.
-  trim  = delaunay(xpm,ypm);
+  trim  = delaunayTriangulation(xpm,ypm);
   Xpm   = [reshape(xpm,Mp*Lp,1) reshape(ypm,Mp*Lp,1) ];
+  disp('Calculating nnel')
   nnel  = dsearchn(Xpm,trim,Xp);                    %% find the nearest non-masked neighbor
   nnel = reshape(     nnel,Mp,Lp  );
 
