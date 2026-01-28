@@ -34,7 +34,7 @@ function r2r_make_wec(par_grd,par_data,chd_grd,chd_data);
   lonp(lonp<0) = lonp(lonp<0) + 360;
 
   display('going delaunay');
-  tri_fullpar = delaunayTriangulation(lonp,latp);
+  tri_fullpar  = delaunay(lonp,latp);
 %  tri_fullpar = DelaunayTri([reshape(lonp,Mpp*Lpp,1),reshape(latp,Mpp*Lpp,1)]);
   display('return delaunay');
 
@@ -55,7 +55,8 @@ function r2r_make_wec(par_grd,par_data,chd_grd,chd_data);
   jcmax(end) = Mp;
 
 % time loop for writing
-for tind = 1:size(ptime)
+%for tind = 1:size(ptime) 
+for tind = 316:size(ptime) %did 299 to 316 already
   disp(['time: ',num2str(tind),' of ',num2str(size(ptime))])
 % Do the interpolation for all child chunks
   for domx = 1:ndomx

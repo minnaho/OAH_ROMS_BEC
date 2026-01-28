@@ -24,8 +24,8 @@ disp(' ')
 %   child
 %
     romsdir    = '/data/project9/minnaho/swel/';
-    chdgrd    = [romsdir 'mc60_grd.nc'];
-    chdini    = [romsdir 'mc60_wec.20190415.nc'];
+    chdgrd    = [romsdir 'mc60_newlarge_grd.nc'];
+    chdini    = [romsdir 'mc60_newlarge_wec.20190415.nc'];
 %    
 %---------------------------------------------------------------------------------------
 % USER-DEFINED VARIABLES & OPTIONS END HERE

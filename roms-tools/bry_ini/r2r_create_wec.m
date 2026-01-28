@@ -32,51 +32,51 @@ ncwriteatt(inifile,'Dwave','long_name','clockwise mean wind wave direction from 
 ncwriteatt(inifile,'Dwave','units','degree');
 
 nccreate(inifile,'Pwave','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'Pwave','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'Pwave','long_name','Peak wave period (tp)');
 ncwriteatt(inifile,'Pwave','units','meter');
 
 nccreate(inifile,'uorb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'uorb','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'uorb','long_name','Eastward bottom orbital velocity');
 ncwriteatt(inifile,'uorb','units','meter');
 
 nccreate(inifile,'vorb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'vorb','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'vorb','long_name','Northward bottom orbital velocity');
 ncwriteatt(inifile,'vorb','units','meter');
 
 nccreate(inifile,'ust2d','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'ust2d','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'ust2d','long_name','Eastward-Depth averaged Stokes drift');
 ncwriteatt(inifile,'ust2d','units','meter');
 
 nccreate(inifile,'vst2d','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'vst2d','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'vst2d','long_name','Northward-Depth averaged Stokes drift');
 ncwriteatt(inifile,'vst2d','units','meter');
 
 nccreate(inifile,'ust0','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'ust0','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'ust0','long_name','Eastward surface Stokes drift');
 ncwriteatt(inifile,'ust0','units','meter');
 
 nccreate(inifile,'vst0','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'vst0','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'vst0','long_name','Northward surface Stokes drift');
 ncwriteatt(inifile,'vst0','units','meter');
 
 nccreate(inifile,'ed','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'ed','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'ed','long_name','bed frictional energy dissipation');
 ncwriteatt(inifile,'ed','units','meter');
 
 nccreate(inifile,'eb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'eb','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'eb','long_name','breaking dissipation (deep water and depth limited)');
 ncwriteatt(inifile,'eb','units','meter');
 
 nccreate(inifile,'qb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'qb','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'qb','long_name','fraction of breaking waves');
 ncwriteatt(inifile,'qb','units','meter');
 
 nccreate(inifile,'sup','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'sup','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'sup','long_name','set down (m)');
 ncwriteatt(inifile,'sup','units','meter');
 
 nccreate(inifile,'lmw','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
-ncwriteatt(inifile,'lmw','long_name','mean wind wave amplitude (Hsig/2/sqrt(2))');
+ncwriteatt(inifile,'lmw','long_name','mean wavelength (m)');
 ncwriteatt(inifile,'lmw','units','meter');
 
 %

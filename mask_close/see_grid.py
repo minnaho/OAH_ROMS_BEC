@@ -10,8 +10,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 plt.ion()
 
-grid_path = '/data/project3/kesf/ROMS/L2_SCB/grid/'
-grid_name = 'mask_fix.nc'
+grid_path = '/data/project9/minnaho/swel/tides/mc60/'
+grid_name = 'mc60_grd_fill.nc'
 
 def onclick(event):
     global ix, iy
@@ -20,7 +20,7 @@ def onclick(event):
 
 
 data = Dataset(grid_path+grid_name,'r')
-mask = data.variables['land_rho']
+mask = data.variables['mask_rho']
 mask_copy = np.copy(mask)
 
 
