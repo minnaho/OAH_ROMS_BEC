@@ -33,43 +33,43 @@ ncwriteatt(inifile,'Dwave','units','degree');
 
 nccreate(inifile,'Pwave','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'Pwave','long_name','Peak wave period (tp)');
-ncwriteatt(inifile,'Pwave','units','meter');
+ncwriteatt(inifile,'Pwave','units','seconds');
 
 nccreate(inifile,'uorb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'uorb','long_name','Eastward bottom orbital velocity');
-ncwriteatt(inifile,'uorb','units','meter');
+ncwriteatt(inifile,'uorb','units','m/s');
 
 nccreate(inifile,'vorb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'vorb','long_name','Northward bottom orbital velocity');
-ncwriteatt(inifile,'vorb','units','meter');
+ncwriteatt(inifile,'vorb','units','m/s');
 
 nccreate(inifile,'ust2d','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'ust2d','long_name','Eastward-Depth averaged Stokes drift');
-ncwriteatt(inifile,'ust2d','units','meter');
+ncwriteatt(inifile,'ust2d','units','m/s');
 
 nccreate(inifile,'vst2d','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'vst2d','long_name','Northward-Depth averaged Stokes drift');
-ncwriteatt(inifile,'vst2d','units','meter');
+ncwriteatt(inifile,'vst2d','units','m/s');
 
 nccreate(inifile,'ust0','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'ust0','long_name','Eastward surface Stokes drift');
-ncwriteatt(inifile,'ust0','units','meter');
+ncwriteatt(inifile,'ust0','units','m/s');
 
 nccreate(inifile,'vst0','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'vst0','long_name','Northward surface Stokes drift');
-ncwriteatt(inifile,'vst0','units','meter');
+ncwriteatt(inifile,'vst0','units','m/s');
 
 nccreate(inifile,'ed','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'ed','long_name','bed frictional energy dissipation');
-ncwriteatt(inifile,'ed','units','meter');
+ncwriteatt(inifile,'ed','units','m3/s3');
 
 nccreate(inifile,'eb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'eb','long_name','breaking dissipation (deep water and depth limited)');
-ncwriteatt(inifile,'eb','units','meter');
+ncwriteatt(inifile,'eb','units','m3/s3');
 
 nccreate(inifile,'qb','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'qb','long_name','fraction of breaking waves');
-ncwriteatt(inifile,'qb','units','meter');
+ncwriteatt(inifile,'qb','units',' ');
 
 nccreate(inifile,'sup','Dimensions',{'xi_rho',Lp,'eta_rho',Mp,'wwv_time'},'datatype','single');
 ncwriteatt(inifile,'sup','long_name','set down (m)');
